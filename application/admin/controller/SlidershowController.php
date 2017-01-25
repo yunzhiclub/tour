@@ -2,9 +2,9 @@
 namespace app\admin\controller;
 use think\Controller;
 /**
-* 后台首页
+* 幻灯片管理
 */
-class IndexController extends Controller
+class SlidershowController extends Controller
 {
     
     public function index()
