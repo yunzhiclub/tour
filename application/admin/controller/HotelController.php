@@ -2,9 +2,9 @@
 namespace app\admin\controller;
 use think\Controller;
 /**
-* 后台首页
+* 酒店管理
 */
-class IndexController extends Controller
+class HotelController extends Controller
 {
     
     public function index()

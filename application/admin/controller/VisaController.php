@@ -2,9 +2,9 @@
 namespace app\admin\controller;
 use think\Controller;
 /**
-* 后台首页
+* 签证管理
 */
-class IndexController extends Controller
+class VisaController extends Controller
 {
     
     public function index()

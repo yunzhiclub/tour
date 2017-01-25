@@ -2,9 +2,9 @@
 namespace app\admin\controller;
 use think\Controller;
 /**
-* 后台首页
+* 系统设置
 */
-class IndexController extends Controller
+class SystemController extends Controller
 {
     
     public function index()

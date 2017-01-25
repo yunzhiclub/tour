@@ -2,9 +2,9 @@
 namespace app\admin\controller;
 use think\Controller;
 /**
-* 后台首页
+* 评价管理
 */
-class IndexController extends Controller
+class EvaluateController extends Controller
 {
     
     public function index()
