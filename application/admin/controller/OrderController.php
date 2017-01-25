@@ -2,9 +2,9 @@
 namespace app\admin\controller;
 use think\Controller;
 /**
-* 后台首页
+* 订单管理
 */
-class IndexController extends Controller
+class OrderController extends Controller
 {
     
     public function index()
