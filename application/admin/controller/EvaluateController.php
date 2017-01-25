@@ -11,4 +11,9 @@ class EvaluateController extends Controller
     {
         return $this->fetch();
     }
+
+    public function star()
+    {
+        return $this->fetch();
+    }
 }
