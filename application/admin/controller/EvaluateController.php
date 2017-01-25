@@ -4,7 +4,7 @@ use think\Controller;
 /**
 * 评价管理
 */
-class EvaluateController extends Controller
+class EvaluateController extends IndexController
 {
     
     public function index()

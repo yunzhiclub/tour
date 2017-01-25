@@ -4,7 +4,7 @@ use think\Controller;
 /**
 * 客户管理
 */
-class CustomerController extends Controller
+class CustomerController extends IndexController
 {
     
     public function index()

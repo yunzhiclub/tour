@@ -4,7 +4,7 @@ use think\Controller;
 /**
 * 路线管理
 */
-class RouteController extends Controller
+class RouteController extends IndexController
 {
     
     public function index()
