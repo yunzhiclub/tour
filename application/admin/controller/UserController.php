@@ -11,4 +11,9 @@ class UserController extends IndexController
     {
         return $this->fetch();
     }
+
+    public function add()
+    {
+    	return $this->fetch();
+    }
 }
