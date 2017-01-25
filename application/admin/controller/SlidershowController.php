@@ -4,7 +4,7 @@ use think\Controller;
 /**
 * 幻灯片管理
 */
-class SlidershowController extends Controller
+class SlidershowController extends IndexController
 {
     
     public function index()

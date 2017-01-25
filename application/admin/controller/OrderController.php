@@ -4,7 +4,7 @@ use think\Controller;
 /**
 * 订单管理
 */
-class OrderController extends Controller
+class OrderController extends IndexController
 {
     
     public function index()

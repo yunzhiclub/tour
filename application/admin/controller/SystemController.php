@@ -4,7 +4,7 @@ use think\Controller;
 /**
 * 系统设置
 */
-class SystemController extends Controller
+class SystemController extends IndexController
 {
     
     public function index()
