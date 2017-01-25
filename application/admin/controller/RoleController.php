@@ -2,9 +2,9 @@
 namespace app\admin\controller;
 use think\Controller;
 /**
-* 后台首页
+* 角色管理
 */
-class IndexController extends Controller
+class RoleController extends Controller
 {
     
     public function index()

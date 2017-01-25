@@ -2,9 +2,9 @@
 namespace app\admin\controller;
 use think\Controller;
 /**
-* 后台首页
+* 航班管理
 */
-class IndexController extends Controller
+class FlightController extends Controller
 {
     
     public function index()
