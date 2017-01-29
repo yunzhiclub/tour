@@ -11,4 +11,19 @@ class VisaController extends IndexController
     {
         return $this->fetch();
     }
+
+    public function add()
+    {
+    	return $this->fetch();
+    }
+
+    public function edit()
+    {
+    	return $this->fetch();
+    }
+
+    public function people()
+    {
+    	return $this->fetch();
+    }
 }
