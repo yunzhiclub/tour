@@ -4,7 +4,7 @@ use think\Controller;
 /**
 * 角色管理
 */
-class RoleController extends Controller
+class RoleController extends IndexController
 {
     
     public function index()

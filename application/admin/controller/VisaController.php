@@ -4,7 +4,7 @@ use think\Controller;
 /**
 * 签证管理
 */
-class VisaController extends Controller
+class VisaController extends IndexController
 {
     
     public function index()
