@@ -24,7 +24,7 @@ angular
   .config(['$stateProvider', '$urlRouterProvider', 'cfpLoadingBarProvider', function($stateProvider, $urlRouterProvider, cfpLoadingBarProvider) {
     // 设置LoadingBar HTML Loading模板
     cfpLoadingBarProvider.spinnerTemplate = '<div id="loadingToast" ng-show=""><div class="weui-mask_transparent"></div><div class="weui-toast"><i class="weui-loading weui-icon_toast"></i><p class="weui-toast__content">数据加载中</p></div></div>';
-    $urlRouterProvider.otherwise('/personal');
+    $urlRouterProvider.otherwise('/home');
     $stateProvider
     .state('home', {
         url: '/home',      // 首页
