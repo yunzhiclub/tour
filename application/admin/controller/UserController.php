@@ -16,4 +16,9 @@ class UserController extends IndexController
     {
     	return $this->fetch();
     }
+
+    public function edit()
+    {
+    	return $this->fetch();
+    }
 }
