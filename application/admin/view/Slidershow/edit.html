@@ -1,0 +1,39 @@
+{extend name="index" /}
+{block name="content"}
+<div class="panel-body"></div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-12">
+							<form class="form-horizontal">
+								<div class="form-group">
+									<label for="title" class="col-md-2 text-right">图片名称:</label>
+									<div class="col-md-3">
+										<input type="text" name="title" class="form-control">
+									</div>
+								</div>
+								<div class="form-group">
+    								<label for="InputPicture" class="col-md-2 text-right">照片上传:</label>
+    								<div class="col-md-3">
+    									<input type="file" name="image" id="InputPicture">
+    									<p class="help-block">图片最佳尺寸为1980*670</p>
+    								</div>
+  								</div>
+  								<div class="form-group">
+  									<label for="radio" class="col-md-2 text-right">是否显示:</label>
+  									<div class="col-md-3">
+  										<input type="radio" name="is_show" value="1" id="radio1" checked="checked">&nbsp;<label for="radio1">是</label>&nbsp;&nbsp;
+  										<input type="radio" name="is_show" value="0" id="radio2">&nbsp;<label for="radio2">否</label>
+  									</div>
+  								</div>
+  								<button type="submit" class="btn btn-success col-md-3 col-md-offset-2"><i class="glyphicon glyphicon-ok"></i>&nbsp;确认</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{/block}
