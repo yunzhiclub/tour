@@ -61,6 +61,11 @@ angular
         templateUrl: 'views/paysuccess.html',
         controller:'PaysuccessCtrl',
     })
+       .state('payfail', {
+        url: '/payfail',    // 支付失败界面
+        templateUrl: 'views/payfail.html',
+        controller:'PayfailCtrl',
+    })
      .state('toinvite', {
         url: '/toinvite',   // 发布邀约的首页
         templateUrl: 'views/toinvite.html',
@@ -131,6 +136,21 @@ angular
         templateUrl: 'views/orderdetail.html',
         controller:'OrderdetailCtrl',
     })
+         .state('nopayed', {
+        url: '/nopayed',     // 未支付列表页面
+        templateUrl: 'views/nopayed.html',
+        controller:'NopayedCtrl',
+    })
+          .state('nofinish', {
+        url: '/nofinish',     // 未完成列表页面
+        templateUrl: 'views/nofinish.html',
+        controller:'NofinishCtrl',
+    })
+        .state('noevaluate', {
+        url: '/noevaluate',     // 待点评列表页面
+        templateUrl: 'views/noevaluate.html',
+        controller:'NoevaluateCtrl',
+    })
          .state('insurance', {
         url: '/insurance',         // 保险页面
         templateUrl: 'views/insurance.html',
@@ -140,6 +160,11 @@ angular
         url: '/invoice',         // 发票详情页面
         templateUrl: 'views/invoice.html',
         controller:'InvoiceCtrl',
+    })
+        .state('addinvoice', {
+        url: '/addinvoice',         // 新增发票抬头页面
+        templateUrl: 'views/addinvoice.html',
+        controller:'AddinvoiceCtrl',
     })
            .state('trlpeoples', {
         url: '/trlpeoples',         // 出游人详情页面
@@ -170,6 +195,21 @@ angular
         url: '/addtourist',       // 新增游客页面
         templateUrl: 'views/addtourist.html',
         controller:'AddtouristCtrl',
+    })
+        .state('tuisong', {
+        url: '/tuisong',       // 推送信息首页
+        templateUrl: 'views/tuisong.html',
+        controller:'TuisongCtrl',
+    })
+        .state('tuisong1', {
+        url: '/tuisong1',       // 定制详情首页
+        templateUrl: 'views/tuisong1.html',
+        controller:'Tuisong1Ctrl',
+    })
+        .state('tuisong2', {
+        url: '/tuisong2',       // 趣约详情首页
+        templateUrl: 'views/tuisong2.html',
+        controller:'Tuisong2Ctrl',
     });
     
 }]).

@@ -11,4 +11,9 @@ class EvaluateController extends IndexController
     {
         return $this->fetch();
     }
+
+    public function star()
+    {
+        return $this->fetch();
+    }
 }

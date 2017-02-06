@@ -2,4 +2,55 @@
 description  评价页面
 router:#!/evaluate
  -->
-<p>This is the evaluate view.</p>
+<div class="weui-form-preview">
+    <div class="weui-form-preview__hd">
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">跟团游|未支付 </label>
+            <p class="weui-form-preview__value">订单号：1234567</p>
+        </div>
+    </div>
+    <div class="weui-form-preview__bd">
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">路线</label>
+            <span class="weui-form-preview__value"><泰国-普吉岛-甲米6或7日游></span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">详情</label>
+            <span class="weui-form-preview__value">天津往返直飞，入住泳池别墅，2晚国五酒店，无自费，畅游甲米，大堡礁浮潜，幻多奇主题乐园，预定赠送出海跟拍</span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">预定时间</label>
+            <span class="weui-form-preview__value">2016-10-25</span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">出发时间</label>
+            <span class="weui-form-preview__value">2016-11-05</span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">归来时间</label>
+            <span class="weui-form-preview__value">2016-11-10</span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">出发城市</label>
+            <span class="weui-form-preview__value">天津</span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">出游人数</label>
+            <span class="weui-form-preview__value">2成人</span>
+        </div>
+    </div>
+</div>
+<div class="weui-cells__title">总体评价</div>
+<div class="weui-cells weui-cells_form">
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <textarea class="weui-textarea" placeholder="多行输入" rows="3"></textarea>
+            <div class="weui-textarea-counter"><span>0</span>/200</div>
+        </div>
+    </div>
+</div>
+<div class="page__bd page__bd_spacing">
+    <a ui-sref="orderls" class="weui-btn weui-btn_primary" style="margin-right:20px;margin-left:20px;margin-top: 10px">
+        发表评论
+        </a>
+</div>
