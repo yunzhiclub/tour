@@ -1,4 +1,79 @@
 {extend name="index" /}
 {block name="content"}
-路线管理
+<div class="row">
+    <div class="col-md-12">
+        <div class="span12">
+            <hr />
+            <div class="row">
+                <div class="row">
+                <div class="col-md-11">
+                    <form action="{:url('index')}" method="get" class="form-inline">
+                        <div class="col-md-3">
+                            <label>出发地</label>&nbsp;
+                            <select class="form-control">
+                                <option value="1">天津</option>
+                                <option value="2">北京</option>
+                                <option value="3">上海</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label>目的地</label>&nbsp;
+                            <select class="form-control">
+                                <option value="1">首尔</option>
+                                <option value="2">伦敦</option>
+                                <option value="3">巴黎</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label>出发时间</label>&nbsp;
+                            <select class="form-control" name="click_on">
+                              <option value="1">2017/11/12</option>
+                                <option value="2">2017/11/13</option>
+                                <option value="3">2017/11/14</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="sr-only" for="name">路线</label>
+                                <input name="title" type="text" class="form-control" placeholder="路线..." id="title" value="{:input('get.title')}">
+                            </div>
+                            <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-1">
+                    <tr>
+                        <a class="btn btn-success" href="{:url('add')}"><i class="glyphicon glyphicon-plus">新增</i></a>
+                    </tr>
+                </div>
+            </div>
+            </div>
+            <hr />
+            <table class="table table-hover table-bordered">
+                <tr class="info">
+                    <th>序号</th>
+                    <th>出发地</th>
+                    <th>目的地</th>
+                    <th>出发日期</th>
+                    <th>返程日期</th>
+                    <th>价格/人</th>
+                    <th>操作</th>
+                </tr>
+                <tr>
+                	<td>1</td>
+                	<td>天津</td>
+                	<td>伦敦</td>
+                	<td>2017/11/12</td>
+                    <td>2017/11/20</td>
+                	<td>8000</td>
+                	<td>
+                     <a href="{:url('edit')}" class="btn btn-primary">查看</a>   
+                     <a href="#" class="btn btn-warning">修改</a>   
+                     <a href="#" class="btn btn-info">删除</a>   
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
 {/block}

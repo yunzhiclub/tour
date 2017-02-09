@@ -18,8 +18,8 @@ router:#!/clsdetail
     </div>
 </div>
 <div class="page">
-   <div class="page__bd">
-     <div class="weui-form-preview">
+    <div class="page__bd">
+        <div class="weui-form-preview">
             <div class="weui-form-preview__hd">
                 <div class="weui-form-preview__item">
                     <font color="red">2888￥起</font>
@@ -37,18 +37,18 @@ router:#!/clsdetail
         </div>
     </div>
 </div>
- <div class="page">
-   <div class="page__bd">
-     <div class="weui-form-preview">
+<div class="page">
+    <div class="page__bd">
+        <div class="weui-form-preview">
             <div class="weui-form-preview__hd">
             </div>
-                <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">出发城市</label>
-                    <span class="weui-form-preview__value">天津</span>
-                </div>
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">出发城市</label>
+                <span class="weui-form-preview__value">天津</span>
             </div>
         </div>
     </div>
+</div>
 </div>
 <div class="page">
     <div class="page__hd">
@@ -56,35 +56,71 @@ router:#!/clsdetail
     <div class="page__bd">
         <div class="weui-cells__title">出发日期 以下价格均为起价</div>
         <div class="weui-cells">
- <div class="weui-flex">
-    <div class="weui-flex__item"><div class="placeholder"><a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">11-03周四 ￥4661</a></div></div>
-    <div class="weui-flex__item"><div class="placeholder"><a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">11-03周四 ￥4661</a></div></div>
-    <div class="weui-flex__item"><div class="placeholder"><a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">11-03周四 ￥4661</a></div></div>
-    <div class="weui-flex__item"><div class="placeholder"><a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">11-03周四 ￥4661</a></div></div>
-</div>
-<div class="weui-flex">
-    <div class="weui-flex__item"><div class="placeholder"><a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">11-03周四 ￥4661</a></div></div>
-    <div class="weui-flex__item"><div class="placeholder"><a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">11-03周四 ￥4661</a></div></div>
-    <div class="weui-flex__item"><div class="placeholder"><a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">11-03周四 ￥4661</a></div></div>
-    <div class="weui-flex__item"><div class="placeholder"><a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">11-03周四 ￥4661</a></div></div>
-</div>
-         </div>
+            <div class="weui-flex">
+                <div class="weui-flex__item">
+                    <div class="placeholder"><a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">11-03周四 ￥4661</a></div>
+                </div>
+                <div class="weui-flex__item">
+                    <div class="placeholder"><a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">11-03周四 ￥4661</a></div>
+                </div>
+                <div class="weui-flex__item">
+                    <div class="placeholder"><a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">11-03周四 ￥4661</a></div>
+                </div>
+                <div class="weui-flex__item">
+                    <div class="placeholder"><a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">11-03周四 ￥4661</a></div>
+                </div>
+            </div>
+            <div class="weui-flex">
+                <div class="weui-flex__item">
+                    <div class="placeholder"><a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">11-03周四 ￥4661</a></div>
+                </div>
+                <div class="weui-flex__item">
+                    <div class="placeholder"><a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">11-03周四 ￥4661</a></div>
+                </div>
+                <div class="weui-flex__item">
+                    <div class="placeholder"><a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">11-03周四 ￥4661</a></div>
+                </div>
+                <div class="weui-flex__item">
+                    <div class="placeholder"><a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">11-03周四 ￥4661</a></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <div class="page">
     <div class="page__bd" style="height: 100%;">
         <div class="weui-tab">
             <div class="weui-navbar">
-                <div class="weui-navbar__item weui-bar__item_on">
+                <button class="weui-navbar__item" ng-click="ishidden1()">
                     详情
-                </div>
-                <div class="weui-navbar__item">
+                </button>
+                <button class="weui-navbar__item" ng-click="ishidden2()">
                     评价
-                </div>
+                </button>
             </div>
             <div class="weui-tab__panel">
-
+                <p ng-hide="status1">【北部经典景点玩乐 ：首都路易港、红顶教堂、蔻丹广场、中央市场、SUPER U超市、炮台山】 推荐产品编号：210301330、210240388（可直接复制在搜索框内搜索）
+                </p>
+                <p ng-hide="status2">对此次行程安排非常满意，无论是领队还是当地导游服务非常好，尽心尽力为游客安排好一切。总之，此次行程非常满意，也感谢途牛无论是之前还是回来后，一直都有跟踪服务，服务很好，以后出游还会很途牛合作的！</p>
             </div>
         </div>
     </div>
 </div>
+<div class="page">
+    <div class="weui-flex">
+        <div class="weui-flex__item">
+            <div class="placeholder">
+                <a style="height:100%;width:100%;background-color:#f8f8f8;" class="weui-btn weui-btn_mini weui-btn_default"><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>电话客服</a>
+            </div>
+        </div>
+        <div class="weui-flex__item">
+            <div class="placeholder">
+                <a style="height:100%;width:100%;background-color:#f8f8f8;" class="weui-btn weui-btn_mini weui-btn_default"><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>收藏</a>
+            </div>
+        </div>
+        <div class="weui-flex__item">
+            <div class="placeholder">
+                <a style="height:100%;width:100%;background-color:#ffa726" class="weui-btn weui-btn_mini weui-btn_default" ui-sref="clsorder">立即预定</a>
+            </div>
+        </div>
+    </div>
