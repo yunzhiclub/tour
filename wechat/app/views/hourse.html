@@ -10,7 +10,7 @@ router:#!/hourse
             <section>
                 <section>
                     <p>
-                        <img src="weui/src/example/images/top1.png" alt="" style="margin-right:0px;margin-left:0px;margin-top: 1px">
+                        <img src="weui/src/example/images/top1.png" alt="" style="width:100%;display:block;margin-right:0px;margin-left:0px;margin-top: 1px">
                     </p>
                 </section>
             </section>
@@ -20,8 +20,25 @@ router:#!/hourse
 <div class="page" style="margin-left:15px;margin-right:15px">
     <div class="page__hd">
         <p class="page__desc">选择房间：</p>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell weui-cell_switch">
+                <div class="weui-cell__bd">是否公开订单</div>
+                <div class="weui-cell__ft">
+                    <label for="switchCP" class="weui-switch-cp">
+                        <input id="switchCP" class="weui-switch-cp__input" type="checkbox" checked="checked" />
+                        <div class="weui-switch-cp__box"></div>
+                    </label>
+                </div>
+            </div>
+        </div>
     </div>
-    <br>
+     <div class="weui-cell">
+                <div class="weui-cell__hd"><label for="" class="weui-label">订单截止时间</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="datetime-local" value="" placeholder=""/>
+                </div>
+            </div>
+<hr>
 <div class="weui-flex">
     <div class="weui-flex__item" style="margin-right:20px;margin-left:10px">
         <div class="placeholder"> 
@@ -36,6 +53,11 @@ router:#!/hourse
                 </div>
              </div>
           </a>
+          <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>已支付</p>
+                </div>
+            </div>
         </div>
     </div>
     <div class="weui-flex__item" >
@@ -51,6 +73,11 @@ router:#!/hourse
                 </div>
           </div>
        </a>
+        <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>已支付</p>
+                </div>
+            </div>
       </div>
       </div>
 </div>
@@ -69,6 +96,11 @@ router:#!/hourse
                 </div>
              </div>
           </a>
+           <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>未支付</p>
+                </div>
+            </div>
         </div>
     </div>
     <div class="weui-flex__item">
@@ -85,6 +117,11 @@ router:#!/hourse
                 </div>
           </div>
        </a>
+       <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>未受邀</p>
+                </div>
+            </div>
       </div>
       </div>
 </div>
@@ -104,6 +141,11 @@ router:#!/hourse
                 </div>
              </div>
           </a>
+          <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>未受邀</p>
+                </div>
+            </div>
         </div>
     </div>
     <div class="weui-flex__item" >
@@ -120,10 +162,23 @@ router:#!/hourse
                 </div>
           </div>
        </a>
+       <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>未受邀</p>
+                </div>
+            </div>
       </div>
       </div>
 </div>
+<br>
 </div>
+<hr>
+        <label for="weuiAgree" class="weui-agree">
+            <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
+            <span class="weui-agree__text">
+                我已阅读并接受<a href="javascript:void(0);">预定须知、合同、保险等条款</a>
+            </span>
+        </label>
 <div class="weui-btn-area">
             <a class="weui-btn weui-btn_primary" ui-sref="topay" id="showTooltips">去支付</a>
  </div>
