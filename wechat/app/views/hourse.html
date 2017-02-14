@@ -32,12 +32,12 @@ router:#!/hourse
             </div>
         </div>
     </div>
-     <div class="weui-cell">
+    <div class="weui-cell">
                 <div class="weui-cell__hd"><label for="" class="weui-label">订单截止时间</label></div>
                 <div class="weui-cell__bd">
                     <input class="weui-input" type="datetime-local" value="" placeholder=""/>
                 </div>
-            </div>
+    </div>
 <hr>
 <div class="weui-flex">
     <div class="weui-flex__item" style="margin-right:20px;margin-left:10px">
@@ -127,22 +127,27 @@ router:#!/hourse
 </div>
 <hr>
 <div class="weui-flex">
-    <div class="weui-flex__item" style="margin-right:20px;margin-left:10px">
+    <div class="weui-flex__item">
         <div class="placeholder"> 
-         <a ui-sref="topay" class="weui-btn weui-btn_plain-default" style="width:160px"> 
+         <a ui-sref="" class="weui-btn weui-btn_plain-default" style="width:160px"> 
              <div class="weui-cell">
                 <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
                     <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block"/>
                     <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">可选</span>
                 </div>
                 <div class="weui-cell__bd">
-                    <p>♀</p>
-                    <p style="font-size: 13px;color: #888888;">￥10,000.00</p>
+                    <div class="weui-cell__bd">
+                    <p>性别</p>
+                    <p style="font-size: 13px;color: #888888;">金额</p>
+                    </div>
                 </div>
              </div>
           </a>
           <div class="weui-cell">
                 <div class="weui-cell__bd">
+                <button type="button" class="btn btn-default" ng-click="open(null, null, 1)">年龄:{{ selected1 }}</button>
+                    <button type="button" class="btn btn-default" ng-click="open(null, null, 2)">性别:{{ selected2 }}</button>
+                    <input type="" name="" placeholder="金额">
                     <p>未受邀</p>
                 </div>
             </div>
@@ -179,6 +184,38 @@ router:#!/hourse
                 我已阅读并接受<a href="javascript:void(0);">预定须知、合同、保险等条款</a>
             </span>
         </label>
+<div class="weui-panel">
+            <div class="weui-panel__hd">文字列表附来源</div>
+            <div class="weui-panel__bd">
+                <div class="weui-media-box weui-media-box_text">
+                    <h4 class="weui-media-box__title">标题一</h4>
+                    <p class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+                    <ul class="weui-media-box__info">
+                        <li class="weui-media-box__info__meta"><button type="button" class="btn btn-default" ng-click="open(null, null, 1)">年龄:{{ selected1 }}</button></li>
+                        <li class="weui-media-box__info__meta"><button type="button" class="btn btn-default" ng-click="open(null, null, 2)">性别:{{ selected2 }}</button></li>
+                        <li class="weui-media-box__info__meta weui-media-box__info__meta_extra"> <input type="" name="" placeholder="金额"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 <div class="weui-btn-area">
             <a class="weui-btn weui-btn_primary" ui-sref="topay" id="showTooltips">去支付</a>
- </div>
+</div>
+
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <ul>
+            <li ng-repeat="item in items">
+                <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+            </li>
+        </ul>
+        Selected: <b>{{ selected.item }}</b>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
