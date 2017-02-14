@@ -20,6 +20,7 @@ angular
     'ngTouch',
     'ui.router',
     'angular-loading-bar',
+    'ui.bootstrap',
   ])
   .config(['$stateProvider', '$urlRouterProvider', 'cfpLoadingBarProvider', function($stateProvider, $urlRouterProvider, cfpLoadingBarProvider) {
     // 设置LoadingBar HTML Loading模板
@@ -212,7 +213,21 @@ angular
         controller:'Tuisong2Ctrl',
     });
     
-}]).
+}]).controller('ModalInstanceCtrl', function ($uibModalInstance, items, $scope) {
+  var $ctrl = $scope;
+  $ctrl.items = items;
+  $ctrl.selected = {
+    item: $ctrl.items[0]
+  };
+
+  $ctrl.ok = function () {
+    $uibModalInstance.close($ctrl.selected.item);
+  };
+
+  $ctrl.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+}).
 /*
 由于整个应用都会跟路由打交道所以把$state和$stateParams这两个对象放在$rootscope上，
 方便其他地方注入和应用。这里的run方法只会在angular运行的时候执行一次
