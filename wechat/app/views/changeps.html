@@ -3,6 +3,26 @@ description 个人信息修改页面
 router:#!/changeps
  -->
 <div class="weui-cells weui-cells_form">
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <div class="weui-uploader">
+                <div class="weui-uploader__hd">
+                    <p class="weui-uploader__title">上传头像</p>
+                </div>
+                <div class="weui-uploader__bd">
+                    <div class="weui-uploader__input-box">
+                        <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">昵称</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="" pattern="" placeholder="请输入昵称"/>
+            </div>
+    </div>
     <div class="weui-cell weui-cell_vcode">
         <div class="weui-cell__hd">
             <label class="weui-label">绑定手机</label>
@@ -19,12 +39,92 @@ router:#!/changeps
             <label class="weui-label">邮箱</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="number" pattern="[0-9]*" placeholder="单行输入" />
+            <input class="weui-input" type="" pattern="" placeholder="单行输入" />
         </div>
     </div>
+    <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">性别</label></div>
+                <div class="weui-cell__bd">
+                <div class="weui-cell weui-cell_select weui-cell_select-before">
+                    <select class="weui-select" name="select1">
+                        <option value="1">男</option>
+                        <option value="2">女</option>
+                    </select>
+                </div>
+                </div>
+    </div>
+    <div class="weui-cell">
+                <div class="weui-cell__hd"><label for="" class="weui-label">出生日期</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="date" value=""/>
+                </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">所在城市</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="" pattern="" placeholder="" />
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">绑定身份证</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="" pattern="" placeholder="请输入身份证号"/>
+            </div>
+    </div>
+    <div class="weui-cell">
+    <div class="weui-cell__bd">
+            <div class="weui-uploader">
+                <div class="weui-uploader__hd">
+                    <p class="weui-uploader__title">上传身份证正反面用于审核</p>
+                </div>
+                <div class="weui-uploader__bd">
+                    <div class="weui-uploader__input-box">
+                        <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple />
+                    </div>
+                     <div class="weui-uploader__input-box">
+                        <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple />
+                    </div>
+                </div>
+            </div>
+    </div>
+    </div>
 </div>
+
 <div class="page__bd page__bd_spacing">
-    <a ui-sref="personal" class="weui-btn weui-btn_primary" style="margin-right:20px;margin-left:20px;margin-top: 100px">
+    <a ui-sref="personal" class="weui-btn weui-btn_primary" style="margin-right:20px;margin-left:20px;margin-top: 70px;margin-bottom:20px">
         保存修改
         </a>
 </div>
+<script type="text/javascript">
+    $(function(){
+        var tmpl = '<li class="weui-uploader__file" style="background-image:url(#url#)"></li>',
+            $gallery = $("#gallery"), $galleryImg = $("#galleryImg"),
+            $uploaderInput = $("#uploaderInput"),
+            $uploaderFiles = $("#uploaderFiles")
+            ;
+
+        $uploaderInput.on("change", function(e){
+            var src, url = window.URL || window.webkitURL || window.mozURL, files = e.target.files;
+            for (var i = 0, len = files.length; i < len; ++i) {
+                var file = files[i];
+
+                if (url) {
+                    src = url.createObjectURL(file);
+                } else {
+                    src = e.target.result;
+                }
+
+                $uploaderFiles.append($(tmpl.replace('#url#', src)));
+            }
+        });
+        $uploaderFiles.on("click", "li", function(){
+            $galleryImg.attr("style", this.getAttribute("style"));
+            $gallery.fadeIn(100);
+        });
+        $gallery.on("click", function(){
+            $gallery.fadeOut(100);
+        });
+    });
+</script>
