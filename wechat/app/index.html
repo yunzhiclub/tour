@@ -17,12 +17,12 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="wechatApp">
+  <body ng-app="wechatApp" ng-controller="MainCtrl">
         <div ui-view></div>
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
@@ -79,6 +79,9 @@
         <script src="scripts/controllers/nopayed.js"></script>
         <script src="scripts/controllers/nofinish.js"></script>
         <script src="scripts/controllers/noevaluate.js"></script>
+        <script src="scripts/services/config.js"></script>
+        <script src="scripts/services/cookies.js"></script>
+        <script src="scripts/services/user.js"></script>
         <!-- endbuild -->
 </body>
 </html>
