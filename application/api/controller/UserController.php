@@ -49,7 +49,7 @@ class UserController extends ApiController {
      * 成功 return $this->response([]);| 错误 $this->   
      * response(20004, $UserModel->getError());
      */
-    public function saveUser($user = null) {
+    public function saveUser() {
        // 保存客户的逻辑     
     }
 }

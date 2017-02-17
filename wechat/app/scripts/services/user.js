@@ -128,9 +128,9 @@ angular.module('wechatApp')
 
             // 调用$http请求，保存用户信息
             $http({
-                method: 'GET',
+                method: 'POST',
                 url: url + 'saveUser?',
-                data: postData,
+                data: {user: postData},
             }).then(function successCallback(response) {
                 console.log('保存用户信息成功：');
                 console.log(response);
@@ -177,6 +177,6 @@ angular.module('wechatApp')
             // 保存数据
             saveUser: function() {
                 return saveUser();
-            };
+            },
         };
     }]);
