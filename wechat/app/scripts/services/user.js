@@ -13,10 +13,17 @@ angular.module('wechatApp')
         // ...
         var self = this;
         self.user = {
-            openid: '',
+            openid: 'oYIbNwFiyIJK25Ifro0LKww03N2g',
             idCardNum: '',
-            isReceiveMessage: false,
-            tickets: [1, 2],
+            nickName: '',
+            sex: '',
+            old: '',
+            idCardNum: '',
+            phoneNum: '',
+            email: '',
+            birthday: '',
+            location: '',
+            imgUrl: '',
         };
         var url = config.apiUrl + 'user/';
         // 用户是否登陆
@@ -95,6 +102,7 @@ angular.module('wechatApp')
                             email: user.Email,
                             birthday: user.Birthday,
                             location: user.Location,
+                            imgUrl: user.ImgUrl,
                         };
                         cookies.put('openid', user.Openid);
                     }
@@ -108,6 +116,35 @@ angular.module('wechatApp')
             } else {
                 deferred.resolve(self.user); //执行成功
             }
+            return promise;
+        };
+
+        // 保存用户修改
+        var saveUser = function() {
+            // 定义promise解决异步问题
+            var deferred = $q.defer();
+            var promise = deferred.promise;
+            var postData = self.user;
+
+            // 调用$http请求，保存用户信息
+            $http({
+                method: 'GET',
+                url: url + 'saveUser?',
+                data: postData,
+            }).then(function successCallback(response) {
+                console.log('保存用户信息成功：');
+                console.log(response);
+                if (typeof response.data.errorCode !== 'undefined') {
+                    console.log('系统发生错误：' + response.data.error);
+                } else {
+                    // 处理数据
+
+                }
+                deferred.resolve(); // 执行成功
+            }, function errorCallback(response) {
+                console.log(response);
+                deferred.reject(); //执行失败
+            });
             return promise;
         };
         // Public API here
@@ -134,7 +171,12 @@ angular.module('wechatApp')
 
             // 初始化
             init: function() {
-                clearOpenidOfParam();           // 清理URL中的OPENID，防止链接转发引起的错误
+                clearOpenidOfParam(); // 清理URL中的OPENID，防止链接转发引起的错误
             },
+
+            // 保存数据
+            saveUser: function() {
+                return saveUser();
+            };
         };
     }]);
