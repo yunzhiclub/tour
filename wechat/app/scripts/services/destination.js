@@ -61,6 +61,32 @@ angular.module('wechatApp')
             return promise;
         };
 
+        var getCitysBycountryid = function(countryid) {
+            // 定义promise 解决异步问题
+            var deferred = $q.defer();
+            var promise = deferred.promise;
+
+            // $http去后台获取数据
+            $http({
+                method: 'GET',
+                url: config.apiUrl + 'Destination/getCitysBycountryid',
+                params: {countryid: countryid},
+            }).then(function successCallback(response) {
+                console.log(response);
+                if (typeof response.data.errorCode !== 'undefined') {
+                    console.log('系统发生错误：' + response.data.error);
+                } else {
+                    // 逻辑处理 
+                    self.destinations = response.data.data;
+                }
+                deferred.resolve(); //执行成功
+            }, function errorCallback(response) {
+                deferred.reject(); //执行失败
+            });
+            return promise;
+        };
+
+
 
         // Public API here
         return {
@@ -72,6 +98,11 @@ angular.module('wechatApp')
             // 获取地区所有的国家
             getCountrysByplaceid: function(placeid) {
                 return getCountrysByplaceid(placeid);
-            }
+            },
+
+            // 获取国家所在的城市
+            getCitysBycountryid: function(countryid) {
+                return getCitysBycountryid(countryid);
+            },
         };
     }]);

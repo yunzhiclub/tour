@@ -147,6 +147,35 @@ angular.module('wechatApp')
             });
             return promise;
         };
+
+        // 保存用户修改
+        var getCollectionsByuserid = function(user_id) {
+            // 定义promise解决异步问题
+            var deferred = $q.defer();
+            var promise = deferred.promise;
+           
+
+            // 调用$http请求，保存用户信息
+            $http({
+                method: 'GET',
+                url: url + 'getCollectionsByuserid?',
+                params: {user_id: user_id},
+            }).then(function successCallback(response) {
+                console.log('保存用户信息成功：');
+                console.log(response);
+                if (typeof response.data.errorCode !== 'undefined') {
+                    console.log('系统发生错误：' + response.data.error);
+                } else {
+                    // 处理数据
+
+                }
+                deferred.resolve(); // 执行成功
+            }, function errorCallback(response) {
+                console.log(response);
+                deferred.reject(); //执行失败
+            });
+            return promise;
+        };
         // Public API here
         return {
             // 判断用是否登陆
@@ -177,6 +206,11 @@ angular.module('wechatApp')
             // 保存数据
             saveUser: function() {
                 return saveUser();
+            },
+
+            // 获取收藏
+            getCollectionsByuserid: function(user_id) {
+                return getCollectionsByuserid(user_id);
             },
         };
     }]);
