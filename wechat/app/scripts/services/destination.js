@@ -29,16 +29,18 @@ angular.module('wechatApp')
                     // 逻辑处理 
                     self.destinations = response.data.data;
                 }
-                deferred.resolve(self.destinations); //执行成功
+                deferred.resolve(); //执行成功
             }, function errorCallback(response) {
                 deferred.reject(); //执行失败
             });
+            return promise;
         };
 
 
         // Public API here
         return {
             getDestinations: function() {
+                // 获取全部目的地
                 return getDestinations();
             },
         };
