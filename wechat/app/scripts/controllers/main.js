@@ -8,7 +8,7 @@
  * Controller of the wechatApp
  */
 angular.module('wechatApp')
-    .controller('MainCtrl', ['user', '$scope', 'route', function(user, $scope, route) {
+    .controller('MainCtrl', ['user', '$scope', 'route',  function(user, $scope, route) {
         // 用户未登录，则进行登录
         if (!user.isLogin()) {
             user.login();
@@ -21,5 +21,12 @@ angular.module('wechatApp')
         // user.getUser().then(function success(user) {
         //     $scope.user = user;
         // }, function error() {});
-
+        $scope.test = function() {
+            console.log("test");
+            route.collecteTheRoute(1, 4).then(function success(response) {
+                console.log("chenggong");
+            }, function error(response) {
+                console.log("shibai");
+            });
+        }
     }]);
