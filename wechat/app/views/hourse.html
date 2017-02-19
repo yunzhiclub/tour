@@ -145,8 +145,8 @@ router:#!/hourse
           </a>
           <div class="weui-cell">
                 <div class="weui-cell__bd">
-                <button type="button" class="btn btn-default" ng-click="open(null, null, 1)">年龄:{{ selected1 }}</button>
-                    <button type="button" class="btn btn-default" ng-click="open(null, null, 2)">性别:{{ selected2 }}</button>
+                <button type="button" class="btn btn-default" ng-click="open()">年龄:{{ selected1 }}</button>
+                    <button type="button" class="btn btn-default" ng-click="open()">性别:{{ selected2 }}</button>
                     <input type="" name="" placeholder="金额">
                     <p>未受邀</p>
                 </div>
@@ -208,11 +208,20 @@ router:#!/hourse
     </div>
     <div class="modal-body" id="modal-body">
         <ul>
-            <li ng-repeat="item in items">
-                <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+            <li ng-repeat="item in terms1">
+                <a href="#" ng-click="$event.preventDefault(); selected.item1 = item">{{ item }}</a>
             </li>
         </ul>
-        Selected: <b>{{ selected.item }}</b>
+        Selected: <b>{{ selected.item1 }}</b>
+        <ul>
+            <li ng-repeat="item in terms2">
+                <a href="#" ng-click="$event.preventDefault(); selected.item2 = item">{{ item }}</a>
+            </li>
+        </ul>
+        Selected: <b>{{ selected.item2 }}</b>
+        <br>
+        <div>金额:<input type="text" placeholder="$000" ng-model="selected.money"></div>
+        
     </div>
     <div class="modal-footer">
         <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>

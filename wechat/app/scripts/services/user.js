@@ -148,7 +148,7 @@ angular.module('wechatApp')
             return promise;
         };
 
-        // 保存用户修改
+        // 获取用户收藏
         var getCollectionsByuserid = function(user_id) {
             // 定义promise解决异步问题
             var deferred = $q.defer();
@@ -176,6 +176,117 @@ angular.module('wechatApp')
             });
             return promise;
         };
+
+        var getOrdersByuserid = function(user_id) {
+            // 定义promise解决异步问题
+            var deferred = $q.defer();
+            var promise = deferred.promise;
+           
+
+            // 调用$http请求，保存用户信息
+            $http({
+                method: 'GET',
+                url: url + 'getOrdersByuserid?',
+                params: {user_id: user_id},
+            }).then(function successCallback(response) {
+                console.log('保存用户信息成功：');
+                console.log(response);
+                if (typeof response.data.errorCode !== 'undefined') {
+                    console.log('系统发生错误：' + response.data.error);
+                } else {
+                    // 处理数据
+
+                }
+                deferred.resolve(); // 执行成功
+            }, function errorCallback(response) {
+                console.log(response);
+                deferred.reject(); //执行失败
+            });
+            return promise;
+        };
+
+        var setIsOpen = function(id, user_id) {
+           // 定义promise 解决异步问题
+            var deferred = $q.defer();
+            var promise = deferred.promise;
+            
+            // $http去后台获取数据
+            $http({
+                method: 'GET',
+                url: url + 'setIsOpen',
+                params: {id: id, user_id: user_id},
+            }).then(function successCallback(response) {
+                console.log(response);
+                if (typeof response.data.errorCode !== 'undefined') {
+                    console.log('系统发生错误：' + response.data.error);
+                } else {
+                    // 逻辑处理 
+                  
+                }
+                deferred.resolve(); //执行成功
+            }, function errorCallback(response) {
+                deferred.reject(); //执行失败
+            });
+            return promise;
+        };
+
+         var getInvitationsBystatus = function(status, user_id) {
+           // 定义promise 解决异步问题
+            var deferred = $q.defer();
+            var promise = deferred.promise;
+            
+            // $http去后台获取数据
+            $http({
+                method: 'GET',
+                url: url + 'getInvitationsBystatus',
+                params: {status: status, user_id: user_id},
+            }).then(function successCallback(response) {
+                console.log(response);
+                if (typeof response.data.errorCode !== 'undefined') {
+                    console.log('系统发生错误：' + response.data.error);
+                } else {
+                    // 逻辑处理 
+                  
+                }
+                deferred.resolve(); //执行成功
+            }, function errorCallback(response) {
+                deferred.reject(); //执行失败
+            });
+            return promise;
+        };
+
+        var toEvaluate = function(postData) {
+           // 定义promise 解决异步问题
+            var deferred = $q.defer();
+            var promise = deferred.promise;
+
+            var datas = {
+                id : postData.id,
+                user_id: postData.user_id,
+                text: postData.text,
+            };
+            
+            // $http去后台保存数据
+            $http({
+                method: 'POST',
+                url: url + 'toEvaluate',
+                data: datas,
+            }).then(function successCallback(response) {
+                console.log(response);
+                if (typeof response.data.errorCode !== 'undefined') {
+                    console.log('系统发生错误：' + response.data.error);
+                } else {
+                    // 逻辑处理 
+                  
+                }
+                deferred.resolve(); //执行成功
+            }, function errorCallback(response) {
+                deferred.reject(); //执行失败
+            });
+            return promise;
+        };
+
+
         // Public API here
         return {
             // 判断用是否登陆
@@ -211,6 +322,26 @@ angular.module('wechatApp')
             // 获取收藏
             getCollectionsByuserid: function(user_id) {
                 return getCollectionsByuserid(user_id);
+            },
+
+            // 获取自己的全部订单
+            getOrdersByuserid: function(user_id) {
+                return getOrdersByuserid(user_id);
+            },
+
+            // 设置趣约是否公开（必须是自己发布的）
+            setIsOpen: function(id, user_id) {
+              return setIsOpen(id, user_id);
+            },
+
+            // 根据订单状态和用户id获取订单列表(包括自己发布的)
+            getInvitationsBystatus: function(status, user_id) {
+              return getInvitationsBystatus(status, user_id);
+            },
+
+            // 按趣约id和用户id评价订单
+            toEvaluate: function(postData) {
+              return toEvaluate(postData);
             },
         };
     }]);
