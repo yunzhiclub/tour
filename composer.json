@@ -17,11 +17,13 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "topthink/framework": "^5.0"
+        "topthink/framework": "^5.0",
+        "overtrue/wechat": "~3.1"
     },
     "extra": {
         "think-path": "thinkphp"
     },
+    "minimum-stability": "dev",
     "config": {
         "preferred-install": "dist"
     }
