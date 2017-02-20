@@ -1,6 +1,8 @@
 <?php
 namespace app\api\controller;
 use think\Request;
+use app\model\Region;	//地区
+use app\model\Country;	//国家
 
 class DestinationController extends ApiController {
 	/**
@@ -8,32 +10,37 @@ class DestinationController extends ApiController {
 	 * @return             array;
 	 */
 	public function getDestinations() {
-
-		// 示例数据
-		$data = ["欧洲", '美洲', '意大利'];
+		//取出所有目的地
+		$regions = Region::all();
 		
-		return $this->response($data);
+		return $this->response($regions);
 	}
 
 	/**
-	 * 获取全部的目的地国家通过地区id
+	 * 获取全部的目的地国家   通过地区id
 	 * @return             array;
 	 */
 	public function getCountrysByplaceid() {
-	   	$placeid = Request::instance()->param('placeid');
+	   	$regionId = Request::instance()->param('id');
 	   	// 逻辑处理
-		
-		return $this->response([]);
+	   	
+	   	$map = array('region_id' => $regionId);
+
+	   	//根据地区id查询
+	   	$Country = new Country;
+		$countrys = $Country->where($map)->select();
+
+		return $this->response($countrys);
 	}
 
 	/**
-	 * 获取全部的城市通过国家id
+	 * 获取全部的城市 通过国家id
 	 * @return             array;
 	 */
 	public function getCitysBycountryid() {
-	   	$countryid = Request::instance()->param('countryid');
+	   	$countryid = Request::instance()->param('id');
 	   	// 逻辑处理
-		
+		$map = array('country_id' => $countryid);
 		return $this->response([]);
 	}
 }
