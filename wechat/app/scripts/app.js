@@ -215,13 +215,15 @@ angular
     
 }]).controller('ModalInstanceCtrl', function ($uibModalInstance, items, $scope) {
   var $ctrl = $scope;
-  $ctrl.items = items;
+  $ctrl.terms1 = items.terms1;
+  $ctrl.terms2 = items.terms2;
   $ctrl.selected = {
-    item: $ctrl.items[0]
+    item1: $ctrl.terms1[0],
+    item2: $ctrl.terms2[0],
   };
 
   $ctrl.ok = function () {
-    $uibModalInstance.close($ctrl.selected.item);
+    $uibModalInstance.close($ctrl.selected);
   };
 
   $ctrl.cancel = function () {
