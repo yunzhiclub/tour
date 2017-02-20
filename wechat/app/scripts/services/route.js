@@ -8,7 +8,7 @@
  * Factory in the wechatApp.
  */
 angular.module('wechatApp')
-    .factory('route', ['$q', '$http', 'config', '$httpParamSerializer', function($q, $http, config, $httpParamSerializer) {
+    .factory('route', ['$q', '$http', 'config', function($q, $http, config) {
         // Service logic
         var self = this;
         self.routes = [];
