@@ -52,4 +52,16 @@ class UserController extends ApiController {
     public function saveUser() {
        // 保存客户的逻辑     
     }
+
+    /**
+     * 获取收藏
+     * @param    int                  $user_id [description]
+     * @return   
+     * 成功 return $this->response($Collections);| 错误 $this->   
+     * response(20004, $UserModel->getError());
+     */
+    public function getCollectionsByuserid() {
+        $user_id = Request::instance->param('user_id');
+       // 保存客户的逻辑     
+    }
 }
