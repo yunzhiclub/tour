@@ -20,7 +20,9 @@ angular.module('wechatApp')
 
         $ctrl.animationsEnabled = true;
 
-        $ctrl.open = function(size, parentSelector, type) {
+
+        // 打开弹出框
+        $ctrl.open = function(size, parentSelector) {
             var parentElem = parentSelector ?
                 angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
             var modalInstance = $uibModal.open({
@@ -33,23 +35,15 @@ angular.module('wechatApp')
                 size: size,
                 appendTo: parentElem,
                 resolve: {
-                    items: function() {
-                    	if (type == 1) {
-                    		return $ctrl.items1;
-                    	} else if (type == 2) {
-                    		return $ctrl.items2;
-                    	}
-                       
+                    items: {
+                        terms1: ['0~25', '25~35', '35~'],
+                        terms2: ['男', '女'],
                     }
                 }
             });
 
-            modalInstance.result.then(function(selectedItem) {
-            	if (type == 1) {
-            		$ctrl.selected1 = selectedItem;
-            	} else if (type = 2) {
-            		$ctrl.selected2 = selectedItem;
-            	}
+            modalInstance.result.then(function(selectedItems) {
+            	console.log(selectedItems);
                 
             }, function() {
                 $log.info('Modal dismissed at: ' + new Date());

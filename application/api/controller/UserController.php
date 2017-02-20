@@ -64,4 +64,51 @@ class UserController extends ApiController {
         $user_id = Request::instance->param('user_id');
        // 保存客户的逻辑     
     }
+
+    /**
+     * 获取用户的全部订单
+     * @param    int                  $user_id [description]
+     * @return   
+     * 成功 return $this->response($orders);| 错误 $this->   
+     * response(20004, $UserModel->getError());
+     */
+    public function getOrdersByuserid() {
+        $user_id = Request::instance->param('user_id');
+       // 逻辑     
+    }
+
+    /**
+     * 按趣约id和用户id设置是否公开
+     * @param              int
+     * @return             array[];
+     */
+    public function setIsOpen() {
+        $id = Request::instance()->param('id');
+        $user_id = Request::instance()->param('user_id');
+
+        return $this->response([]);
+    }
+
+    /**
+     * 根据订单状态和用户id获取订单列表(包括自己发布的)
+     * @param              int
+     * @return             array[];
+     */
+    public function getInvitationsBystatus() {
+        $status = Request::instance()->param('status');
+        $user_id = Request::instance()->param('user_id');
+
+        return $this->response([]);
+    }
+
+    /**
+     * 按趣约id和用户id评价订单
+     * @param              int
+     * @return             array[];
+     */
+    public function toEvaluate() {
+        
+
+        return $this->response([]);
+    }
 }
