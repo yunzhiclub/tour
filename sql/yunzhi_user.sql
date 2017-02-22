@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost_3306
-Source Server Version : 50505
+Source Server         : localhost
+Source Server Version : 50626
 Source Host           : localhost:3306
 Source Database       : tour
 
 Target Server Type    : MYSQL
-Target Server Version : 50505
+Target Server Version : 50626
 File Encoding         : 65001
 
-Date: 2017-01-25 21:28:35
+Date: 2017-02-21 20:57:54
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,17 +20,17 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `yunzhi_user`;
 CREATE TABLE `yunzhi_user` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户id',
-  `openid` varchar(28) DEFAULT '' COMMENT '微信openid',
-  `username` varchar(30) DEFAULT '' COMMENT '用户名',
-  `user_name` varchar(30) DEFAULT NULL COMMENT '用户姓名',
-  `role_id` int(10) unsigned DEFAULT NULL COMMENT '用户姓名',
-  `phone` tinyint(11) unsigned DEFAULT NULL COMMENT '电话号码',
-  `email` varchar(30) DEFAULT '' COMMENT '邮箱',
-  `idcardnum` tinyint(18) unsigned DEFAULT NULL COMMENT '身份证号',
-  PRIMARY KEY (`id`)
+  `openid` varchar(50) NOT NULL COMMENT 'openid',
+  `nickname` varchar(20) DEFAULT '' COMMENT '昵称',
+  `sex` int(11) unsigned DEFAULT NULL,
+  `city` varchar(20) DEFAULT '',
+  `province` varchar(20) DEFAULT '',
+  `country` varchar(20) DEFAULT '',
+  `headimgurl` varchar(200) DEFAULT '',
+  PRIMARY KEY (`openid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yunzhi_user
 -- ----------------------------
+INSERT INTO `yunzhi_user` VALUES ('oYIbNwFiyIJK25Ifro0LKww03N2g', '成杰', '1', '', '天津', '中国', 'http://wx.qlogo.cn/mmopen/QNa3GHaSEXJEQgUS2yro9XSXUAWgbia4q89UwsfXT9gz6uYGBM4d1sawbwQIn6wJlJpb7T8LhR6piaCic5r7TLbS8Yib2eI0xb27/0');
