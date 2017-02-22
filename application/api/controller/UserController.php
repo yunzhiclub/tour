@@ -50,7 +50,10 @@ class UserController extends ApiController {
      * response(20004, $UserModel->getError());
      */
     public function saveUser() {
-       // 保存客户的逻辑     
+       // 保存客户的逻辑
+       $datas = Request::instance()->param();
+       var_dump($datas);
+       die();   
     }
 
     /**
@@ -61,7 +64,7 @@ class UserController extends ApiController {
      * response(20004, $UserModel->getError());
      */
     public function getCollectionsByuserid() {
-        $user_id = Request::instance->param('user_id');
+        $user_id = Request::instance()->param('user_id');
        // 保存客户的逻辑     
     }
 
@@ -73,7 +76,7 @@ class UserController extends ApiController {
      * response(20004, $UserModel->getError());
      */
     public function getOrdersByuserid() {
-        $user_id = Request::instance->param('user_id');
+        $user_id = Request::instance()->param('user_id');
        // 逻辑     
     }
 

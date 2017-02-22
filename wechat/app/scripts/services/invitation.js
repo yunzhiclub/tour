@@ -155,7 +155,7 @@ angular.module('wechatApp')
             var deferred = $q.defer();
             var promise = deferred.promise;
 
-            var data = {
+            var datas = {
                 user_id: postdata.user_id,
                 invite_id: postdata.invite_id,
                 bed_id: postdata.bed_id,
@@ -282,7 +282,7 @@ angular.module('wechatApp')
             },
 
             // 支付
-            topay: function topay(postdata) {
+            topay: function (postdata) {
                 return topay(postdata);
             },
 
