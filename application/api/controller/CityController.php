@@ -1,7 +1,7 @@
 <?php
 namespace app\api\controller;
 use think\Request;
-use app\model\Start;	//出发城市
+use app\model\StartModel;	//出发城市
 
 class CityController extends ApiController {
 	/**
@@ -9,7 +9,8 @@ class CityController extends ApiController {
 	 * @return             array;
 	 */
 	public function getStartCitys() {
-		$starts = Start::all();
+		$starts = StartModel::all();
+		
 		return $this->response($starts);
 	}
 }
