@@ -117,4 +117,17 @@ class InvitationController extends ApiController {
 		
 		return $this->response($invites);
 	}
+
+	/**
+	 * 按趣约id返回趣约详情
+	 * @param              int
+	 * @return             array;
+	 */
+	public function getInvitationByid() {
+		$id = Request::instance()->param('id');
+
+		return $this->response([]);
+	}
+
+	
 }
