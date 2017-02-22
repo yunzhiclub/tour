@@ -4,7 +4,7 @@ use think\Model;
 /**
  * 国家
  */
-class Country extends Model
+class CountryModel extends Model
 {
-
+	
 }

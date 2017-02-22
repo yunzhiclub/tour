@@ -1,36 +1,66 @@
 <?php
 namespace app\api\controller;
 use think\Request;
+use app\model\RouteModel;	//路线
+use app\model\InviteModel;	//邀约
+use app\model\ChosenModel;	//精选
+use app\model\DestinationcityModel;	//目的地城市
+use app\mode\StarttimeModel;	//出发时间
+use app\model\StartModel;	//出发城市
 
 class InvitationController extends ApiController {
 	/**
 	 * 获取精选趣约
+	 * @author huangshauibin
 	 * @return             array;
 	 */
 	public function getChosedInvitations() {
-		return $this->response([]);
+		//获取查询信息,精选
+		$map = ChosenModel::ChosenInvite();
+		
+		//从邀约表中查询
+		$invitions = InviteModel::getInviteByRouteId($map);
+
+		return $this->response($invitions);
 	}
 
 	/**
 	 * 按目的地(地区id)返回趣约
 	 * @param              int
+	 * @author huangshuaibin
 	 * @return             array;
 	 */
 	public function getInvitationsByplaceid() {
-		$placeid = Request::instance()->param('placeid');
+		$id = Request::instance()->param('id');
 
-		return $this->response([]);
+		//获取路线ID By目的地ID
+		$map = RouteModel::getRouteIdByDestinationId($id);
+		
+		//通过路线id查询邀约
+		$invitions = InviteModel::getInviteByRouteId($map);
+		
+		return $this->response($invitions);
 	}
 
 	/**
 	 * 按目的地(国家id)返回趣约
 	 * @param              int
+	 * @author huangshuaibin
 	 * @return             array;
 	 */
 	public function getInvitationsBycountryid() {
-		$placeid = Request::instance()->param('countryid');
+		$id = Request::instance()->param('id');
 
-		return $this->response([]);
+		//获取国家对应目的城市ID
+		$destinationcityIds = DestinationcityModel::getDestinationIdByCountryId($id);
+
+		//根据目的城市ID取出对应路线ID
+		$routeIds = RouteModel::getRouteIdByDestinationId($destinationcityIds);
+
+		//根据路线ID取出对应趣约ID
+		$invites = InviteModel::getInviteByRouteId($routeIds);
+
+		return $this->response($invites);
 	}
 
 	/**
@@ -57,25 +87,34 @@ class InvitationController extends ApiController {
 	}
 
 	/**
-	 * 按时间获取趣约
+	 * 按时间获取趣约???按照什么时间,时间ID还是时间....
 	 * @param              string
 	 * @return             array[]
 	 */
 	public function getInvitationsBytime() {
-		$time = Request::instance()->param('time');
+		//$time = Request::instance()->param('time');
 		
+		//通过日期获取路线id数组
 
+		//通过路线id数组取出对应邀约数组
 		return $this->response([]);
 	}
 
 	/**
 	 * 按出发城市id返回趣约
 	 * @param              int
+	 * @author huangshuaibin
 	 * @return             array;
 	 */
 	public function getInvitationsBycityid() {
 		$cityid = Request::instance()->param('cityid');
 
-		return $this->response([]);
+		//根据出发城市id(一个id)取出对应路线ID数组
+		$routeIds = RouteModel::getRouteIdByStartId($cityid);
+
+		//根据路线ID数组 取出对应邀约
+		$invites = InviteModel::getInviteByRouteId($routeIds);
+		
+		return $this->response($invites);
 	}
 }
