@@ -8,10 +8,10 @@
  * Controller of the wechatApp
  */
 angular.module('wechatApp')
-  .controller('HomeCtrl', function () {
+  .controller('HomeCtrl', ['$scope', 'destination', function ($scope, destination) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
-  });
+  }]);

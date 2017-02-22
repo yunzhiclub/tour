@@ -8,6 +8,7 @@ use think\Session;
 use think\Url;
 use EasyWeChat\Foundation\Application;
 use think\Cookie;
+use app\model\UserModel;
 
 
 class OauthController extends WechatController {
@@ -61,6 +62,26 @@ class OauthController extends WechatController {
      */
     private function redirectToCallbackUrl() {
         $user = Session::get('wechat_user');
+
+        // 判断用户是否是第一次登陆系统
+        // 1 查找数据库是否存在
+        $UserModel = UserModel::get($user['original']['openid']);
+        
+        // 判断是否该用户是否存在
+        if (is_null($UserModel)) {
+            // 保存数据
+            $UserModel = new UserModel;
+            $data['openid'] = $user['original']['openid'];
+            $data['nickname'] = $user['original']['nickname'];
+            $data['sex'] = $user['original']['sex'];
+            $data['province'] = $user['original']['province'];
+            $data['country'] = $user['original']['country']; 
+            $data['city'] = $user['original']['city']; 
+            $data['headimgurl'] = $user['original']['headimgurl']; 
+
+            // save
+            $UserModel->save($data);
+        }
         $callbackUrl = Session::get('callbackUrl') . '?openid=' . $user['id'];
         return $this->redirect($callbackUrl);
     }
