@@ -26,13 +26,8 @@ class DestinationController extends ApiController {
 	public function getCountrysByplaceid() {
 	   	$regionId = Request::instance()->param('id');
 
-	   	//查询条件
-	   	$map = array('region_id' => $regionId);
-
-	   	//根据地区id查询
-	   	$Country = new CountryModel;
-		$countrys = $Country->where($map)->select();
-
+	   	$countrys = CountryModel::getCountrysByRegionId($regionId);
+	   	
 		return $this->response($countrys);
 	}
 
@@ -41,14 +36,11 @@ class DestinationController extends ApiController {
 	 * @author huangshuaibin
 	 * @return             array;
 	 */
-	public function getCitysByCountryId() {
-	   	//$countryid = Request::instance()->param('id');
-		$countryid = 2;
-	   	// 逻辑处理
-		$map = array('country_id' => $countryid);
+	public function getCitysBycountryid() {
+	   	$countryid = Request::instance()->param('id');
 
-		$Destinationcity = new DestinationcityModel;
-		$destinationcitys = $Destinationcity->where($map)->select();
+	   	// 通过国家id获取全部的城市的数据
+		$destinationcitys = DestinationcityModel::getDestinationcitysByCountryId($countryid);
 		
 		return $this->response($destinationcitys);
 	}
