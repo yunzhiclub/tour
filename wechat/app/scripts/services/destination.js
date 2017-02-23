@@ -12,7 +12,7 @@ angular.module('wechatApp')
         // Service logic
         var self = this;
         self.destinations = [];
-        var getDestinations = function() {
+        var getAllRegions = function() {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
@@ -20,7 +20,7 @@ angular.module('wechatApp')
             // $http去后台获取数据
             $http({
                 method: 'GET',
-                url: config.apiUrl + 'Destination/getDestinations',
+                url: config.apiUrl + 'Destination/getAllRegions',
             }).then(function successCallback(response) {
                 // console.log(response);
                 if (typeof response.data.errorCode !== 'undefined') {
@@ -91,8 +91,8 @@ angular.module('wechatApp')
         // Public API here
         return {
             // 获取全部目的地(地区)
-            getDestinations: function() {
-                return getDestinations();
+            getAllRegions: function() {
+                return getAllRegions();
             },
 
             // 获取地区所有的国家

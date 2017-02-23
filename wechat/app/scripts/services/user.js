@@ -67,7 +67,6 @@ angular.module('wechatApp')
 
         // 获取用户的openid
         var getOpenid = function() {
-
             return cookies.get('openid');
         };
 
@@ -102,7 +101,7 @@ angular.module('wechatApp')
                             idcard: '130272199511927782',
                             birthday: '1288323623006',
                         };
-                        cookies.put('openid', user.Openid);
+                        cookies.put('openid', user.openid);
                     }
                     deferred.resolve(self.user); //执行成功
                 }, function errorCallback(response) {

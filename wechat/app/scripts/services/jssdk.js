@@ -1,0 +1,89 @@
+'use strict';
+
+/**
+ * @ngdoc service
+ * @name wechatApp.jssdk
+ * @description
+ * # jssdk
+ * Factory in the wechatApp.
+ */
+angular.module('wechatApp')
+    .factory('jssdk', ['$q', '$http', 'config', function($q, $http, config) {
+        // Service logic
+
+        // 获取当前的url
+        var url = window.location.href.replace(window.location.hash, '');
+
+        // 定制配置信息
+        var jssdkConfig = {
+            jsApiList: ['chooseImage'],
+            debug: true,
+            appId: '',
+        };
+
+        // 发送请求，获取配置信息
+        var getConfig = function() {
+            // 定义promise 解决异步问题
+            var deferred = $q.defer();
+            var promise = deferred.promise;
+
+            $http({
+                url: config.apiUrl + 'Jssdk/getConfig?url=' + encodeURIComponent(url),
+                method: 'get',
+            }).then(function successCallback(response, status) {
+
+                console.log(response.data.data);
+                if (typeof response.data.errorCode !== 'undefined') {
+                    console.log('系统发生错误：' + response.data.error);
+                } else {
+                    // 逻辑处理 
+                    // 返回200说明请求正常，则调用系统初始化函数
+                    if (response.status == 200) {
+                        // 调jssdk初始化函数
+                        init(response.data.data);
+                    } else {
+                        alert('数据返回错误', +response.status);
+                    }
+                }
+                deferred.resolve(); //执行成功
+
+            }, function errorCallback(response) {
+                alert('数据返回错误:' + response.status);
+                deferred.reject(); //执行失败
+            });
+            return promise;
+        }
+
+        // 系统初始化
+        var init = function(config) {
+            jssdkConfig.appId = config.appId;
+            jssdkConfig.nonceStr = config.nonceStr;
+            jssdkConfig.signature = config.signature;
+            jssdkConfig.timestamp = config.timestamp;
+            wx.config(jssdkConfig);
+        };
+
+        // 上传图片
+        var chooseImg = function(callback = undefined) {
+            wx.chooseImage({
+                count: 1, // 默认9
+                sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                success: function (res) {
+                    callback(res);
+                    // $scope.imgurl = res.localIds[0];
+                    // $scope.$apply();
+                    // var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                }
+            });
+        };
+        // Public API here
+        return {
+            getConfig: function() {
+                return getConfig();
+            },
+            chooseImg: function(callback = undefined) {
+                chooseImg(callback);
+            },
+        };
+    }]);
