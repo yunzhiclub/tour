@@ -14,16 +14,14 @@ angular.module('wechatApp')
         var self = this;
         self.user = {
             openid: 'oYIbNwFiyIJK25Ifro0LKww03N2g',
-            idCardNum: '',
             nickName: '',
             sex: '',
-            old: '',
-            idCardNum: '',
-            phoneNum: '',
-            email: '',
-            birthday: '',
-            location: '',
             imgUrl: '',
+            num: '',
+            email: '',
+            city: '',
+            idcard: '',
+            birthday: '',
         };
         var url = config.apiUrl + 'user/';
         // 用户是否登陆
@@ -69,6 +67,7 @@ angular.module('wechatApp')
 
         // 获取用户的openid
         var getOpenid = function() {
+
             return cookies.get('openid');
         };
 
@@ -79,7 +78,7 @@ angular.module('wechatApp')
             var promise = deferred.promise;
 
             // 当前user为默认值，则调用$http请求，获取当前user
-            if (self.user.openid === '') {
+            if (self.user.openid === 'oYIbNwFiyIJK25Ifro0LKww03N2g') {
                 var openid = getOpenid();
                 $http({
                     method: 'GET',
@@ -93,16 +92,15 @@ angular.module('wechatApp')
                     } else {
                         var user = response.data.data;
                         self.user = {
-                            openid: user.Openid,
-                            nickName: user.NickName,
-                            sex: user.Sex,
-                            old: user.Old,
-                            idCardNum: user.IdCardNum,
-                            phoneNum: user.PhoneNum,
-                            email: user.Email,
-                            birthday: user.Birthday,
-                            location: user.Location,
-                            imgUrl: user.ImgUrl,
+                            openid: user.openid,
+                            nickName: user.nickname,
+                            sex: user.sex,
+                            imgUrl: user.headimgurl,
+                            city: user.city,
+                            num: '13920884917',
+                            email: '2819786276@qq.com',
+                            idcard: '130272199511927782',
+                            birthday: '1288323623006',
                         };
                         cookies.put('openid', user.Openid);
                     }
@@ -120,17 +118,16 @@ angular.module('wechatApp')
         };
 
         // 保存用户修改
-        var saveUser = function() {
+        var saveUser = function(datas) {
             // 定义promise解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
-            var postData = self.user;
-
+            
             // 调用$http请求，保存用户信息
             $http({
-                method: 'POST',
+                method: 'GET',
                 url: url + 'saveUser?',
-                data: {user: postData},
+                params:{openid: datas.openid, data: datas},
             }).then(function successCallback(response) {
                 console.log('保存用户信息成功：');
                 console.log(response);
@@ -315,8 +312,8 @@ angular.module('wechatApp')
             },
 
             // 保存数据
-            saveUser: function() {
-                return saveUser();
+            saveUser: function(datas) {
+                return saveUser(datas);
             },
 
             // 获取收藏

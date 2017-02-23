@@ -22,7 +22,7 @@ angular.module('wechatApp')
                 method: 'GET',
                 url: config.apiUrl + 'Destination/getDestinations',
             }).then(function successCallback(response) {
-                console.log(response);
+                // console.log(response);
                 if (typeof response.data.errorCode !== 'undefined') {
                     console.log('系统发生错误：' + response.data.error);
                 } else {

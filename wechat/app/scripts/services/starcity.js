@@ -25,9 +25,9 @@ angular.module('wechatApp')
                     console.log('系统发生错误：' + response.data.error);
                 } else {
                     // 逻辑处理 
-                    self.citys = response.data.data;
+                   
                 }
-                deferred.resolve(self.routes); //执行成功
+                deferred.resolve(); //执行成功
             }, function errorCallback(response) {
                 deferred.reject(); //执行失败
             });
@@ -38,6 +38,7 @@ angular.module('wechatApp')
 
     // Public API here
     return {
+        // 获取全部出发城市
       getStartCitys: function () {
         return getStartCitys();
       }
