@@ -96,8 +96,8 @@ angular.module('wechatApp')
             },
 
             // 获取地区所有的国家
-            getCountrysByplaceid: function(placeid) {
-                return getCountrysByplaceid(placeid);
+            getCountrysByPlaceId: function(placeid) {
+                return getCountrysByPlaceId(placeid);
             },
 
             // 获取国家所在的城市
