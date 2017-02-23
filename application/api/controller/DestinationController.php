@@ -41,7 +41,7 @@ class DestinationController extends ApiController {
 	 * @author huangshuaibin
 	 * @return             array;
 	 */
-	public function getCitysBycountryid() {
+	public function getCitysByCountryId() {
 	   	//$countryid = Request::instance()->param('id');
 		$countryid = 2;
 	   	// 逻辑处理

@@ -61,7 +61,7 @@ angular.module('wechatApp')
             return promise;
         };
 
-        var getCitysBycountryid = function(countryid) {
+        var getCitysByCountryId = function(countryid) {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
@@ -69,7 +69,7 @@ angular.module('wechatApp')
             // $http去后台获取数据
             $http({
                 method: 'GET',
-                url: config.apiUrl + 'Destination/getCitysBycountryid',
+                url: config.apiUrl + 'Destination/getCitysByCountryId',
                 params: {countryid: countryid},
             }).then(function successCallback(response) {
                 console.log(response);
@@ -101,8 +101,8 @@ angular.module('wechatApp')
             },
 
             // 获取国家所在的城市
-            getCitysBycountryid: function(countryid) {
-                return getCitysBycountryid(countryid);
+            getCitysByCountryId: function(countryid) {
+                return getCitysByCountryId(countryid);
             },
         };
     }]);
