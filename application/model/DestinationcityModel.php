@@ -36,14 +36,14 @@ class DestinationcityModel extends Model
 	 * @param  int $countryId 国家id
 	 * @return array            目的地国家的所有城市
 	 */
-	public static function getDestinationcitysByCountryId($countryId)
+	public static function getDestinationCitysByCountryId($countryId)
 	{
 		//查询条件
 		$map = array('country_id' => $countryId);
 
 		//查询
-		$Destinationcity = new DestinationcityModel;
-		$destinationcitys = $Destinationcity->where($map)->select();
+		$DestinationCity = new DestinationCityModel;
+		$destinationcitys = $DestinationCity->where($map)->select();
 
 		return $destinationcitys;
 	}
