@@ -37,7 +37,7 @@ angular.module('wechatApp')
         };
 
 
-        var getRoutesBycountryid = function(countryid, cityid) {
+        var getRoutesByCountryId = function(countryid, cityid) {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
@@ -45,7 +45,7 @@ angular.module('wechatApp')
             // $http去后台获取数据
             $http({
                 method: 'GET',
-                url: config.apiUrl + 'Route/getRoutesBycountryid',
+                url: config.apiUrl + 'Route/getRoutesByCountryId',
                 params: { countryid: countryid, cityid: cityid },
             }).then(function successCallback(response) {
                 console.log(response);
@@ -183,8 +183,8 @@ angular.module('wechatApp')
             },
 
             // 按目的地(国家id)和出发城市id选出路线
-            getRoutesBycountryid: function(countryid, cityid) {
-                return getRoutesBycountryid(countryid, cityid);
+            getRoutesByCountryId: function(countryid, cityid) {
+                return getRoutesByCountryId(countryid, cityid);
             },
 
             // 取得对应id的route对应的所有评价
