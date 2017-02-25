@@ -2,7 +2,7 @@
 namespace app\model;
 use think\Model;
 /**
- * 客户
+ * 前台的客户
  */
 class UserModel extends Model
 {
@@ -39,5 +39,66 @@ class UserModel extends Model
             return false;
         }
         
+    }
+
+    /**
+     * 保存前台用户信息
+     * @param  json $datas 前台传来的json格式的数据
+     * @author huangshuaibin
+     * @return bool        true or false
+     */
+    public static function saveUser($datas)
+    {
+        $data = $datas['data']; 
+        //解码json数据
+        $ObejectData = json_decode($data);
+
+        //取出用户
+        $OpenId = $ObejectData->openid;
+        $User = UserModel::get($OpenId);
+
+        //判断传过来的对象是否有对应属性并保存数据
+        if (property_exists('ObejectData', 'nickName')) {
+            $User->nickName = $ObejectData->nickName;        
+        }
+        if (property_exists('ObejectData', 'sex')) {
+            $User->sex = $ObejectData->sex;
+        }
+        if (property_exists('ObejectData', 'headimgurl')) {
+            $User->headimgurl = $ObejectData->headimgurl;
+        }
+
+        if (property_exists('ObejectData', 'city')) {
+            $User->city = $ObejectData->city;
+        }
+        if (property_exists('ObejectData', 'province')) {
+            $User->province = $ObejectData->province;
+        }
+        if (property_exists('ObejectData', 'num')) {
+            $User->phone = $ObejectData->num;
+        }
+        if (property_exists('ObejectData', 'country')) {
+            $User->country = $ObejectData->country;
+        }
+        if (property_exists('ObejectData', 'email')) {
+            $User->emial = $ObejectData->email;
+        }
+        if (property_exists('ObejectData', 'birthday')) {
+            $User->date = $ObejectData->birthday;
+        }
+        if (property_exists('ObejectData', 'idcard')) {
+            $User->idcard = $ObejectData->idcard;
+        }
+        if (property_exists('ObejectData', 'cardimgfonturl')) {
+            $User->cardimgfonturl = $ObejectData->cardimgfonturl;
+        }
+        if (property_exists('ObejectData', 'cardimgversourl')) {
+            $User->cardimgversourl = $ObejectData->cardimgversourl;
+        }
+        if ($User->save()) {
+            return false;
+        }
+
+        return true;
     }
 }
