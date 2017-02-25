@@ -30,4 +30,21 @@ class DestinationcityModel extends Model
 
 		return $temp;
 	}
+
+	/**
+	 * 通过国家id 获取  所有对应目的国家的所有城市
+	 * @param  int $countryId 国家id
+	 * @return array            目的地国家的所有城市
+	 */
+	public static function getDestinationCitysByCountryId($countryId)
+	{
+		//查询条件
+		$map = array('country_id' => $countryId);
+
+		//查询
+		$DestinationCity = new DestinationCityModel;
+		$destinationcitys = $DestinationCity->where($map)->select();
+
+		return $destinationcitys;
+	}
 }

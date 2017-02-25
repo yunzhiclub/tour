@@ -3,7 +3,6 @@ namespace app\model;
 use think\Model;
 /**
  * 客户
- * @author huangshuaibin 
  */
 class UserModel extends Model
 {
