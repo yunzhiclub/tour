@@ -8,12 +8,11 @@
  * Controller of the wechatApp
  */
 angular.module('wechatApp')
-    .controller('MainCtrl', ['user', '$scope', 'starcity', 'cookies',  function(user, $scope, starcity, cookies) {
+    .controller('MainCtrl', ['user', '$scope', 'starcity', 'cookies', 'jssdk',  function(user, $scope, starcity, cookies, jssdk) {
         // 用户未登录，则进行登录
 
         if (!user.isLogin()) {
             user.login();
-
             // 用户已登录，进行用户的初始化
         } else {
             user.init();
@@ -22,4 +21,7 @@ angular.module('wechatApp')
         user.getUser().then(function success(user) {
             $scope.user = user;
         }, function error() {});
+        
+        // 获取jssdk的配置信息
+        jssdk.getConfig();
     }]);

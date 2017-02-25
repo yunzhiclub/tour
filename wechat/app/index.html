@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title></title>
     <meta name="description" content="">
@@ -16,11 +17,13 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
-  </head>
-  <body ng-app="wechatApp" ng-controller="MainCtrl">
-        <div ui-view></div>
+</head>
+
+<body ng-app="wechatApp" ng-controller="MainCtrl">
+    <div ui-view></div>
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
@@ -37,55 +40,56 @@
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
-
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
-        <script src="scripts/controllers/home.js"></script>
-        <script src="scripts/controllers/cities.js"></script>
-        <script src="scripts/controllers/search.js"></script>
-        <script src="scripts/controllers/invitedls.js"></script>
-        <script src="scripts/controllers/toinvite.js"></script>
-        <script src="scripts/controllers/ivdetail.js"></script>
-        <script src="scripts/controllers/topay.js"></script>
-        <script src="scripts/controllers/paysuccess.js"></script>
-        <script src="scripts/controllers/choseroute.js"></script>
-        <script src="scripts/controllers/placelist.js"></script>
-        <script src="scripts/controllers/routes.js"></script>
-        <script src="scripts/controllers/hourse.js"></script>
-        <script src="scripts/controllers/classic.js"></script>
-        <script src="scripts/controllers/clsdetail.js"></script>
-        <script src="scripts/controllers/clsorder.js"></script>
-        <script src="scripts/controllers/personal.js"></script>
-        <script src="scripts/controllers/changeps.js"></script>
-        <script src="scripts/controllers/orderls.js"></script>
-        <script src="scripts/controllers/orderdetail.js"></script>
-        <script src="scripts/controllers/evaluate.js"></script>
-        <script src="scripts/controllers/collectionls.js"></script>
-        <script src="scripts/controllers/insurance.js"></script>
-        <script src="scripts/controllers/trlpeoples.js"></script>
-        <script src="scripts/controllers/invoice.js"></script>
-        <script src="scripts/controllers/sendtime.js"></script>
-        <script src="scripts/controllers/visa.js"></script>
-        <script src="scripts/controllers/paydetail.js"></script>
-        <script src="scripts/controllers/touristls.js"></script>
-        <script src="scripts/controllers/addtourist.js"></script>
-        <script src="scripts/controllers/payfail.js"></script>
-        <script src="scripts/controllers/addinvoice.js"></script>
-        <script src="scripts/controllers/tuisong.js"></script>
-        <script src="scripts/controllers/tuisong1.js"></script>
-        <script src="scripts/controllers/tuisong2.js"></script>
-        <script src="scripts/controllers/nopayed.js"></script>
-        <script src="scripts/controllers/nofinish.js"></script>
-        <script src="scripts/controllers/noevaluate.js"></script>
-        <script src="scripts/services/config.js"></script>
-        <script src="scripts/services/cookies.js"></script>
-        <script src="scripts/services/user.js"></script>
-        <script src="scripts/services/destination.js"></script>
-        <script src="scripts/services/invitation.js"></script>
-        <script src="scripts/services/route.js"></script>
-        <script src="scripts/services/starcity.js"></script>
-        <!-- endbuild -->
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/about.js"></script>
+    <script src="scripts/controllers/home.js"></script>
+    <script src="scripts/controllers/cities.js"></script>
+    <script src="scripts/controllers/search.js"></script>
+    <script src="scripts/controllers/invitedls.js"></script>
+    <script src="scripts/controllers/toinvite.js"></script>
+    <script src="scripts/controllers/ivdetail.js"></script>
+    <script src="scripts/controllers/topay.js"></script>
+    <script src="scripts/controllers/paysuccess.js"></script>
+    <script src="scripts/controllers/choseroute.js"></script>
+    <script src="scripts/controllers/placelist.js"></script>
+    <script src="scripts/controllers/routes.js"></script>
+    <script src="scripts/controllers/hourse.js"></script>
+    <script src="scripts/controllers/classic.js"></script>
+    <script src="scripts/controllers/clsdetail.js"></script>
+    <script src="scripts/controllers/clsorder.js"></script>
+    <script src="scripts/controllers/personal.js"></script>
+    <script src="scripts/controllers/changeps.js"></script>
+    <script src="scripts/controllers/orderls.js"></script>
+    <script src="scripts/controllers/orderdetail.js"></script>
+    <script src="scripts/controllers/evaluate.js"></script>
+    <script src="scripts/controllers/collectionls.js"></script>
+    <script src="scripts/controllers/insurance.js"></script>
+    <script src="scripts/controllers/trlpeoples.js"></script>
+    <script src="scripts/controllers/invoice.js"></script>
+    <script src="scripts/controllers/sendtime.js"></script>
+    <script src="scripts/controllers/visa.js"></script>
+    <script src="scripts/controllers/paydetail.js"></script>
+    <script src="scripts/controllers/touristls.js"></script>
+    <script src="scripts/controllers/addtourist.js"></script>
+    <script src="scripts/controllers/payfail.js"></script>
+    <script src="scripts/controllers/addinvoice.js"></script>
+    <script src="scripts/controllers/tuisong.js"></script>
+    <script src="scripts/controllers/tuisong1.js"></script>
+    <script src="scripts/controllers/tuisong2.js"></script>
+    <script src="scripts/controllers/nopayed.js"></script>
+    <script src="scripts/controllers/nofinish.js"></script>
+    <script src="scripts/controllers/noevaluate.js"></script>
+    <script src="scripts/services/config.js"></script>
+    <script src="scripts/services/cookies.js"></script>
+    <script src="scripts/services/user.js"></script>
+    <script src="scripts/services/destination.js"></script>
+    <script src="scripts/services/invitation.js"></script>
+    <script src="scripts/services/route.js"></script>
+    <script src="scripts/services/starcity.js"></script>
+    <script src="scripts/services/jssdk.js"></script>
+    <!-- endbuild -->
 </body>
+
 </html>

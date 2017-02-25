@@ -12,7 +12,7 @@ angular.module('wechatApp')
         // Service logic
         var self = this;
         self.destinations = [];
-        var getDestinations = function() {
+        var getAllRegions = function() {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
@@ -20,7 +20,7 @@ angular.module('wechatApp')
             // $http去后台获取数据
             $http({
                 method: 'GET',
-                url: config.apiUrl + 'Destination/getDestinations',
+                url: config.apiUrl + 'Destination/getAllRegions',
             }).then(function successCallback(response) {
                 // console.log(response);
                 if (typeof response.data.errorCode !== 'undefined') {
@@ -36,7 +36,7 @@ angular.module('wechatApp')
             return promise;
         };
 
-        var getCountrysByplaceid = function(placeid) {
+        var getCountrysByPlaceId = function(placeid) {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
@@ -44,7 +44,7 @@ angular.module('wechatApp')
             // $http去后台获取数据
             $http({
                 method: 'GET',
-                url: config.apiUrl + 'Destination/getCountrysByplaceid',
+                url: config.apiUrl + 'Destination/getCountrysByPlaceId',
                 params: {placeid: placeid},
             }).then(function successCallback(response) {
                 console.log(response);
@@ -61,7 +61,7 @@ angular.module('wechatApp')
             return promise;
         };
 
-        var getCitysBycountryid = function(countryid) {
+        var getCitysByCountryId = function(countryid) {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
@@ -69,7 +69,7 @@ angular.module('wechatApp')
             // $http去后台获取数据
             $http({
                 method: 'GET',
-                url: config.apiUrl + 'Destination/getCitysBycountryid',
+                url: config.apiUrl + 'Destination/getCitysByCountryId',
                 params: {countryid: countryid},
             }).then(function successCallback(response) {
                 console.log(response);
@@ -91,18 +91,18 @@ angular.module('wechatApp')
         // Public API here
         return {
             // 获取全部目的地(地区)
-            getDestinations: function() {
-                return getDestinations();
+            getAllRegions: function() {
+                return getAllRegions();
             },
 
             // 获取地区所有的国家
-            getCountrysByplaceid: function(placeid) {
-                return getCountrysByplaceid(placeid);
+            getCountrysByPlaceId: function(placeid) {
+                return getCountrysByPlaceId(placeid);
             },
 
             // 获取国家所在的城市
-            getCitysBycountryid: function(countryid) {
-                return getCitysBycountryid(countryid);
+            getCitysByCountryId: function(countryid) {
+                return getCitysByCountryId(countryid);
             },
         };
     }]);

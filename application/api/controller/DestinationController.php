@@ -23,7 +23,7 @@ class DestinationController extends ApiController {
 	 * @author huangshuaibin
 	 * @return             array;
 	 */
-	public function getCountrysByplaceid() {
+	public function getCountrysByPlaceId() {
 	   	$regionId = Request::instance()->param('id');
 
 	   	$countrys = CountryModel::getCountrysByRegionId($regionId);
@@ -36,7 +36,7 @@ class DestinationController extends ApiController {
 	 * @author huangshuaibin
 	 * @return             array;
 	 */
-	public function getCitysBycountryid() {
+	public function getCitysByCountryId() {
 	   	$countryid = Request::instance()->param('id');
 
 	   	// 通过国家id获取全部的城市的数据
