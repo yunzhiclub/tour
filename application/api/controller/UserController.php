@@ -50,10 +50,15 @@ class UserController extends ApiController {
      * response(20004, $UserModel->getError());
      */
     public function saveUser() {
-       // 保存客户的逻辑
+       // datas是一个数组,data是其中的Json字符串
        $datas = Request::instance()->param();
-       var_dump($datas);
-       die();   
+
+       //调用保存用户方法
+       if(UserModel::saveUser($datas) === false) {
+            return '保存失败';
+       }
+
+       return '保存成功';
     }
 
     /**

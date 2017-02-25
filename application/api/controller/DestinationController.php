@@ -11,7 +11,7 @@ class DestinationController extends ApiController {
 	 * @author huangshuaibin 
 	 * @return             array;
 	 */
-	public function getDestinations() {
+	public function getAllRegions() {
 		//取出所有目的地
 		$regions = RegionModel::all();
 		
