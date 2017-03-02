@@ -24,4 +24,8 @@ angular.module('wechatApp')
         
         // 获取jssdk的配置信息
         jssdk.getConfig();
+
+        // $scope.test = function() {
+        //     return jssdk.downloadImg('rJAj-qyHntGvt3IjmGbWh43UxXwTAwHl5isrdM1Gf8kDg7_2cuGEbzNlvlGgdEJS');
+        // }
     }]);

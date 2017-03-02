@@ -30,7 +30,7 @@ class InvitationController extends ApiController {
 	 * @author huangshuaibin
 	 * @return             array;
 	 */
-	public function getInvitationsByplaceid() {
+	public function getInvitationsByPlaceId() {
 		$id = Request::instance()->param('id');
 
 		//获取路线ID By目的地ID
@@ -48,7 +48,7 @@ class InvitationController extends ApiController {
 	 * @author huangshuaibin
 	 * @return             array;
 	 */
-	public function getInvitationsBycountryid() {
+	public function getInvitationsByCountryId() {
 		$id = Request::instance()->param('id');
 
 		//获取国家对应目的城市ID
@@ -75,7 +75,7 @@ class InvitationController extends ApiController {
 	}
 
 	/**
-	 * 保存趣约
+	 * 去支付
 	 * @param              string
 	 * @return             array[]
 	 */
@@ -91,7 +91,7 @@ class InvitationController extends ApiController {
 	 * @param              string
 	 * @return             array[]
 	 */
-	public function getInvitationsBytime() {
+	public function getInvitationsByTime() {
 		//$time = Request::instance()->param('time');
 		
 		//通过日期获取路线id数组
@@ -106,7 +106,7 @@ class InvitationController extends ApiController {
 	 * @author huangshuaibin
 	 * @return             array;
 	 */
-	public function getInvitationsBycityid() {
+	public function getInvitationsByCityId() {
 		$cityid = Request::instance()->param('cityid');
 
 		//根据出发城市id(一个id)取出对应路线ID数组
@@ -123,7 +123,7 @@ class InvitationController extends ApiController {
 	 * @param              int
 	 * @return             array;
 	 */
-	public function getInvitationByid() {
+	public function getInvitationById() {
 		$id = Request::instance()->param('id');
 
 		return $this->response([]);
