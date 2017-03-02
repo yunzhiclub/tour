@@ -56,7 +56,7 @@ class RouteController extends ApiController {
 	 * @param              int
 	 * @return             object;
 	 */
-	public function getRoutesBycountryid() {
+	public function getRoutesByCountryId() {
 		$countryid = Request::instance()->param('countryid');
 		$cityid = Request::instance()->param('cityid');
 		

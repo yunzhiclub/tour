@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
+Source Server         : localhost_3306
 Source Server Version : 50505
 Source Host           : localhost:3306
 Source Database       : tour
@@ -10,16 +10,16 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-02-20 19:59:25
+Date: 2017-02-25 11:16:20
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for `yunzhi_start`
+-- Table structure for `yunzhi_start_city`
 -- ----------------------------
-DROP TABLE IF EXISTS `yunzhi_start`;
-CREATE TABLE `yunzhi_start` (
+DROP TABLE IF EXISTS `yunzhi_start_city`;
+CREATE TABLE `yunzhi_start_city` (
   `id` int(10) NOT NULL,
   `name` varchar(40) DEFAULT '' COMMENT '城市名称',
   `country_id` int(10) DEFAULT NULL COMMENT '国家的id',
@@ -28,7 +28,7 @@ CREATE TABLE `yunzhi_start` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of yunzhi_start
+-- Records of yunzhi_start_city
 -- ----------------------------
-INSERT INTO `yunzhi_start` VALUES ('1', '天津', '1', '127.0.0.1/tour/public');
-INSERT INTO `yunzhi_start` VALUES ('2', '北京', '1', '127.0.0.1/tour/public');
+INSERT INTO `yunzhi_start_city` VALUES ('1', '天津', '1', '127.0.0.1/tour/public');
+INSERT INTO `yunzhi_start_city` VALUES ('2', '北京', '1', '127.0.0.1/tour/public');

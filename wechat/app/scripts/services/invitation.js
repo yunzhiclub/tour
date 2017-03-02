@@ -36,7 +36,7 @@ angular.module('wechatApp')
             return promise;
         };
 
-        var getInvitationsByplaceid = function(placeid) {
+        var getInvitationsByPlaceId = function(placeid) {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
@@ -44,7 +44,7 @@ angular.module('wechatApp')
             // $http去后台获取数据
             $http({
                 method: 'GET',
-                url: config.apiUrl + 'Invitation/getInvitationsByplaceid',
+                url: config.apiUrl + 'Invitation/getInvitationsByPlaceId',
                 params: { placeid: placeid },
             }).then(function successCallback(response) {
                 console.log(response);
@@ -61,7 +61,7 @@ angular.module('wechatApp')
             return promise;
         };
 
-        var getInvitationsBycountryid = function(countryid) {
+        var getInvitationsByCountryId = function(countryid) {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
@@ -69,7 +69,7 @@ angular.module('wechatApp')
             // $http去后台获取数据
             $http({
                 method: 'GET',
-                url: config.apiUrl + 'Invitation/getInvitationsBycountryid',
+                url: config.apiUrl + 'Invitation/getInvitationsByCountryId',
                 params: { countryid: countryid },
             }).then(function successCallback(response) {
                 console.log(response);
@@ -180,7 +180,7 @@ angular.module('wechatApp')
             return promise;
         };
 
-        var getInvitationsBytime = function(time) {
+        var getInvitationsByTime = function(time) {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
@@ -188,7 +188,7 @@ angular.module('wechatApp')
             // $http去后台获取数据
             $http({
                 method: 'GET',
-                url: config.apiUrl + 'Invitation/getInvitationsBytime',
+                url: config.apiUrl + 'Invitation/getInvitationsByTime',
                 params: { time: time },
             }).then(function successCallback(response) {
                 console.log(response);
@@ -205,7 +205,7 @@ angular.module('wechatApp')
             return promise;
         };
 
-        var getInvitationsBycityid = function(cityid) {
+        var getInvitationsByCityId = function(cityid) {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
@@ -213,7 +213,7 @@ angular.module('wechatApp')
             // $http去后台获取数据
             $http({
                 method: 'GET',
-                url: config.apiUrl + 'Invitation/getInvitationsBycityid',
+                url: config.apiUrl + 'Invitation/getInvitationsByCityId',
                 params: { cityid: cityid },
             }).then(function successCallback(response) {
                 console.log(response);
@@ -230,7 +230,7 @@ angular.module('wechatApp')
             return promise;
         };
 
-        var getInvitationByid = function(id) {
+        var getInvitationById = function(id) {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
@@ -238,7 +238,7 @@ angular.module('wechatApp')
             // $http去后台获取数据
             $http({
                 method: 'GET',
-                url: config.apiUrl + 'Invitation/getInvitationByid',
+                url: config.apiUrl + 'Invitation/getInvitationById',
                 params: { id: id },
             }).then(function successCallback(response) {
                 console.log(response);
@@ -268,12 +268,12 @@ angular.module('wechatApp')
             },
 
             // 按目的地(地区id)选出趣约
-            getInvitationsByplaceid: function(placeid) {
-                return getInvitationsByplaceid(placeid);
+            getInvitationsByPlaceId: function(placeid) {
+                return getInvitationsByPlaceId(placeid);
             },
             // 按目的地(国家id)选出趣约
-            getInvitationsBycountryid: function(countryid) {
-                return getInvitationsBycountryid(countryid);
+            getInvitationsByCountryId: function(countryid) {
+                return getInvitationsByCountryId(countryid);
             },
 
             // 保存趣约
@@ -286,19 +286,19 @@ angular.module('wechatApp')
                 return topay(postdata);
             },
 
-            // 通过时间获取趣约
-            getInvitationsBytime: function(time) {
-                return getInvitationsBytime(time);
+            // 通过出发时间获取趣约
+            getInvitationsByTime: function(time) {
+                return getInvitationsByTime(time);
             },
 
             // 按出发城市id选出趣约
-            getInvitationsBycityid: function(cityid) {
-                return getInvitationsBycityid(cityid);
+            getInvitationsByCityId: function(cityid) {
+                return getInvitationsByCityId(cityid);
             },
 
-            // 获取趣约详情byid
-            getInvitationByid: function(id) {
-                return getInvitationByid(id);
+            // 获取趣约详情by趣约id
+            getInvitationById: function(id) {
+                return getInvitationById(id);
             },
 
 
