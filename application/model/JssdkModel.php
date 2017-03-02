@@ -125,6 +125,7 @@ class JssdkModel {
     return $res;
   }
 
+  // 获取Media类的配置文件
   public function getOptions() {
       $config = $this->config;
       $config['appid'] = $config['app_id'];
@@ -179,4 +180,20 @@ class JssdkModel {
     return $data;
   }
 
+  // 获取微信jssdk的配置信息
+  public function getConfig($url) {
+
+    // 获取app_id和secret和url
+    $config = $this->config;
+    $app_id = $config['app_id'];
+    $secret = $config['secret'];
+    
+    // 获取jssdk配置
+    $jssdkModel = new self($app_id, $secret, $url);
+    $signPackage = $jssdkModel->GetSignPackage();
+
+    // 清理内存
+    unset($signPackage['rawString']);
+    return $signPackage;
+  }
 }
