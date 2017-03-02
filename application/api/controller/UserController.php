@@ -56,8 +56,7 @@ class UserController extends ApiController
     public function saveUser() {
        // datas是一个数组,data是其中的Json字符串
        $datas = Request::instance()->param();
-       var_dump($datas);
-       die();
+       
        //调用保存用户方法
        if(UserModel::saveUser($datas) === false) {
             return '保存失败';
@@ -89,11 +88,11 @@ class UserController extends ApiController
      * 成功 return $this->response($orders);| 错误 $this->   
      * response(20004, $UserModel->getError());
      */
-    public function getOrdersByuserId() 
+    public function getOrdersByUserId() 
     {
         $userId = Request::instance()->param('user_id');
        // 获取用户的全部订单
-       $orders = OrderModel::getOrdersByuserId($userId);
+       $orders = OrderModel::getOrdersByUserId($userId);
 
        return $this->response($orders);   
     }

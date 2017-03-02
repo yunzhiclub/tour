@@ -16,7 +16,7 @@ class UserModel extends Model
     static public function getUserModelByOpenid($openid = '') {
         // 查找数据库是否存在
         $UserModel = UserModel::get($openid);
-    
+        
         if (is_null($UserModel)) {
             $UserModel = new self();
         }
@@ -95,6 +95,9 @@ class UserModel extends Model
         if (property_exists('ObejectData', 'cardimgversourl')) {
             $User->cardimgversourl = $ObejectData->cardimgversourl;
         }
+        //保存图片到public/upload文件夹下边
+        //调用保存图片的方法并将headUrl存入数据库
+        
         if ($User->save()) {
             return false;
         }

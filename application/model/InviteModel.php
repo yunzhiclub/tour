@@ -14,8 +14,8 @@ class InviteModel extends Model
 	public static function getInviteByRouteId($map)
 	{
 		$InviteModel = new InviteModel;
-		$invitions = $InviteModel->where('route_id','in',$map)->select();
-		return $invitions;
+		$invitations = $InviteModel->where('route_id','in',$map)->select();
+		return $invitations;
 	}
 
 	/**

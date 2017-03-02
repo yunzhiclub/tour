@@ -43,8 +43,8 @@ class DestinationcityModel extends Model
 
 		//查询
 		$DestinationCity = new DestinationCityModel;
-		$destinationcitys = $DestinationCity->where($map)->select();
+		$DestinationCitys = $DestinationCity->where($map)->select();
 
-		return $destinationcitys;
+		return $DestinationCitys;
 	}
 }
