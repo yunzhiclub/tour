@@ -23,4 +23,16 @@ class CollectionModel extends Model
 
 		return true;
 	}
+
+	/**
+	 * 通过用户ID获取用户的全部收藏
+	 * @param  int $UserId 用户的id
+	 * @return array         用户的所有收藏
+	 */
+	public static function getCollectionsByUserId($UserId)
+	{
+		$Collection = new CollectionModel;
+		$collections = $Collection->where('user_id', 'in', $UserId)->select();
+		return $collections;
+	}	
 }
