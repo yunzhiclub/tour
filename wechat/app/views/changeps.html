@@ -10,7 +10,7 @@ router:#!/changeps
                     <p class="weui-uploader__title">上传头像</p>
                 </div>
                 <div class="weui-uploader__bd">
-                    <button type="" ng-click="chooseImg()"><img src="{{headImgUrl}}" alt="" height="80" width="80" class="img-circle"></button>
+                    <button type="" ng-click="chooseImg(1)"><img src="{{user.headImg.headImgUrl}}" alt="" height="80" width="80" class="img-circle"></button>
                 </div>
             </div>
         </div>
@@ -85,12 +85,8 @@ router:#!/changeps
                     <p class="weui-uploader__title">上传身份证正反面用于审核</p>
                 </div>
                 <div class="weui-uploader__bd">
-                    <div class="weui-uploader__input-box">
-                        <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple />
-                    </div>
-                    <div class="weui-uploader__input-box">
-                        <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple />
-                    </div>
+                    <button type="" ng-click="chooseImg(2)"><img src="{{user.frontIdCardImg.frontIdCardImgUrl}}" alt="正面" height="80" width="80" class="img-circle"></button>
+                    <button type="" ng-click="chooseImg(3)"><img src="{{user.backIdCardImg.backIdCardImgUrl}}" alt="反面" height="80" width="80" class="img-circle"></button>
                 </div>
             </div>
         </div>
@@ -101,36 +97,4 @@ router:#!/changeps
         保存修改
         </a>
 </div>
-<!-- <script type="text/javascript">
-$(function() {
-    var tmpl = '<li class="weui-uploader__file" style="background-image:url(#url#)"></li>',
-        $gallery = $("#gallery"),
-        $galleryImg = $("#galleryImg"),
-        $uploaderInput = $("#uploaderInput"),
-        $uploaderFiles = $("#uploaderFiles");
 
-    $uploaderInput.on("change", function(e) {
-        var src, url = window.URL || window.webkitURL || window.mozURL,
-            files = e.target.files;
-        for (var i = 0, len = files.length; i < len; ++i) {
-            var file = files[i];
-
-            if (url) {
-                src = url.createObjectURL(file);
-            } else {
-                src = e.target.result;
-            }
-
-            $uploaderFiles.append($(tmpl.replace('#url#', src)));
-        }
-    });
-    $uploaderFiles.on("click", "li", function() {
-        $galleryImg.attr("style", this.getAttribute("style"));
-        $gallery.fadeIn(100);
-    });
-    $gallery.on("click", function() {
-        $gallery.fadeOut(100);
-    });
-});
-</script>
- -->
