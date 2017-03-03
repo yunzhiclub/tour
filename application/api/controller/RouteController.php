@@ -1,10 +1,10 @@
 <?php
 namespace app\api\controller;
 use think\Request;
-use app\model\HomerecommendModel;
+use app\model\HomereCommendModel;
 use app\model\InviteModel;
 use app\model\RouteModel;	//路线
-use app\model\StarttimeModel;	//出发时间
+use app\model\StartTimeModel;	//出发时间
 use app\model\EvaluateModel;	//评价
 use app\model\CollectionModel;	//收藏
 
@@ -14,9 +14,9 @@ class RouteController extends ApiController {
 	 * @author huangshuaibin
 	 * @return             array;
 	 */
-	public function getChosedRoutes() {
+	public function getChosenRoutes() {
 		//获取全部首页推荐的route_id 构成的数组
-		$routeIds = HomerecommendModel::getAllHomecommendIds();
+		$routeIds = HomereCommendModel::getAllHomeCommendIds();
 		
 		//通过首页推荐的路线ID数组  取出 对应所有邀约
 		$invites = InviteModel::getInviteByRouteId($routeIds);
@@ -42,13 +42,13 @@ class RouteController extends ApiController {
 	 * @param              int
 	 * @return             array;
 	 */
-	public function getStartimeByid() {
+	public function getStarTimeByid() {
 		$id = Request::instance()->param('id');
 
 		//通过路线id取出所有的出发时间以及价格
-		$startimes = StarttimeModel::getStarttimeByRouteId($id);
+		$startTimes = StartTimeModel::getStartTimeByRouteId($id);
 
-		return $this->response($startimes);
+		return $this->response($startTimes);
 	}
 
 	/**
@@ -57,11 +57,11 @@ class RouteController extends ApiController {
 	 * @return             object;
 	 */
 	public function getRoutesByCountryId() {
-		$countryid = Request::instance()->param('countryid');
-		$cityid = Request::instance()->param('cityid');
+		$CountryId = Request::instance()->param('countryid');
+		$StartCityId = Request::instance()->param('cityid');
 		
 		//获取符合条件的目的地国家城市和出发城市的路线id
-		$routeIds = RouteModel::getRouteIdsByCountryIdAndStart($cityid, $countryid);
+		$routeIds = RouteModel::getRouteIdsByCountryIdAndStartCity($StartCityId, $CountryId);
 
 		//通过路线id取出所有的路线详情
 		$routes = RouteModel::getRoutesByIds($routeIds);
@@ -75,7 +75,7 @@ class RouteController extends ApiController {
 	 * @author huangshuaibin
 	 * @return             array;
 	 */
-	public function getEvaluatesByid() {
+	public function getEvaluatesById() {
 		$id = Request::instance()->param('id');
 		
 		//通过路线id取出所有对应的评价
@@ -89,12 +89,12 @@ class RouteController extends ApiController {
 	 * @param              array
 	 * @return             array(空数组);
 	 */
-	public function collecteTheRoute() 
+	public function collecteRoute() 
 	{
-		$user_id  = Request::instance()->param('user_id');
-		$route_id = Request::instance()->param('route_id');
+		$userId  = Request::instance()->param('user_id');
+		$routeId = Request::instance()->param('route_id');
 		
-		CollectionModel::saveCollection($user_id,$route_id);
+		CollectionModel::saveCollection($userId, $routeId);
 		return $this->response([]);
 	}
 }

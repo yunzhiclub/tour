@@ -3,7 +3,7 @@ namespace app\api\controller;
 use think\Request;
 use app\model\RegionModel;	//地区
 use app\model\CountryModel;	//国家
-use app\model\DestinationcityModel;	//目的城市管理
+use app\model\DestinationCityModel;	//目的城市管理
 
 class DestinationController extends ApiController {
 	/**
@@ -23,7 +23,7 @@ class DestinationController extends ApiController {
 	 * @author huangshuaibin
 	 * @return             array;
 	 */
-	public function getCountrysByPlaceId() {
+	public function getCountrysByRegionId() {
 	   	$regionId = Request::instance()->param('id');
 
 	   	$countrys = CountryModel::getCountrysByRegionId($regionId);
@@ -40,8 +40,8 @@ class DestinationController extends ApiController {
 	   	$countryid = Request::instance()->param('id');
 
 	   	// 通过国家id获取全部的城市的数据
-		$destinationcitys = DestinationcityModel::getDestinationcitysByCountryId($countryid);
+		$DestinationCitys = DestinationCityModel::getDestinationCitysByCountryId($countryid);
 		
-		return $this->response($destinationcitys);
+		return $this->response($DestinationCitys);
 	}
 }

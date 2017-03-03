@@ -10,22 +10,23 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-03-02 21:23:26
+Date: 2017-03-02 21:21:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for `yunzhi_role`
+-- Table structure for `yunzhi_collection`
 -- ----------------------------
-DROP TABLE IF EXISTS `yunzhi_role`;
-CREATE TABLE `yunzhi_role` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '角色id',
-  `type` varchar(30) DEFAULT '' COMMENT '角色类型',
-  `title` varchar(30) DEFAULT '' COMMENT '角色名称',
+DROP TABLE IF EXISTS `yunzhi_collection`;
+CREATE TABLE `yunzhi_collection` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) DEFAULT NULL,
+  `route_id` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of yunzhi_role
+-- Records of yunzhi_collection
 -- ----------------------------
+INSERT INTO `yunzhi_collection` VALUES ('1', '1', '2');

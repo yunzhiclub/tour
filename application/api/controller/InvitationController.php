@@ -4,9 +4,9 @@ use think\Request;
 use app\model\RouteModel;	//路线
 use app\model\InviteModel;	//邀约
 use app\model\ChosenModel;	//精选
-use app\model\DestinationcityModel;	//目的地城市
-use app\mode\StarttimeModel;	//出发时间
-use app\model\StartModel;	//出发城市
+use app\model\DestinationCityModel;	//目的地城市
+use app\mode\StartTimeModel;	//出发时间
+use app\model\StartCityModel;	//出发城市
 
 class InvitationController extends ApiController {
 	/**
@@ -14,14 +14,14 @@ class InvitationController extends ApiController {
 	 * @author huangshauibin
 	 * @return             array;
 	 */
-	public function getChosedInvitations() {
+	public function getChosenInvites() {
 		//获取查询信息,精选
 		$map = ChosenModel::ChosenInvite();
 		
 		//从邀约表中查询
-		$invitions = InviteModel::getInviteByRouteId($map);
+		$Invitations = InviteModel::getInviteByRouteId($map);
 
-		return $this->response($invitions);
+		return $this->response($Invitations);
 	}
 
 	/**
@@ -30,7 +30,7 @@ class InvitationController extends ApiController {
 	 * @author huangshuaibin
 	 * @return             array;
 	 */
-	public function getInvitationsByPlaceId() {
+	public function getInvitationsByRegionId() {
 		$id = Request::instance()->param('id');
 
 		//获取路线ID By目的地ID
@@ -68,7 +68,7 @@ class InvitationController extends ApiController {
 	 * @param              string
 	 * @return             int(新生成的趣约的id);
 	 */
-	public function saveTheInvitation() {
+	public function saveInvitation() {
 		
 
 		return $this->response([]);
@@ -91,7 +91,7 @@ class InvitationController extends ApiController {
 	 * @param              string
 	 * @return             array[]
 	 */
-	public function getInvitationsByTime() {
+	public function getInvitationsByStartTime() {
 		//$time = Request::instance()->param('time');
 		
 		//通过日期获取路线id数组
@@ -106,11 +106,11 @@ class InvitationController extends ApiController {
 	 * @author huangshuaibin
 	 * @return             array;
 	 */
-	public function getInvitationsByCityId() {
-		$cityid = Request::instance()->param('cityid');
+	public function getInvitationsByStartCityId() {
+		$StartCityId = Request::instance()->param('cityid');
 
 		//根据出发城市id(一个id)取出对应路线ID数组
-		$routeIds = RouteModel::getRouteIdByStartId($cityid);
+		$routeIds = RouteModel::getRouteIdByStartId($StartCityId);
 
 		//根据路线ID数组 取出对应邀约
 		$invites = InviteModel::getInviteByRouteId($routeIds);

@@ -22,7 +22,7 @@ angular.module('wechatApp')
             city: '',
             idcard: '',
             birthday: '',
-            frontIdCardImg: {frontIdCardImgUrl: null, serverId: null},
+            frontIdCardImg: {frontIdCardImgCardImgUrl: null, serverId: null},
             backIdCardImgUrl: {backIdCardImgUrl: null, serverId: null},
         };
         var url = config.apiUrl + 'user/';
@@ -96,7 +96,7 @@ angular.module('wechatApp')
                             openid: user.openid,
                             nickName: user.nickname,
                             sex: user.sex,
-                            headImg: {headImgUrl: user.headimgurl, serverId: null},
+                            headImg: {headImgUrl: user.headimgurl, serverId: 'rJAj-qyHntGvt3IjmGbWh43UxXwTAwHl5isrdM1Gf8kDg7_2cuGEbzNlvlGgdEJS'},
                             city: user.city,
                             num: '13920884917',
                             email: '2819786276@qq.com',
