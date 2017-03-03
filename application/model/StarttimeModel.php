@@ -5,7 +5,7 @@ use think\Model;
  * 出发时间
  * @author huangshuaibin 
  */
-class StarttimeModel extends Model
+class StartTimeModel extends Model
 {
 	/**
 	 * 通过路线id取出  出发时间以及价格数据
@@ -13,12 +13,12 @@ class StarttimeModel extends Model
 	 * @author huangshuaibin
 	 * @return array          数组形式的出发事假以及价格数据
 	 */
-	public static function getStarttimeByRouteId($RouteId)
+	public static function getStartTimeByRouteId($RouteId)
 	{
-		$StarttimeModel = new StarttimeModel;
+		$StartTimeModel = new StartTimeModel;
 
 		//通过路线查询
-		$starttimes = $StarttimeModel->where('route_id', '=', $RouteId)->select();
-		return $starttimes;
+		$startTimes = $StartTimeModel->where('route_id', '=', $RouteId)->select();
+		return $startTimes;
 	}
 }

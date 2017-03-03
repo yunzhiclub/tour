@@ -1,7 +1,7 @@
 <?php
 namespace app\model;
 use think\Model;
-use app\model\DestinationcityModel;	//目的城市
+use app\model\DestinationCityModel;	//目的城市
 /**
  * 路线
  */
@@ -18,7 +18,7 @@ class RouteModel extends Model
 		$RouteModel = new RouteModel;
 
 		//通过ID进行查询
-		$routes = $RouteModel->where('destinationcity_id','in',$id)->select();
+		$routes = $RouteModel->where('destination_city_id','in',$id)->select();
 
 		//临时数组
 		$temp = [];
@@ -36,12 +36,12 @@ class RouteModel extends Model
 	 * @author huangshuaibin
 	 * @return array     返回路线ID 数组
 	 */
-	public static function getRouteIdByStartId($startId)
+	public static function getRouteIdByStartCityId($startId)
 	{
 		$RouteModel = new RouteModel;
 
 		//通过id查询取出对应路线
-		$routes = $RouteModel->where('start_id', '=', $startId)->select();
+		$routes = $RouteModel->where('start_city_id', '=', $startId)->select();
 
 		//将路线数组中的id  打包成一个新的数组
 		//临时数组
@@ -87,10 +87,10 @@ class RouteModel extends Model
 	 * @author huangshuaibin
 	 * @return array            满足条件的路线的数组
 	 */
-	public static function getRouteIdsByCountryIdAndStart($startId,$countryId)
+	public static function getRouteIdsByCountryIdAndStartCity($startId,$countryId)
 	{
 		//通过出发城市取出所有的路线
-		$routes1 = RouteModel::getRouteIdByStartId($startId);
+		$routes1 = RouteModel::getRouteIdByStartCityId($startId);
 
 		//通过目的国家取出其对应的所有目的城市
 		$destinationcitys = DestinationcityModel::getDestinationIdByCountryId($countryId);

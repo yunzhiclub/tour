@@ -6,20 +6,20 @@ use think\Model;
  * @author huangshuaibin
  */
 
-class HomerecommendModel extends Model
+class HomeRecommendModel extends Model
 {
 	/**
 	 * 取出所有的首页推荐对应的路线ID
 	 * @return [type] [description]
 	 */
-	public static function getAllHomecommendIds()
+	public static function getAllHomeCommendIds()
 	{
 		//取出所有的首页推荐
-		$homerecommends = HomerecommendModel::all();
+		$HomeRecommends = HomeRecommendModel::all();
 
 		$temp=[];
 		//将推荐的ID 打包成一个临时数组
-		foreach ($homerecommends as $key => $value) {
+		foreach ($HomeRecommends as $key => $value) {
 			array_push($temp, $value->route_id);
 		}
 
