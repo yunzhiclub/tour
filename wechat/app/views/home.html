@@ -68,28 +68,13 @@ router:#!/home
     <div class="weui-flex__item ">
         <div class="placeholder "><a href="javascript:; " class="weui-btn weui-btn_mini weui-btn_primary " style="width:70px;height:30px">精 选</a></div>
     </div>
-    <div class="weui-flex__item ">
-        <div class="placeholder "><button href="javascript:; " class="weui-btn weui-btn_mini weui-btn_default " style="width:70px;height:30px">欧 洲</button></div>
-    </div>
-    <div class="weui-flex__item ">
-        <div class="placeholder "><button href="javascript:; " class="weui-btn weui-btn_mini weui-btn_default " style="width:70px;height:30px">美 洲</button></div>
-    </div>
-    <div class="weui-flex__item ">
-        <div class="placeholder "><button href="javascript:; " class="weui-btn weui-btn_mini weui-btn_default " style="width:70px;height:30px">澳 洲</button></div>
+    <div class="weui-flex__item " ng-repeat="region in homeRegions">
+        <div class="placeholder "><button href="javascript:; " class="weui-btn weui-btn_mini weui-btn_default " style="width:70px;height:30px">{{region}}</button></div>
     </div>
 </div>
 <div class="weui-flex " style="margin-left:15px ">
-    <div class="weui-flex__item ">
-        <div class="placeholder "><button href="javascript:; " class="weui-btn weui-btn_mini weui-btn_default " style="width:70px;height:30px">中东非</button></div>
-    </div>
-    <div class="weui-flex__item ">
-        <div class="placeholder "><button href="javascript:; " class="weui-btn weui-btn_mini weui-btn_default " style="width:70px;height:30px">东南亚</button></div>
-    </div>
-    <div class="weui-flex__item " style="width:70px;height:30px">
-        <div class="placeholder "><button href="javascript:; " class="weui-btn weui-btn_mini weui-btn_default ">日 本</button></div>
-    </div>
-    <div class="weui-flex__item " style="width:70px;height:30px">
-        <div class="placeholder "><button href="javascript:; " class="weui-btn weui-btn_mini weui-btn_default " style="width:70px;height:30px">韩 国</button></div>
+    <div class="weui-flex__item " ng-repeat="city in homeCitys">
+        <div class="placeholder "><button href="javascript:; " class="weui-btn weui-btn_mini weui-btn_default " style="width:70px;height:30px">{{city}}</button></div>
     </div>
 </div>
 <br>

@@ -9,9 +9,18 @@
  */
 angular.module('wechatApp')
   .controller('HomeCtrl', ['$scope', 'destination', function ($scope, destination) {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+
+  	// 获取首页的citys
+  	destination.getHomeCitys().then(function successCallBack(homeCitys) {
+  		$scope.homeCitys = homeCitys;
+  	}, function errorCallBack() {
+
+  	});
+
+  	// 获取首页的地区
+  	destination.getHomeRegions().then(function successCallBack(homeRegions) {
+  		$scope.homeRegions = homeRegions;
+  	}, function errorCallBack() {
+
+  	});
   }]);
