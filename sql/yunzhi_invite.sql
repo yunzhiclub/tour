@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost
-Source Server Version : 50505
+Source Server Version : 50626
 Source Host           : localhost:3306
 Source Database       : tour
 
 Target Server Type    : MYSQL
-Target Server Version : 50505
+Target Server Version : 50626
 File Encoding         : 65001
 
-Date: 2017-03-02 21:23:09
+Date: 2017-03-03 16:54:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,23 +21,23 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `yunzhi_invite`;
 CREATE TABLE `yunzhi_invite` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `route_id` int(10) DEFAULT NULL,
-  `user_id` int(10) unsigned DEFAULT NULL,
-  `bed_id` int(10) DEFAULT NULL,
-  `start_id` int(10) DEFAULT NULL,
-  `number` int(10) DEFAULT NULL,
-  `person_num` int(10) DEFAULT NULL,
-  `pay` int(10) DEFAULT NULL,
-  `unpay` int(10) DEFAULT NULL,
-  `status` tinyint(1) DEFAULT NULL,
-  `ispublic` tinyint(1) DEFAULT NULL,
-  `ordertime` int(10) DEFAULT NULL,
+  `route_id` int(10) NOT NULL COMMENT '路线id',
+  `user_id` int(10) unsigned NOT NULL COMMENT '用户id',
+  `start_time_id` int(10) NOT NULL COMMENT '出发时间id',
+  `number` int(10) NOT NULL COMMENT '订单号',
+  `person_num` int(10) NOT NULL DEFAULT '0' COMMENT '邀约人数',
+  `pay_num` int(10) NOT NULL DEFAULT '0' COMMENT '支付人数',
+  `unpay_num` int(10) NOT NULL DEFAULT '0' COMMENT '未支付人数',
+  `status` tinyint(10) NOT NULL DEFAULT '0' COMMENT '0状态是邀约未完成1完成',
+  `is_public` tinyint(10) NOT NULL DEFAULT '1' COMMENT '0是不公开1是公开',
+  `create_time` int(40) NOT NULL DEFAULT '0' COMMENT '订单生成时间',
+  `deadline` int(40) NOT NULL DEFAULT '0' COMMENT '到期时间小与路线的结束时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yunzhi_invite
 -- ----------------------------
-INSERT INTO `yunzhi_invite` VALUES ('1', '1', '1', '1', '1', '1', '4', '1', '1', '1', '1', '1222');
-INSERT INTO `yunzhi_invite` VALUES ('2', '1', '1', null, null, null, null, null, null, '1', null, null);
-INSERT INTO `yunzhi_invite` VALUES ('3', '2', '1', null, null, null, null, null, null, '0', null, null);
+INSERT INTO `yunzhi_invite` VALUES ('1', '1', '1', '1', '1', '4', '1', '1', '1', '1', '1222', '0');
+INSERT INTO `yunzhi_invite` VALUES ('2', '1', '1', '0', '0', '0', '0', '0', '1', '0', '0', '0');
+INSERT INTO `yunzhi_invite` VALUES ('3', '2', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0');
