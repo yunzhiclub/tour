@@ -155,7 +155,7 @@ class JssdkModel {
     $Media = new \Wechat\WechatMedia(); 
     $result = $Media->getMedia($serverId);
     if ($result === false) {
-      return fasle;
+      return false;
     }
 
     // 拼出保存图片的地址
