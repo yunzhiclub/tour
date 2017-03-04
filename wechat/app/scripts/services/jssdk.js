@@ -63,7 +63,7 @@ angular.module('wechatApp')
             wx.config(jssdkConfig);
         };
 
-        // 上传图片
+        // 上传图片获取serverid
         var chooseImg = function(callBack = undefined) {
 
             var imgs = { localId: null, serverId: null };
@@ -98,40 +98,6 @@ angular.module('wechatApp')
             });
         };
 
-        // 上传图片操作
-        var downloadImg = function(serverId) {
-
-            // 定义promise 解决异步问题
-            var deferred = $q.defer();
-            var promise = deferred.promise;
-
-            $http({
-                url: config.apiUrl + 'Jssdk/download?',
-                method: 'get',
-                params: { serverId: serverId },
-            }).then(function successCallback(response, status) {
-
-                console.log(response.data.data);
-                if (typeof response.data.errorCode !== 'undefined') {
-                    console.log('系统发生错误：' + response.data.error);
-                } else {
-                    // 逻辑处理 
-                    // 返回200说明请求正常，则调用系统初始化函数
-                    if (response.status == 200) {
-                        // 调jssdk初始化函数
-
-                    } else {
-                        alert('数据返回错误', +response.status);
-                    }
-                }
-                deferred.resolve(); //执行成功
-
-            }, function errorCallback(response) {
-                alert('数据返回错误:' + response.status);
-                deferred.reject(); //执行失败
-            });
-            return promise;
-        };
         // Public API here
         return {
             // 获取jssdk配置
@@ -143,10 +109,5 @@ angular.module('wechatApp')
             chooseImg: function(callBack = undefined) {
                 chooseImg(callBack);
             },
-
-            // 下载图片操作
-            downloadImg: function(serverId) {
-                return downloadImg(serverId);
-            }
         };
     }]);

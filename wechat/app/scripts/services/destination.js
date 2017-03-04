@@ -45,7 +45,7 @@ angular.module('wechatApp')
             $http({
                 method: 'GET',
                 url: config.apiUrl + 'Destination/getCountrysByPlaceId',
-                params: {placeid: placeid},
+                params: { placeid: placeid },
             }).then(function successCallback(response) {
                 console.log(response);
                 if (typeof response.data.errorCode !== 'undefined') {
@@ -70,7 +70,7 @@ angular.module('wechatApp')
             $http({
                 method: 'GET',
                 url: config.apiUrl + 'Destination/getCitysByCountryId',
-                params: {countryid: countryid},
+                params: { countryid: countryid },
             }).then(function successCallback(response) {
                 console.log(response);
                 if (typeof response.data.errorCode !== 'undefined') {
@@ -86,8 +86,56 @@ angular.module('wechatApp')
             return promise;
         };
 
+        // 获取首页显示的目的城市
+        var getHomeCitys = function() {
+            // 定义promise 解决异步问题
+            var deferred = $q.defer();
+            var promise = deferred.promise;
 
+            // $http去后台获取数据
+            $http({
+                method: 'GET',
+                url: config.apiUrl + 'Destination/getHomeCitys',
+            }).then(function successCallback(response) {
+                console.log(response);
+                if (typeof response.data.errorCode !== 'undefined') {
+                    console.log('系统发生错误：' + response.data.error);
+                } else {
+                    // 逻辑处理 
+                    self.destinations = response.data.data;
+                }
+                deferred.resolve(self.destinations); //执行成功
+            }, function errorCallback(response) {
+                deferred.reject(); //执行失败
+            });
+            return promise;
+        };
 
+         // 获取首页显示的目的地区
+        var getHomeRegions = function() {
+            // 定义promise 解决异步问题
+            var deferred = $q.defer();
+            var promise = deferred.promise;
+
+            // $http去后台获取数据
+            $http({
+                method: 'GET',
+                url: config.apiUrl + 'Destination/getHomeRegions',
+            }).then(function successCallback(response) {
+                console.log(response);
+                if (typeof response.data.errorCode !== 'undefined') {
+                    console.log('系统发生错误：' + response.data.error);
+                } else {
+                    // 逻辑处理 
+                    self.destinations = response.data.data;
+                }
+                deferred.resolve(self.destinations); //执行成功
+            }, function errorCallback(response) {
+                deferred.reject(); //执行失败
+            });
+            return promise;
+        };
+        
         // Public API here
         return {
             // 获取全部目的地(地区)
@@ -103,6 +151,17 @@ angular.module('wechatApp')
             // 获取国家所在的城市
             getCitysByCountryId: function(countryid) {
                 return getCitysByCountryId(countryid);
+            },
+
+            // 获取首页显示的目的城市（4）
+            getHomeCitys: function() {
+                return getHomeCitys();
+            },
+
+
+            // 获取首页显示的目的地区
+            getHomeRegions: function() {
+                return getHomeRegions();
             },
         };
     }]);
