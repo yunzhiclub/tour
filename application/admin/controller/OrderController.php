@@ -23,11 +23,11 @@ class OrderController extends IndexController
     {
     	return $this->fetch();
     }
-    public function orderadd()
+    public function AddOrder()
     {
     	return $this->fetch();
     }
-    public function orderedit()
+    public function EditOrder()
     {
     	return $this->fetch();
     }

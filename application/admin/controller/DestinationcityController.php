@@ -1,7 +1,7 @@
 <?php
 namespace app\admin\controller;
 use think\Model;
-class DestinationcityController extends IndexController
+class DestinationCityController extends IndexController
 {
 	public function index()
 	{
