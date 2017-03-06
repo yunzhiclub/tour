@@ -8,7 +8,7 @@ use think\Session;
 use think\Url;
 use EasyWeChat\Foundation\Application;
 use think\Cookie;
-use app\model\UserModel;
+use app\model\CustomerModel;
 
 
 class OauthController extends WechatController {
@@ -18,7 +18,7 @@ class OauthController extends WechatController {
         $config = $this->config;
 
         // 设置回调函数
-        $config['oauth']['callback'] = Url::build('getUserAndSession');
+        $config['oauth']['callback'] = Url::build('getcustomerAndSession');
         $this->app = new Application($config);
     }
 
@@ -34,7 +34,7 @@ class OauthController extends WechatController {
             throw new \Exception("do not receive callbackurl");
         }
         session('callbackUrl', $callbackUrl);
-        if (is_null(Session::get('wechat_user'))) {
+        if (is_null(Session::get('wechat_customer'))) {
             return $this->app->oauth->redirect();
         } else {
             return $this->redirectToCallbackUrl();
@@ -47,10 +47,10 @@ class OauthController extends WechatController {
      * @author 梦云智 http://www.mengyunzhi.com
      * @DateTime 2016-12-21T08:10:59+0800
      */
-    public function getUserAndSession() {
+    public function getcustomerAndSession() {
         // 获取 OAuth 授权结果用户信息
-        $user = $this->app->oauth->user(); 
-        Session::set('wechat_user', $user);
+        $customer = $this->app->oauth->customer(); 
+        Session::set('wechat_customer', $customer);
         return $this->redirectToCallbackUrl();
     }
 
@@ -61,28 +61,28 @@ class OauthController extends WechatController {
      * @DateTime 2016-12-21T07:53:57+0800
      */
     private function redirectToCallbackUrl() {
-        $user = Session::get('wechat_user');
+        $customer = Session::get('wechat_customer');
 
         // 判断用户是否是第一次登陆系统
         // 1 查找数据库是否存在
-        $UserModel = UserModel::get($user['original']['openid']);
+        $CustomerModel = CustomerModel::get($customer['original']['openid']);
         
         // 判断是否该用户是否存在
-        if (is_null($UserModel)) {
+        if (is_null($CustomerModel)) {
             // 保存数据
-            $UserModel = new UserModel;
-            $data['openid'] = $user['original']['openid'];
-            $data['nickname'] = $user['original']['nickname'];
-            $data['sex'] = $user['original']['sex'];
-            $data['province'] = $user['original']['province'];
-            $data['country'] = $user['original']['country']; 
-            $data['city'] = $user['original']['city']; 
-            $data['headimgurl'] = $user['original']['headimgurl']; 
+            $CustomerModel = new CustomerModel;
+            $data['openid'] = $customer['original']['openid'];
+            $data['nickname'] = $customer['original']['nickname'];
+            $data['sex'] = $customer['original']['sex'];
+            $data['province'] = $customer['original']['province'];
+            $data['country'] = $customer['original']['country']; 
+            $data['city'] = $customer['original']['city']; 
+            $data['headimgurl'] = $customer['original']['headimgurl']; 
 
             // save
-            $UserModel->save($data);
+            $CustomerModel->save($data);
         }
-        $callbackUrl = Session::get('callbackUrl') . '?openid=' . $user['id'];
+        $callbackUrl = Session::get('callbackUrl') . '?openid=' . $customer['id'];
         return $this->redirect($callbackUrl);
     }
 }
