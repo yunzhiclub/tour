@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-03-02 21:22:32
+Date: 2017-03-06 20:41:30
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,7 +21,7 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `yunzhi_evaluate`;
 CREATE TABLE `yunzhi_evaluate` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
+  `customer_id` int(11) DEFAULT NULL,
   `route_id` int(10) DEFAULT NULL,
   `star` int(10) DEFAULT NULL,
   `content` varchar(200) DEFAULT NULL,
