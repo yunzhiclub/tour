@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost
-Source Server Version : 50626
+Source Server Version : 50505
 Source Host           : localhost:3306
 Source Database       : tour
 
 Target Server Type    : MYSQL
-Target Server Version : 50626
+Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-03-03 16:54:05
+Date: 2017-03-06 20:41:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -22,7 +22,7 @@ DROP TABLE IF EXISTS `yunzhi_invite`;
 CREATE TABLE `yunzhi_invite` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `route_id` int(10) NOT NULL COMMENT '路线id',
-  `user_id` int(10) unsigned NOT NULL COMMENT '用户id',
+  `customer_id` int(10) unsigned NOT NULL COMMENT '用户id',
   `start_time_id` int(10) NOT NULL COMMENT '出发时间id',
   `number` int(10) NOT NULL COMMENT '订单号',
   `person_num` int(10) NOT NULL DEFAULT '0' COMMENT '邀约人数',

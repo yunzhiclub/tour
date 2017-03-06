@@ -48,14 +48,14 @@ class InviteModel extends Model
 	 * $status=1的时候表名要取出的邀约订单已经成型
 	 * $status=0                            未成型
 	 * @param  int $status 0 or 1
-	 * @param  int $userId 用户id
+	 * @param  int $CustomerId 用户id
 	 * @author huangshuaibin
 	 * @return array         满足条件的邀约订单
 	 */
-	public static function getInviteByUserIdAndStatus($status, $userId)
+	public static function getInviteByCustomerIdAndStatus($status, $CustomerId)
 	{
 		$InviteModel = new InviteModel;
-		$invites = $InviteModel->where('user_id', '=', $userId)->select();
+		$invites = $InviteModel->where('customer_id', '=', $CustomerId)->select();
 
 		//建立临时数组,作为取出邀约的查询条件
 		$temp = [];
