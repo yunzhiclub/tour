@@ -23,7 +23,7 @@ class CustomerController extends ApiController
         // }
 
         // 获取用户实体
-        $Customer = Customer::getCustomerByOpenid($openid);
+        $Customer = CustomerModel::getCustomerByOpenid($openid);
     }
 
 
@@ -36,7 +36,7 @@ class CustomerController extends ApiController
     public function getCustomerByOpenid($openid) {
         try {
             // 获取用户实体
-            $Customer = Customer::getCustomerByOpenid($openid);
+            $Customer = CustomerModel::getCustomerByOpenid($openid);
             
             // 成功设置，返回空数组
             return $this->response($Customer);
@@ -58,7 +58,7 @@ class CustomerController extends ApiController
        $datas = Request::instance()->param();
        
        //调用保存用户方法
-       if(Customer::saveCustomer($datas) === false) {
+       if(CustomerModel::saveCustomer($datas) === false) {
             return '保存失败';
        }
 
@@ -74,7 +74,7 @@ class CustomerController extends ApiController
      */
     public function getCollectionsByCustomerId()
     {
-        $CustomerId = Request::instance()->param('Customer_id');
+        $CustomerId = Request::instance()->param('customer_id');
        // 获取该客户的收藏
        $Collections =  CollectionModel::getCollectionsByCustomerId($CustomerId);
        
@@ -90,7 +90,7 @@ class CustomerController extends ApiController
      */
     public function getOrdersByCustomerId() 
     {
-        $CustomerId = Request::instance()->param('Customer_id');
+        $CustomerId = Request::instance()->param('customer_id');
        // 获取用户的全部订单
        $orders = OrderModel::getOrdersByCustomerId($CustomerId);
 
@@ -125,7 +125,7 @@ class CustomerController extends ApiController
     public function getInvitationsByCustomerIdAndStatus() {
         //暂定status=1是邀约成型,status=0是邀约正在征集中
         $status = Request::instance()->param('status');
-        $CustomerId = Request::instance()->param('Customer_id');
+        $CustomerId = Request::instance()->param('customer_id');
         $invitation = InviteModel::getInviteByCustomerIdAndStatus($status, $CustomerId);
 
         return $this->response($invitation);
@@ -139,7 +139,7 @@ class CustomerController extends ApiController
     public function toEvaluate() {
         
         $InviteId = Request::instance()->param('invite_id');
-        $CustomerId   = Request::instance()->param('Customer_id');
+        $CustomerId   = Request::instance()->param('customer_id');
 
         
         return $this->response([]);
