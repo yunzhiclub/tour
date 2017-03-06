@@ -25,7 +25,7 @@ angular.module('wechatApp')
             frontIdCardImg: {frontIdCardImgCardImgUrl: null, serverId: null},
             backIdCardImgUrl: {backIdCardImgUrl: null, serverId: null},
         };
-        var url = config.apiUrl + 'user/';
+        var url = config.apiUrl + 'customer/';
         // 用户是否登陆
         var isLogin = function() {
             if (typeof getOpenid() === 'undefined') {
@@ -83,7 +83,7 @@ angular.module('wechatApp')
                 var openid = getOpenid();
                 $http({
                     method: 'GET',
-                    url: url + 'getUserByOpenid?openid=' + openid,
+                    url: url + 'getCustomerByOpenid?openid=' + openid,
                     data: { openid: getOpenid() }
                 }).then(function successCallback(response) {
                     console.log('获取用户信息成功：');
@@ -94,9 +94,9 @@ angular.module('wechatApp')
                         var user = response.data.data;
                         self.user = {
                             openid: user.openid,
-                            nickName: user.nickname,
+                            nickName: user.nick_name,
                             sex: user.sex,
-                            headImg: {headImgUrl: user.headimgurl, serverId: 'rJAj-qyHntGvt3IjmGbWh43UxXwTAwHl5isrdM1Gf8kDg7_2cuGEbzNlvlGgdEJS'},
+                            headImg: {headImgUrl: user.head_img_url, serverId: 'rJAj-qyHntGvt3IjmGbWh43UxXwTAwHl5isrdM1Gf8kDg7_2cuGEbzNlvlGgdEJS'},
                             city: user.city,
                             num: '13920884917',
                             email: '2819786276@qq.com',
@@ -129,7 +129,7 @@ angular.module('wechatApp')
             // 调用$http请求，保存用户信息
             $http({
                 method: 'GET',
-                url: url + 'saveUser?',
+                url: url + 'saveCustomer?',
                 params: { openid: datas.openid, data: datas },
             }).then(function successCallback(response) {
                 console.log('保存用户信息成功：');
@@ -158,8 +158,8 @@ angular.module('wechatApp')
             // 调用$http请求，保存用户信息
             $http({
                 method: 'GET',
-                url: url + 'getCollectionsByuserid?',
-                params: { user_id: user_id },
+                url: url + 'getCollectionsByCustomerId?',
+                params: { customer_id: user_id },
             }).then(function successCallback(response) {
                 console.log('保存用户信息成功：');
                 console.log(response);
@@ -186,8 +186,8 @@ angular.module('wechatApp')
             // 调用$http请求，保存用户信息
             $http({
                 method: 'GET',
-                url: url + 'getOrdersByuserid?',
-                params: { user_id: user_id },
+                url: url + 'getOrdersByCustomerId?',
+                params: { customer_id: user_id },
             }).then(function successCallback(response) {
                 console.log('保存用户信息成功：');
                 console.log(response);
@@ -205,7 +205,7 @@ angular.module('wechatApp')
             return promise;
         };
 
-        var setIsOpen = function(id, user_id) {
+        var setInviteIsPublic = function(id, flag) {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
@@ -213,8 +213,8 @@ angular.module('wechatApp')
             // $http去后台获取数据
             $http({
                 method: 'GET',
-                url: url + 'setIsOpen',
-                params: { id: id, user_id: user_id },
+                url: url + 'setInviteIsPublic',
+                params: { id: id, flag: flag },
             }).then(function successCallback(response) {
                 console.log(response);
                 if (typeof response.data.errorCode !== 'undefined') {
@@ -230,7 +230,7 @@ angular.module('wechatApp')
             return promise;
         };
 
-        var getInvitationsBystatus = function(status, user_id) {
+        var getInvitationsByCustomerIdAndStatus = function(status, user_id) {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
@@ -238,8 +238,8 @@ angular.module('wechatApp')
             // $http去后台获取数据
             $http({
                 method: 'GET',
-                url: url + 'getInvitationsBystatus',
-                params: { status: status, user_id: user_id },
+                url: url + 'getInvitationsByCustomerIdAndStatus',
+                params: { status: status, customer_id: user_id },
             }).then(function successCallback(response) {
                 console.log(response);
                 if (typeof response.data.errorCode !== 'undefined') {
@@ -330,13 +330,13 @@ angular.module('wechatApp')
             },
 
             // 设置趣约是否公开（必须是自己发布的）
-            setIsOpen: function(id, user_id) {
-                return setIsOpen(id, user_id);
+            setInviteIsPublic: function(id, flag) {
+                return setInviteIsPublic(id, flag);
             },
 
             // 根据订单状态和用户id获取订单列表(包括自己发布的)
-            getInvitationsBystatus: function(status, user_id) {
-                return getInvitationsBystatus(status, user_id);
+            getInvitationsByCustomerIdAndStatus: function(status, user_id) {
+                return getInvitationsByCustomerIdAndStatus(status, user_id);
             },
 
             // 按趣约id和用户id评价订单
