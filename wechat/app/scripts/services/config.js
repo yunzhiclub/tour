@@ -15,6 +15,6 @@ angular.module('wechatApp')
         prefix: 'wechat_',        // cookie 名称前缀
         expire:  0,               // cookie 保存时间
     },
-    oauthUrl: 'http://192.168.0.109/tour/public/index.php/wechat/OAuth/index',         // autho认证文件
-    apiUrl: 'http://192.168.0.109/tour/public/index.php/api/'
+    oauthUrl: 'http://192.168.0.115/tour/public/index.php/wechat/OAuth/index',         // autho认证文件
+    apiUrl: 'http://192.168.0.115/tour/public/index.php/api/'
   });
