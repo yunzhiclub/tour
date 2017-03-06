@@ -13,8 +13,8 @@ class CustomerModel extends Model
      * @return   CustomerModel                           
      * @author 梦云智 http://www.mengyunzhi.com
      * @DateTime 2016-12-21T17:17:10+0800
-     */
-    static public function getCustomerModelByOpenid($openid = '') {
+     */ 
+    static public function getCustomerByOpenid($openid = '') {
         // 查找数据库是否存在
         $CustomerModel = CustomerModel::get($openid);
         
