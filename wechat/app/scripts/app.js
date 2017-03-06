@@ -217,7 +217,7 @@ angular
         $compileProvider.imgSrcSanitizationWhitelist(/^\s*(wxlocalresource|https?|ftp|mailto|chrome-extension):/);
 
     }]).
-    // 弹出框同一处理方法
+// 弹出框同一处理方法
 controller('ModalInstanceCtrl', function($uibModalInstance, items, $scope) {
         var $ctrl = $scope;
         $ctrl.terms1 = items.terms1;

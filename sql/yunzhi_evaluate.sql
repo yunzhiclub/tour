@@ -10,24 +10,26 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-03-02 21:23:22
+Date: 2017-03-02 21:22:32
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for `yunzhi_region`
+-- Table structure for `yunzhi_evaluate`
 -- ----------------------------
-DROP TABLE IF EXISTS `yunzhi_region`;
-CREATE TABLE `yunzhi_region` (
+DROP TABLE IF EXISTS `yunzhi_evaluate`;
+CREATE TABLE `yunzhi_evaluate` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `regionname` varchar(40) DEFAULT '' COMMENT '地区名称',
-  `pictureurl` varchar(80) DEFAULT '' COMMENT '图片url',
+  `user_id` int(11) DEFAULT NULL,
+  `route_id` int(10) DEFAULT NULL,
+  `star` int(10) DEFAULT NULL,
+  `content` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of yunzhi_region
+-- Records of yunzhi_evaluate
 -- ----------------------------
-INSERT INTO `yunzhi_region` VALUES ('1', '亚洲', '127.0.0.1/public');
-INSERT INTO `yunzhi_region` VALUES ('2', '欧洲', '127.0.0.1/public');
+INSERT INTO `yunzhi_evaluate` VALUES ('1', '1', '1', '5', '这是评价1');
+INSERT INTO `yunzhi_evaluate` VALUES ('2', '1', '2', '4', '这是评价2');

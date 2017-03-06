@@ -2,19 +2,21 @@
 namespace app\model;
 use think\Model;
 use think\Cache;
-
+use think\Config;
 /*
 jssdk处理类
 */
 class JssdkModel {
-	private $appId;
-  	private $appSecret;
-  	private $url;
-
-  	public function __construct($appId, $appSecret, $url) {
+	   private $appId;
+    private $appSecret;
+  	 private $url;
+     protected $pathconfig = ROOT_PATH . 'public' . DS . 'upload' . DS;
+     protected $config;
+  	public function __construct($appId = null, $appSecret= null, $url = null) {
     	$this->appId = $appId;
     	$this->appSecret = $appSecret;
     	$this->url = $url;
+      $this->config = Config::get('wechat');
   	}
 
   	public function getSignPackage() {
@@ -60,7 +62,6 @@ class JssdkModel {
     		'jsapi_ticket' => null,
     		);
   		$data = Cache::get("jsapi_ticket");
-  		
     	if ($data['expire_time'] < time()) {
      		 $accessToken = $this->getAccessToken();
      		 // 如果是企业号用以下 URL 获取 ticket
@@ -122,5 +123,77 @@ class JssdkModel {
     curl_close($curl);
 
     return $res;
+  }
+
+  // 获取Media类的配置文件
+  public function getOptions() {
+      $config = $this->config;
+      $config['appid'] = $config['app_id'];
+      $config['appsecret'] = $config['secret'];
+      $config['encodingaeskey'] = '';
+      $config['mch_id'] = '';
+      $config['partnerkey'] = '';
+      $config['ssl_cer'] = '';
+      $config['ssl_key'] = '';
+      $config['cachepath'] = '';
+      return $config;
+    }
+
+  /*
+   * description 从微信服务器读取图片，然后下载到本地服务器并把数据url返回回来
+   * @param serverId(string)
+   * @return success $data(string)文件和上一级文件夹名字可以存入数据库 | error false(boolen)
+   */
+  public function download($serverId = null) {
+    
+    // 获取options
+    $options = $this->getOptions();
+
+    // 配置jssdk
+    \Wechat\Loader::config($options);
+
+    // 实例化Media类
+    $Media = new \Wechat\WechatMedia(); 
+    $result = $Media->getMedia($serverId);
+    if ($result === false) {
+      return false;
+    }
+
+    // 拼出保存图片的地址
+    $lateFolderName = date('Ymd', time());
+    $fileFolder = $this->pathconfig . $lateFolderName;
+    if (!is_dir($fileFolder)) {
+      mkdir($fileFolder);
+    }
+
+    $fileName = sha1($result) . '.png';
+    $path = $fileFolder . DS . $fileName;
+    
+    // 保存图片
+    $state = file_put_contents($path, $result); 
+    if ($state === false) {
+      return false;
+    }
+    
+    // 返回文件和上一级文件夹名字
+    $data = $lateFolderName . DS . $fileName;
+    return $data;
+  }
+
+  // 获取微信jssdk的配置信息
+  public function getConfig($url) {
+
+    // 获取app_id和secret和url
+    $config = $this->config;
+    $app_id = $config['app_id'];
+    $secret = $config['secret'];
+    
+    // 获取jssdk配置
+    $jssdkModel = new self($app_id, $secret, $url);
+    $signPackage = $jssdkModel->GetSignPackage();
+
+    // 清理内存
+    unset($signPackage['rawString']);
+    return $signPackage;
   }
 }

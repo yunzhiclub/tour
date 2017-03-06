@@ -5,7 +5,7 @@ use think\Model;
  * 出发城市
  * @author huangshuaibin 
  */
-class StartModel extends Model
+class StartCityModel extends Model
 {
 
 }
