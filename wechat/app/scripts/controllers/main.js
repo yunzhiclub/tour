@@ -8,7 +8,7 @@
  * Controller of the wechatApp
  */
 angular.module('wechatApp')
-    .controller('MainCtrl', ['customer', '$scope', 'starcity', 'cookies', 'jssdk',  function(customer, $scope, starcity, cookies, jssdk) {
+    .controller('MainCtrl', ['customer', '$scope', 'cookies', 'jssdk',  function(customer, $scope, cookies, jssdk) {
         // 用户未登录，则进行登录
 
         if (!customer.isLogin()) {

@@ -8,20 +8,19 @@
  * Factory in the wechatApp.
  */
 angular.module('wechatApp')
-    .factory('starcity', ['$q', '$http', 'config', function($q, $http, config) {
+    .factory('startcity', ['$q', 'server', function($q, server) {
         // Service logic
         var self = this;
         self.citys = [];
+        var url = 'City/';
         var getStartCitys = function() {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
+            var paramUrl = url + 'getStartCitys';
+            var data = null;
 
-            // $http去后台获取数据
-            $http({
-                method: 'GET',
-                url: config.apiUrl + 'City/getStartCitys',
-            }).then(function successCallback(response) {
+            server.http(paramUrl, data, function successCallback(response) {
                 if (typeof response.data.errorCode !== 'undefined') {
                     console.log('系统发生错误：' + response.data.error);
                 } else {
@@ -31,7 +30,8 @@ angular.module('wechatApp')
                 deferred.resolve(self.sitys); //执行成功
             }, function errorCallback(response) {
                 deferred.reject(); //执行失败
-            });
+            }); 
+          
             return promise;
         };
 

@@ -28,7 +28,7 @@ angular.module('wechatApp')
 
         // 选择上传图片获取localId(可用作url)和serverId
         $scope.chooseImg = function(type) {
-            if (type == 1) {
+            if (type === 1) {
                 jssdk.chooseImg(function(imgs) {
                     console.log(imgs);
                     $scope.customer.headImg.headImgUrl= imgs.localId;
@@ -37,7 +37,7 @@ angular.module('wechatApp')
                     // // $scope.$apply();
                     // var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
                 });
-            } else if (type == 2) {
+            } else if (type === 2) {
                 jssdk.chooseImg(function(imgs) {
                     console.log(imgs);
                     $scope.customer.frontIdCardImg.frontIdCardImgUrl = imgs.localId; 
@@ -57,5 +57,5 @@ angular.module('wechatApp')
                     // var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
                 });
             }
-        }
+        };
     }]);

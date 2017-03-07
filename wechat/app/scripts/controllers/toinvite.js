@@ -8,13 +8,13 @@
  * Controller of the wechatApp
  */
 angular.module('wechatApp')
-  .controller('ToinviteCtrl', ['starcity', 'invitation', '$scope',  function (starcity, $scope, invitation) {
+  .controller('ToinviteCtrl', ['startcity', '$scope', 'invitation', function (startcity, $scope, invitation) {
   	// 获取全部出发城市
-   starcity.getStartCitys().then(function successCallBack(starcitys) {
-   	$scope.starcitys = starcitys;
+   startcity.getStartCitys().then(function successCallBack(startCitys) {
+   	$scope.startCitys = startCitys;
    	// 设默认城市
-   	$scope.selectedStartCityId = starcitys[0].id;
+   	$scope.selectedStartCityId = startCitys[0].id;
    }, function error() {
    });
-   console.log(invitation);
+
   }]);

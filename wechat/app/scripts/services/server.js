@@ -22,14 +22,14 @@ angular.module('wechatApp')
                 param.url = url + paramUrl;
             } else {
                 param = paramUrl;
-            };
+            }
             $http(param).then(function successCallback(response) {
                 if (typeof response.data.errorCode !== 'undefined') {
                     console.log('系统发生错误：' + response.data.error);
-                };
+                }
                 successCallBack(response);
             }, function errorCallback(response) {
-                console.log('请求失败');
+                console.log(response);
                 errorCallBack(response);
 
             });

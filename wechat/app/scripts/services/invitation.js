@@ -302,9 +302,5 @@ angular.module('wechatApp')
             getInvitationById: function(id) {
                 return getInvitationById(id);
             },
-
-
-
-
         };
     }]);
