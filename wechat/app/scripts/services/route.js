@@ -8,20 +8,20 @@
  * Factory in the wechatApp.
  */
 angular.module('wechatApp')
-    .factory('route', ['$q', '$http', 'config', function($q, $http, config) {
+    .factory('route', ['$q', 'config', 'server', function($q, $http, config, server) {
         // Service logic
         var self = this;
         self.routes = [];
-        var getChosedRoutes = function() {
+        var url = 'Route/';
+        var getChoosedRoutes = function() {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
+            var paramUrl = url + 'getChoosedRoutes';
+            var data = null;
 
             // $http去后台获取数据
-            $http({
-                method: 'GET',
-                url: config.apiUrl + 'Route/getChosedRoutes',
-            }).then(function successCallback(response) {
+            server.http(paramUrl, data, function successCallback(response) {
                 console.log(response);
                 if (typeof response.data.errorCode !== 'undefined') {
                     console.log('系统发生错误：' + response.data.error);
@@ -33,21 +33,20 @@ angular.module('wechatApp')
             }, function errorCallback(response) {
                 deferred.reject(); //执行失败
             });
+
             return promise;
         };
 
 
-        var getRoutesByCountryId = function(countryid, cityid) {
+        var getRoutesByCountryId = function(countryId, cityId) {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
+            var paramUrl = url + 'getRoutesByCountryId';
+            var data = { countryId: countryId, cityId: cityId };
 
             // $http去后台获取数据
-            $http({
-                method: 'GET',
-                url: config.apiUrl + 'Route/getRoutesByCountryId',
-                params: { countryid: countryid, cityid: cityid },
-            }).then(function successCallback(response) {
+            server.http(paramUrl, data, function successCallback(response) {
                 console.log(response);
                 if (typeof response.data.errorCode !== 'undefined') {
                     console.log('系统发生错误：' + response.data.error);
@@ -59,21 +58,20 @@ angular.module('wechatApp')
             }, function errorCallback(response) {
                 deferred.reject(); //执行失败
             });
+
             return promise;
         };
 
 
-        var getRouteByid = function(id) {
+        var getRouteById = function(id) {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
+            var paramUrl = url + 'getRouteById';
+            var data = { id: id };
 
             // $http去后台获取数据
-            $http({
-                method: 'GET',
-                url: config.apiUrl + 'Route/getRouteByid',
-                params: { id: id },
-            }).then(function successCallback(response) {
+            server.http(paramUrl, data, function successCallback(response) {
                 console.log(response);
                 if (typeof response.data.errorCode !== 'undefined') {
                     console.log('系统发生错误：' + response.data.error);
@@ -85,20 +83,19 @@ angular.module('wechatApp')
             }, function errorCallback(response) {
                 deferred.reject(); //执行失败
             });
+
             return promise;
         };
 
-        var getStartimeByid = function(id) {
+        var getStartimeById = function(id) {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
+            var paramUrl = url + 'getStartimeById';
+            var data = { id: id };
 
             // $http去后台获取数据
-            $http({
-                method: 'GET',
-                url: config.apiUrl + 'Route/getStartimeByid',
-                params: { id: id },
-            }).then(function successCallback(response) {
+            server.http(paramUrl, data, function successCallback(response) {
                 console.log(response);
                 if (typeof response.data.errorCode !== 'undefined') {
                     console.log('系统发生错误：' + response.data.error);
@@ -110,20 +107,19 @@ angular.module('wechatApp')
             }, function errorCallback(response) {
                 deferred.reject(); //执行失败
             });
+
             return promise;
         };
 
-        var getEvaluatesByid = function(id) {
+        var getEvaluatesById = function(id) {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
+            var paramUrl = url + 'getEvaluatesById';
+            var data = { id: id };
 
             // $http去后台获取数据
-            $http({
-                method: 'GET',
-                url: config.apiUrl + 'Route/getEvaluatesByid',
-                params: { id: id },
-            }).then(function successCallback(response) {
+            server.http(paramUrl, data, function successCallback(response) {
                 console.log(response);
                 if (typeof response.data.errorCode !== 'undefined') {
                     console.log('系统发生错误：' + response.data.error);
@@ -135,21 +131,19 @@ angular.module('wechatApp')
             }, function errorCallback(response) {
                 deferred.reject(); //执行失败
             });
+
             return promise;
         };
 
-        var collecteTheRoute = function(user_id, route_id) {
+        var collecteTheRoute = function(customerId, routeId) {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
-            
-            
+            var paramUrl = url + 'collecteTheRoute';
+            var data = { customerId: customerId, routeId: routeId };
+
             // $http去后台获取数据
-            $http({
-                method: 'GET',
-                url: config.apiUrl + 'Route/collecteTheRoute',
-                params: {user_id: user_id, route_id: route_id},
-            }).then(function successCallback(response) {
+            server.http(paramUrl, data, function successCallback(response) {
                 console.log(response);
                 if (typeof response.data.errorCode !== 'undefined') {
                     console.log('系统发生错误：' + response.data.error);
@@ -161,6 +155,7 @@ angular.module('wechatApp')
             }, function errorCallback(response) {
                 deferred.reject(); //执行失败
             });
+
             return promise;
         };
 
@@ -168,33 +163,33 @@ angular.module('wechatApp')
         // Public API here
         return {
             // 获取推荐路线
-            getChosedRoutes: function() {
-                return getChosedRoutes();
+            getChoosedRoutes: function() {
+                return getChoosedRoutes();
             },
 
             // 取得对应id的route详情
-            getRouteByid: function(id) {
-                return getRouteByid(id);
+            getRouteById: function(id) {
+                return getRouteById(id);
             },
 
             // 取得对应id的route对应的所有出发时间和价格
-            getStartimeByid: function(id) {
-                return getStartimeByid(id);
+            getStartimeById: function(id) {
+                return getStartimeById(id);
             },
 
             // 按目的地(国家id)和出发城市id选出路线
-            getRoutesByCountryId: function(countryid, cityid) {
-                return getRoutesByCountryId(countryid, cityid);
+            getRoutesByCountryId: function(countryId, cityId) {
+                return getRoutesByCountryId(countryId, cityId);
             },
 
             // 取得对应id的route对应的所有评价
-            getEvaluatesByid: function(id) {
-                return getEvaluatesByid(id);
+            getEvaluatesById: function(id) {
+                return getEvaluatesById(id);
             },
 
-            collecteTheRoute: function(user_id, route_id) {
-                return collecteTheRoute(user_id, route_id);
+            collecteTheRoute: function(customerId, routeId) {
+                return collecteTheRoute(customerId, routeId);
             },
-            
+
         };
     }]);
