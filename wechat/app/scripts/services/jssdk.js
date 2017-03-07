@@ -8,7 +8,7 @@
  * Factory in the wechatApp.
  */
 angular.module('wechatApp')
-    .factory('jssdk', ['$q', '$http', 'config', function($q, $http, config) {
+    .factory('jssdk', ['$q', 'config', 'server', function($q, config, server) {
         // Service logic
 
         // 获取当前的url
@@ -20,18 +20,15 @@ angular.module('wechatApp')
             debug: true,
             appId: '',
         };
-
         // 发送请求，获取配置信息
         var getConfig = function() {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
+            var paramUrl = 'Jssdk/getConfig';
+            var data = { url: encodeURIComponent(url) };
 
-            $http({
-                url: config.apiUrl + 'Jssdk/getConfig?url=' + encodeURIComponent(url),
-                method: 'get',
-            }).then(function successCallback(response, status) {
-
+            server.http(paramUrl, data, function successCallback(response) {
                 console.log(response.data.data);
                 if (typeof response.data.errorCode !== 'undefined') {
                     console.log('系统发生错误：' + response.data.error);
@@ -46,11 +43,11 @@ angular.module('wechatApp')
                     }
                 }
                 deferred.resolve(); //执行成功
-
             }, function errorCallback(response) {
                 alert('数据返回错误:' + response.status);
                 deferred.reject(); //执行失败
             });
+
             return promise;
         }
 
@@ -66,6 +63,7 @@ angular.module('wechatApp')
         // 上传图片获取serverid
         var chooseImg = function(callBack = undefined) {
 
+            // 定义localid和serverid
             var imgs = { localId: null, serverId: null };
             wx.chooseImage({
                 count: 1, // 默认9
@@ -75,7 +73,7 @@ angular.module('wechatApp')
 
                     // 返回选定照片的本地ID列表
                     imgs.localId = res.localIds[0];
-                    
+
 
                     // 调用上传图片接口
                     wx.uploadImage({
@@ -85,7 +83,7 @@ angular.module('wechatApp')
                             // 返回图片服务器ID res.serverId,然后执行回调函数
                             imgs.serverId = res.serverId;
                             callBack(imgs);
-                            
+
                         },
                         fail: function(res) {
                             alert('上传图片失败');

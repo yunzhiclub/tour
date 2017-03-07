@@ -14,11 +14,16 @@ angular.module('wechatApp')
 
         // 设置header
         var http = function(paramUrl = null, data = null, successCallBack = null, errorCallBack = null) {
-            $http({
-                method: 'GET',
-                url: url + paramUrl,
-                params: data,
-            }).then(function successCallback(response) {
+
+            var param = {};
+            if (typeof(paramUrl) === 'string') {
+                param.method = 'GET';
+                param.params = data;
+                param.url = url + paramUrl;
+            } else {
+                param = paramUrl;
+            };
+            $http(param).then(function successCallback(response) {
                 if (typeof response.data.errorCode !== 'undefined') {
                     console.log('系统发生错误：' + response.data.error);
                 };
