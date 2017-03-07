@@ -20,7 +20,7 @@ class CustomerModel extends Model
         $CustomerModel = CustomerModel::get($openid);
         
         //图片的路径拼接
-        $pathconfig = 'http://192.168.0.115' . DS .'tour' . DS . 'public' . DS . 'upload' . DS;
+        $pathconfig = 'public' . DS . 'upload' . DS;
         
         //对Customer中的部分数据进行简单的加工
         //图片URL的拼接
@@ -37,7 +37,7 @@ class CustomerModel extends Model
         if (is_null($CustomerModel)) {
             $CustomerModel = new self();
         }
-       
+        
         // 数据库中存在，则返回获取到的对象
         return $CustomerModel;
     }
