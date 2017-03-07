@@ -8,7 +8,7 @@
  * Factory in the wechatApp.
  */
 angular.module('wechatApp')
-    .factory('invitation', ['config', '$http', '$q', function(config, $http, $q) {
+    .factory('invitation', ['config', '$q', 'server', function(config, $q, server) {
         // Service logic
         var self = this;
         self.invitations = [];
@@ -17,20 +17,21 @@ angular.module('wechatApp')
             startCityId: '',
             invitationId: '',
             startTimeId: '',
-            isPublic:'',
+            isPublic: '',
             deadLine: '',
             roomDatas: [],
         };
-        var getChosedInvitations = function() {
+        var url = 'Invitation/';
+        var getChoosedInvitations = function() {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
+            var paramUrl = url + 'getChoosedInvitations';
+            var data = null;
+
 
             // $http去后台获取数据
-            $http({
-                method: 'GET',
-                url: config.apiUrl + 'Invitation/getChosedInvitations',
-            }).then(function successCallback(response) {
+            server.http(paramUrl, data, function successCallback(response) {
                 console.log(response);
                 if (typeof response.data.errorCode !== 'undefined') {
                     console.log('系统发生错误：' + response.data.error);
@@ -42,20 +43,20 @@ angular.module('wechatApp')
             }, function errorCallback(response) {
                 deferred.reject(); //执行失败
             });
+
             return promise;
         };
 
-        var getInvitationsByPlaceId = function(placeid) {
+        var getInvitationsByPlaceId = function(placeId) {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
+            var paramUrl = url + 'getInvitationsByPlaceId';
+            var data = { placeId: placeId };
+
 
             // $http去后台获取数据
-            $http({
-                method: 'GET',
-                url: config.apiUrl + 'Invitation/getInvitationsByPlaceId',
-                params: { placeid: placeid },
-            }).then(function successCallback(response) {
+            server.http(paramUrl, data, function successCallback(response) {
                 console.log(response);
                 if (typeof response.data.errorCode !== 'undefined') {
                     console.log('系统发生错误：' + response.data.error);
@@ -67,20 +68,20 @@ angular.module('wechatApp')
             }, function errorCallback(response) {
                 deferred.reject(); //执行失败
             });
+
             return promise;
         };
 
-        var getInvitationsByCountryId = function(countryid) {
+        var getInvitationsByCountryId = function(countryId) {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
+            var paramUrl = url + 'getInvitationsByCountryId';
+            var data = { countryId: countryId };
+
 
             // $http去后台获取数据
-            $http({
-                method: 'GET',
-                url: config.apiUrl + 'Invitation/getInvitationsByCountryId',
-                params: { countryid: countryid },
-            }).then(function successCallback(response) {
+            server.http(paramUrl, data, function successCallback(response) {
                 console.log(response);
                 if (typeof response.data.errorCode !== 'undefined') {
                     console.log('系统发生错误：' + response.data.error);
@@ -92,6 +93,7 @@ angular.module('wechatApp')
             }, function errorCallback(response) {
                 deferred.reject(); //执行失败
             });
+
             return promise;
         };
 
@@ -101,8 +103,8 @@ angular.module('wechatApp')
             var promise = deferred.promise;
 
             // 需要保存得数据(示例数据)
-            var datas = {
-                user_id: postdata.user_id,
+            var data = {
+                customer_id: postdata.customer_id,
                 route_id: postdata.route_id,
                 time_id: postdata.time_id,
                 isopen: postdata.isopen,
@@ -139,12 +141,9 @@ angular.module('wechatApp')
                     },
                 },
             };
-            // $http去后台保存数据
-            $http({
-                method: 'POST',
-                url: config.apiUrl + 'Invitation/saveTheInvitation',
-                data: datas,
-            }).then(function successCallback(response) {
+            var paramUrl = url + 'saveTheInvitation';
+            // $http去后台获取数据
+            server.http(paramUrl, data, function successCallback(response) {
                 console.log(response);
                 if (typeof response.data.errorCode !== 'undefined') {
                     console.log('系统发生错误：' + response.data.error);
@@ -156,6 +155,7 @@ angular.module('wechatApp')
             }, function errorCallback(response) {
                 deferred.reject(); //执行失败
             });
+
             return promise;
         };
 
@@ -164,28 +164,26 @@ angular.module('wechatApp')
             var deferred = $q.defer();
             var promise = deferred.promise;
 
-            var datas = {
+            var data = {
                 user_id: postdata.user_id,
                 invite_id: postdata.invite_id,
                 bed_id: postdata.bed_id,
             };
+            var paramUrl = url + 'topay';
             // $http去后台获取数据
-            $http({
-                method: 'POST',
-                url: config.apiUrl + 'Invitation/topay',
-                data: datas,
-            }).then(function successCallback(response) {
+            server.http(paramUrl, data, function successCallback(response) {
                 console.log(response);
                 if (typeof response.data.errorCode !== 'undefined') {
                     console.log('系统发生错误：' + response.data.error);
                 } else {
                     // 逻辑处理 
-
+                    self.invitations = response.data.data;
                 }
                 deferred.resolve(self.invitations); //执行成功
             }, function errorCallback(response) {
                 deferred.reject(); //执行失败
             });
+
             return promise;
         };
 
@@ -193,38 +191,11 @@ angular.module('wechatApp')
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
+            var data = { time: time };
+            var paramUrl = url + 'getInvitationsByTime';
 
             // $http去后台获取数据
-            $http({
-                method: 'GET',
-                url: config.apiUrl + 'Invitation/getInvitationsByTime',
-                params: { time: time },
-            }).then(function successCallback(response) {
-                console.log(response);
-                if (typeof response.data.errorCode !== 'undefined') {
-                    console.log('系统发生错误：' + response.data.error);
-                } else {
-                    // 逻辑处理 
-
-                }
-                deferred.resolve(self.invitations); //执行成功
-            }, function errorCallback(response) {
-                deferred.reject(); //执行失败
-            });
-            return promise;
-        };
-
-        var getInvitationsByCityId = function(cityid) {
-            // 定义promise 解决异步问题
-            var deferred = $q.defer();
-            var promise = deferred.promise;
-
-            // $http去后台获取数据
-            $http({
-                method: 'GET',
-                url: config.apiUrl + 'Invitation/getInvitationsByCityId',
-                params: { cityid: cityid },
-            }).then(function successCallback(response) {
+            server.http(paramUrl, data, function successCallback(response) {
                 console.log(response);
                 if (typeof response.data.errorCode !== 'undefined') {
                     console.log('系统发生错误：' + response.data.error);
@@ -236,6 +207,30 @@ angular.module('wechatApp')
             }, function errorCallback(response) {
                 deferred.reject(); //执行失败
             });
+            return promise;
+        };
+
+        var getInvitationsByCityId = function(cityId) {
+            // 定义promise 解决异步问题
+            var deferred = $q.defer();
+            var promise = deferred.promise;
+            var data = { cityId: cityId };
+            var paramUrl = url + 'getInvitationsByCityId';
+
+            // $http去后台获取数据
+            server.http(paramUrl, data, function successCallback(response) {
+                console.log(response);
+                if (typeof response.data.errorCode !== 'undefined') {
+                    console.log('系统发生错误：' + response.data.error);
+                } else {
+                    // 逻辑处理 
+                    self.invitations = response.data.data;
+                }
+                deferred.resolve(self.invitations); //执行成功
+            }, function errorCallback(response) {
+                deferred.reject(); //执行失败
+            });
+
             return promise;
         };
 
@@ -243,13 +238,10 @@ angular.module('wechatApp')
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
-
+            var paramUrl = url + 'getInvitationById';
+            var data = { id: id };
             // $http去后台获取数据
-            $http({
-                method: 'GET',
-                url: config.apiUrl + 'Invitation/getInvitationById',
-                params: { id: id },
-            }).then(function successCallback(response) {
+            server.http(paramUrl, data, function successCallback(response) {
                 console.log(response);
                 if (typeof response.data.errorCode !== 'undefined') {
                     console.log('系统发生错误：' + response.data.error);
@@ -261,6 +253,7 @@ angular.module('wechatApp')
             }, function errorCallback(response) {
                 deferred.reject(); //执行失败
             });
+           
             return promise;
         };
 
@@ -272,17 +265,17 @@ angular.module('wechatApp')
         // Public API here
         return {
             // 获取精选趣约
-            getChosedInvitations: function() {
-                return getChosedInvitations();
+            getChoosedInvitations: function() {
+                return getChoosedInvitations();
             },
 
             // 按目的地(地区id)选出趣约
-            getInvitationsByPlaceId: function(placeid) {
-                return getInvitationsByPlaceId(placeid);
+            getInvitationsByPlaceId: function(placeId) {
+                return getInvitationsByPlaceId(placeId);
             },
             // 按目的地(国家id)选出趣约
-            getInvitationsByCountryId: function(countryid) {
-                return getInvitationsByCountryId(countryid);
+            getInvitationsByCountryId: function(countryId) {
+                return getInvitationsByCountryId(countryId);
             },
 
             // 保存趣约
@@ -291,7 +284,7 @@ angular.module('wechatApp')
             },
 
             // 支付
-            topay: function (postdata) {
+            topay: function(postdata) {
                 return topay(postdata);
             },
 
@@ -301,8 +294,8 @@ angular.module('wechatApp')
             },
 
             // 按出发城市id选出趣约
-            getInvitationsByCityId: function(cityid) {
-                return getInvitationsByCityId(cityid);
+            getInvitationsByCityId: function(cityId) {
+                return getInvitationsByCityId(cityId);
             },
 
             // 获取趣约详情by趣约id

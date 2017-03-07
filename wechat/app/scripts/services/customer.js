@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc service
- * @name wechatApp.user
+ * @name wechatApp.customer
  * @description
- * # user
+ * # customer
  * Factory in the wechatApp.
  */
 angular.module('wechatApp')
-    .factory('customer', ['cookies', '$window', '$location', 'config', '$http', '$q', 'server', function(cookies, $window, $location, config, $http, $q, server) {
+    .factory('customer', ['cookies', '$window', '$location', 'config', '$q', 'server', function(cookies, $window, $location, config, $q, server) {
         // Service logic
         // ...
         var self = this;
