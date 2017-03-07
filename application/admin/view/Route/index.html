@@ -6,7 +6,7 @@
             <hr />
             <div class="row">
                 <div class="row">
-                <div class="col-md-11">
+                <div class="col-md-10">
                     <form action="{:url('index')}" method="get" class="form-inline">
                         <div class="col-md-3">
                             <label>出发地</label>&nbsp;
@@ -16,7 +16,7 @@
                                 <option value="3">上海</option>
                             </select>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <label>目的地</label>&nbsp;
                             <select class="form-control">
                                 <option value="1">首尔</option>
@@ -24,15 +24,7 @@
                                 <option value="3">巴黎</option>
                             </select>
                         </div>
-                        <div class="col-md-3">
-                            <label>出发时间</label>&nbsp;
-                            <select class="form-control" name="click_on">
-                              <option value="1">2017/11/12</option>
-                                <option value="2">2017/11/13</option>
-                                <option value="3">2017/11/14</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label class="sr-only" for="name">路线</label>
                                 <input name="title" type="text" class="form-control" placeholder="路线..." id="title" value="{:input('get.title')}">
@@ -41,7 +33,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-md-1">
+                <div class="col-md-2 text-right">
                     <tr>
                         <a class="btn btn-success" href="{:url('add')}"><i class="glyphicon glyphicon-plus">新增</i></a>
                     </tr>
@@ -56,7 +48,7 @@
                     <th>目的地</th>
                     <th>出发日期</th>
                     <th>返程日期</th>
-                    <th>价格/人</th>
+                    <th>价格</th>
                     <th>操作</th>
                 </tr>
                 <tr>
@@ -67,9 +59,9 @@
                     <td>2017/11/20</td>
                 	<td>8000</td>
                 	<td>
-                     <a href="{:url('edit')}" class="btn btn-primary">查看</a>   
-                     <a href="#" class="btn btn-warning">修改</a>   
-                     <a href="#" class="btn btn-info">删除</a>   
+                     <a href="{:url('detail')}" class="btn btn-primary">详情</a>   
+                     <a href="{:url('edit')}" class="btn btn-info">编辑</a>   
+                     <a href="#" class="btn btn-danger">删除</a>   
                     </td>
                 </tr>
             </table>
