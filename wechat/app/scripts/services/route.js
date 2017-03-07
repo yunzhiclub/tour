@@ -184,7 +184,7 @@ angular.module('wechatApp')
 
             // 取得对应id的route对应的所有评价
             getEvaluatesById: function(id) {
-                return getEvaluatesByid(id);
+                return getEvaluatesById(id);
             },
 
             collecteTheRoute: function(customerId, routeId) {

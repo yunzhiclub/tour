@@ -35,7 +35,7 @@ angular.module('wechatApp')
                 } else {
                     // 逻辑处理 
                     // 返回200说明请求正常，则调用系统初始化函数
-                    if (response.status == 200) {
+                    if (response.status === 200) {
                         // 调jssdk初始化函数
                         init(response.data.data);
                     } else {
@@ -49,7 +49,7 @@ angular.module('wechatApp')
             });
 
             return promise;
-        }
+        };
 
         // 系统初始化
         var init = function(config) {

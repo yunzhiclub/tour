@@ -8,7 +8,7 @@
  * Factory in the wechatApp.
  */
 angular.module('wechatApp')
-    .factory('startcity', ['$q', 'server', 'config', function($q, server, config) {
+    .factory('startcity', ['$q', 'server', function($q, server) {
         // Service logic
         var self = this;
         self.citys = [];
