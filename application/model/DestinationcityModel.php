@@ -4,7 +4,7 @@ use think\Model;
 /**
  * 目的城市
  */
-class DestinationcityModel extends Model
+class DestinationCityModel extends Model
 {
 	/**
 	 * 根据目的国家ID 取出 对应的目的城市ID

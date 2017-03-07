@@ -4,7 +4,11 @@ use think\Controller;
 /**
 * 图片管理
 */
+<<<<<<< HEAD:application/admin/controller/SlidershowController.php:application/admin/controller/SlidershowController.php
+class SliderShowController extends IndexController
+=======
 class PictureController extends IndexController
+>>>>>>> refs/remotes/origin/development:application/admin/controller/PictureController.php:application/admin/controller/PictureController.php
 {
     
     public function index()
@@ -23,6 +27,7 @@ class PictureController extends IndexController
     {
     	return $this->fetch();
     }
+    public function add1()
     {
         return $this->fetch();
     }
