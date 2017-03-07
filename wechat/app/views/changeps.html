@@ -10,7 +10,7 @@ router:#!/changeps
                     <p class="weui-uploader__title">上传头像</p>
                 </div>
                 <div class="weui-uploader__bd">
-                    <button type="" ng-click="chooseImg(1)"><img src="{{user.headImg.headImgUrl}}" alt="" height="80" width="80" class="img-circle"></button>
+                    <button type="" ng-click="chooseImg(1)"><img src="{{customer.headImg.headImgUrl}}" alt="" height="80" width="80" class="img-circle"></button>
                 </div>
             </div>
         </div>
@@ -20,7 +20,7 @@ router:#!/changeps
             <label class="weui-label">昵称:</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="" pattern="" placeholder="请输入昵称" value="{{user.nickName}}" />
+            <input class="weui-input" type="" pattern="" placeholder="请输入昵称" value="{{customer.nickName}}" />
         </div>
     </div>
     <div class="weui-cell weui-cell_vcode">
@@ -28,7 +28,7 @@ router:#!/changeps
             <label class="weui-label">绑定手机</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="tel" placeholder="单行输入" value="{{user.num}}">
+            <input class="weui-input" type="tel" placeholder="单行输入" value="{{customer.num}}">
         </div>
         <div class="weui-cell__ft">
             <button class="weui-vcode-btn">获取验证码</button>
@@ -39,7 +39,7 @@ router:#!/changeps
             <label class="weui-label">邮箱</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="" pattern="" placeholder="单行输入" value="{{user.email}}" />
+            <input class="weui-input" type="" pattern="" placeholder="单行输入" value="{{customer.email}}" />
         </div>
     </div>
     <div class="weui-cell">
@@ -48,7 +48,7 @@ router:#!/changeps
         </div>
         <div class="weui-cell__bd">
             <div class="weui-cell weui-cell_select weui-cell_select-before">
-                <select class="weui-select" name="sex" ng-model="user.sex">
+                <select class="weui-select" name="sex" ng-model="customer.sex">
                     <option ng-repeat="option in options" ng-value="option.value">{{option.sex}}</option>
                 </select>
             </div>
@@ -59,7 +59,7 @@ router:#!/changeps
             <label for="" class="weui-label">出生日期</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="date" value="{{user.birthday | date:'yyyy-MM-dd'}}" />
+            <input class="weui-input" type="date" value="{{customer.birthday | date:'yyyy-MM-dd'}}" />
         </div>
     </div>
     <div class="weui-cell">
@@ -67,7 +67,7 @@ router:#!/changeps
             <label class="weui-label">所在城市</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="" pattern="" placeholder="" value="{{user.city}}" />
+            <input class="weui-input" type="" pattern="" placeholder="" value="{{customer.city}}" />
         </div>
     </div>
     <div class="weui-cell">
@@ -75,7 +75,7 @@ router:#!/changeps
             <label class="weui-label">绑定身份证</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="" pattern="" placeholder="请输入身份证号" value="{{user.idcard}}" />
+            <input class="weui-input" type="" pattern="" placeholder="请输入身份证号" value="{{customer.idcard}}" />
         </div>
     </div>
     <div class="weui-cell">
@@ -85,8 +85,8 @@ router:#!/changeps
                     <p class="weui-uploader__title">上传身份证正反面用于审核</p>
                 </div>
                 <div class="weui-uploader__bd">
-                    <button type="" ng-click="chooseImg(2)"><img src="{{user.frontIdCardImg.frontIdCardImgUrl}}" alt="正面" height="80" width="80" class="img-circle"></button>
-                    <button type="" ng-click="chooseImg(3)"><img src="{{user.backIdCardImg.backIdCardImgUrl}}" alt="反面" height="80" width="80" class="img-circle"></button>
+                    <button type="" ng-click="chooseImg(2)"><img src="{{customer.frontIdCardImg.frontIdCardImgUrl}}" alt="正面" height="80" width="80" class="img-circle"></button>
+                    <button type="" ng-click="chooseImg(3)"><img src="{{customer.backIdCardImg.backIdCardImgUrl}}" alt="反面" height="80" width="80" class="img-circle"></button>
                 </div>
             </div>
         </div>

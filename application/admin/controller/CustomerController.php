@@ -19,4 +19,8 @@ class CustomerController extends IndexController
     {
     	return $this->fetch();
     }
+    public function collection()
+    {
+        return $this->fetch();
+    }
 }

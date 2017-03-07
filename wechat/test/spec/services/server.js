@@ -1,18 +1,18 @@
 'use strict';
 
-describe('Service: user', function () {
+describe('Service: server', function () {
 
   // load the service's module
   beforeEach(module('wechatApp'));
 
   // instantiate service
-  var user;
-  beforeEach(inject(function (_user_) {
-    user = _user_;
+  var server;
+  beforeEach(inject(function (_server_) {
+    server = _server_;
   }));
 
   it('should do something', function () {
-    expect(!!user).toBe(true);
+    expect(!!server).toBe(true);
   });
 
 });
