@@ -47,7 +47,6 @@ angular.module('wechatApp')
                 url: config.apiUrl + 'Destination/getCountrysByPlaceId',
                 params: { placeid: placeid },
             }).then(function successCallback(response) {
-                console.log(response);
                 if (typeof response.data.errorCode !== 'undefined') {
                     console.log('系统发生错误：' + response.data.error);
                 } else {

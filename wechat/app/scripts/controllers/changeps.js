@@ -8,7 +8,7 @@
  * Controller of the wechatApp
  */
 angular.module('wechatApp')
-    .controller('ChangepsCtrl', ['$scope', 'user', 'jssdk', function($scope, user, jssdk) {
+    .controller('ChangepsCtrl', ['$scope', 'customer', 'jssdk', function($scope, customer, jssdk) {
 
         // 性别的选项
         $scope.options = [
@@ -18,7 +18,7 @@ angular.module('wechatApp')
 
         // 保存数据
         $scope.submit = function() {
-            user.saveUser($scope.user).then(function success() {
+            customer.saveCustomer($scope.customer).then(function success() {
                 console.log('保存成功');
                 $scope.$apply();
             }, function error() {
@@ -31,8 +31,8 @@ angular.module('wechatApp')
             if (type == 1) {
                 jssdk.chooseImg(function(imgs) {
                     console.log(imgs);
-                    $scope.user.headImg.headImgUrl= imgs.localId;
-                    $scope.user.headImg.serverId= imgs.serverId;                
+                    $scope.customer.headImg.headImgUrl= imgs.localId;
+                    $scope.customer.headImg.serverId= imgs.serverId;                
                     // $scope.headImgUrl = imgs.localId;
                     // // $scope.$apply();
                     // var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
@@ -40,8 +40,8 @@ angular.module('wechatApp')
             } else if (type == 2) {
                 jssdk.chooseImg(function(imgs) {
                     console.log(imgs);
-                    $scope.user.frontIdCardImg.frontIdCardImgUrl = imgs.localId; 
-                    $scope.user.frontIdCardImg.serverId= imgs.serverId;  
+                    $scope.customer.frontIdCardImg.frontIdCardImgUrl = imgs.localId; 
+                    $scope.customer.frontIdCardImg.serverId= imgs.serverId;  
                     // $scope.headImgUrl = imgs.localId;
                     // // $scope.$apply();
                     // var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
@@ -49,9 +49,9 @@ angular.module('wechatApp')
             } else {
                 jssdk.chooseImg(function(imgs) {
                     console.log(imgs);
-                    $scope.user.backIdCardImgUrl = imgs.localId;
-                    $scope.user.backIdCardImg.backIdCardImgUrl = imgs.localId; 
-                    $scope.user.backIdCardImg.serverId= imgs.serverId;     
+                    $scope.customer.backIdCardImgUrl = imgs.localId;
+                    $scope.customer.backIdCardImg.backIdCardImgUrl = imgs.localId; 
+                    $scope.customer.backIdCardImg.serverId= imgs.serverId;     
                     // $scope.headImgUrl = imgs.localId;
                     // // $scope.$apply();
                     // var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
