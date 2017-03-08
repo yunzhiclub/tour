@@ -15,8 +15,15 @@ class FlightModel extends Model
 	 * @author chuhang 
 	 */
 	static public function getStartCityNameById($id) {
+
 		$StartCityModel = StartCityModel::get($id);
-		$StartCityName = $StartCityModel->getData('name');
+
+		//判断出发城市是否为空
+		if (null !== $StartCityModel) {
+			$StartCityName = $StartCityModel->getData('name');
+		} else {
+			$StartCityName = '无';
+		}
 
 		return $StartCityName;
 	}
@@ -28,9 +35,16 @@ class FlightModel extends Model
 	 * @author chuhang 
 	 */
 	static public function getDestinationCityNameById($id) {
-		$DestinationCityModel = DestinationCityModel::get($id);
-		$DestinationCityName = $DestinationCityModel->getData('name');
 
+		$DestinationCityModel = DestinationCityModel::get($id);
+
+		//判断目的地是否为空
+		if (null !== $DestinationCityModel) {
+			$DestinationCityName = $DestinationCityModel->getData('name');
+		} else {
+			$DestinationCityName = '无';
+		}
+		
 		return $DestinationCityName;
 	}
 
