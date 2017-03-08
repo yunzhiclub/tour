@@ -23,7 +23,5 @@ class PictureController extends IndexController
     {
     	return $this->fetch();
     }
-    {
-        return $this->fetch();
-    }
+    
 }
