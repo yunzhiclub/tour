@@ -41,8 +41,8 @@
                                 <td  align="right">{$FlightModel->money_format($FlightModel->getData('price'))}</td>
                                 <td>{$FlightModel->getData('type_name')}</td>
                                 <td>{$FlightModel->getData('company')}</td>
-                                <td>{$FlightModel->getData('up_time')}</td>
-                                <td>{$FlightModel->getData('down_time')}</td>
+                                <td>{$FlightModel->substrTime($FlightModel->getData('up_time'))}</td>
+                                <td>{$FlightModel->substrTime($FlightModel->getData('down_time'))}</td>
                                 <td>{$FlightModel->getStartCityNameById($FlightModel->getData('up_city_id'))}</td>
                                 <td>{$FlightModel->getDestinationCityNameById($FlightModel->getData('down_city_id'))}</td>
                                 <td> <a class="btn btn-sm btn-primary" href="{:url('edit?id=' . $FlightModel->getData('id'))}"><i class="glyphicon glyphicon-pencil"></i> 编辑</a>

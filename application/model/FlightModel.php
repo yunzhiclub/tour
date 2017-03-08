@@ -53,7 +53,16 @@ class FlightModel extends Model
 	    $j = (($j = strlen($i)) > 2) ? $j % 2 : 0; 
 
 	   return  $symbol.$sign .($j ? substr($i,0, $j) + $t : '').preg_replace('/(\d{3})(?=\d)/',"$1" + $t,substr($i,$j)) ;
+	}
 
+	/**
+	 * 截取时间长度，去除不必要的显示，如02:44:00,截取后02:44
+	 * @param  [String] $time [所要截取的时间]
+	 * @return [string]       [截取后的时间]
+	 */
+	static public function substrTime($time) {
+		$result = substr($time, 0, -3);
+		return $result;
 	}
 
 }
