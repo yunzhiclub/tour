@@ -15,32 +15,27 @@
                     </form>
                 </div>
                 <div class="col-md-2  text-right">
-                    <a class="btn btn-success" href="{:url('add')}"><i class="glyphicon glyphicon-plus">新增</i></a>
+                    <a class="btn btn-success" href="{:url('AddOrder')}"><i class="glyphicon glyphicon-plus">新增</i></a>
                 </div>
             </div>
             <hr />
             
             <table class="table table-hover table-bordered">
                 <tr class="info">
-                     <th>编号</th>
-                     <th>床位号</th>
-                     <th>订单编号</th>
-                     <th>客户</th>
-                     <th>邀约名称</th>
-                     <th>入住人性别</th>
-                	 <th>金额</th>
+                    <th>订单编号</th>
+                    <th>出行客户</th>
+                    <th>邀约名称</th>
+                    <th>支付人</th>
                      <th>操作</th>
                 </tr>
                 <tr>
-                    <td>1</td>
-                    <td>999</td>
-                    <td><a href="{:url('order')}">666</a></td>
+                    <td>666</td>
                     <td>张三</td>
-                    <td>华夏半年游</td>
-                    <td>男</td>
-                	<td>80000$</td>
+                    <td>华夏半年游</td> 
+                    <td>张三/李四</td> 
+
                 	<td>
-                     <a class="btn btn-sm btn-info" href="{:url('edit')}"><i class="glyphicon glyphicon-pencil"></i> 编辑</a>
+                     <a class="btn btn-sm btn-info" href="{:url('EditOrder')}"><i class="glyphicon glyphicon-pencil"></i> 编辑</a>
                     <a class="btn btn-sm btn-danger" href="#"><i class="glyphicon glyphicon-trash"></i> 删除</a>
 
                     </td>
