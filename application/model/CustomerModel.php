@@ -1,44 +1,45 @@
 <?php
 namespace app\model;
 use think\Model;
+use think\Request;
 use app\model\JssdkModel;
 /**
  * 前台的客户
  */
-class UserModel extends Model
+class CustomerModel extends Model
 {
 	/**
      * 通过opendId获取用户的基本信息
      * @param    string                   $openid 
-     * @return   UserModel                           
+     * @return   CustomerModel                           
      * @author 梦云智 http://www.mengyunzhi.com
      * @DateTime 2016-12-21T17:17:10+0800
-     */
-    static public function getUserModelByOpenid($openid = '') {
+     */ 
+    static public function getCustomerByOpenid($openid = '') {
         // 查找数据库是否存在
-        $UserModel = UserModel::get($openid);
+        $CustomerModel = CustomerModel::get($openid);
         
-        //保存图片的路径
-        $pathconfig = ROOT_PATH . 'public' . DS . 'upload' . DS;
+        //图片的路径拼接
+        $pathconfig = 'public' . DS . 'upload' . DS;
         
-        //对User中的部分数据进行简单的加工
+        //对Customer中的部分数据进行简单的加工
         //图片URL的拼接
-        if ('' !== $UserModel->head_img_url) {
-            $UserModel->head_img_url = $pathconfig . $UserModel->head_img_url;
+        if ('' !== $CustomerModel->head_img_url) {
+            $CustomerModel->head_img_url = $pathconfig . $CustomerModel->head_img_url;
         }
-        if ('' !== $UserModel->card_img_front_url) {
-            $UserModel->card_img_front_url = $pathconfig . $UserModel->card_img_front_url; 
+        if ('' !== $CustomerModel->card_img_front_url) {
+            $CustomerModel->card_img_front_url = $pathconfig . $CustomerModel->card_img_front_url; 
         }
-        if ('' !== $UserModel->card_img_back_url) {
-            $UserModel->card_img_back_url = $pathconfig . $UserModel->card_img_back_url;
+        if ('' !== $CustomerModel->card_img_back_url) {
+            $CustomerModel->card_img_back_url = $pathconfig . $CustomerModel->card_img_back_url;
         }
 
-        if (is_null($UserModel)) {
-            $UserModel = new self();
+        if (is_null($CustomerModel)) {
+            $CustomerModel = new self();
         }
-       
+        
         // 数据库中存在，则返回获取到的对象
-        return $UserModel;
+        return $CustomerModel;
     }
 
     /**
@@ -63,7 +64,7 @@ class UserModel extends Model
      * @author huangshuaibin
      * @return bool        true or false
      */
-    public static function saveUser($datas)
+    public static function saveCustomer($datas)
     {
         $data = $datas['data']; 
         //解码json数据
@@ -71,36 +72,36 @@ class UserModel extends Model
       
         //取出用户
         $OpenId = $ObejectData->openid;
-        $User = UserModel::get($OpenId);
+        $Customer = CustomerModel::get($OpenId);
         
         //判断传过来的对象是否有对应属性并保存数据
         if (property_exists('ObejectData', 'nickName')) {
-            $User->nick_name = $ObejectData->nickName;        
+            $Customer->nick_name = $ObejectData->nickName;        
         }
         if (property_exists('ObejectData', 'sex')) {
-            $User->sex = $ObejectData->sex;
+            $Customer->sex = $ObejectData->sex;
         }
 
         if (property_exists('ObejectData', 'city')) {
-            $User->city = $ObejectData->city;
+            $Customer->city = $ObejectData->city;
         }
         if (property_exists('ObejectData', 'province')) {
-            $User->province = $ObejectData->province;
+            $Customer->province = $ObejectData->province;
         }
         if (property_exists('ObejectData', 'num')) {
-            $User->phone = $ObejectData->num;
+            $Customer->phone = $ObejectData->num;
         }
         if (property_exists('ObejectData', 'country')) {
-            $User->country = $ObejectData->country;
+            $Customer->country = $ObejectData->country;
         }
         if (property_exists('ObejectData', 'email')) {
-            $User->emial = $ObejectData->email;
+            $Customer->emial = $ObejectData->email;
         }
         if (property_exists('ObejectData', 'birthday')) {
-            $User->date = $ObejectData->birthday;
+            $Customer->date = $ObejectData->birthday;
         }
         if (property_exists('ObejectData', 'idcard')) {
-            $User->idcard = $ObejectData->idcard;
+            $Customer->idcard = $ObejectData->idcard;
         }
 
         //从前台传来的对象中取出HeadImg的对象
@@ -123,18 +124,18 @@ class UserModel extends Model
         $CardImgBackUrl = $JssdkModel->download($BackIdCardImgServerId);
 
         if (false !== $HeadImgUrl) {
-            $User->head_img_url = $HeadImgUrl;
+            $Customer->head_img_url = $HeadImgUrl;
         }
         if (false !== $CardImgFrontUrl) {
-            $User->card_img_front_url = $CardImgFrontUrl;
+            $Customer->card_img_front_url = $CardImgFrontUrl;
         }
         if (false !== $CardImgBackUrl) {
-            $User->card_img_back_url = $CardImgBackUrl;
+            $Customer->card_img_back_url = $CardImgBackUrl;
         }
 
         //调用保存图片的方法并将headUrl存入数据库
         
-        if ($User->save()) {
+        if ($Customer->save()) {
             return false;
         }
 

@@ -1,14 +1,14 @@
 <?php
 namespace app\api\controller;
 use think\Request;
-use app\model\UserModel;
+use app\model\CustomerModel;
 use app\model\CollectionModel;
 use app\model\OrderModel;
 use app\model\InviteModel;  //邀约
 
-class UserController extends ApiController 
+class CustomerController extends ApiController 
 {
-    private $UserModel;
+    private $Customer;
 
     public function __construct(Request $request = null) {
         parent::__construct($request);
@@ -17,13 +17,13 @@ class UserController extends ApiController
         $openid = Request::instance()->param('openid');
 
         // 验证openid长度是否符合
-        // if (!UserModel::checkOpenidLength($openid)) {
+        // if (!Customer::checkOpenidLength($openid)) {
         //     $this->response(20002);     // openid长度不正确
         //     return;
         // }
 
         // 获取用户实体
-        $UserModel = UserModel::getUserModelByOpenid($openid);
+        $Customer = CustomerModel::getCustomerByOpenid($openid);
     }
 
 
@@ -33,13 +33,13 @@ class UserController extends ApiController
      * @author 梦云智 http://www.mengyunzhi.com
      * @DateTime 2016-12-22T10:13:54+0800
      */
-    public function getUserByOpenid($openid) {
+    public function getCustomerByOpenid($openid) {
         try {
             // 获取用户实体
-            $UserModel = UserModel::getUserModelByOpenid($openid);
+            $Customer = CustomerModel::getCustomerByOpenid($openid);
             
             // 成功设置，返回空数组
-            return $this->response($UserModel);
+            return $this->response($Customer);
 
         } catch (\Exception $e) {
             $this->exception($e);
@@ -48,17 +48,17 @@ class UserController extends ApiController
 
     /**
      * 保存用户信息
-     * @param    object                  $user [description]
+     * @param    object                  $Customer [description]
      * @return   
      * 成功 return $this->response([]);| 错误 $this->   
-     * response(20004, $UserModel->getError());
+     * response(20004, $Customer->getError());
      */
-    public function saveUser() {
+    public function saveCustomer() {
        // datas是一个数组,data是其中的Json字符串
        $datas = Request::instance()->param();
        
        //调用保存用户方法
-       if(UserModel::saveUser($datas) === false) {
+       if(CustomerModel::saveCustomer($datas) === false) {
             return '保存失败';
        }
 
@@ -67,32 +67,32 @@ class UserController extends ApiController
 
     /**
      * 获取收藏
-     * @param    int                  $user_id [description]
+     * @param    int                  $Customer_id [description]
      * @return   
      * 成功 return $this->response($Collections);| 错误 $this->   
-     * response(20004, $UserModel->getError());
+     * response(20004, $Customer->getError());
      */
-    public function getCollectionsByUserId()
+    public function getCollectionsByCustomerId()
     {
-        $userId = Request::instance()->param('user_id');
+        $CustomerId = Request::instance()->param('customer_id');
        // 获取该客户的收藏
-       $Collections =  CollectionModel::getCollectionsByUserId($userId);
+       $Collections =  CollectionModel::getCollectionsByCustomerId($CustomerId);
        
        return $this->response($Collections);  
     }
 
     /**
      * 获取用户的全部订单
-     * @param    int                  $user_id [description]
+     * @param    int                  $Customer_id [description]
      * @return   
      * 成功 return $this->response($orders);| 错误 $this->   
-     * response(20004, $UserModel->getError());
+     * response(20004, $Customer->getError());
      */
-    public function getOrdersByUserId() 
+    public function getOrdersByCustomerId() 
     {
-        $userId = Request::instance()->param('user_id');
+        $CustomerId = Request::instance()->param('customer_id');
        // 获取用户的全部订单
-       $orders = OrderModel::getOrdersByUserId($userId);
+       $orders = OrderModel::getOrdersByCustomerId($CustomerId);
 
        return $this->response($orders);   
     }
@@ -104,7 +104,7 @@ class UserController extends ApiController
      */
     public function setInviteIsPublic() {
         $id = Request::instance()->param('id');
-        //$userId = Request::instance()->param('user_id');
+        //$CustomerId = Request::instance()->param('Customer_id');
         //flag=1是将把订单改为公开,flag=0,将订单改成不公开
         $flag = Request::instance()->param('flag');
 
@@ -122,11 +122,11 @@ class UserController extends ApiController
      * @param              int
      * @return             array[];
      */
-    public function getInvitationsByUserIdAndStatus() {
+    public function getInvitationsByCustomerIdAndStatus() {
         //暂定status=1是邀约成型,status=0是邀约正在征集中
         $status = Request::instance()->param('status');
-        $userId = Request::instance()->param('user_id');
-        $invitation = InviteModel::getInviteByUserIdAndStatus($status, $userId);
+        $CustomerId = Request::instance()->param('customer_id');
+        $invitation = InviteModel::getInviteByCustomerIdAndStatus($status, $CustomerId);
 
         return $this->response($invitation);
     }
@@ -139,7 +139,7 @@ class UserController extends ApiController
     public function toEvaluate() {
         
         $InviteId = Request::instance()->param('invite_id');
-        $UserId   = Request::instance()->param('user_id');
+        $CustomerId   = Request::instance()->param('customer_id');
 
         
         return $this->response([]);
