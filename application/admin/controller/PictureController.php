@@ -23,7 +23,6 @@ class PictureController extends IndexController
     {
     	return $this->fetch();
     }
-    public function add1()
     {
         return $this->fetch();
     }

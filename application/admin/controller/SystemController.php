@@ -21,4 +21,8 @@ class SystemController extends IndexController
     {
     	return $this->fetch();
     }
+    public function content()
+    {
+        return $this->fetch();
+    }
 }
