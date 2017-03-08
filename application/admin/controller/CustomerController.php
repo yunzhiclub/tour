@@ -2,25 +2,25 @@
 namespace app\admin\controller;
 use think\Controller;
 /**
-* 图片管理
+* 客户管理
 */
-class PictureController extends IndexController
+class CustomerController extends IndexController
 {
     
     public function index()
     {
         return $this->fetch();
     }
+    public function edit()
+    {
+    	return $this->fetch();
+    }
     public function detail()
     {
     	return $this->fetch();
     }
-    public function add()
+    public function collection()
     {
-    	return $this->fetch();
-    }
-    public function edit()
-    {
-    	return $this->fetch();
+        return $this->fetch();
     }
 }
