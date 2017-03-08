@@ -11,6 +11,10 @@ class PictureController extends IndexController
     {
         return $this->fetch();
     }
+    public function detail()
+    {
+    	return $this->fetch();
+    }
     public function add()
     {
     	return $this->fetch();
@@ -18,5 +22,8 @@ class PictureController extends IndexController
     public function edit()
     {
     	return $this->fetch();
+    }
+    {
+        return $this->fetch();
     }
 }
