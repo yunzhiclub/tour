@@ -2,18 +2,14 @@
 namespace app\admin\controller;
 use think\Controller;
 /**
-* 图片管理
+* 路线管理
 */
-class PictureController extends IndexController
+class RouteController extends IndexController
 {
     
     public function index()
     {
         return $this->fetch();
-    }
-    public function detail()
-    {
-    	return $this->fetch();
     }
     public function add()
     {
@@ -23,5 +19,8 @@ class PictureController extends IndexController
     {
     	return $this->fetch();
     }
-    
+    public function detail() 
+    {
+        return $this->fetch();
+    }
 }
