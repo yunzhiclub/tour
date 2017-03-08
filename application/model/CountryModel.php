@@ -20,7 +20,19 @@ class CountryModel extends Model
 	   	//根据地区id查询
 	   	$Country = new CountryModel;
 		$countrys = $Country->where($map)->select();
-
+		$data = [];
+		$bigData = [];
+		for ($i = 1; $i <= count($countrys); $i++) {
+			array_push($data, $countrys[$i-1]);
+			if ($i % 3 === 0) {
+				array_push($bigData, $data);
+				$data = [];
+			}
+		}
+		if (count($countrys) % 3 !== 0) {
+			array_push($bigData, $data);
+		}
+		
 		return $countrys;
 	}
 }
