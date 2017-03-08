@@ -17,7 +17,7 @@ class DestinationCityModel extends Model
 		//查询条件
 		$map = array('country_id' => $id);
 
-		$Destinationcity = new DestinationcityModel;
+		$Destinationcity = new DestinationCityModel;
 		$destinations = $Destinationcity->where($map)->select();
 
 		//临时数组
