@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-03-08 09:12:17
+Date: 2017-03-08 10:01:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -131,14 +131,16 @@ DROP TABLE IF EXISTS `yunzhi_destination_city`;
 CREATE TABLE `yunzhi_destination_city` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `country_id` int(10) DEFAULT NULL COMMENT '国家ID',
-  `city_name` char(30) DEFAULT '' COMMENT '目的城市',
+  `name` char(30) DEFAULT '' COMMENT '目的城市',
   `picture_url` varchar(60) DEFAULT '' COMMENT '图片URL',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yunzhi_destination_city
 -- ----------------------------
+INSERT INTO `yunzhi_destination_city` VALUES ('1', '1', '伦敦', '');
+INSERT INTO `yunzhi_destination_city` VALUES ('2', '2', '巴黎', '');
 
 -- ----------------------------
 -- Table structure for `yunzhi_evaluate`
@@ -350,6 +352,7 @@ CREATE TABLE `yunzhi_room` (
 DROP TABLE IF EXISTS `yunzhi_route`;
 CREATE TABLE `yunzhi_route` (
   `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '路线id',
+  `name` varchar(40) DEFAULT NULL,
   `start_city_id` int(10) DEFAULT NULL COMMENT '出发城市',
   `destination_city_id` int(10) DEFAULT NULL COMMENT '目的城市',
   `hotel_id` int(10) DEFAULT NULL COMMENT '酒店ID',
@@ -372,10 +375,10 @@ CREATE TABLE `yunzhi_route` (
 -- ----------------------------
 -- Records of yunzhi_route
 -- ----------------------------
-INSERT INTO `yunzhi_route` VALUES ('1', '1', '1', '1', '1', '1', '3', '这是一个路线比较简短的描述信息', '3', '3', '9688', '9000', '1', '5', '这个是一个路线的内容的详细描述', '0', '0');
-INSERT INTO `yunzhi_route` VALUES ('2', '1', '1', '1', '1', '1', '1', '路线的描述信息2', '2', '2', '9655', '9500', '1', '5', '这是路线的详细描述2', '0', '0');
-INSERT INTO `yunzhi_route` VALUES ('3', '1', '2', null, null, null, null, '', null, null, null, null, null, null, '', '0', '0');
-INSERT INTO `yunzhi_route` VALUES ('4', '2', '2', null, null, null, null, '', null, null, null, null, null, null, '', '0', '0');
+INSERT INTO `yunzhi_route` VALUES ('1', null, '1', '1', '1', '1', '1', '3', '这是一个路线比较简短的描述信息', '3', '3', '9688', '9000', '1', '5', '这个是一个路线的内容的详细描述', '0', '0');
+INSERT INTO `yunzhi_route` VALUES ('2', null, '1', '1', '1', '1', '1', '1', '路线的描述信息2', '2', '2', '9655', '9500', '1', '5', '这是路线的详细描述2', '0', '0');
+INSERT INTO `yunzhi_route` VALUES ('3', null, '1', '2', null, null, null, null, '', null, null, null, null, null, null, '', '0', '0');
+INSERT INTO `yunzhi_route` VALUES ('4', null, '2', '2', null, null, null, null, '', null, null, null, null, null, null, '', '0', '0');
 
 -- ----------------------------
 -- Table structure for `yunzhi_start_city`
