@@ -4,7 +4,7 @@ use think\Model;
 /**
  * 目的城市
  */
-class DestinationcityModel extends Model
+class DestinationCityModel extends Model
 {
 	/**
 	 * 根据目的国家ID 取出 对应的目的城市ID
@@ -17,7 +17,7 @@ class DestinationcityModel extends Model
 		//查询条件
 		$map = array('country_id' => $id);
 
-		$Destinationcity = new DestinationcityModel;
+		$Destinationcity = new DestinationCityModel;
 		$destinations = $Destinationcity->where($map)->select();
 
 		//临时数组
