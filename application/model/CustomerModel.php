@@ -1,6 +1,7 @@
 <?php
 namespace app\model;
 use think\Model;
+use think\Request;
 use app\model\JssdkModel;
 /**
  * 前台的客户
@@ -18,8 +19,8 @@ class CustomerModel extends Model
         // 查找数据库是否存在
         $CustomerModel = CustomerModel::get($openid);
         
-        //保存图片的路径
-        $pathconfig = ROOT_PATH . 'public' . DS . 'upload' . DS;
+        //图片的路径拼接
+        $pathconfig = 'public' . DS . 'upload' . DS;
         
         //对Customer中的部分数据进行简单的加工
         //图片URL的拼接
@@ -36,7 +37,7 @@ class CustomerModel extends Model
         if (is_null($CustomerModel)) {
             $CustomerModel = new self();
         }
-       
+        
         // 数据库中存在，则返回获取到的对象
         return $CustomerModel;
     }
