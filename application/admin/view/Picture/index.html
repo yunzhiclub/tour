@@ -37,16 +37,19 @@
                     <th>类型</th>
                     <th>操作</th>
                 </tr>
+                {volist name="pictures" id="picture" key="key"}
                 <tr>
-                    <td>1</td>
-                    <td>香格里拉酒店</td>
-                    <td>酒店</td>
+                    <td>{$key}</td>
+                    <td>{$picture.name}</td>
+                    <td>{$picture.type}</td>
                     <td> 
-                    <a class="btn btn-sm btn-info" href="{:url('edit')}"><i class="glyphicon glyphicon-pencil"></i> 编辑</a>
-                    <a class="btn btn-sm btn-danger" href="#"><i class="glyphicon glyphicon-trash"></i> 删除</a>
+                    <a class="btn btn-sm btn-info" href="{:url('edit?id=' . $picture->id)}"><i class="glyphicon glyphicon-pencil"></i> 编辑</a>
+                    <a class="btn btn-sm btn-danger" href="{:url('delete?id=' . $picture->id)}"><i class="glyphicon glyphicon-trash"></i> 删除</a>
                     </td>
                 </tr>
+                {/volist}
             </table>
+            {$pictures->render()}
         </div>
     </div>
 </div>
