@@ -83,7 +83,7 @@ angular
                 controller: 'PlacelistCtrl',
             })
             .state('routes', {
-                url: '/routes', // 具体国家中的路线列表
+                url: '/routes/:destinationCountryId', // 具体国家中的路线列表
                 templateUrl: 'views/routes.html',
                 controller: 'RoutesCtrl',
             })
