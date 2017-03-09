@@ -39,12 +39,12 @@ angular.module('wechatApp')
                         // 调jssdk初始化函数
                         init(response.data.data);
                     } else {
-                        alert('数据返回错误', +response.status);
+                        console.log('数据返回错误', +response.status);
                     }
                 }
                 deferred.resolve(); //执行成功
             }, function errorCallback(response) {
-                alert('数据返回错误:' + response.status);
+                console.log('数据返回错误:' + response.status);
                 deferred.reject(); //执行失败
             });
 

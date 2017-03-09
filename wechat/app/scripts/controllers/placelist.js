@@ -17,7 +17,7 @@ angular.module('wechatApp')
         		$scope.countrys = commonTools.formatArray(response);
                 
         	}, function errorCallBack(response) {
-
+                console.log(response);
         	});
         }
     }]);
