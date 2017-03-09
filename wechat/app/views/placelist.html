@@ -4,8 +4,8 @@ router:#!/placelist
  -->
 <div class="page">
     <div class="page__bd page__bd_spacing">
-        <div class="weui-flex" ng-repeat="country in countrys | format">
-            <div class="weui-flex__item">
+        <div class="weui-flex" ng-repeat="country in countrys">
+            <div class="weui-flex__item" ng-repeat="city in country">
                <div class="placeholder"> 
                   <div class="page__bd">
                    <article class="weui-article">
@@ -14,38 +14,7 @@ router:#!/placelist
                         <img src="weui/src/example/images/England.png" alt="">
                        </p>
                        <p>
-                        英国
-                       </p>
-                     </section>
-                   </article>
-                  </div>
-               </div>
-            </div>
-            <div class="weui-flex__item">
-               <div class="placeholder"> 
-                  <div class="page__bd">
-                   <article class="weui-article">
-                     <section> 
-                       <p>
-                        <img src="weui/src/example/images/Germany.png" alt="">
-                       </p>
-                        德国
-                       </p>
-                     </section>
-                   </article>
-                  </div>
-               </div>
-            </div>
-           <div class="weui-flex__item">
-               <div class="placeholder"> 
-                  <div class="page__bd">
-                   <article class="weui-article">
-                     <section> 
-                       <p>
-                        <img src="weui/src/example/images/France.png" alt="">
-                       </p>
-                       <p>
-                        法国
+                        英国sdfdfd
                        </p>
                      </section>
                    </article>
