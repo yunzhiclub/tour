@@ -14,9 +14,9 @@ angular.module('wechatApp')
     	var startCityId = order.startCityId;
     	if ($stateParams.destinationCountryId !== undefined) {
         	route.getRoutesByCountryId($stateParams.destinationCountryId, startCityId).then(function successCallBack(response) {
-        		
+        		console.log(response);
         	}, function errorCallBack(response) {
-
+        		console.log(response);
         	});
         }
   }]);
