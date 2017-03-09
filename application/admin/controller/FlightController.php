@@ -23,6 +23,7 @@ class FlightController extends IndexController
         $FlightModels = $FlightModel->where($map)->where('number', 'like', '%' . $number . '%')->paginate(20);
 
         $this->assign('FlightModels', $FlightModels);
+
         return $this->fetch();
     }
 
@@ -38,8 +39,8 @@ class FlightController extends IndexController
 
     	$this->assign('StartCityModels', $StartCityModels);
     	$this->assign('DestinationCityModels', $DestinationCityModels);
-
     	$this->assign('FlightModel', $FlightModel);
+
     	return $this->fetch();
     }
 
@@ -66,12 +67,14 @@ class FlightController extends IndexController
 
     	$this->assign('StartCityModels', $StartCityModels);
     	$this->assign('DestinationCityModels', $DestinationCityModels);
+
     	return $this->fetch();
     }
 
     public function save()
     {
     	$data = Request::instance()->param();
+
     	$FlightModel = new FlightModel;
     	if (false === $FlightModel->save($data)) {
     		return $this->error('保存失败');
@@ -88,6 +91,7 @@ class FlightController extends IndexController
     	if (false === $FlightModel->isUpdate()->save($data)) {
     		return $this->error($FlightModel->getError());
     	}
+
     	return $this->success('操作成功', url('index'));
     }
 }

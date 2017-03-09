@@ -23,7 +23,11 @@
                             <div class="form-group">
                                 <label for="password" class="col-md-2 text-right">仓型</label>
                                 <div class="col-md-3">
-                                    <input name="type_name" class="form-control" value="{$FlightModel->getData('type_name')}">
+                                    <select name="type_name" class="form-control">
+                                        <option {eq name="2" value="$FlightModel->getData('type_name')" } selected="selected" {/eq}>经济舱</option>
+                                        <option {eq name="1" value="$FlightModel->getData('type_name')" } selected="selected" {/eq}>公务舱</option>
+                                        <option {eq name="0" value="$FlightModel->getData('type_name')" } selected="selected" {/eq}>头等舱</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">

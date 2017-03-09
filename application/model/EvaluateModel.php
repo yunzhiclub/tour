@@ -1,10 +1,10 @@
 <?php
 namespace app\model;
-use think\Model;
+
 /**
  * 评价
  */
-class EvaluateModel extends Model
+class EvaluateModel extends ModelModel
 {
 	/**
 	 **通过路线id查询对应的评价		

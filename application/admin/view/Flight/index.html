@@ -39,7 +39,7 @@
                                 <td>{$key}</td>
                                 <td>{$FlightModel->getData('number')}</td>
                                 <td  align="right">{$FlightModel->money_format($FlightModel->getData('price'))}</td>
-                                <td>{$FlightModel->getData('type_name')}</td>
+                                <td>{$FlightModel->getTypeName($FlightModel->getData('type_name'))}</td>
                                 <td>{$FlightModel->getData('company')}</td>
                                 <td>{$FlightModel->substrTime($FlightModel->getData('up_time'))}</td>
                                 <td>{$FlightModel->substrTime($FlightModel->getData('down_time'))}</td>

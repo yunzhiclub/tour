@@ -1,10 +1,10 @@
 <?php
 namespace app\model;
-use think\Model;
+
 /**
  * 航班管理
  */
-class FlightModel extends Model
+class FlightModel extends ModelModel
 {
 	protected $autoWriteTimestamp = true;
 
@@ -15,8 +15,15 @@ class FlightModel extends Model
 	 * @author chuhang 
 	 */
 	static public function getStartCityNameById($id) {
+
 		$StartCityModel = StartCityModel::get($id);
-		$StartCityName = $StartCityModel->getData('name');
+
+		//判断出发城市是否为空
+		if (null !== $StartCityModel) {
+			$StartCityName = $StartCityModel->getData('name');
+		} else {
+			$StartCityName = '无';
+		}
 
 		return $StartCityName;
 	}
@@ -28,9 +35,16 @@ class FlightModel extends Model
 	 * @author chuhang 
 	 */
 	static public function getDestinationCityNameById($id) {
-		$DestinationCityModel = DestinationCityModel::get($id);
-		$DestinationCityName = $DestinationCityModel->getData('name');
 
+		$DestinationCityModel = DestinationCityModel::get($id);
+
+		//判断目的地是否为空
+		if (null !== $DestinationCityModel) {
+			$DestinationCityName = $DestinationCityModel->getData('name');
+		} else {
+			$DestinationCityName = '无';
+		}
+		
 		return $DestinationCityName;
 	}
 
@@ -65,4 +79,20 @@ class FlightModel extends Model
 		return $result;
 	}
 
+	/**
+	 * 获取飞机舱型，0，头等舱，1，公务舱，2，经济舱
+	 * @param  int $val 舱型对应的数字
+	 * @return String      舱型名称
+	 * @author chuhang 
+	 */
+	static public function getTypeName($val) {
+
+		if ($val === 0) {
+			return '头等舱';
+		} elseif ($val === 1) {
+			return '公务舱';
+		}
+
+		return '经济舱';
+	}
 }

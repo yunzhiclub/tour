@@ -1,10 +1,10 @@
 <?php
 namespace app\model;
-use think\Model;
+
 /**
  * 目的城市
  */
-class DestinationCityModel extends Model
+class DestinationCityModel extends ModelModel
 {
 	/**
 	 * 根据目的国家ID 取出 对应的目的城市ID
