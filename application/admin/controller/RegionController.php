@@ -16,10 +16,5 @@ use think\Controller;
  	public function edit()
  	{
  		return $this->fetch();
- 	}
- 	public function country()
- 	{
- 		return $this->fetch();
- 	}
-
+ 	}	
  }
