@@ -1,11 +1,10 @@
 <?php
 namespace app\model;
-use think\Model;
 use app\model\DestinationCityModel;	//目的城市
 /**
  * 路线
  */
-class RouteModel extends Model
+class RouteModel extends ModelModel
 {
 	/**
 	 * 获取路线ID By 目的地ID

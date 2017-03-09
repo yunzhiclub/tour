@@ -1,11 +1,11 @@
 <?php
 namespace app\model;
-use think\Model;
+
 /**
  * 支付订单管理
  * @author huangshuaibin
 */
-class OrderModel extends Model
+class OrderModel extends ModelModel
 {
 	/**
 	 * 通过用户id获取该用户的所有的订单	
