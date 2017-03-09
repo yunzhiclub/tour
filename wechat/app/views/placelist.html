@@ -3,208 +3,29 @@ description 这是国家列表页面
 router:#!/placelist
  -->
 <div class="page">
+    <div class="page__hd" style="margin-left:2px">
+        <p class="page__desc"><img src="weui/src/example/images/xin.png" alt="">请您选择国家</p>
+    </div>
     <div class="page__bd page__bd_spacing">
-        <div class="weui-flex" ng-repeat="country in countrys | format">
-            <div class="weui-flex__item">
-               <div class="placeholder"> 
-                  <div class="page__bd">
-                   <article class="weui-article">
-                     <section> 
-                       <p>
-                        <img src="weui/src/example/images/England.png" alt="">
-                       </p>
-                       <p>
-                        英国
-                       </p>
-                     </section>
-                   </article>
-                  </div>
-               </div>
-            </div>
-            <div class="weui-flex__item">
-               <div class="placeholder"> 
-                  <div class="page__bd">
-                   <article class="weui-article">
-                     <section> 
-                       <p>
-                        <img src="weui/src/example/images/Germany.png" alt="">
-                       </p>
-                        德国
-                       </p>
-                     </section>
-                   </article>
-                  </div>
-               </div>
-            </div>
-           <div class="weui-flex__item">
-               <div class="placeholder"> 
-                  <div class="page__bd">
-                   <article class="weui-article">
-                     <section> 
-                       <p>
-                        <img src="weui/src/example/images/France.png" alt="">
-                       </p>
-                       <p>
-                        法国
-                       </p>
-                     </section>
-                   </article>
-                  </div>
-               </div>
-            </div>
-        </div>
-        <div class="weui-flex">
-           <div class="weui-flex__item">
-               <div class="placeholder"> 
-                  <div class="page__bd">
-                   <article class="weui-article">
-                     <section> 
-                       <p>
-                        <img src="weui/src/example/images/Switzerland.png" alt="">
-                       </p>
-                       <p>
-                        瑞士
-                       </p>
-                     </section>
-                   </article>
-                  </div>
-               </div>
-            </div>
-            <div class="weui-flex__item">
-               <div class="placeholder"> 
-                  <div class="page__bd">
-                   <article class="weui-article">
-                     <section> 
-                       <p>
-                        <img src="weui/src/example/images/Italy.png" alt="">
-                       </p>
-                       <p>
-                       意大利
-                       </p>
-                     </section>
-                   </article>
-                  </div>
-               </div>
-            </div>
-            <div class="weui-flex__item">
-               <div class="placeholder"> 
-                  <div class="page__bd">
-                   <article class="weui-article">
-                     <section> 
-                       <p>
-                        <img src="weui/src/example/images/Norway.png" alt="">
-                       </p>
-                       <p>
-                        挪威
-                       </p>
-                     </section>
-                   </article>
-                  </div>
-               </div>
-            </div>
-        </div>
-        <div class="weui-flex">
-            <div class="weui-flex__item">
-               <div class="placeholder"> 
-                  <div class="page__bd">
-                   <article class="weui-article">
-                     <section> 
-                       <p>
-                        <img src="weui/src/example/images/Sweden.png" alt="">
-                       </p>
-                       <p>
-                        瑞典
-                       </p>
-                     </section>
-                   </article>
-                  </div>
-               </div>
-            </div>
-            <div class="weui-flex__item">
-               <div class="placeholder"> 
-                  <div class="page__bd">
-                   <article class="weui-article">
-                     <section> 
-                       <p>
-                        <img src="weui/src/example/images/Sweden.png" alt="">
-                       </p>
-                       <p>
-                        瑞典
-                       </p>
-                     </section>
-                   </article>
-                  </div>
-               </div>
-            </div>
-           <div class="weui-flex__item">
-               <div class="placeholder"> 
-                  <div class="page__bd">
-                   <article class="weui-article">
-                     <section> 
-                       <p>
-                        <img src="weui/src/example/images/Denmark.png" alt="">
-                       </p>
-                       <p>
-                        丹麦
-                       </p>
-                     </section>
-                   </article>
-                  </div>
-               </div>
-            </div>
-        </div>
-        <div class="weui-flex">
-           <div class="weui-flex__item">
-               <div class="placeholder"> 
-                  <div class="page__bd">
-                   <article class="weui-article">
-                     <section> 
-                       <p>
-                        <img src="weui/src/example/images/Greece.png" alt="">
-                       </p>
-                       <p>
-                       希腊
-                       </p>
-                     </section>
-                   </article>
-                  </div>
-               </div>
-            </div>
-            <div class="weui-flex__item">
-               <div class="placeholder"> 
-                  <div class="page__bd">
-                   <article class="weui-article">
-                     <section> 
-                       <p>
-                        <img src="weui/src/example/images/Holland,png.png" alt="">
-                       </p>
-                       <p>
-                       荷兰
-                       </p>
-                     </section>
-                   </article>
-                  </div>
-               </div>
-            </div>
-            <div class="weui-flex__item">
-               <div class="placeholder"> 
-                  <div class="page__bd">
-                   <article class="weui-article">
-                     <section> 
-                       <p>
-                        <img src="weui/src/example/images/Spain.png" alt="">
-                       </p>
-                       <p>
-                       西班牙
-                       </p>
-                     </section>
-                   </article>
-                  </div>
-               </div>
+        <div class="weui-flex" ng-repeat="country in countrys ">
+            <div class="weui-flex__item" ng-repeat="item in country">
+                <div class="placeholder">
+                    <div class="page__bd">
+                        <article class="weui-article">
+                            <section>
+                                <p>
+                                    <a ui-sref="routes({destinationCountryId: item.id})">
+                                        <img src="weui/src/example/images/England.png" alt="">
+                                    </a>
+                                </p>
+                                <p>
+                                    {{item.name}}
+                                </p>
+                            </section>
+                        </article>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
- <div class="weui-btn-area">
-            <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">确定</a>
- </div>
