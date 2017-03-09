@@ -20,7 +20,7 @@ class CountryModel extends Model
 	   	//根据地区id查询
 	   	$Country = new CountryModel;
 		$countrys = $Country->where($map)->select();
-
+		
 		return $countrys;
 	}
 }
