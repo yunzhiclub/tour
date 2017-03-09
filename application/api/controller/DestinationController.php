@@ -24,10 +24,12 @@ class DestinationController extends ApiController {
 	 * @return             array;
 	 */
 	public function getCountrysByRegionId() {
+
 	   	$regionId = Request::instance()->param('id');
 
 	   	$countrys = CountryModel::getCountrysByRegionId($regionId);
 	   	
+
 		return $this->response($countrys);
 	}
 
