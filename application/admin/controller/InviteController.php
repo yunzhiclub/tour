@@ -16,4 +16,9 @@ class InviteController extends IndexController
 	{
 		return $this->fetch();
 	}
+
+	public function bedDetail()
+	{
+		return $this->fetch('Bed/index');
+	}
 }
