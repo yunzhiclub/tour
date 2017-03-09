@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : bendi
+Source Server         : test
 Source Server Version : 50625
-Source Host           : localhost:3306
+Source Host           : 127.0.0.1:3306
 Source Database       : tour
 
 Target Server Type    : MYSQL
 Target Server Version : 50625
 File Encoding         : 65001
 
-Date: 2017-03-07 22:18:22
+Date: 2017-03-09 21:59:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -33,7 +33,6 @@ CREATE TABLE `yunzhi_route` (
   `check_in_rooms` int(10) DEFAULT NULL COMMENT '房间数',
   `starting_price` int(10) DEFAULT NULL COMMENT '路线起价',
   `standard_price` int(10) DEFAULT NULL COMMENT '标价',
-  `picture_id` int(10) DEFAULT NULL COMMENT '幻灯片id',
   `deadline` int(10) DEFAULT NULL COMMENT '到期时间',
   `content` varchar(100) DEFAULT '' COMMENT '详细内容',
   `click` int(100) DEFAULT '0' COMMENT '点击次数',
@@ -44,7 +43,7 @@ CREATE TABLE `yunzhi_route` (
 -- ----------------------------
 -- Records of yunzhi_route
 -- ----------------------------
-INSERT INTO `yunzhi_route` VALUES ('1', null, '1', '1', '1', '1', '1', '3', '这是一个路线比较简短的描述信息', '3', '3', '9688', '9000', '1', '5', '这个是一个路线的内容的详细描述', '0', '0');
-INSERT INTO `yunzhi_route` VALUES ('2', null, '1', '1', '1', '1', '1', '1', '路线的描述信息2', '2', '2', '9655', '9500', '1', '5', '这是路线的详细描述2', '0', '0');
-INSERT INTO `yunzhi_route` VALUES ('3', null, '1', '2', null, null, null, null, '', null, null, null, null, null, null, '', '0', '0');
-INSERT INTO `yunzhi_route` VALUES ('4', null, '2', '2', null, null, null, null, '', null, null, null, null, null, null, '', '0', '0');
+INSERT INTO `yunzhi_route` VALUES ('1', null, '1', '1', '1', '1', '1', '3', '这是一个路线比较简短的描述信息', '3', '3', '9688', '9000', '5', '这个是一个路线的内容的详细描述', '0', '0');
+INSERT INTO `yunzhi_route` VALUES ('2', null, '1', '1', '1', '1', '1', '1', '路线的描述信息2', '2', '2', '9655', '9500', '5', '这是路线的详细描述2', '0', '0');
+INSERT INTO `yunzhi_route` VALUES ('3', null, '1', '2', null, null, null, null, '', null, null, null, null, null, '', '0', '0');
+INSERT INTO `yunzhi_route` VALUES ('4', null, '2', '2', null, null, null, null, '', null, null, null, null, null, '', '0', '0');
