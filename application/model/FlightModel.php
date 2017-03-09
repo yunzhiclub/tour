@@ -6,8 +6,17 @@ use think\Model;
  */
 class FlightModel extends Model
 {
+	private $StartCityModel = null;		// 
 	protected $autoWriteTimestamp = true;
 
+	public function StartCityModel() {
+		if (null === $this->StartCityModel) {
+			$startId = (int)$this->getData('start_city_id');
+			$this->StartCityModel = StartCityModel::get($startId);
+		}
+
+		return $this->StartCityModel;
+	}
 	/**
 	 * 获取出发城市名称通过id
 	 * @param  int $id 城市id
