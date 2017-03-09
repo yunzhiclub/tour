@@ -4,7 +4,7 @@ router:#!/placelist
  -->
 <div class="page">
     <div class="page__bd page__bd_spacing">
-        <div class="weui-flex">
+        <div class="weui-flex" ng-repeat="country in countrys | format">
             <div class="weui-flex__item">
                <div class="placeholder"> 
                   <div class="page__bd">
@@ -103,7 +103,7 @@ router:#!/placelist
                </div>
             </div>
         </div>
-                <div class="weui-flex">
+        <div class="weui-flex">
             <div class="weui-flex__item">
                <div class="placeholder"> 
                   <div class="page__bd">

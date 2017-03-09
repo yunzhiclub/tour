@@ -12,15 +12,7 @@ angular.module('wechatApp')
         // Service logic
         var self = this;
         self.invitations = [];
-        self.invitation = {
-            openId: '',
-            startCityId: '',
-            invitationId: '',
-            startTimeId: '',
-            isPublic: '',
-            deadLine: '',
-            roomDatas: [],
-        };
+        
         var url = 'Invitation/';
         var getChoosedInvitations = function() {
             // 定义promise 解决异步问题
