@@ -8,8 +8,7 @@
                 <div class="col-md-10">
                     <form class="form-inline" action="{:url('', url('get.'))}"  method="get">
                         <div class="form-group">
-                            <label class="sr-only" for="name">姓名</label>
-                            <input name="name" type="text" class="form-control" placeholder="姓名..." id="name" value="{:input('get.name')}">
+                            <input name="name" type="text" class="form-control" placeholder="名称..." id="name" value="{:input('get.name')}">
                         </div>
                         <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>
                     </form>
@@ -22,17 +21,21 @@
             <table class="table table-hover table-bordered">
                 <tr class="info">
                     <th>序号</th>
-                    <th>出发城市</th>
+                    <th>名称</th>
                     <th>操作</th>
                 </tr>
+               
+                {volist name="StartCityModels" id="StartCityModel" key="key"} 
                 <tr>
-                	<td>1</td>
-                	<td>天津</td>
-                	<td>
-                     <a class="btn btn-sm btn-primary" href="{:url('edit')}"><i class="glyphicon glyphicon-pencil"></i> 编辑</a>
-                    <a class="btn btn-sm btn-danger" href="#"><i class="glyphicon glyphicon-trash"></i> 删除</a>
+                    <td>{$key}</td>
+                    <td>{$StartCityModel->getData('name')}</td>
+                    <td>
+                        <a class="btn btn-sm btn-primary" href="{:url('edit?id=' . $StartCityModel->getData('id'))}"><i class="glyphicon glyphicon-pencil"></i> 编辑</a>
+                        <a class="btn btn-sm btn-danger" href="{:url('delete?id=' . $StartCityModel->getData('id'))}"><i class="glyphicon glyphicon-trash"></i> 删除</a>
                     </td>
                 </tr>
+                {/volist}
+                
             </table>
         </div>
     </div>
