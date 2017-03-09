@@ -22,11 +22,11 @@ class PictureController extends IndexController
     }
     public function add()
     {
-    	return $this->fetch();
+        return $this->fetch();
     }
     public function edit()
     {
-    	return $this->fetch();
+        return $this->fetch();
     }
     /**
      * 上传图片保存
