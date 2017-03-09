@@ -24,8 +24,6 @@
                             <tr class="info">
                                 <th>序号</th>
                                 <th>航班号</th>
-                                <th>价格</th>
-                                <th>仓型</th>
                                 <th>航空公司</th>
                                 <th>起飞时间</th>
                                 <th>抵达时间(当地)</th>
@@ -37,8 +35,6 @@
                             <tr>
                                 <td>{$key}</td>
                                 <td>{$FlightModel->getData('number')}</td>
-                                <td  align="right">{$FlightModel->money_format($FlightModel->getData('price'))}</td>
-                                <td>{$FlightModel->getTypeName($FlightModel->getData('type_name'))}</td>
                                 <td>{$FlightModel->getData('company')}</td>
                                 <td>{$FlightModel->substrTime($FlightModel->getData('up_time'))}</td>
                                 <td>{$FlightModel->substrTime($FlightModel->getData('down_time'))}</td>
