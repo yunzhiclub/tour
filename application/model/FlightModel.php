@@ -1,10 +1,10 @@
 <?php
 namespace app\model;
-use think\Model;
+
 /**
  * 航班管理
  */
-class FlightModel extends Model
+class FlightModel extends ModelModel
 {
 	protected $autoWriteTimestamp = true;
 

@@ -1,12 +1,11 @@
 <?php
 namespace app\model;
-use think\Model;
 use think\Request;
 use app\model\JssdkModel;
 /**
  * 前台的客户
  */
-class CustomerModel extends Model
+class CustomerModel extends ModelModel
 {
 	/**
      * 通过opendId获取用户的基本信息

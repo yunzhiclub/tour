@@ -1,10 +1,10 @@
 <?php
 namespace app\model;
-use think\Model;
+
 /**
  * 邀约
  */
-class InviteModel extends Model
+class InviteModel extends ModelModel
 {
 	/**
 	 * 通过查route_id对应的询条件$map获取邀约
