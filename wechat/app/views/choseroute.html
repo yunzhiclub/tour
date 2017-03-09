@@ -7,14 +7,34 @@ router:#!/choseroute
     <div class="page__hd" style="margin-left:2px">
         <p class="page__desc"><img src="weui/src/example/images/mudidi.png" alt="">按目的地选</p>
     </div>
-    <div class="page__bd">
-        <article class="weui-article">
+    <div class="page__bd page__bd_spacing">
+    <div class="weui-flex">
+       <!--  <article class="weui-article">
                 <section> 
                     <p>
                         <img src="weui/src/example/images/trip5.png" alt="" style="width:100%;display:block">
                     </p>
                 </section>
-        </article>
+        </article> -->
+         <div class="weui-flex__item" ng-repeat="region in regions">
+               <div class="placeholder"> 
+                  <div class="page__bd">
+                   <article class="weui-article">
+                     <section> 
+                       <p>
+                        <a ui-sref="placelist({regionId: region.id})">
+                        <img src="weui/src/example/images/England.png" alt="">
+                         </a>
+                       </p>
+                       <p>
+                        {{region.regionname}}
+                       </p>
+                     </section>
+                   </article>
+                  </div>
+               </div>
+            </div>
+        </div>
     </div>
  </div>
 </div>

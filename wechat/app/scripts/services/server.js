@@ -13,7 +13,7 @@ angular.module('wechatApp')
         var url = config.apiUrl;
 
         // 设置header
-        var http = function(paramUrl = null, data = null, successCallBack = null, errorCallBack = null) {
+        var http = function(paramUrl, data, successCallBack, errorCallBack) {
 
             var param = {};
             if (typeof(paramUrl) === 'string') {
