@@ -11,9 +11,13 @@
 angular.module('wechatApp')
     .filter('format', function() {
         return function(iterms) {
+        	if (iterms.length === 0) {
+        		return iterms;
+        	}
             var data = [];
             var datas = [];
             angular.forEach(iterms, function(iterm, key) {
+            	
                 data.push(iterm);
                 if (0 === ((key + 1) % 3)) {
                     datas.push(data);
@@ -25,7 +29,8 @@ angular.module('wechatApp')
                 datas.push(data);
             }
             console.log(datas);
-            iterms = [];
-            return iterms;
+            
+
+            return datas;
         };
     });

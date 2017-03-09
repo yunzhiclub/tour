@@ -18,6 +18,6 @@ describe('Controller: PlacelistCtrl', function () {
   }));
 
   it('should attach a list of awesomeThings to the scope', function () {
-    // expect(PlacelistCtrl.awesomeThings.length).toBe(3);
+    expect(PlacelistCtrl.awesomeThings.length).toBe(3);
   });
 });
