@@ -8,10 +8,6 @@
  * Controller of the wechatApp
  */
 angular.module('wechatApp')
-  .controller('RoutesCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('RoutesCtrl', ['$scope', '$stateParams', function ($scope) {
+    	
+  }]);
