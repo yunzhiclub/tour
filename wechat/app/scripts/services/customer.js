@@ -17,15 +17,18 @@ angular.module('wechatApp')
             nickName: '',
             sex: '',
             headImg: { headImgUrl: null, serverId: null },
-            num: '',
+            phone: '',
             email: '',
             city: '',
             idcard: '',
             birthday: '',
+            country: '',
+            province: '',
             frontIdCardImg: { frontIdCardImgCardImgUrl: null, serverId: null },
             backIdCardImgUrl: { backIdCardImgUrl: null, serverId: null },
         };
         var url = 'customer/';
+        var siteUrl = config.siteUrl;
         // 用户是否登陆
         var isLogin = function() {
             if (typeof getOpenid() === 'undefined') {
@@ -95,14 +98,14 @@ angular.module('wechatApp')
                             openid: customer.openid,
                             nickName: customer.nick_name,
                             sex: customer.sex,
-                            headImg: { headImgUrl: customer.head_img_url, serverId: 'rJAj-qyHntGvt3IjmGbWh43UxXwTAwHl5isrdM1Gf8kDg7_2cuGEbzNlvlGgdEJS' },
+                            headImg: { headImgUrl: siteUrl + customer.head_img_url, serverId: null },
                             city: customer.city,
-                            num: '13920884917',
-                            email: '2819786276@qq.com',
-                            idcard: '130272199511927782',
-                            birthday: '1288323623006',
-                            frontIdCardImg: { frontIdCardImgUrl: '', serverId: null },
-                            backIdCardImg: { backIdCardImgUrl: '', serverId: null },
+                            phone: customer.phone,
+                            email: customer.email,
+                            idcard: customer.idcard,
+                            birthday: customer.birthday,
+                            frontIdCardImg: { frontIdCardImgUrl: siteUrl + customer.card_img_front_url, serverId: null },
+                            backIdCardImg: { backIdCardImgUrl: siteUrl + customer.card_img_back_url, serverId: null },
                         };
                         cookies.put('openid', customer.openid);
                     }
