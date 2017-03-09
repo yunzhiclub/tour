@@ -1,11 +1,11 @@
 <?php
 namespace app\model;
-use think\Model;
+
 /**
  * 出发时间
  * @author huangshuaibin 
  */
-class StartTimeModel extends Model
+class StartTimeModel extends ModelModel
 {
 	/**
 	 * 通过路线id取出  出发时间以及价格数据

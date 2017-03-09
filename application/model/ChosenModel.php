@@ -1,10 +1,10 @@
 <?php
 namespace app\model;
-use think\Model;
+
 /**
  * 精选
  */
-class ChosenModel extends Model
+class ChosenModel extends ModelModel
 {
 	/**
 	 * 获取精选的邀约的id并压入数组$map,用于取出invite信息的查询条件
