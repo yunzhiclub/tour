@@ -33,7 +33,6 @@
                                 <th>终点</th>
                                 <th>操作</th>
                             </tr>
-
                             {volist name="FlightModels" id="FlightModel" key="key"}
                             <tr>
                                 <td>{$key}</td>
@@ -43,8 +42,8 @@
                                 <td>{$FlightModel->getData('company')}</td>
                                 <td>{$FlightModel->substrTime($FlightModel->getData('up_time'))}</td>
                                 <td>{$FlightModel->substrTime($FlightModel->getData('down_time'))}</td>
-                                <td>{$FlightModel->getStartCityNameById($FlightModel->getData('up_city_id'))}</td>
-                                <td>{$FlightModel->getDestinationCityNameById($FlightModel->getData('down_city_id'))}</td>
+                                <td>{eq name="$FlightModel->StartCityModel()" value=""}无{else /}{$FlightModel->StartCityModel()->getData('name')}{/eq}</td>
+                                <td>{eq name="$FlightModel->DestinationCityModel()" value=""}无{else /}{$FlightModel->DestinationCityModel()->getData('name')}{/eq}</td>
                                 <td> <a class="btn btn-sm btn-primary" href="{:url('edit?id=' . $FlightModel->getData('id'))}"><i class="glyphicon glyphicon-pencil"></i> 编辑</a>
                                 <a class="btn btn-sm btn-danger" href="{:url('delete?id=' . $FlightModel->getData('id'))}"><i class="glyphicon glyphicon-trash"></i> 删除</a></td>
                             </tr>

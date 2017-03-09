@@ -6,16 +6,36 @@ namespace app\model;
  */
 class FlightModel extends ModelModel
 {
-	private $StartCityModel = null;		// 
 	protected $autoWriteTimestamp = true;
+	private $StartCityModel = null;		//对应的出发城市模型
+	private $DestinationCityModel = null;	 //对应的目的地城市模型
 
+	/**
+	 * 当前模型与出发城市关系为n:1
+	 * @return lists StartCityModels
+	 * @author chuhang 
+	 */
 	public function StartCityModel() {
+
 		if (null === $this->StartCityModel) {
-			$startId = (int)$this->getData('start_city_id');
-			$this->StartCityModel = StartCityModel::get($startId);
+			$this->StartCityModel = StartCityModel::get($this->getData('up_city_id'));
 		}
 
 		return $this->StartCityModel;
+	}
+
+	/**
+	 * 当前模型与目的地城市的型为n:1
+	 * @return lists DestinationCityModel
+	 * @author chuhang 
+	 */
+	public function DestinationCityModel() {
+
+		if (null === $this->DestinationCityModel) {
+			$this->DestinationCityModel = DestinationCityModel::get($this->getData('down_city_id'));
+		}
+
+		return $this->DestinationCityModel;
 	}
 	/**
 	 * 获取出发城市名称通过id
