@@ -8,7 +8,7 @@
  * Factory in the wechatApp.
  */
 angular.module('wechatApp')
-    .factory('route', ['$q', 'config', 'server', function($q, $http, config, server) {
+    .factory('route', ['$q', 'config', 'server', function($q, config, server) {
         // Service logic
         var self = this;
         self.routes = [];
@@ -31,7 +31,7 @@ angular.module('wechatApp')
                 }
                 deferred.resolve(self.routes); //执行成功
             }, function errorCallback(response) {
-                deferred.reject(); //执行失败
+                deferred.reject(response); //执行失败
             });
 
             return promise;
@@ -43,7 +43,7 @@ angular.module('wechatApp')
             var deferred = $q.defer();
             var promise = deferred.promise;
             var paramUrl = url + 'getRoutesByCountryId';
-            var data = { countryId: countryId, cityId: cityId };
+            var data = { countryid: countryId, cityid: cityId };
 
             // $http去后台获取数据
             server.http(paramUrl, data, function successCallback(response) {
@@ -56,7 +56,7 @@ angular.module('wechatApp')
                 }
                 deferred.resolve(self.routes); //执行成功
             }, function errorCallback(response) {
-                deferred.reject(); //执行失败
+                deferred.reject(response); //执行失败
             });
 
             return promise;
@@ -81,7 +81,7 @@ angular.module('wechatApp')
                 }
                 deferred.resolve(self.routes); //执行成功
             }, function errorCallback(response) {
-                deferred.reject(); //执行失败
+                deferred.reject(response); //执行失败
             });
 
             return promise;
@@ -105,7 +105,7 @@ angular.module('wechatApp')
                 }
                 deferred.resolve(self.routes); //执行成功
             }, function errorCallback(response) {
-                deferred.reject(); //执行失败
+                deferred.reject(response); //执行失败
             });
 
             return promise;
@@ -129,7 +129,7 @@ angular.module('wechatApp')
                 }
                 deferred.resolve(self.routes); //执行成功
             }, function errorCallback(response) {
-                deferred.reject(); //执行失败
+                deferred.reject(response); //执行失败
             });
 
             return promise;
@@ -153,7 +153,7 @@ angular.module('wechatApp')
                 }
                 deferred.resolve(self.routes); //执行成功
             }, function errorCallback(response) {
-                deferred.reject(); //执行失败
+                deferred.reject(response); //执行失败
             });
 
             return promise;

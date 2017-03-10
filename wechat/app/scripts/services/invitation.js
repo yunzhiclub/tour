@@ -12,15 +12,7 @@ angular.module('wechatApp')
         // Service logic
         var self = this;
         self.invitations = [];
-        self.invitation = {
-            openId: '',
-            startCityId: '',
-            invitationId: '',
-            startTimeId: '',
-            isPublic: '',
-            deadLine: '',
-            roomDatas: [],
-        };
+        
         var url = 'Invitation/';
         var getChoosedInvitations = function() {
             // 定义promise 解决异步问题
@@ -41,7 +33,7 @@ angular.module('wechatApp')
                 }
                 deferred.resolve(self.invitations); //执行成功
             }, function errorCallback(response) {
-                deferred.reject(); //执行失败
+                deferred.reject(response); //执行失败
             });
 
             return promise;
@@ -66,7 +58,7 @@ angular.module('wechatApp')
                 }
                 deferred.resolve(self.invitations); //执行成功
             }, function errorCallback(response) {
-                deferred.reject(); //执行失败
+                deferred.reject(response); //执行失败
             });
 
             return promise;
@@ -91,7 +83,7 @@ angular.module('wechatApp')
                 }
                 deferred.resolve(self.invitations); //执行成功
             }, function errorCallback(response) {
-                deferred.reject(); //执行失败
+                deferred.reject(response); //执行失败
             });
 
             return promise;
@@ -153,7 +145,7 @@ angular.module('wechatApp')
                 }
                 deferred.resolve(self.invitations); //执行成功
             }, function errorCallback(response) {
-                deferred.reject(); //执行失败
+                deferred.reject(response); //执行失败
             });
 
             return promise;
@@ -181,7 +173,7 @@ angular.module('wechatApp')
                 }
                 deferred.resolve(self.invitations); //执行成功
             }, function errorCallback(response) {
-                deferred.reject(); //执行失败
+                deferred.reject(response); //执行失败
             });
 
             return promise;
@@ -205,7 +197,7 @@ angular.module('wechatApp')
                 }
                 deferred.resolve(self.invitations); //执行成功
             }, function errorCallback(response) {
-                deferred.reject(); //执行失败
+                deferred.reject(response); //执行失败
             });
             return promise;
         };
@@ -228,7 +220,7 @@ angular.module('wechatApp')
                 }
                 deferred.resolve(self.invitations); //执行成功
             }, function errorCallback(response) {
-                deferred.reject(); //执行失败
+                deferred.reject(response); //执行失败
             });
 
             return promise;
@@ -251,7 +243,7 @@ angular.module('wechatApp')
                 }
                 deferred.resolve(self.invitations); //执行成功
             }, function errorCallback(response) {
-                deferred.reject(); //执行失败
+                deferred.reject(response); //执行失败
             });
            
             return promise;

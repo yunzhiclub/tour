@@ -29,19 +29,19 @@ angular.module('wechatApp')
                     // 逻辑处理 
                     self.destinations = response.data.data;
                 }
-                deferred.resolve(); //执行成功
+                deferred.resolve(self.destinations); //执行成功
             }, function errorCallback(response) {
-                deferred.reject(); //执行失败   
+                deferred.reject(response); //执行失败   
             });
             return promise;
         };
 
-        var getCountrysByPlaceId = function(placeId) {
+        var getCountrysByRegionId = function(regionId) {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
-            var paramUrl = url + 'getCountrysByPlaceId';
-            var data = { placeId: placeId };
+            var paramUrl = url + 'getCountrysByRegionId';
+            var data = { id: regionId };
             // $http去后台获取数据
             server.http(paramUrl, data, function successCallback(response) {
                 // console.log(response);
@@ -51,9 +51,9 @@ angular.module('wechatApp')
                     // 逻辑处理 
                     self.destinations = response.data.data;
                 }
-                deferred.resolve(); //执行成功
+                deferred.resolve(self.destinations); //执行成功
             }, function errorCallback(response) {
-                deferred.reject(); //执行失败   
+                deferred.reject(response); //执行失败   
             });
 
             return promise;
@@ -76,7 +76,7 @@ angular.module('wechatApp')
                 }
                 deferred.resolve(); //执行成功
             }, function errorCallback(response) {
-                deferred.reject(); //执行失败   
+                deferred.reject(response); //执行失败   
             });
             return promise;
         };
@@ -100,7 +100,7 @@ angular.module('wechatApp')
                 }
                 deferred.resolve(self.destinations); //执行成功
             }, function errorCallback(response) {
-                deferred.reject(); //执行失败
+                deferred.reject(response); //执行失败
             });
             return promise;
         };
@@ -126,7 +126,7 @@ angular.module('wechatApp')
                 }
                 deferred.resolve(self.destinations); //执行成功
             }, function errorCallback(response) {
-                deferred.reject(); //执行失败
+                deferred.reject(response); //执行失败
             });
             return promise;
         };
@@ -139,8 +139,8 @@ angular.module('wechatApp')
             },
 
             // 获取地区所有的国家
-            getCountrysByPlaceId: function(placeId) {
-                return getCountrysByPlaceId(placeId);
+            getCountrysByRegionId: function(regionId) {
+                return getCountrysByRegionId(regionId);
             },
 
             // 获取国家所在的城市
