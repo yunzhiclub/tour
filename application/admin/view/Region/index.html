@@ -6,10 +6,10 @@
             <hr />
             <div class="row">
                 <div class="col-md-10">
-                    <form class="form-inline" action="{:url('', url('get.'))}"  method="get">
+                    <form class="form-inline" action="{url()}"  method="get">
                         <div class="form-group">
-                            <label class="sr-only" for="name">姓名</label>
-                            <input name="name" type="text" class="form-control" placeholder="姓名..." id="name" value="{:input('get.name')}">
+                            <label class="sr-only" for="regionname">姓名</label>
+                            <input name="regionname" type="text" class="form-control" placeholder="姓名..."  value="{:input('get.name')}">
                         </div>
                         <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>
                     </form>
@@ -25,15 +25,18 @@
                     <th>地区</th>
                     <th>操作</th>
                 </tr>
+                {volist name="regions" id="region" key="key"}
                 <tr>
-                	<td>1</td>
-                	<td> <a href="{:url('Country/index')}">欧洲</a></td>
+                	<td>{$key}</td>
+                	<td> <a href="{:url('Country/index')}">{$region->getData('regionname')}</a></td>
                 	<td>
-                    <a class="btn btn-sm btn-primary" href="{:url('edit')}"><i class="glyphicon glyphicon-pencil"></i> 编辑</a>
-                    <a class="btn btn-sm btn-danger" href="#"><i class="glyphicon glyphicon-trash"></i> 删除</a>
+                    <a class="btn btn-sm btn-primary" href="{:url('edit?id='.$region->getData('id'))}"><i class="glyphicon glyphicon-pencil"></i> 编辑</a>
+                    <a class="btn btn-sm btn-danger" href="{:url('delete?id='.$region->getData('id'))}><i class="glyphicon glyphicon-trash"></i> 删除</a>
                     </td>
                 </tr>
+                {/volist}
             </table>
+             {$regions->render()}
         </div>
     </div>
 </div>
