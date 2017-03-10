@@ -20,7 +20,7 @@ class FlightController extends IndexController
         //模糊查询
         $FlightModel = new FlightModel;
         $map['is_delete'] = 0;
-        $FlightModels = $FlightModel->where($map)->where('number', 'like', '%' . $number . '%')->paginate(20);
+        $FlightModels = $FlightModel->where($map)->where('number', 'like', '%' . $number . '%')->paginate();
 
         $this->assign('FlightModels', $FlightModels);
 
@@ -53,7 +53,7 @@ class FlightController extends IndexController
     	$FlightModel->is_delete = 1;
 
     	if (false === $FlightModel->save()) {
-    		$this->error($FlightModel->getError());
+    		return $this->error($FlightModel->getError());
     	}
 
     	return $this->success('删除成功');
@@ -77,7 +77,7 @@ class FlightController extends IndexController
 
     	$FlightModel = new FlightModel;
     	if (false === $FlightModel->save($data)) {
-    		return $this->error('保存失败');
+    		return $this->error($FlightModel->getError());
     	}
 
     	return $this->success('保存成功', url('index'));
