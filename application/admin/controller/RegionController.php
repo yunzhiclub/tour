@@ -16,8 +16,8 @@ use app\model\RegionModel;              //地区管理
     	$regionname=input('get.regionname');
     	//模糊查询
     	$RegionModel= new RegionModel;
-    	$is_show['is_delete'] = 0;//数据库字段is_delete为0时显示
-    	 $regions = $RegionModel->where($is_show)->where('regionname', 'like', '%' . $regionname . '%')->paginate(10);
+    	$map['is_delete'] = 0;//数据库字段is_delete为0时显示
+    	 $regions = $RegionModel->where($map)->where('regionname', 'like', '%' . $regionname . '%')->paginate(10);
 
         $this->assign('regions',$regions);
         return $this->fetch();
