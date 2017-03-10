@@ -78,12 +78,12 @@ angular
                 controller: 'ChoserouteCtrl',
             })
             .state('placelist', {
-                url: '/placelist', // 国家列表界面
+                url: '/placelist/:regionId', // 国家列表界面
                 templateUrl: 'views/placelist.html',
                 controller: 'PlacelistCtrl',
             })
             .state('routes', {
-                url: '/routes', // 具体国家中的路线列表
+                url: '/routes/:destinationCountryId', // 具体国家中的路线列表
                 templateUrl: 'views/routes.html',
                 controller: 'RoutesCtrl',
             })

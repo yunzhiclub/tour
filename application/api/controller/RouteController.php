@@ -66,7 +66,7 @@ class RouteController extends ApiController {
 		//通过路线id取出所有的路线详情
 		$routes = RouteModel::getRoutesByIds($routeIds);
 		
-		return $this->response([]);
+		return $this->response($routes);
 	}
 
 	/**

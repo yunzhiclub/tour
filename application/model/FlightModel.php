@@ -1,37 +1,41 @@
 <?php
 namespace app\model;
-use think\Model;
+
 /**
  * 航班管理
  */
-class FlightModel extends Model
+class FlightModel extends ModelModel
 {
 	protected $autoWriteTimestamp = true;
+	private $StartCityModel = null;		//对应的出发城市模型
+	private $DestinationCityModel = null;	 //对应的目的地城市模型
 
 	/**
-	 * 获取出发城市名称通过id
-	 * @param  int $id 城市id
-	 * @return String    城市名称
+	 * 当前模型与出发城市关系为n:1
+	 * @return lists StartCityModels
 	 * @author chuhang 
 	 */
-	static public function getStartCityNameById($id) {
-		$StartCityModel = StartCityModel::get($id);
-		$StartCityName = $StartCityModel->getData('name');
+	public function StartCityModel() {
 
-		return $StartCityName;
+		if (null === $this->StartCityModel) {
+			$this->StartCityModel = StartCityModel::get($this->getData('up_city_id'));
+		}
+
+		return $this->StartCityModel;
 	}
 
 	/**
-	 * 获取目的地城市名称通过id
-	 * @param  int $id 目的地城市id
-	 * @return String     目的地城市姓名
+	 * 当前模型与目的地城市的型为n:1
+	 * @return lists DestinationCityModel
 	 * @author chuhang 
 	 */
-	static public function getDestinationCityNameById($id) {
-		$DestinationCityModel = DestinationCityModel::get($id);
-		$DestinationCityName = $DestinationCityModel->getData('name');
+	public function DestinationCityModel() {
 
-		return $DestinationCityName;
+		if (null === $this->DestinationCityModel) {
+			$this->DestinationCityModel = DestinationCityModel::get($this->getData('down_city_id'));
+		}
+
+		return $this->DestinationCityModel;
 	}
 
 	/**
@@ -64,5 +68,4 @@ class FlightModel extends Model
 		$result = substr($time, 0, -3);
 		return $result;
 	}
-
 }

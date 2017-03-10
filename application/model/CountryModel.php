@@ -1,10 +1,10 @@
 <?php
 namespace app\model;
-use think\Model;
+
 /**
  * 国家
  */
-class CountryModel extends Model
+class CountryModel extends ModelModel
 {
 	/**
 	 * 通过地区id  获取  该地区全部国家信息

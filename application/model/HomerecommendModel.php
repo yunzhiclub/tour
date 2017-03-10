@@ -1,12 +1,12 @@
 <?php
 namespace app\model;
-use think\Model;
+
 /**
  * 首页推荐
  * @author huangshuaibin
  */
 
-class HomeRecommendModel extends Model
+class HomeRecommendModel extends ModelModel
 {
 	/**
 	 * 取出所有的首页推荐对应的路线ID

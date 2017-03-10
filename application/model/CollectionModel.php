@@ -1,8 +1,8 @@
 <?php
 namespace app\model;
-use think\Model;
 
-class CollectionModel extends Model
+
+class CollectionModel extends ModelModel
 {
 	/**
 	 * 保存收藏
