@@ -12,11 +12,11 @@ class StartCityModel extends ModelModel
 	 * @return boolean 
 	 * @author chuhang 
 	 */
-	public function isFlightStartCity() {
+	public function isXXXFlightStartCity() {
 		$FlightModels = FlightModel::all();
 
 		foreach ($FlightModels as $FlightModel) {
-			if ($FlightModel->up_city_id === $this->id) {
+			if ($FlightModel->up_city_id === $this->getData('id')) {
 				return false;
 			}
 		}
@@ -29,11 +29,11 @@ class StartCityModel extends ModelModel
 	 * @return boolean 
 	 * @author chuhang 
 	 */
-	public function isRouteStartCity() {
+	public function isXXXRouteStartCity() {
 		$RouteModels = RouteModel::all();
 
 		foreach ($RouteModels as $RouteModel) {
-			if ($RouteModel->start_city_id === $this->id) {
+			if ($RouteModel->start_city_id === $this->getData('id')) {
 				return false;
 			}
 		}
