@@ -9,14 +9,13 @@
  */
 angular.module('wechatApp')
     .controller('ClsdetailCtrl', ['$scope', '$stateParams', 'route', 'order', 'commonTools', function($scope, $stateParams, route, order, commonTools) {
-
-        // 测试数据
+        // 对应路线的出发时间测试数据
         var dataArray = [{ id: 1, date: 214323432, money: 5999}, { id: 2, date: 214323432, money: 5999 }, { id: 3, date: 214323432, money: 5999 }, { id: 4, date: 214323432, money: 5999 }, { id: 5, date: 214323432, money: 5999 }, { id: 6, date: 214323432, money: 5999 }, { id: 7, date: 214323432, money: 5999 }, { id: 8, date: 214323432, money: 5999 }];
         $scope.startTimes = commonTools.formatArray(dataArray, 4);
 
 
 
-        // 获取路线详细信息
+        // 根据路由传过来的数组索引获取路线详细信息
         var index = $stateParams.routeId;
         var routeDetail = route.routes[index];
 
@@ -28,6 +27,9 @@ angular.module('wechatApp')
         
         var routeId = routeDetail.id;
 
+        // 向这次的邀约中添加路线的id
+        order.routeId = routeId;
+
         // 获取路线对应的出发时间和价格
         // route.getStarTimeByid(routeId).then(function successCallBack(response) {
         //   console.log(response);
@@ -35,6 +37,19 @@ angular.module('wechatApp')
         // }, function errorCallBack(response) {
         //   console.log(response);
         // });
+
+
+        // 获取路线的评价
+
+
+        // 拼接订单详情
+
+
+        // 收藏这条路线
+
+
+        // 客服电话去掉拨号功能
+        
 
         // 设置显示和隐藏
         $scope.status1 = true;

@@ -8,15 +8,20 @@
  * Controller of the wechatApp
  */
 angular.module('wechatApp')
-    .controller('HourseCtrl', ['$stateParams', '$uibModal', '$log', '$document', '$scope', function($uibModal, $log, $document, $scope, $stateParams) {
-         console.log($stateParams.timeId);
+    .controller('HourseCtrl', ['$uibModal', '$log', '$document', '$scope', '$stateParams', 'order', function($uibModal, $log, $document, $scope, $stateParams, order) {
         if ($stateParams.timeId !== undefined) {
-            // 选用路线的实际价格
-            console.log($stateParams.timeId);
+            // 选用选择的出发时间给本次邀约实体复制
+            order.startTimeId = $stateParams.timeId;
+        } else {
+            // 选用默认出发时间
+            order.startTimeId = null;
         }
 
+        // 设置默认是公开
+        $scope.isPublic = 1;
 
-
+        $scope.deadLine = new Date(2010, 11, 28, 14, 57);      
+    
         var $ctrl = $scope;
         $ctrl.items1 = ['0~25', '25~35', '35~'];
         $ctrl.items2 = ['男', '女'];

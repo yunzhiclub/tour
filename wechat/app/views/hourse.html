@@ -25,7 +25,7 @@ router:#!/hourse
                 <div class="weui-cell__bd">是否公开订单</div>
                 <div class="weui-cell__ft">
                     <label for="switchCP" class="weui-switch-cp">
-                        <input id="switchCP" class="weui-switch-cp__input" type="checkbox" checked="checked" />
+                        <input id="switchCP" class="weui-switch-cp__input" type="checkbox" ng-model="isPublic" ng-true-value="1" ng-false-value="0" />
                         <div class="weui-switch-cp__box"></div>
                     </label>
                 </div>
@@ -33,158 +33,154 @@ router:#!/hourse
         </div>
     </div>
     <div class="weui-cell">
-                <div class="weui-cell__hd"><label for="" class="weui-label">订单截止时间</label></div>
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="datetime-local" value="" placeholder=""/>
-                </div>
-    </div>
-<hr>
-<div class="weui-flex">
-    <div class="weui-flex__item" style="margin-right:20px;margin-left:10px">
-        <div class="placeholder"> 
-         <a ui-sref="" class="weui-btn weui-btn_plain-default" style="width:160px" ng-click="open()"> 
-             <div class="weui-cell">
-                <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-                    <img src="weui/src/example/images/lhead1.png" style="width: 50px;display: block"/>
-                </div>
-                <div class="weui-cell__bd">
-                    <p>♀</p>
-                    <p style="font-size: 13px;color: #888888;">￥5,0000.00</p>
-                </div>
-             </div>
-          </a>
-          <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <p>已支付</p>
-                </div>
-            </div>
+        <div class="weui-cell__hd">
+            <label for="exampleInput" class="weui-label">订单截止时间</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input id="exampleInput" class="weui-input" type="datetime-local" placeholder="yyyy-MM-ddTHH:mm:ss" ng-model="deadLine"/>
         </div>
     </div>
-    <div class="weui-flex__item" >
-      <div class="placeholder">
-       <a ui-sref="" class="weui-btn weui-btn_plain-default" style="width:160px" style="margin-right:20px;margin-left:20px">
-          <div class="weui-cell">
-                <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-                    <img src="weui/src/example/images/lhead2.png" style="width: 50px;display: block"/>
-                </div>
-                <div class="weui-cell__bd">
-                    <p>♀</p>
-                    <p style="font-size: 13px;color: #888888;">￥0.01</p>
-                </div>
-          </div>
-       </a>
-        <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <p>已支付</p>
-                </div>
-            </div>
-      </div>
-      </div>
-</div>
-<hr>
-<div class="weui-flex">
-    <div class="weui-flex__item" style="margin-right:20px;margin-left:10px">
-        <div class="placeholder"> 
-         <a ui-sref="" class="weui-btn weui-btn_plain-default" style="width:160px"> 
-             <div class="weui-cell">
-                <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-                    <img src="weui/src/example/images/lhead5.png" style="width: 50px;display: block"/>
-                </div>
-                <div class="weui-cell__bd">
-                    <p>♂</p>
-                    <p style="font-size: 13px;color: #888888;">￥0.01</p>
-                </div>
-             </div>
-          </a>
-           <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <p>未支付</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="weui-flex__item">
-      <div class="placeholder">
-       <a ui-sref="" class="weui-btn weui-btn_plain-default" style="width:160px" style="margin-right:20px;margin-left:20px">
-          <div class="weui-cell">
-                <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-                    <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block"/>
-                    <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;"></span>
-                </div>
-                <div class="weui-cell__bd">
-                    <p>♂</p>
-                    <p style="font-size: 13px;color: #888888;">￥0.01</p>
-                </div>
-          </div>
-       </a>
-       <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <p>未受邀</p>
-                </div>
-            </div>
-      </div>
-      </div>
-</div>
-<hr>
-<div class="weui-flex">
-    <div class="weui-flex__item">
-        <div class="placeholder"> 
-         <a ui-sref="" class="weui-btn weui-btn_plain-default" style="width:160px"> 
-             <div class="weui-cell">
-                <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-                    <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block"/>
-                    <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">可选</span>
-                </div>
-                <div class="weui-cell__bd">
+    <hr>
+    <div class="weui-flex">
+        <div class="weui-flex__item" style="margin-right:20px;margin-left:10px">
+            <div class="placeholder">
+                <button class="weui-btn weui-btn_plain-default" style="width:180px" ng-click="open()">
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+                            <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block" />
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p style="width:60px;height:80px;">男20~30</p>
+                            <p style="font-size: 13px;color: #888888;height:20px;width:70px">￥5,0000.00</p>
+                        </div>
+                    </div>
+                </button>
+                <div class="weui-cell">
                     <div class="weui-cell__bd">
-                    <p>性别</p>
-                    <p style="font-size: 13px;color: #888888;">金额</p>
+                        <p>未支付</p>
                     </div>
                 </div>
-             </div>
-          </a>
-          <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <p>未受邀</p>
+            </div>
+        </div>
+        <div class="weui-flex__item">
+            <div class="placeholder">
+                <button class="weui-btn weui-btn_plain-default" style="width:180px" ng-click="open()">
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+                            <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block" />
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p style="width:60px;height:80px;">男20~30</p>
+                            <p style="font-size: 13px;color: #888888;height:20px;width:70px">￥5,0000.00</p>
+                        </div>
+                    </div>
+                </button>
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <p>未支付</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="weui-flex__item" >
-      <div class="placeholder">
-       <a ui-sref="topay" class="weui-btn weui-btn_plain-default" style="width:160px">
-          <div class="weui-cell">
-                <div class="weui-cell__hd" style="position: relative" style="margin-right:20px;margin-left:20px">
-                    <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block"/>
-                    <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">可选</span>
-                </div>
-                <div class="weui-cell__bd">
-                    <p>♀</p>
-                    <p style="font-size: 13px;color: #888888;">￥0.01</p>
-                </div>
-          </div>
-       </a>
-       <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <p>未受邀</p>
+    <hr>
+    <div class="weui-flex">
+        <div class="weui-flex__item" style="margin-right:20px;margin-left:10px">
+            <div class="placeholder">
+                <button class="weui-btn weui-btn_plain-default" style="width:180px" ng-click="open()">
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+                            <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block" />
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p style="width:60px;height:80px;">男20~30</p>
+                            <p style="font-size: 13px;color: #888888;height:20px;width:70px">￥5,0000.00</p>
+                        </div>
+                    </div>
+                </button>
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <p>未支付</p>
+                    </div>
                 </div>
             </div>
-      </div>
-      </div>
-</div>
-<br>
+        </div>
+        <div class="weui-flex__item">
+             <div class="placeholder">
+                <button class="weui-btn weui-btn_plain-default" style="width:180px" ng-click="open()">
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+                            <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block" />
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p style="width:60px;height:80px;">男20~30</p>
+                            <p style="font-size: 13px;color: #888888;height:20px;width:70px">￥5,0000.00</p>
+                        </div>
+                    </div>
+                </button>
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <p>未支付</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="weui-flex">
+        <div class="weui-flex__item" style="margin-right:20px;margin-left:10px">
+             <div class="placeholder">
+                <button class="weui-btn weui-btn_plain-default" style="width:180px" ng-click="open()">
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+                            <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block" />
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p style="width:60px;height:80px;">男20~30</p>
+                            <p style="font-size: 13px;color: #888888;height:20px;width:70px">￥5,0000.00</p>
+                        </div>
+                    </div>
+                </button>
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <p>未支付</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="weui-flex__item">
+             <div class="placeholder">
+                <button class="weui-btn weui-btn_plain-default" style="width:180px" ng-click="open()">
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+                            <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block" />
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p style="width:60px;height:80px;">男20~30</p>
+                            <p style="font-size: 13px;color: #888888;height:20px;width:70px">￥5,0000.00</p>
+                        </div>
+                    </div>
+                </button>
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <p>未支付</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
 </div>
 <hr>
-        <label for="weuiAgree" class="weui-agree">
-            <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
-            <span class="weui-agree__text">
+<label for="weuiAgree" class="weui-agree">
+    <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
+    <span class="weui-agree__text">
                 我已阅读并接受<a href="javascript:void(0);">预定须知、合同、保险等条款</a>
             </span>
-        </label>
+</label>
 <div class="weui-btn-area">
-            <a class="weui-btn weui-btn_primary" ui-sref="topay" id="showTooltips">去支付</a>
+    <a class="weui-btn weui-btn_primary" ui-sref="topay" id="showTooltips">去支付</a>
 </div>
-
 <script type="text/ng-template" id="myModalContent.html">
     <div class="modal-header">
         <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
@@ -203,8 +199,9 @@ router:#!/hourse
         </ul>
         Selected: <b>{{ selected.item2 }}</b>
         <br>
-        <div>金额:<input type="text" placeholder="$000" ng-model="selected.money"></div>
-        
+        <div>金额:
+            <input type="text" placeholder="$000" ng-model="selected.money">
+        </div>
     </div>
     <div class="modal-footer">
         <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
