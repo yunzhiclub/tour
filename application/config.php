@@ -299,4 +299,11 @@ return [
 
     // 配置uploads路径
     'uploads' => RUNTIME_PATH .'uploads',
+
+    //分页配置
+    'paginate'               => [
+        'type'      => 'bootstrap',
+        'var_page'  => '5',
+        'list_rows' => 20,
+    ],
 ];
