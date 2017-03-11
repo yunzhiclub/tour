@@ -1,62 +1,73 @@
 {extend name="index" /} {block name="content"}
-<div class="panel-body"></div>
-<div class="row">
-    <div class="col-md-12">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <div class="row">
-                    <form class="form-horizontal">
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">用户名</label>
-                            <div class="col-md-3">
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">昵称</label>
-                            <div class="col-md-3">
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword3" class="col-md-2 control-label">联系方式</label>
-                            <div class="col-md-3">
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword3" class="col-md-2 control-label">电子邮件</label>
-                            <div class="col-md-3">
-                                <input type="email" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword3" class="col-md-2 control-label">原密码</label>
-                            <div class="col-md-3">
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword3" class="col-md-2 control-label">新密码</label>
-                            <div class="col-md-3">
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword3" class="col-md-2 control-label">再次输入新密码</label>
-                            <div class="col-md-3">
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-offset-3 col-md-10">
-                                <button type="submit" class="btn btn-md btn-success"><i class="fa fa-check "></i>确认</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+<div class="row" ng-app="app">
+    <div class="col-md-11" ng-controller="editController">
+        <div class="panel panel-default" >
+          <div class="panel-body">
+              <div class="row">
+                  <form class="form-horizontal">
+                      <div class="form-group">
+                          <label class="col-md-2 control-label">用户名</label>
+                          <div class="col-md-3">
+                              <input type="text" class="form-control" value="{$currentUserModel->getData('username')}" disabled="disabled">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-md-2 control-label">昵称</label>
+                          <div class="col-md-3">
+                              <input type="text" class="form-control" value="{$currentUserModel->getData('name')}">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="inputPassword3" class="col-md-2 control-label">联系方式</label>
+                          <div class="col-md-3">
+                              <input type="text" class="form-control" value="{$currentUserModel->getData('phonenumber')}">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="inputPassword3" class="col-md-2 control-label">电子邮件</label>
+                          <div class="col-md-3">
+                              <input type="email" class="form-control" value="{$currentUserModel->getData('email')}">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="inputPassword3" class="col-md-2 control-label">原密码</label>
+                          <div class="col-md-3">
+                              <input type="text" class="form-control">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="inputPassword3" class="col-md-2 control-label">新密码</label>
+                          <div class="col-md-3">
+                              <input type="text" class="form-control">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="inputPassword3" class="col-md-2 control-label">再次输入新密码</label>
+                          <div class="col-md-3">
+                              <input type="text" class="form-control">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <div class="col-md-offset-3 col-md-10">
+                              <button type="submit" class="btn btn-md btn-success"><i class="fa fa-check "></i>确认</button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
         </div>
     </div>
 </div>
+<script>
+app.controller('editController', function ($scope){
+    console.log(2);
+    $scope.show = true;
+    $scope.chu = 'fd';
+    console.log($scope.chu);
+    $scope.temporary = function (data) {
+    $scope.chu = data;
+    }
+});
+
+</script>
 {/block}

@@ -20,6 +20,7 @@ class LoginController extends Controller
         // 验证用户名是否存在
         $map = array('username' => $username );
         $User = UserModel::get($map);
+        
         if (UserModel::login($username, $password)) {
             return $this->success('登录成功', url('Index/index'));
         } else {
