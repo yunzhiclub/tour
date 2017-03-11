@@ -17,6 +17,7 @@ router:#!/hourse
         </article>
     </div>
 </div>
+<form name="myForm">
 <div class="page" style="margin-left:15px;margin-right:15px">
     <div class="page__hd">
         <p class="page__desc">选择房间：</p>
@@ -37,90 +38,51 @@ router:#!/hourse
             <label for="exampleInput" class="weui-label">订单截止时间</label>
         </div>
         <div class="weui-cell__bd">
-            <input id="exampleInput" class="weui-input" type="datetime-local" placeholder="yyyy-MM-ddTHH:mm:ss" ng-model="deadLine"/>
+            <input id="exampleInput" class="weui-input" type="datetime-local" placeholder="yyyy-MM-ddTHH:mm:ss" ng-model="deadLine" />
         </div>
     </div>
     <hr>
+    <form name="myForm">
     <div class="weui-flex">
         <div class="weui-flex__item" style="margin-right:20px;margin-left:10px">
             <div class="placeholder">
-                <button class="weui-btn weui-btn_plain-default" style="width:180px" ng-click="open()">
+                <button class="weui-btn weui-btn_plain-default" style="width:180px" ng-click="setOptions(1,1)">
                     <div class="weui-cell">
                         <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
                             <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block" />
                         </div>
                         <div class="weui-cell__bd">
-                            <p style="width:60px;height:80px;">男20~30</p>
-                            <p style="font-size: 13px;color: #888888;height:20px;width:70px">￥5,0000.00</p>
+                            <p style="width:60px;height:80px;">{{firstRoom.sex}}{{firstRoom.old}}</p>
+                            <p style="font-size: 13px;color: #888888;height:20px;width:70px">{{firstRoom.money | currency: '¥'}}</p>
                         </div>
                     </div>
                 </button>
                 <div class="weui-cell">
                     <div class="weui-cell__bd">
-                        <p>未支付</p>
+                        <input type="radio" ng-model="payRoomNumber" ng-value="1"
+                        class="weui-agree__checkbox">
+                        支付
                     </div>
                 </div>
             </div>
         </div>
         <div class="weui-flex__item">
             <div class="placeholder">
-                <button class="weui-btn weui-btn_plain-default" style="width:180px" ng-click="open()">
+                <button class="weui-btn weui-btn_plain-default" style="width:180px" ng-click="setOptions(2,1)">
                     <div class="weui-cell">
                         <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
                             <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block" />
                         </div>
                         <div class="weui-cell__bd">
-                            <p style="width:60px;height:80px;">男20~30</p>
-                            <p style="font-size: 13px;color: #888888;height:20px;width:70px">￥5,0000.00</p>
+                            <p style="width:60px;height:80px;">{{scendRoom.sex}}{{scendRoom.old}}</p>
+                            <p style="font-size: 13px;color: #888888;height:20px;width:70px">{{scendRoom.money | currency: '¥'}}</p>
                         </div>
                     </div>
                 </button>
                 <div class="weui-cell">
                     <div class="weui-cell__bd">
-                        <p>未支付</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <hr>
-    <div class="weui-flex">
-        <div class="weui-flex__item" style="margin-right:20px;margin-left:10px">
-            <div class="placeholder">
-                <button class="weui-btn weui-btn_plain-default" style="width:180px" ng-click="open()">
-                    <div class="weui-cell">
-                        <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-                            <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block" />
-                        </div>
-                        <div class="weui-cell__bd">
-                            <p style="width:60px;height:80px;">男20~30</p>
-                            <p style="font-size: 13px;color: #888888;height:20px;width:70px">￥5,0000.00</p>
-                        </div>
-                    </div>
-                </button>
-                <div class="weui-cell">
-                    <div class="weui-cell__bd">
-                        <p>未支付</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="weui-flex__item">
-             <div class="placeholder">
-                <button class="weui-btn weui-btn_plain-default" style="width:180px" ng-click="open()">
-                    <div class="weui-cell">
-                        <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-                            <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block" />
-                        </div>
-                        <div class="weui-cell__bd">
-                            <p style="width:60px;height:80px;">男20~30</p>
-                            <p style="font-size: 13px;color: #888888;height:20px;width:70px">￥5,0000.00</p>
-                        </div>
-                    </div>
-                </button>
-                <div class="weui-cell">
-                    <div class="weui-cell__bd">
-                        <p>未支付</p>
+                         <input type="radio" ng-model="payRoomNumber" ng-value="2"class="weui-agree__checkbox">
+                        支付
                     </div>
                 </div>
             </div>
@@ -129,75 +91,125 @@ router:#!/hourse
     <hr>
     <div class="weui-flex">
         <div class="weui-flex__item" style="margin-right:20px;margin-left:10px">
-             <div class="placeholder">
-                <button class="weui-btn weui-btn_plain-default" style="width:180px" ng-click="open()">
+            <div class="placeholder">
+                <button class="weui-btn weui-btn_plain-default" style="width:180px" ng-click="setOptions(3,2)">
                     <div class="weui-cell">
                         <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
                             <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block" />
                         </div>
                         <div class="weui-cell__bd">
-                            <p style="width:60px;height:80px;">男20~30</p>
-                            <p style="font-size: 13px;color: #888888;height:20px;width:70px">￥5,0000.00</p>
+                            <p style="width:60px;height:80px;">{{thirdRoom.sex}}{{thirdRoom.old}}</p>
+                            <p style="font-size: 13px;color: #888888;height:20px;width:70px">{{thirdRoom.money | currency: '¥'}}</p>
                         </div>
                     </div>
                 </button>
                 <div class="weui-cell">
                     <div class="weui-cell__bd">
-                        <p>未支付</p>
+                         <input type="radio" ng-model="payRoomNumber" ng-value="3" class="weui-agree__checkbox">
+                        支付
                     </div>
                 </div>
             </div>
         </div>
         <div class="weui-flex__item">
-             <div class="placeholder">
-                <button class="weui-btn weui-btn_plain-default" style="width:180px" ng-click="open()">
+            <div class="placeholder">
+                <button class="weui-btn weui-btn_plain-default" style="width:180px" ng-click="setOptions(4,2)">
                     <div class="weui-cell">
                         <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
                             <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block" />
                         </div>
                         <div class="weui-cell__bd">
-                            <p style="width:60px;height:80px;">男20~30</p>
-                            <p style="font-size: 13px;color: #888888;height:20px;width:70px">￥5,0000.00</p>
+                            <p style="width:60px;height:80px;">{{fourthRoom.sex}}{{fourthRoom.old}}</p>
+                            <p style="font-size: 13px;color: #888888;height:20px;width:70px">{{fourthRoom.money | currency: '¥'}}</p>
                         </div>
                     </div>
                 </button>
                 <div class="weui-cell">
                     <div class="weui-cell__bd">
-                        <p>未支付</p>
+                         <input type="radio" ng-model="payRoomNumber" ng-value="4"class="weui-agree__checkbox">
+                        支付
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <hr>
+    <div class="weui-flex">
+        <div class="weui-flex__item" style="margin-right:20px;margin-left:10px">
+            <div class="placeholder">
+                <button class="weui-btn weui-btn_plain-default" style="width:180px" ng-click="setOptions(5,3)">
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+                            <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block" />
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p style="width:60px;height:80px;">{{fifthRoom.sex}}{{fifthRoom.old}}</p>
+                            <p style="font-size: 13px;color: #888888;height:20px;width:70px">{{fifthRoom.money | currency: '¥'}}</p>
+                        </div>
+                    </div>
+                </button>
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                         <input type="radio" ng-model="payRoomNumber" ng-value="5"class="weui-agree__checkbox">
+                        支付
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="weui-flex__item">
+            <div class="placeholder">
+                <button class="weui-btn weui-btn_plain-default" style="width:180px" ng-click="setOptions(6,3)">
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+                            <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block" />
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p style="width:60px;height:80px;">{{sixthRoom.sex}}{{sixthRoom.old}}</p>
+                            <p style="font-size: 13px;color: #888888;height:20px;width:70px">{{sixthRoom.money | currency: '¥'}}</p>
+                        </div>
+                    </div>
+                </button>
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                         <input type="radio" ng-model="payRoomNumber" ng-value="6"class="weui-agree__checkbox">
+                        支付
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
     <br>
 </div>
 <hr>
 <label for="weuiAgree" class="weui-agree">
-    <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
+    <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox" required="required">
     <span class="weui-agree__text">
                 我已阅读并接受<a href="javascript:void(0);">预定须知、合同、保险等条款</a>
             </span>
 </label>
 <div class="weui-btn-area">
-    <a class="weui-btn weui-btn_primary" ui-sref="topay" id="showTooltips">去支付</a>
+    <a type="submit" class="weui-btn weui-btn_primary" id="showTooltips" ng-click="">去支付</a>
 </div>
+</form>
+
 <script type="text/ng-template" id="myModalContent.html">
     <div class="modal-header">
-        <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
+        <h3 class="modal-title" id="modal-title">设置房间人信息</h3>
     </div>
     <div class="modal-body" id="modal-body">
         <ul>
-            <li ng-repeat="item in terms1">
-                <a href="#" ng-click="$event.preventDefault(); selected.item1 = item">{{ item }}</a>
+            <li ng-repeat="old in olds">
+                <a href="#" ng-click="$event.preventDefault(); selected.old = old">{{ old }}</a>
             </li>
         </ul>
-        Selected: <b>{{ selected.item1 }}</b>
+        年龄: <b>{{ selected.old }}</b>
         <ul>
-            <li ng-repeat="item in terms2">
-                <a href="#" ng-click="$event.preventDefault(); selected.item2 = item">{{ item }}</a>
+            <li ng-repeat="sex in sexs">
+                <a href="#" ng-click="$event.preventDefault(); selected.sex = sex">{{ sex | format}}</a>
             </li>
         </ul>
-        Selected: <b>{{ selected.item2 }}</b>
+        性别: <b>{{ selected.sex | format}}</b>
         <br>
         <div>金额:
             <input type="text" placeholder="$000" ng-model="selected.money">
