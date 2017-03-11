@@ -7,6 +7,22 @@ namespace app\model;
  */
 class StartTimeModel extends ModelModel
 {
+	private $RouteModel = null;		//外键关联的对象
+	/**
+	 * 获取属性中route_id对应的对象
+	 * @author huangshuaibin 
+	 * @return Objext 对应的Route对象
+	 */
+	public function getRouteModel()
+	{
+		//判断该对象是否使用过该对象,如果没有使用该对象
+		if (null == $this->RouteModel) {
+			$RouteId = $this->getData('route_id');
+			$this->RouteModel = RouteModel::get($RouteId);
+		}
+		
+		return $this->RouteModel;
+	}
 	/**
 	 * 通过路线id取出  出发时间以及价格数据
 	 * @param  int $RouteId 路线id
