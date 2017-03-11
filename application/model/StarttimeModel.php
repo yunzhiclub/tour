@@ -18,7 +18,8 @@ class StartTimeModel extends ModelModel
 		$StartTimeModel = new StartTimeModel;
 
 		//通过路线查询
-		$startTimes = $StartTimeModel->where('route_id', '=', $RouteId)->select();
+		$startTimes = $StartTimeModel->where('route_id', '=', $RouteId)->order('date desc')->select();
+
 		return $startTimes;
 	}
 }
