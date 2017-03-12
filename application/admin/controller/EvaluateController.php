@@ -12,7 +12,7 @@ class EvaluateController extends IndexController
         return $this->fetch();
     }
 
-    public function star()
+    public function detail()
     {
         return $this->fetch();
     }
