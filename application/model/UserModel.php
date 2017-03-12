@@ -100,5 +100,34 @@ class UserModel extends ModelModel
         return $encryptedpassword;
     }
 
+    /**
+     * 判断密码是否正确
+     * @param  string $data 用户提交的密码
+     * @return boolean       true为正确，反之。
+     * @author chuhang 
+     */
+    static public function passwordIsTrue($data){
 
+        $password = self::getCurrentUserModel()->getData('password');
+
+        if (self::encryptPassword($data) === $password) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 更新用户数据
+     * @param  array $data 用户数据
+     * @return boolean       保存成功为true，反之
+     * @author chuhang 
+     */
+    public function saveUserInfo($data) {
+        $this->phonenumber = $data['phonenumber'];
+        $this->email = $data['email'];
+        $this->name = $data['name'];
+        $this->password = self::encryptPassword($data['newpassword']);
+        
+        return $this->save();
+    }
 }
