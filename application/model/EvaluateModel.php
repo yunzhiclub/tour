@@ -9,13 +9,32 @@ class EvaluateModel extends ModelModel
 	private $CustomerModel = null;
 	private $RouteModel = null;
 
+	/**
+	 * 获取用户Model
+	 * @return Object 用户对象
+	 */
 	public function getCustomerModel()
 	{
 		if (null === $this->CustomerModel) {
 			$CustomerId = $this->getData('customer_id');
 			$this->CustomerModel = CustomerModel::get($CustomerId);
 		}
+
 		return $this->CustomerModel;
+	}
+
+	/**
+	 * 获取路线对象
+	 * @return Object 外键对应的Route对象
+	 */
+	public function getRouteModel()
+	{
+		if (null === $this->RouteModel) {
+			$RouteId = $this->getData('route_id');
+			$this->RouteModel = RouteModel::get($RouteId);
+		}
+
+		return $this->RouteModel;
 	}
 	/**
 	 **通过路线id查询对应的评价		
