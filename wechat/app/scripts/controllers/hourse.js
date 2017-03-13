@@ -8,12 +8,15 @@
  * Controller of the wechatApp
  */
 angular.module('wechatApp')
-    .controller('HourseCtrl', function($uibModal, $log, $document, $scope) {
-        this.awesomeThings = [
-            'HTML5 Boilerplate',
-            'AngularJS',
-            'Karma'
-        ];
+    .controller('HourseCtrl', ['$stateParams', '$uibModal', '$log', '$document', '$scope', function($uibModal, $log, $document, $scope, $stateParams) {
+         console.log($stateParams.timeId);
+        if ($stateParams.timeId !== undefined) {
+            // 选用路线的实际价格
+            console.log($stateParams.timeId);
+        }
+
+
+
         var $ctrl = $scope;
         $ctrl.items1 = ['0~25', '25~35', '35~'];
         $ctrl.items2 = ['男', '女'];
@@ -49,4 +52,4 @@ angular.module('wechatApp')
                 $log.info('Modal dismissed at: ' + new Date());
             });
         };
-    });
+    }]);
