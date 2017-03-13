@@ -113,7 +113,7 @@ angular.module('wechatApp')
             });
         };
 
-        // 必须是六人组必须每个房间都设置人的信息
+        // 必须是六人组必须每个房间都设置人的信息,目前生成邀约的所有的信息已经全有了
         $scope.submit = function() {
             if(roomDatas.length !== 6) {
                 alert("请选择房间信息");
