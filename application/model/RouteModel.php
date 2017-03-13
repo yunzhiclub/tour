@@ -1,6 +1,7 @@
 <?php
 namespace app\model;
 use app\model\DestinationCityModel;	//目的城市
+use app\model\DestinationCityRouteHotelFlightViewModel; //与路线有关信息组成的视图
 /**
  * 路线
  */
@@ -86,13 +87,13 @@ class RouteModel extends ModelModel
 	 * @author huangshuaibin
 	 * @return array            满足条件的路线的数组
 	 */
-	public static function getRouteIdsByCountryIdAndStartCity($startId,$countryId)
+	public static function getRouteIdsByCountryIdAndStartCityId($startId,$countryId)
 	{
 		//通过出发城市取出所有的路线
 		$routes1 = RouteModel::getRouteIdByStartCityId($startId);
 
 		//通过目的国家取出其对应的所有目的城市
-		$destinationcitys = DestinationcityModel::getDestinationIdByCountryId($countryId);
+		$destinationcitys = DestinationCityModel::getDestinationIdByCountryId($countryId);
 
 		//通过目的城市的id取出所有的路线的id
 		$routes2 = RouteModel::getRouteIdByDestinationId($destinationcitys);
@@ -110,5 +111,19 @@ class RouteModel extends ModelModel
 
 		//返回数据
 		return $temp;
+	}
+
+	/**
+	 * 获取路线的详情信息，从视图中查询数据
+	 * @param  array or int $routeIds 一个路线id构成的数组或者单个的id
+	 * @return array           array中的每一项都是一个对象，路线的详细信息
+	 */
+	public static function getRoutesDetails($routeIds)
+	{
+		
+		$DestinationCityRouteHotelFlightViewModel = new DestinationCityRouteHotelFlightViewModel;
+		$RouteDetails = $DestinationCityRouteHotelFlightViewModel->where('id', 'in', $routeIds)->select();
+		
+		return $RouteDetails;
 	}
 }

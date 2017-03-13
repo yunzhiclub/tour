@@ -93,7 +93,7 @@ angular
                 controller: 'ClassicCtrl',
             })
             .state('clsdetail', {
-                url: '/clsdetail', // 经典小团详情界面
+                url: '/clsdetail/:routeId', // 经典小团详情界面
                 templateUrl: 'views/clsdetail.html',
                 controller: 'ClsdetailCtrl',
             })
@@ -113,7 +113,7 @@ angular
                 controller: 'VisaCtrl',
             })
             .state('hourse', {
-                url: '/hourse', // 房间选择界面
+                url: '/hourse/:timeId', // 房间选择界面
                 templateUrl: 'views/hourse.html',
                 controller: 'HourseCtrl',
             })
