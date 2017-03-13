@@ -6,53 +6,21 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <form class="form-horizontal" action="{:url('save')}" method="post">
-                            <div class="form-group">
-                                <label for="name" class="col-md-2 text-right">名称</label>
-                                希尔顿
-
-                            </div>
-                            <div class="form-group">
-                                <label for="password" class="col-md-2 text-right">国家</label>
-                                中国
-                            </div>
-                            <div class="form-group">
-                                <label for="password" class="col-md-2 text-right">地址</label>
-                                剑桥路
-                            </div>
-                            <div class="form-group">
-                                <label for="password" class="col-md-2 text-right">电话</label>
-                                60435025
-                            </div>
-                            <div class="form-group">
-                                <label for="password" class="col-md-2 text-right">星级</label>
-                                4
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 text-right" value="">WIFI</label>
-                                有
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 text-right" value="">热水</label>
-                                无
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2 text-right" value="">早餐</label>
-                                有
-                            </div>
-                            <div class="form-group">
-                                <label for="image" class="col-md-2 text-right">图片</label>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-7 text-center">
-                                    <button type="submit" class="btn btn-md btn-success"><i class="fa fa-check "></i>确认</button>
-                                </div>
-                            </div>
-                        </form>
+                        <center><h1>{$HotelModel->getData('title')}</h1></center>
                     </div>
+                    
+                </div><hr>
+                <div class="row">
+                <div class="col-md-12">
+                    <p>{$HotelModel->getData('content')}</p>
+                </div>
+            
                 </div>
             </div>
         </div>
     </div>
-</d iv>
+</div>
+<style type="text/css">
+    p {text-indent: 1cm}
+</style>
 {/block}
