@@ -54,18 +54,18 @@ class RouteController extends ApiController {
 	/**
 	 * 取出对应目的地(国家id)和出发城市id的所有路线
 	 * @param              int
-	 * @return             object;
+	 * @return             object 
 	 */
 	public function getRoutesByCountryId() {
 		$CountryId = Request::instance()->param('countryid');
 		$StartCityId = Request::instance()->param('cityid');
 		
-		//获取符合条件的目的地国家城市和出发城市的路线id
-		$routeIds = RouteModel::getRouteIdsByCountryIdAndStartCity($StartCityId, $CountryId);
+		//获取符合条件的目的地国家城市和出发城市的路线id从视图中查询出来的，
+		$routeIds = RouteModel::getRouteIdsByCountryIdAndStartCityId($StartCityId, $CountryId);
 
-		//通过路线id取出所有的路线详情
-		$routes = RouteModel::getRoutesByIds($routeIds);
-		
+		//取出所有的符合查询条件的路线的详细信息，从DestinationCityRouteHotelFlightView视图中查询，返回的包含路线详情的对象数组
+		$routes = RouteModel::getRoutesDetails($routeIds);
+			
 		return $this->response($routes);
 	}
 

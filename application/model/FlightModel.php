@@ -6,7 +6,6 @@ namespace app\model;
  */
 class FlightModel extends ModelModel
 {
-	protected $autoWriteTimestamp = true;
 	private $StartCityModel = null;		//对应的出发城市模型
 	private $DestinationCityModel = null;	 //对应的目的地城市模型
 

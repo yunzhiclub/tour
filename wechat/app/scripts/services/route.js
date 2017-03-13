@@ -11,7 +11,7 @@ angular.module('wechatApp')
     .factory('route', ['$q', 'config', 'server', function($q, config, server) {
         // Service logic
         var self = this;
-        self.routes = [];
+        self.routes = [{id:1,startCityName: '天津', content:'这是路线的详细的描述', beginTime: 69870990, actualPrice:5677}, {id:2, startCityName: '天津',content: '这是路线的详细的描述', beginTime: 69870990, actualPrice:5677}];
         var url = 'Route/';
         var getChoosedRoutes = function() {
             // 定义promise 解决异步问题
@@ -72,7 +72,6 @@ angular.module('wechatApp')
 
             // $http去后台获取数据
             server.http(paramUrl, data, function successCallback(response) {
-                console.log(response);
                 if (typeof response.data.errorCode !== 'undefined') {
                     console.log('系统发生错误：' + response.data.error);
                 } else {
@@ -87,11 +86,11 @@ angular.module('wechatApp')
             return promise;
         };
 
-        var getStartimeById = function(id) {
+        var getStarTimeByid = function(id) {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
-            var paramUrl = url + 'getStartimeById';
+            var paramUrl = url + 'getStarTimeByid';
             var data = { id: id };
 
             // $http去后台获取数据
@@ -173,8 +172,8 @@ angular.module('wechatApp')
             },
 
             // 取得对应id的route对应的所有出发时间和价格
-            getStartimeById: function(id) {
-                return getStartimeById(id);
+            getStarTimeByid: function(id) {
+                return getStarTimeByid(id);
             },
 
             // 按目的地(国家id)和出发城市id选出路线
@@ -190,6 +189,6 @@ angular.module('wechatApp')
             collecteTheRoute: function(customerId, routeId) {
                 return collecteTheRoute(customerId, routeId);
             },
-
+            routes: self.routes,
         };
     }]);

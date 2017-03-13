@@ -64,11 +64,11 @@ class StartcityController extends IndexController
         $StartCityModel = StartCityModel::get($id);
 
         //判断该出发城市是否为某航班的出发城市
-        if (false === $StartCityModel->isFlightStartCity()) {
+        if (false === $StartCityModel->isXXXFlightStartCity()) {
             return $this->error('该城市为某航班的出发城市');
         }
         //判断该出发城市是否为某路线出发城市
-        if (false === $StartCityModel->isRouteStartCity()) {
+        if (false === $StartCityModel->isXXXRouteStartCity()) {
             return $this->error('该城市为某路线的出发城市');
         }
         //删除数据
