@@ -13,6 +13,21 @@ use think\Log;
 class ApiController extends Controller
 {
     static protected $defaultCode = 10001;
+    protected $postJsonData = [];
+
+    public function __construct(Request $request = null)
+    {
+        parent::__construct($request);
+        $this->postJsonData = json_decode(file_get_contents('php://input'));
+    }
+
+    /**
+     * 获取POST过来的JSON数据
+     * @return array|mixed
+     */
+    public function getPostJsonData() {
+        return $this->postJsonData;
+    }
 
     /**
      * 用户请求响应(供子类统一使用进行数据返回)

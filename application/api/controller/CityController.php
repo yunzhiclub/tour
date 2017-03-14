@@ -13,4 +13,8 @@ class CityController extends ApiController {
 		
 		return $this->response($StartCitys);
 	}
+
+	public function test() {
+        return $this->response($this->getPostJsonData());
+    }
 }
