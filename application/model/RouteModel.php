@@ -126,4 +126,19 @@ class RouteModel extends ModelModel
 		
 		return $RouteDetails;
 	}
+	
+	/**
+	 * 获取该路线的评价数量
+	 * @return int 该路线评价的数量
+	 * @author chuhang 
+	 */
+	public function  getRouteEvaluateCount() 
+	{
+		$EvaluateModel = new EvaluateModel;
+		$map['route_id'] = $this->id;
+		$EvaluateModels = $EvaluateModel->where($map)->select();
+
+		return count($EvaluateModels);
+	}
+
 }
