@@ -48,6 +48,11 @@ class DestinationCityModel extends ModelModel
 
 		return $DestinationCitys;
 	}
+	/**
+	 *   获得对应国家ID
+	 * @return object
+	 * @author zhangmengxiang
+	 */
 	public function getCountry()
 	{
 		$countryId = $this->getData('country_id');
