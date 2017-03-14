@@ -220,11 +220,11 @@ angular
 // 弹出框同一处理方法
 controller('ModalInstanceCtrl', function($uibModalInstance, items, $scope) {
         var $ctrl = $scope;
-        $ctrl.terms1 = items.terms1;
-        $ctrl.terms2 = items.terms2;
+        $ctrl.olds = items.olds;
+        $ctrl.sexs = items.sexs;
         $ctrl.selected = {
-            item1: $ctrl.terms1[0],
-            item2: $ctrl.terms2[0],
+            old: $ctrl.olds[0],
+            sex: $ctrl.sexs[0],
         };
 
         $ctrl.ok = function() {
