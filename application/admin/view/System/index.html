@@ -8,7 +8,7 @@
                         <hr />
                         <div class="row">
                             <div class="col-md-10">
-                                <form class="form-inline" action="{:url()}" method="get">
+                                <form class="form-inline" action="{:url('',url('get.'))}" method="get">
                                     <div class="form-group">
                                         <label class="sr-only" for="name">文章</label>
                                         <input name="name" type="text" class="form-control" placeholder="名称" value="{:input('get.name')}">
@@ -26,17 +26,18 @@
                         <table class="table table-hover table-bordered">
                             <tr class="info">
                                 <th>序号</th>
-                                <th>名称</th>
-                                
+                                <th>标题</th>
                                 <th>操作</th>
                             </tr>
+                            {volist name="ConfigModels" id="ConfigModel" key="key"}
                             <tr>	
-	                            <td>1</td>
-	                            <td><a href="{:url('content')}">用户须知</a></td>
+	                            <td>{$key}</td>
+	                            <td><a href="{:url('content?id='.$ConfigModel->getData('id'))}">{$ConfigModel->getData('title')}</a></td>
 	                            
-	                            <td> <a class="btn btn-sm btn-primary" href="{:url('edit')}"><i class="glyphicon glyphicon-pencil"></i> 编辑</a>
-                                <a class="btn btn-sm btn-danger" href="#"><i class="glyphicon glyphicon-trash"></i> 删除</a></td>
+	                            <td> <a class="btn btn-sm btn-primary" href="{:url('edit?id='.$ConfigModel->getData('id'))}"><i class="glyphicon glyphicon-pencil"></i> 编辑</a>
+                                <a class="btn btn-sm btn-danger" href="{:url('delete?id='.$ConfigModel->getData('id'))}"><i class="glyphicon glyphicon-trash"></i> 删除</a></td>
                             </tr>
+                            {/volist}
                         </table>
                     </div>
                 </div>
