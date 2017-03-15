@@ -15,7 +15,7 @@ class PersonalController extends IndexController
     	//获取当前用户
     	$currentUserModel = UserModel::getCurrentUserModel();
     	$this->assign('currentUserModel', $currentUserModel);
-        return $this->fetch() . $this->fetch('indexJs');
+        return $this->fetch();
     }
 
     public function update()
