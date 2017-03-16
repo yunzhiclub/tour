@@ -1,0 +1,155 @@
+{extend name="index" /} {block name="content"}
+<div class="panel-body"></div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">出发地</label>
+                            <div class="col-md-3">
+                                <select class=" form-control">
+                                    <option value="1">北京</option>
+                                    <option value="2">上海</option>
+                                    <option value="2">天津</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">目的地</label>
+                            <div class="col-md-3">
+                                <select class=" form-control">
+                                    <option value="1">伦敦</option>
+                                    <option value="2">巴黎</option>
+                                    <option value="2">苏黎世</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">酒店</label>
+                            <div class="col-md-3">
+                                <select class=" form-control">
+                                    <option value="1">希尔顿</option>
+                                    <option value="2">希尔顿</option>
+                                    <option value="2">希尔顿</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">出发航班</label>
+                            <div class="col-md-3">
+                                <select class=" form-control">
+                                    <option value="1">G1259</option>
+                                    <option value="2">G1596</option>
+                                    <option value="2">希尔顿</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">返回航班</label>
+                            <div class="col-md-3">
+                                <select class=" form-control">
+                                    <option value="1">G1259</option>
+                                    <option value="2">G1596</option>
+                                    <option value="2">希尔顿</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">出发日期</label>
+                            <div class="col-md-3">
+                                <input type="date" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">返程日期</label>
+                            <div class="col-md-3">
+                                <input type="date" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">截止日期</label>
+                            <div class="col-md-3">
+                                <input type="date" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">描述信息</label>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">选择间数</label>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">入住天数</label>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">起价</label>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">标价</label>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">实际价格</label>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">选择客服</label>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">押金比例</label>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-md-2 text-right">详情</label>
+                            <div class="col-md-9">
+                                <textarea id="textarea1">
+                                <p>请输入内容...</p>
+                            </textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-10">
+                                <button type="submit" class="btn btn-md btn-success"><i class="fa fa-check "></i>确认</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- jQuery -->
+<script src="/tour/public/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- 引入wangEditor的js文件 -->
+<script src="/tour/public/bower_components/wangEditor/dist/js/wangEditor.min.js"></script>
+<script type="text/javascript">
+var editor = new wangEditor('textarea1');
+editor.create();
+</script>
+{/block}

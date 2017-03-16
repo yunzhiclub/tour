@@ -1,0 +1,93 @@
+{extend name="index" /} {block name="content"}
+<div class="panel-body"></div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form class="form-horizontal" action="{:url('save')}" method="post">
+                            <div class="form-group">
+                                <label for="name" class="col-md-2 text-right">名称</label>
+                                <div class="col-md-3">
+                                    <input name="name" class="form-control" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="col-md-2 text-right">国家</label>
+                                <div class="col-md-3">
+                                    <input name="weight" class="form-control" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="col-md-2 text-right">地址</label>
+                                <div class="col-md-3">
+                                    <input name="weight" class="form-control" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="col-md-2 text-right">电话</label>
+                                <div class="col-md-3">
+                                    <input name="weight" class="form-control" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="col-md-2 text-right">星级</label>
+                                <div class="col-md-3">
+                                <select class="form-control">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                                </div>
+                                
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 text-right" value="">WIFI</label>
+                                <div class="col-md-4">
+                                    <input id="radio3" type="radio" name="is_show" value="0">&nbsp;&nbsp;
+                                    <label for="radio3">是</label> &nbsp;&nbsp;&nbsp;
+                                    <input id="radio4" type="radio" name="is_show" value="1">&nbsp;&nbsp;
+                                    <label for="radio4">否</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 text-right" value="">热水</label>
+                                <div class="col-md-4">
+                                    <input id="radio3" type="radio" name="is_show" value="0">&nbsp;&nbsp;
+                                    <label for="radio3">是</label> &nbsp;&nbsp;&nbsp;
+                                    <input id="radio4" type="radio" name="is_show" value="1">&nbsp;&nbsp;
+                                    <label for="radio4">否</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 text-right" value="">早餐</label>
+                                <div class="col-md-4">
+                                    <input id="radio3" type="radio" name="is_show" value="0">&nbsp;&nbsp;
+                                    <label for="radio3">是</label> &nbsp;&nbsp;&nbsp;
+                                    <input id="radio4" type="radio" name="is_show" value="1">&nbsp;&nbsp;
+                                    <label for="radio4">否</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                    <label for="image" class="col-md-2 text-right">图片</label>
+                                    <div class="col-md-3">
+                                      <input type="file" name="image" id="InputPicture">
+                                      <p class="help-block">图片最佳尺寸为1980*670</p>
+                                    </div>
+                                </div>
+                            <div class="form-group">
+                                <div class="col-md-7 text-center">
+                                   <button type="submit" class="btn btn-md btn-success"><i class="fa fa-check "></i>确认</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</d iv>
+{/block}
