@@ -6,36 +6,38 @@ namespace app\model;
  */
 class EvaluateModel extends ModelModel
 {
-	private $CustomerModel = null;
-	private $RouteModel = null;
+	private $RouteModel = null;      //对应路线模型
+
+	private $CustomerModel = null;   //对应的客户模型
+
 
 	/**
-	 * 获取用户Model
-	 * @return Object 用户对象
+	 * 当前模型和路线模型的比为n:1
+	 * @author chuhang 
 	 */
-	public function getCustomerModel()
+	public function RouteModel() 
+	{
+		if (null === $this->RouteModel) {
+			$this->RouteModel = RouteModel::get($this->getData('route_id'));
+		}
+
+		return $this->RouteModel;
+
+	}
+
+	/**
+	 * 当前模型和客户模型比为m:n
+	 * @author chuhang 
+	 */
+	public function CustomerModel()
 	{
 		if (null === $this->CustomerModel) {
-			$CustomerId = $this->getData('customer_id');
-			$this->CustomerModel = CustomerModel::get($CustomerId);
+			$this->CustomerModel = CustomerModel::get($this->getData('customer_id'));
 		}
 
 		return $this->CustomerModel;
 	}
 
-	/**
-	 * 获取路线对象
-	 * @return Object 外键对应的Route对象
-	 */
-	public function getRouteModel()
-	{
-		if (null === $this->RouteModel) {
-			$RouteId = $this->getData('route_id');
-			$this->RouteModel = RouteModel::get($RouteId);
-		}
-
-		return $this->RouteModel;
-	}
 	/**
 	 **通过路线id查询对应的评价		
 	 * @param  int $RouteId 路线id
@@ -50,4 +52,6 @@ class EvaluateModel extends ModelModel
 		$evaluates = $EvaluateModel->where('route_id', '=', $RouteId)->select();
 		return $evaluates;
 	}
+
+	
 }
