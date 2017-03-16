@@ -93,47 +93,8 @@ angular.module('wechatApp')
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
-
-            // 需要保存得数据(示例数据)
-            var data = {
-                customer_id: postdata.customer_id,
-                route_id: postdata.route_id,
-                time_id: postdata.time_id,
-                isopen: postdata.isopen,
-                beds: {
-                    bed1: {
-                        sex: postdata.beds.bed1.sex,
-                        old: postdata.beds.bed1.old,
-                        money: postdata.beds.bed1.money,
-                    },
-                    bed2: {
-                        sex: postdata.beds.bed2.sex,
-                        old: postdata.beds.bed2.old,
-                        money: postdata.beds.bed2.money,
-                    },
-                    bed3: {
-                        sex: postdata.beds.bed3.sex,
-                        old: postdata.beds.bed3.old,
-                        money: postdata.beds.bed3.money,
-                    },
-                    bed4: {
-                        sex: postdata.beds.bed4.sex,
-                        old: postdata.beds.bed4.old,
-                        money: postdata.beds.bed4.money,
-                    },
-                    bed5: {
-                        sex: postdata.beds.bed5.sex,
-                        old: postdata.beds.bed5.old,
-                        money: postdata.beds.bed5.money,
-                    },
-                    bed6: {
-                        sex: postdata.beds.bed6.sex,
-                        old: postdata.beds.bed6.old,
-                        money: postdata.beds.bed6.money,
-                    },
-                },
-            };
-            var paramUrl = url + 'saveTheInvitation';
+            var data = {data: postdata};
+            var paramUrl = url + 'saveInvitation';
             // $http去后台获取数据
             server.http(paramUrl, data, function successCallback(response) {
                 console.log(response);
@@ -141,9 +102,9 @@ angular.module('wechatApp')
                     console.log('系统发生错误：' + response.data.error);
                 } else {
                     // 逻辑处理 
-                    self.invitations = response.data.data;
+                    //self.invitations = response.data.data;
                 }
-                deferred.resolve(self.invitations); //执行成功
+                deferred.resolve(response.status); //执行成功
             }, function errorCallback(response) {
                 deferred.reject(response); //执行失败
             });
