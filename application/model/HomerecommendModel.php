@@ -8,6 +8,22 @@ namespace app\model;
 
 class HomeRecommendModel extends ModelModel
 {
+	private $RouteModel = null;
+
+	/**
+	 * 获取RouteModel通过本对象中的route_id
+	 * @author huangshuaibin 
+	 * @return Object Route对象
+	 */
+	public function getRouteModel()
+	{
+		if (null === $this->RouteModel) {
+			$RouteId = $this->getData('route_id');
+			$this->RouteModel = RouteModel::get($RouteId);
+		}
+
+		return $this->RouteModel;
+	}
 	/**
 	 * 取出所有的首页推荐对应的路线ID
 	 * @return [type] [description]
