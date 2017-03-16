@@ -41,7 +41,7 @@ class PictureController extends IndexController
 
         //上传图片返回false
         if (!is_null($file)) {
-            $flag = PictureModel::saveDate($data, $file);
+            $flag = PictureModel::saveFile($file);
         }
         if (!$flag) {
             return $this->error('图片上传失败', url('add'));

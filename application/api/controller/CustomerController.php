@@ -109,7 +109,7 @@ class CustomerController extends ApiController
         $flag = Request::instance()->param('flag');
 
         //调用改变订单状态是否公开的函数
-        $status = InviteModel::SetInviteIsPublic(1,1);
+        $status = InviteModel::SetInviteIsPublic($id, $flag);
         if (false === $status) {
             return "设置失败";
         }

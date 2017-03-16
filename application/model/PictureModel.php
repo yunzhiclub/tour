@@ -7,33 +7,12 @@ namespace app\model;
  */
 class PictureModel extends ModelModel
 {
-	/**
-	 * 保存图片数据
-	 * @param  array $data 保存图片时的name,type信息
-	 * @param  object $file 保存图片信息缓冲区的对象
-	 * @return bool       true or false
-	 */
-	public static function saveDate($data, $file)
+	public static function saveFile($file)
 	{
 		//将图片移动到指定文件夹下
 		$info = $file->move(ROOT_PATH . 'public' . DS . 'upload' . DS . 'admin');
-		$PictureModel = new PictureModel;
 		
-		$PictureModel->name = $data['name'];
-		$PictureModel->type = $data['type'];
-
-		//保存图片的URL
-		$PictureModel->img_url = $info->getSaveName();
-		
-		$PictureModel->save();
-
-		//判断保存是否成功
-		if (is_null($info))
-		{
-			return false;
-		}
-
-		return true;
+		return $info;
 	}
 	/**
 	 * 软删除图片以及相关信息

@@ -33,8 +33,8 @@ class DestinationCityModel extends ModelModel
 		//查询条件
 		$map = array('country_id' => $id);
 
-		$Destinationcity = new DestinationCityModel;
-		$destinations = $Destinationcity->where($map)->select();
+		$DestinationCity = new DestinationCityModel;
+		$destinations = $DestinationCity->where($map)->select();
 
 		//临时数组
 		$temp = [];
