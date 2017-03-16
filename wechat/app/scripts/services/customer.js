@@ -13,6 +13,7 @@ angular.module('wechatApp')
         // ...
         var self = this;
         self.customer = {
+            id: '',
             openid: 'oYIbNwFiyIJK25Ifro0LKww03N2g',
             nickName: '',
             sex: '',
@@ -95,6 +96,7 @@ angular.module('wechatApp')
                     } else {
                         var customer = response.data.data;
                         self.customer = {
+                            id: customer.id,
                             openid: customer.openid,
                             nickName: customer.nick_name,
                             sex: customer.sex,
