@@ -6,6 +6,22 @@ namespace app\model;
  */
 class DestinationCityModel extends ModelModel
 {
+	private $CountryModel = null;
+
+	/**
+	 * 获取地区地区对象
+	 * @return Object 获取的地区对象
+	 */
+	public function getCountryModel()
+	{
+		if (null === $this->CountryModel) {
+			$CountryId = $this->getData('country_id');
+
+			$this->CountryModel = CountryModel::get($CountryId);
+		}
+
+		return $this->CountryModel;
+	}
 	/**
 	 * 根据目的国家ID 取出 对应的目的城市ID
 	 * @param  int $id 目的国家ID
