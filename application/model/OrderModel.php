@@ -12,10 +12,10 @@ class OrderModel extends ModelModel
 	 * @param  int $userId 用户的id
 	 * @return array         用户的订单的数组
 	 */
-	public static function getOrdersByUserId($userId)
+	public static function getOrdersByCustomerId($CustomerId)
 	{
 		$Order = new OrderModel;
-		$orders = $Order->where('user_id', '=', $userId)->select();
+		$orders = $Order->where('customer_id', '=', $CustomerId)->select();
 		return $orders;
 	}
 }

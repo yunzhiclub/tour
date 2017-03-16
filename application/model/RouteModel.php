@@ -1,12 +1,90 @@
 <?php
 namespace app\model;
-use app\model\DestinationCityModel;	//目的城市
 use app\model\DestinationCityRouteHotelFlightViewModel; //与路线有关信息组成的视图
 /**
  * 路线
  */
 class RouteModel extends ModelModel
 {
+	private $StartCityModel = null;
+	private $DestinationCityModel = null;
+	private $HotelModel = null;
+	private $BegionFlightModel = null;
+	private $BackFlightModel = null;
+
+	/**
+	 * 获取出发城市Model对象
+	 * @author huangshuaibin 
+	 * @return object 出发城市的对象
+	 */
+	public function getStartCityModel()
+	{
+		if (null === $this->StartCityModel) {
+			$StartCityModelId = $this->getData('start_city_id');
+			$this->StartCityModel = StartCityModel::get($StartCityModelId);
+		}
+
+		return $this->StartCityModel;
+	}
+	/**
+	 * 获取目的城市对象Model
+	 * @return object 目的城市对象
+	 */
+	public function getDestinationCityModel()
+	{
+		if (null === $this->DestinationCityModel) {
+			$DestinationCityModelId = $this->getData('destination_city_id');
+			$this->DestinationCityModel = DestinationCityModel::get($DestinationCityModelId);
+		}
+
+		return $this->DestinationCityModel;
+	}
+
+	/**
+	 * 通过RouteModel的外键获取HotelModel的对象
+	 * @return Obejct HotelModel对象的Model
+	 */
+	public function getHotelModel()
+	{
+		if (null === $this->HotelModel) {
+			$HotelModelId = $this->getData('hotel_id');
+			$this->HotelModel = HotelModel::get($HotelModelId);
+		}
+
+		return $this->HotelModel;
+	}
+
+	/**
+	 * 获取外键对应开始航班的Model对象
+	 * @author huangshuaibin 
+	 * @return Object 出发航班的Model
+	 */
+	public function getBegionFlightModel()
+	{
+		if (null === $this->BegionFlightModel) {
+
+			$BeginFlightModelId = $this->getData('begin_flight_id');
+
+			$this->BeginFlightModel = FlightModel::get($BeginFlightModelId);
+		}
+
+		return $this->BeginFlightModel;
+	}
+
+	/**
+	 * 通过外键获取出返回航班的对象
+	 * @author huangshuaibin	
+	 * @return Object 返回航班的对象
+	 */
+	public function getBackFlightModel()
+	{
+		if (null === $this->BackFlightModel) {
+			$BackFlightModelId = $this->getData('back_flight_id');
+			$this->BackFlightModel = FlightModel::get($BackFlightModelId);
+		}
+
+		return $this->BackFlightModel;
+	}
 	/**
 	 * 获取路线ID By 目的地ID
 	 * @param  array $id 路线的ID

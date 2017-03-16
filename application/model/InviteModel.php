@@ -102,30 +102,17 @@ class InviteModel extends ModelModel
 	public static function getInviteByCustomerIdAndStatus($status, $CustomerId)
 	{
 		$InviteModel = new InviteModel;
-		$invites = $InviteModel->where('customer_id', '=', $CustomerId)->select();
 
-		//建立临时数组,作为取出邀约的查询条件
-		$temp = [];
-
-		//取出状态是公开的邀约
-		if (1 == $status) {
-			foreach ($invites as $key => $value) {
-				if (1 == $value->status) {
-					array_push($temp, $value->id);
-				}
-			}
+		//获取状态是1的邀约订单
+		if (1 === $status) {
+			$invites = $InviteModel->where('customer_id', '=', $CustomerId)->where('status', '=', 1)->select();
 		}
 
-		//取出状态是不公开的订单
-		if (0 == $status) {
-			foreach ($invites as $key => $value) {
-				if (1 == $value->status) {
-					array_push($temp, $value->id);
-				}
-			}
+		//获取状态是0的邀约订单
+		if (0 === $status) {
+			$invites = $InviteModel->where('customer_id', '=', $CustomerId)->where('status', '=', 0)->select();
 		}
 
-		$invitations = $InviteModel->where('id', 'in', $temp)->select();
-		return $invitations;
+		return $invites;
 	}
 }
