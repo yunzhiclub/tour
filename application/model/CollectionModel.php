@@ -4,6 +4,22 @@ namespace app\model;
 
 class CollectionModel extends ModelModel
 {
+	private $RouteModel = null;
+
+	/**
+	 * 取出route_id对应的RouteModel
+	 * @author huangshuaibin 
+	 * @return object RouteModel
+	 */
+	public function getRouteModel()
+	{
+		if (null === $this->RouteModel) {
+			$RouteId = $this->getData('route_id');
+			$this->RouteModel = RouteModel::get($RouteId);
+		}
+
+		return $this->RouteModel;
+	}
 	/**
 	 * 保存收藏
 	 * @param  int $userId  用户id

@@ -10,8 +10,7 @@
                             <div class="col-md-10">
                                 <form class="form-inline" action="{:url()}" method="get">
                                     <div class="form-group">
-                                        <label class="sr-only" for="name">文章</label>
-                                        <input name="name" type="text" class="form-control" placeholder="星级" value="{:input('get.name')}">
+                                        <input name="title" type="text" class="form-control" placeholder="名称" value="{:input('get.title')}">
                                     </div>
                                     <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>
                                 </form>
@@ -30,27 +29,21 @@
                                 <th>名称</th>
                                 <th>电话</th>
                                 <th>地址</th>
-                                <th>国家</th>
                                 <th>星级</th>
-                                <th>WIFI</th>
-                                <th>热水</th>
-                                <th>早餐</th>
                                 <th>操作</th>
                             </tr>
-                            <tr>	
-	                            <td>1</td>
-	                            <td>香格里拉酒店</td>
-	                            <td>60435025</td>
-	                            <td>天津市天津职业技术师范大学</td>
-	                            <td>中国</td>
-                                <td>5</td>
-                                <td>有</td>
-                                <td>有</td>
-                                <td>有</td>
-	                            <td>
-	                            <a class="btn btn-sm btn-primary" href="{:url('edit')}"><i class="glyphicon glyphicon-pencil"></i> 编辑</a>
-                                <a class="btn btn-sm btn-danger" href="#"><i class="glyphicon glyphicon-trash"></i> 删除</a></td>
+                            {volist name="HotelModels" id="HotelModel" key="key"}
+                            <tr>
+                                <td>{$key}</td>
+                                <td><a href="{:url('detail?id=' . $HotelModel->getData('id'))}">{$HotelModel->getData('title')}</a></td>
+                                <td>{$HotelModel->getData('phone')}</td>
+                                <td>{$HotelModel->getData('dress')}</td>
+                                <td>{$HotelModel->getData('star')}</td>
+                                <td>
+                                <a class="btn btn-sm btn-primary" href="{:url('edit?id=' . $HotelModel->getData('id'))}"><i class="glyphicon glyphicon-pencil"></i> 编辑</a>
+                                <a class="btn btn-sm btn-danger" href="{:url('delete?id=' . $HotelModel->getData('id'))}"><i class="glyphicon glyphicon-trash"></i> 删除</a></td>
                             </tr>
+                            {/volist}
                         </table>
                     </div>
                 </div>

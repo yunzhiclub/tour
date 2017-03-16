@@ -220,14 +220,22 @@ angular
 // 弹出框同一处理方法
 controller('ModalInstanceCtrl', function($uibModalInstance, items, $scope) {
         var $ctrl = $scope;
-        $ctrl.terms1 = items.terms1;
-        $ctrl.terms2 = items.terms2;
+        $ctrl.olds = items.olds;
+        $ctrl.sexs = items.sexs;
+        // 赋默认值
+        
         $ctrl.selected = {
-            item1: $ctrl.terms1[0],
-            item2: $ctrl.terms2[0],
-        };
+            old: '0~~25',
+            sex: 1,
+            money: undefined,
+        }
+
+        // 双向数据绑定maxMoney
+        $ctrl.maxMoney = items.room.room;
 
         $ctrl.ok = function() {
+             // 改变最大值
+            items.room.changeMaxMoney($ctrl.selected.money);
             $uibModalInstance.close($ctrl.selected);
         };
 

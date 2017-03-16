@@ -6,6 +6,53 @@ namespace app\model;
  */
 class InviteModel extends ModelModel
 {
+	private $RouteModel = null;
+	private $CustomerModel = null;
+	private $StartTimeModel = null;
+	private $BedModel = null;
+
+	/**
+	 * 通过该Model的外键获取Route对应的对象
+	 * @return Objct 获取的RouteModel对象
+	 */
+	public function getRouteModel()
+	{
+		if (null === $this->RouteModel) {
+			$RouteId = $this->getData('route_id');
+			$this->RouteModel = RouteModel::get($RouteId);
+		}
+
+		return $this->RouteModel;
+	}
+
+	/**
+	 * 获取用户model通过该对象的外键customer_id
+	 * @return object 前台客户对象
+	 */
+	public function getCustomerModel()
+	{
+		if (null === $this->CustomerModel) {
+			$CustomerId = $this->getData('customer_id');
+			$this->CustomerModel = CustomerModel::get($CustomerId);
+		}
+
+		return $this->CustomerModel;
+	}
+
+	/**
+	 * 通过该对象中的start_time_id获取StartTimeModel
+	 * @return object StartTimeModel
+	 */
+	public function getStartTimeModel()
+	{
+		if (null == $this->StartTimeModel) {
+			$StartTimeId = $this->getData('start_time_id');
+			$this->StartTimeModel = StartTimeModel::get($StartTimeId);
+		}
+
+		return $this->StartTimeModel;
+	}
+	
 	/**
 	 * 通过查route_id对应的询条件$map获取邀约
 	 * @param  array $map 查询条件数组
