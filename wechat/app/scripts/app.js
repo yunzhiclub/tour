@@ -222,12 +222,20 @@ controller('ModalInstanceCtrl', function($uibModalInstance, items, $scope) {
         var $ctrl = $scope;
         $ctrl.olds = items.olds;
         $ctrl.sexs = items.sexs;
+        // 赋默认值
+        
         $ctrl.selected = {
-            old: $ctrl.olds[0],
-            sex: $ctrl.sexs[0],
-        };
+            old: '0~~25',
+            sex: 1,
+            money: undefined,
+        }
+
+        // 双向数据绑定maxMoney
+        $ctrl.maxMoney = items.room.room;
 
         $ctrl.ok = function() {
+             // 改变最大值
+            items.room.changeMaxMoney($ctrl.selected.money);
             $uibModalInstance.close($ctrl.selected);
         };
 
