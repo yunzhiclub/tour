@@ -62,6 +62,7 @@ angular.module('wechatApp')
 
             // 向这次的邀约中添加路线的id
             order.routeId = routeId;
+            order.deadLine = routeDetail.deadLine;
 
             // 获取路线对应的出发时间和价格
             // route.getStarTimeByid(routeId).then(function successCallBack(response) {

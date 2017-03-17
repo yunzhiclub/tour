@@ -8,8 +8,8 @@
  * Controller of the wechatApp
  */
 angular.module('wechatApp')
-    .controller('HourseCtrl', ['$uibModal', '$log', '$document', '$scope', '$stateParams', 'order', 'room', '$state',
-        function($uibModal, $log, $document, $scope, $stateParams, order, room, $state) {
+    .controller('HourseCtrl', ['$uibModal', '$log', '$document', '$scope', '$stateParams', 'order', 'room', '$state', 'invitation',
+        function($uibModal, $log, $document, $scope, $stateParams, order, room, $state, invitation) {
             if ($stateParams.timeId !== undefined) {
                 // 选用选择的出发时间给本次邀约实体复制
                 order.startTimeId = $stateParams.timeId;
@@ -22,7 +22,10 @@ angular.module('wechatApp')
             $scope.isPublic = 1;
 
             // 默认实例截止时间
-            $scope.deadLine = new Date(2010, 11, 28, 14, 57);
+            var deadLine = order.deadLine;
+            $scope.deadLine = new Date(deadLine);
+
+
 
             var $ctrl = $scope;
 
@@ -126,7 +129,7 @@ angular.module('wechatApp')
         */
 
             $scope.setOptions = function(whichRoom, type) {
-                open(null, null, room,  function callBack(selectedItems) {
+                open(null, null, room, function callBack(selectedItems) {
                     switch (whichRoom) {
                         case 1:
                             $scope.firstRoom.sex = selectedItems.sex;
@@ -191,16 +194,22 @@ angular.module('wechatApp')
 
                 // 给order实例赋值
                 order.isPublic = $scope.isPublic;
-
-                // 目前还有格式的问题（现在是date()）
-                // order.deadLine = deadLine;
+                order.deadLine = $scope.deadLine.getTime();
+                console.log(order.deadLine);
                 order.roomDatas = roomDatas;
 
                 // 最后设置发起邀约的人
                 order.customerId = $scope.customer.id;
-              
+
                 console.log(order);
-                // 调到支付成功页面
+
+                // 调用生成邀约的借口并支付
+                invitation.saveTheInvitation(order).then(function successCallBack(response) {
+                    console.log(response);
+                }, function errorCallBack() {
+
+                    });
+                    // 调到支付成功页面
                 $state.go('paysuccess');
             };
         }
