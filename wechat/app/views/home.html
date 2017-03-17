@@ -40,7 +40,7 @@ router:#!/home
             </div>
             <div>
                 <div class="placeholder" style="margin-right:5px;margin-left:5px;margin-top:7px">
-                    <a ui-sref="personal"><img src="{{customer.headImg.headImgUrl}}" alt="" height="40" width="40"  class="img-circle"></a>
+                    <a ui-sref="personal"><img src="{{customer.headImg.headImgUrl}}" alt="个人中心" height="40" width="40"  class="img-circle"></a>
                 </div>
             </div>
         </div>
@@ -66,7 +66,7 @@ router:#!/home
 </div>
 <div class="weui-flex " style="margin-left:15px ">
     <div class="weui-flex__item ">
-        <div class="placeholder "><a href="javascript:; " class="weui-btn weui-btn_mini weui-btn_primary " style="width:70px;height:30px">精 选</a></div>
+        <div class="placeholder "><button href="javascript:; " class="weui-btn weui-btn_mini weui-btn_primary " style="width:70px;height:30px">精 选</button></div>
     </div>
     <div class="weui-flex__item " ng-repeat="region in homeRegions">
         <div class="placeholder "><button href="javascript:; " class="weui-btn weui-btn_mini weui-btn_default " style="width:70px;height:30px">{{region}}</button></div>
