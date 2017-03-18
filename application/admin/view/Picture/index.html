@@ -1,15 +1,16 @@
 <div ng-app="app">
-<div ng-controller="test">
-   <label for="">
-        (点击图片进行上传):
-    </label> 
-    <div>
+  <div ng-controller="test">
+    <div class="row">
+      <div class="col-md-2 text-right">
+          图片
+      </div>
+      <div class="col-md-3">
+        <input type="file" name="image" />
         <button type="button" ngf-select="upload($file, key)">上传</button>
+      </div>
     </div>
+  </div> 
 </div>
-
-</form>
-  </div>
 
 <script>
 app.controller('test', function ($scope, Upload) {
@@ -17,7 +18,7 @@ app.controller('test', function ($scope, Upload) {
      $scope.upload = function (file, key) {
          Upload.upload({
              url: '{:url("picture/index")}',
-             data: {Filedata: file}
+             data: {image: file}
          }).then(function (resp) {
              var imageInfo = resp.data.data;
              console.log(imageInfo);
