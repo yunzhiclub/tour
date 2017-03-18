@@ -1,58 +1,33 @@
-<div class="row" ng-app="app" ng-controller="test">
-    <div class="col-md-2 text-right">
-        图片
+<div ng-app="app">
+<div ng-controller="test">
+   <label for="">
+        (点击图片进行上传):
+    </label> 
+    <div>
+        <button type="button" ngf-select="upload($file, key)">上传</button>
     </div>
-    <div class="col-md-6">
-        <div flow-init="{target: '/tour/public/admin/picture/index'}"
-             flow-files-submitted="$flow.upload()"
-             flow-file-success="$file.msg = $message"
-             flow-name="files.flow">
-
-          <input type="file" flow-btn/>
-          Input OR Other element as upload button
-          <button type="button" ng-click="upload($flow)">Upload</button>
-
-          <table>
-            <tr ng-repeat="file in $flow.files">
-                <td>{{file.name}}</td>
-                <td>11{{file.msg}}</td>
-            </tr>
-            <img flow-img="$flow.files[0]" />
-          </table>
-        </div>
-    </div>
-    
 </div>
 
-
+</form>
+  </div>
 
 <script>
-
-
-    app.controller('test', function ($scope, $http) {
-
-        $scope.upload = function(file) {
-            console.log(file.files);
-            $scope.file = file.files[0];
-            console.log($scope.file);
-
-            var fd = new FormData();
-             fd.append('file', $scope.file);
-          
-             $http.post('{:url("picture/index")}', fd, {
-                transformRequest: angular.identity,
-                headers: {'Content-Type': undefined}
-             })
-          
-             .success(function(){
-                console.log(1);
-             })
-          
-             .error(function(){
-                console.log(2);
-             });
-             
-        }
-        
-    });
+app.controller('test', function ($scope, Upload) {
+     // upload on file select or drop
+     $scope.upload = function (file, key) {
+         Upload.upload({
+             url: '{:url("picture/index")}',
+             data: {Filedata: file}
+         }).then(function (resp) {
+             var imageInfo = resp.data.data;
+             console.log(imageInfo);
+             $scope.images[key] = imageInfo.url;
+         }, function (resp) {
+             console.log('Error status: ' + resp.status);
+         }, function (evt) {
+             // var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+             // console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+         });
+     };    
+});
 </script>

@@ -11,9 +11,9 @@ class PictureController extends IndexController
 {
     public function index()
     {	
-    	Config::set('app_trace', false);
+    	//Config::set('app_trace', false);
     	//获取上传文件名
-        $data = Request::instance()->param();
+        $data = Request::instance()->file();
         var_dump($data);
 
 
