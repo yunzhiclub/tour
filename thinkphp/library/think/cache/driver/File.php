@@ -12,6 +12,7 @@
 namespace think\cache\driver;
 
 use think\cache\Driver;
+use think\Facade;
 
 /**
  * 文件类型缓存类
@@ -23,7 +24,7 @@ class File extends Driver
         'expire'        => 0,
         'cache_subdir'  => true,
         'prefix'        => '',
-        'path'          => CACHE_PATH,
+        'path'          => '',
         'data_compress' => false,
     ];
 
@@ -36,8 +37,10 @@ class File extends Driver
         if (!empty($options)) {
             $this->options = array_merge($this->options, $options);
         }
-        if (substr($this->options['path'], -1) != DS) {
-            $this->options['path'] .= DS;
+        if (empty($this->options['path'])) {
+            $this->options['path'] = Facade::make('app')->getRuntimePath() . 'cache/';
+        } elseif (substr($this->options['path'], -1) != DIRECTORY_SEPARATOR) {
+            $this->options['path'] .= DIRECTORY_SEPARATOR;
         }
         $this->init();
     }
@@ -69,10 +72,10 @@ class File extends Driver
         $name = md5($name);
         if ($this->options['cache_subdir']) {
             // 使用子目录
-            $name = substr($name, 0, 2) . DS . substr($name, 2);
+            $name = substr($name, 0, 2) . DIRECTORY_SEPARATOR . substr($name, 2);
         }
         if ($this->options['prefix']) {
-            $name = $this->options['prefix'] . DS . $name;
+            $name = $this->options['prefix'] . DIRECTORY_SEPARATOR . $name;
         }
         $filename = $this->options['path'] . $name . '.php';
         $dir      = dirname($filename);
@@ -102,6 +105,7 @@ class File extends Driver
      */
     public function get($name, $default = false)
     {
+        $this->readTimes++;
         $filename = $this->getCacheKey($name);
         if (!is_file($filename)) {
             return $default;
@@ -136,6 +140,7 @@ class File extends Driver
      */
     public function set($name, $value, $expire = null)
     {
+        $this->writeTimes++;
         if (is_null($expire)) {
             $expire = $this->options['expire'];
         }
@@ -201,6 +206,7 @@ class File extends Driver
      */
     public function rm($name)
     {
+        $this->writeTimes++;
         return $this->unlink($this->getCacheKey($name));
     }
 
@@ -221,7 +227,8 @@ class File extends Driver
             $this->rm('tag_' . md5($tag));
             return true;
         }
-        $files = (array) glob($this->options['path'] . ($this->options['prefix'] ? $this->options['prefix'] . DS : '') . '*');
+        $this->writeTimes++;
+        $files = (array) glob($this->options['path'] . ($this->options['prefix'] ? $this->options['prefix'] . DIRECTORY_SEPARATOR : '') . '*');
         foreach ($files as $path) {
             if (is_dir($path)) {
                 array_map('unlink', glob($path . '/*.php'));

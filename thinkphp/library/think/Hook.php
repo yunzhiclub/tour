@@ -14,7 +14,14 @@ namespace think;
 class Hook
 {
 
-    private static $tags = [];
+    private $tags = [];
+
+    protected $app;
+
+    public function __construct(App $app)
+    {
+        $this->app = $app;
+    }
 
     /**
      * 动态添加行为扩展到某个标签
@@ -23,21 +30,21 @@ class Hook
      * @param bool      $first 是否放到开头执行
      * @return void
      */
-    public static function add($tag, $behavior, $first = false)
+    public function add($tag, $behavior, $first = false)
     {
-        isset(self::$tags[$tag]) || self::$tags[$tag] = [];
+        isset($this->tags[$tag]) || $this->tags[$tag] = [];
         if (is_array($behavior) && !is_callable($behavior)) {
             if (!array_key_exists('_overlay', $behavior) || !$behavior['_overlay']) {
                 unset($behavior['_overlay']);
-                self::$tags[$tag] = array_merge(self::$tags[$tag], $behavior);
+                $this->tags[$tag] = array_merge($this->tags[$tag], $behavior);
             } else {
                 unset($behavior['_overlay']);
-                self::$tags[$tag] = $behavior;
+                $this->tags[$tag] = $behavior;
             }
         } elseif ($first) {
-            array_unshift(self::$tags[$tag], $behavior);
+            array_unshift($this->tags[$tag], $behavior);
         } else {
-            self::$tags[$tag][] = $behavior;
+            $this->tags[$tag][] = $behavior;
         }
     }
 
@@ -46,14 +53,14 @@ class Hook
      * @param array        $tags 插件信息
      * @param boolean     $recursive 是否递归合并
      */
-    public static function import(array $tags, $recursive = true)
+    public function import(array $tags, $recursive = true)
     {
         if ($recursive) {
             foreach ($tags as $tag => $behavior) {
-                self::add($tag, $behavior);
+                $this->add($tag, $behavior);
             }
         } else {
-            self::$tags = $tags + self::$tags;
+            $this->tags = $tags + $this->tags;
         }
     }
 
@@ -62,13 +69,13 @@ class Hook
      * @param string $tag 插件位置 留空获取全部
      * @return array
      */
-    public static function get($tag = '')
+    public function get($tag = '')
     {
         if (empty($tag)) {
             //获取全部的插件信息
-            return self::$tags;
+            return $this->tags;
         } else {
-            return array_key_exists($tag, self::$tags) ? self::$tags[$tag] : [];
+            return array_key_exists($tag, $this->tags) ? $this->tags[$tag] : [];
         }
     }
 
@@ -80,12 +87,12 @@ class Hook
      * @param bool   $once   只获取一个有效返回值
      * @return mixed
      */
-    public static function listen($tag, &$params = null, $extra = null, $once = false)
+    public function listen($tag, $params = null, $extra = null, $once = false)
     {
         $results = [];
-        $tags    = static::get($tag);
+        $tags    = $this->get($tag);
         foreach ($tags as $key => $name) {
-            $results[$key] = self::exec($name, $tag, $params, $extra);
+            $results[$key] = $this->exec($name, $tag, $params, $extra);
             if (false === $results[$key]) {
                 // 如果返回false 则中断行为执行
                 break;
@@ -104,9 +111,9 @@ class Hook
      * @param mixed     $extra 额外参数
      * @return mixed
      */
-    public static function exec($class, $tag = '', &$params = null, $extra = null)
+    public function exec($class, $tag = '', $params = null, $extra = null)
     {
-        App::$debug && Debug::remark('behavior_start', 'time');
+        $this->app->isDebug() && $this->app['debug']->remark('behavior_start', 'time');
         $method = Loader::parseName($tag, 1, false);
         if ($class instanceof \Closure) {
             $result = call_user_func_array($class, [ & $params, $extra]);
@@ -126,9 +133,10 @@ class Hook
             $method = ($tag && is_callable([$obj, $method])) ? $method : 'run';
             $result = $obj->$method($params, $extra);
         }
-        if (App::$debug) {
-            Debug::remark('behavior_end', 'time');
-            Log::record('[ BEHAVIOR ] Run ' . $class . ' @' . $tag . ' [ RunTime:' . Debug::getRangeTime('behavior_start', 'behavior_end') . 's ]', 'info');
+        if ($this->app->isDebug()) {
+            $debug = $this->app['debug'];
+            $debug->remark('behavior_end', 'time');
+            $this->app->log('[ BEHAVIOR ] Run ' . $class . ' @' . $tag . ' [ RunTime:' . $debug->getRangeTime('behavior_start', 'behavior_end') . 's ]');
         }
         return $result;
     }

@@ -11,7 +11,7 @@
 
 namespace think\log\driver;
 
-use think\App;
+use think\Facade;
 
 /**
  * 本地化调试输出到文件
@@ -21,7 +21,7 @@ class File
     protected $config = [
         'time_format' => ' c ',
         'file_size'   => 2097152,
-        'path'        => LOG_PATH,
+        'path'        => '',
         'apart_level' => [],
     ];
 
@@ -30,6 +30,9 @@ class File
     {
         if (is_array($config)) {
             $this->config = array_merge($this->config, $config);
+        }
+        if (empty($this->config['path'])) {
+            $this->config['path'] = Facade::make('app')->getRuntimePath() . 'log/';
         }
     }
 
@@ -43,19 +46,19 @@ class File
     public function save(array $log = [], $depr = true)
     {
         $now         = date($this->config['time_format']);
-        $destination = $this->config['path'] . date('Ym') . DS . date('d') . '.log';
+        $destination = $this->config['path'] . date('Ym') . '/' . date('d') . '.log';
 
         $path = dirname($destination);
         !is_dir($path) && mkdir($path, 0755, true);
 
         //检测日志文件大小，超过配置大小则备份日志文件重新生成
         if (is_file($destination) && floor($this->config['file_size']) <= filesize($destination)) {
-            rename($destination, dirname($destination) . DS . $_SERVER['REQUEST_TIME'] . '-' . basename($destination));
+            rename($destination, dirname($destination) . '/' . $_SERVER['REQUEST_TIME'] . '-' . basename($destination));
         }
 
         $depr = $depr ? "---------------------------------------------------------------\r\n" : '';
         $info = '';
-        if (App::$debug) {
+        if (Facade::make('app')->isDebug()) {
             // 获取基本信息
             if (isset($_SERVER['HTTP_HOST'])) {
                 $current_uri = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
@@ -63,10 +66,10 @@ class File
                 $current_uri = "cmd:" . implode(' ', $_SERVER['argv']);
             }
 
-            $runtime    = round(microtime(true) - THINK_START_TIME, 10);
+            $runtime    = round(microtime(true) - Facade::make('app')->getBeginTime(), 10);
             $reqs       = $runtime > 0 ? number_format(1 / $runtime, 2) : '∞';
             $time_str   = ' [运行时间：' . number_format($runtime, 6) . 's][吞吐率：' . $reqs . 'req/s]';
-            $memory_use = number_format((memory_get_usage() - THINK_START_MEM) / 1024, 2);
+            $memory_use = number_format((memory_get_usage() - Facade::make('app')->getBeginMem()) / 1024, 2);
             $memory_str = ' [内存消耗：' . $memory_use . 'kb]';
             $file_load  = ' [文件加载：' . count(get_included_files()) . ']';
 
@@ -86,13 +89,13 @@ class File
             }
             if (in_array($type, $this->config['apart_level'])) {
                 // 独立记录的日志级别
-                $filename = $path . DS . date('d') . '_' . $type . '.log';
+                $filename = $path . '/' . date('d') . '_' . $type . '.log';
                 error_log("[{$now}] {$level}\r\n{$depr}", 3, $filename);
             } else {
                 $info .= $level;
             }
         }
-        if (App::$debug) {
+        if (Facade::make('app')->isDebug()) {
             $info = "{$server} {$remote} {$method} {$uri}\r\n" . $info;
         }
         return error_log("[{$now}] {$info}\r\n{$depr}", 3, $destination);

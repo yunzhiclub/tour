@@ -16,7 +16,8 @@ class Request
     /**
      * @var object 对象实例
      */
-    protected static $instance;
+    protected $instance;
+    protected $config;
 
     protected $method;
     /**
@@ -121,18 +122,19 @@ class Request
 
     /**
      * 架构函数
-     * @access protected
+     * @access public
      * @param array $options 参数
      */
-    protected function __construct($options = [])
+    public function __construct(Config $config, $options = [])
     {
         foreach ($options as $name => $item) {
             if (property_exists($this, $name)) {
                 $this->$name = $item;
             }
         }
+        $this->config = $config;
         if (is_null($this->filter)) {
-            $this->filter = Config::get('default_filter');
+            $this->filter = $this->config->get('default_filter');
         }
         // 保存 php://input
         $this->input = file_get_contents('php://input');
@@ -140,9 +142,9 @@ class Request
 
     public function __call($method, $args)
     {
-        if (array_key_exists($method, self::$hook)) {
+        if (array_key_exists($method, $this->hook)) {
             array_unshift($args, $this);
-            return call_user_func_array(self::$hook[$method], $args);
+            return call_user_func_array($this->hook[$method], $args);
         } else {
             throw new Exception('method not exists:' . __CLASS__ . '->' . $method);
         }
@@ -155,27 +157,13 @@ class Request
      * @param mixed         $callback callable
      * @return void
      */
-    public static function hook($method, $callback = null)
+    public function hook($method, $callback = null)
     {
         if (is_array($method)) {
-            self::$hook = array_merge(self::$hook, $method);
+            $this->hook = array_merge($this->hook, $method);
         } else {
-            self::$hook[$method] = $callback;
+            $this->hook[$method] = $callback;
         }
-    }
-
-    /**
-     * 初始化
-     * @access public
-     * @param array $options 参数
-     * @return \think\Request
-     */
-    public static function instance($options = [])
-    {
-        if (is_null(self::$instance)) {
-            self::$instance = new static($options);
-        }
-        return self::$instance;
     }
 
     /**
@@ -190,7 +178,7 @@ class Request
      * @param string    $content
      * @return \think\Request
      */
-    public static function create($uri, $method = 'GET', $params = [], $cookie = [], $files = [], $server = [], $content = null)
+    public function create($uri, $method = 'GET', $params = [], $cookie = [], $files = [], $server = [], $content = null)
     {
         $server['PATH_INFO']      = '';
         $server['REQUEST_METHOD'] = strtoupper($method);
@@ -253,8 +241,12 @@ class Request
         $options['method']      = $server['REQUEST_METHOD'];
         $options['domain']      = isset($info['scheme']) ? $info['scheme'] . '://' . $server['HTTP_HOST'] : '';
         $options['content']     = $content;
-        self::$instance         = new self($options);
-        return self::$instance;
+        foreach ($options as $name => $item) {
+            if (property_exists($this, $name)) {
+                $this->$name = $item;
+            }
+        }
+        return $this;
     }
 
     /**
@@ -286,7 +278,7 @@ class Request
             $this->url = $url;
             return $this;
         } elseif (!$this->url) {
-            if (IS_CLI) {
+            if ($this->isCli()) {
                 $this->url = isset($_SERVER['argv'][1]) ? $_SERVER['argv'][1] : '';
             } elseif (isset($_SERVER['HTTP_X_REWRITE_URL'])) {
                 $this->url = $_SERVER['HTTP_X_REWRITE_URL'];
@@ -332,7 +324,7 @@ class Request
             return $this;
         } elseif (!$this->baseFile) {
             $url = '';
-            if (!IS_CLI) {
+            if (!$this->isCli()) {
                 $script_name = basename($_SERVER['SCRIPT_FILENAME']);
                 if (basename($_SERVER['SCRIPT_NAME']) === $script_name) {
                     $url = $_SERVER['SCRIPT_NAME'];
@@ -373,6 +365,21 @@ class Request
     }
 
     /**
+     * 获取URL访问根目录
+     * @access public
+     * @return string
+     */
+    public function rootUrl()
+    {
+        $base = $this->root();
+        $root = strpos($base, '.') ? ltrim(dirname($base), DIRECTORY_SEPARATOR) : $base;
+        if ('' != $root) {
+            $root = '/' . ltrim($root, '/');
+        }
+        return $root;
+    }
+
+    /**
      * 获取当前请求URL的pathinfo信息（含URL后缀）
      * @access public
      * @return string
@@ -380,18 +387,18 @@ class Request
     public function pathinfo()
     {
         if (is_null($this->pathinfo)) {
-            if (isset($_GET[Config::get('var_pathinfo')])) {
+            if (isset($_GET[$this->config->get('var_pathinfo')])) {
                 // 判断URL里面是否有兼容模式参数
-                $_SERVER['PATH_INFO'] = $_GET[Config::get('var_pathinfo')];
-                unset($_GET[Config::get('var_pathinfo')]);
-            } elseif (IS_CLI) {
+                $_SERVER['PATH_INFO'] = $_GET[$this->config->get('var_pathinfo')];
+                unset($_GET[$this->config->get('var_pathinfo')]);
+            } elseif ($this->isCli()) {
                 // CLI模式下 index.php module/controller/action/params/...
                 $_SERVER['PATH_INFO'] = isset($_SERVER['argv'][1]) ? $_SERVER['argv'][1] : '';
             }
 
             // 分析PATHINFO信息
             if (!isset($_SERVER['PATH_INFO'])) {
-                foreach (Config::get('pathinfo_fetch') as $type) {
+                foreach ($this->config->get('pathinfo_fetch') as $type) {
                     if (!empty($_SERVER[$type])) {
                         $_SERVER['PATH_INFO'] = (0 === strpos($_SERVER[$type], $_SERVER['SCRIPT_NAME'])) ?
                         substr($_SERVER[$type], strlen($_SERVER['SCRIPT_NAME'])) : $_SERVER[$type];
@@ -412,7 +419,7 @@ class Request
     public function path()
     {
         if (is_null($this->path)) {
-            $suffix   = Config::get('url_html_suffix');
+            $suffix   = $this->config->get('url_html_suffix');
             $pathinfo = $this->pathinfo();
             if (false === $suffix) {
                 // 禁止伪静态访问
@@ -498,15 +505,15 @@ class Request
     {
         if (true === $method) {
             // 获取原始请求类型
-            return IS_CLI ? 'GET' : (isset($this->server['REQUEST_METHOD']) ? $this->server['REQUEST_METHOD'] : $_SERVER['REQUEST_METHOD']);
+            return $this->isCli() ? 'GET' : (isset($this->server['REQUEST_METHOD']) ? $this->server['REQUEST_METHOD'] : $_SERVER['REQUEST_METHOD']);
         } elseif (!$this->method) {
-            if (isset($_POST[Config::get('var_method')])) {
-                $this->method = strtoupper($_POST[Config::get('var_method')]);
+            if (isset($_POST[$this->config->get('var_method')])) {
+                $this->method = strtoupper($_POST[$this->config->get('var_method')]);
                 $this->{$this->method}($_POST);
             } elseif (isset($_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE'])) {
                 $this->method = strtoupper($_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE']);
             } else {
-                $this->method = IS_CLI ? 'GET' : (isset($this->server['REQUEST_METHOD']) ? $this->server['REQUEST_METHOD'] : $_SERVER['REQUEST_METHOD']);
+                $this->method = $this->isCli() ? 'GET' : (isset($this->server['REQUEST_METHOD']) ? $this->server['REQUEST_METHOD'] : $_SERVER['REQUEST_METHOD']);
             }
         }
         return $this->method;
@@ -633,7 +640,7 @@ class Request
         if (true === $name) {
             // 获取包含文件上传信息的数组
             $file = $this->file();
-            $data = array_merge($this->param, $file);
+            $data = is_array($file) ? array_merge($this->param, $file) : $this->param;
             return $this->input($data, '', $default, $filter);
         }
         return $this->input($this->param, $name, $default, $filter);
@@ -688,7 +695,7 @@ class Request
     {
         if (empty($this->post)) {
             $content = $this->input;
-            if (empty($_POST) && 'application/json' == $this->contentType()) {
+            if (empty($_POST) && false !== strpos($this->contentType(), 'application/json')) {
                 $this->post = (array) json_decode($content, true);
             } else {
                 $this->post = $_POST;
@@ -713,7 +720,7 @@ class Request
     {
         if (is_null($this->put)) {
             $content = $this->input;
-            if ('application/json' == $this->contentType()) {
+            if (false !== strpos($this->contentType(), 'application/json')) {
                 $this->put = (array) json_decode($content, true);
             } else {
                 parse_str($content, $this->put);
@@ -1212,7 +1219,7 @@ class Request
         if (true === $ajax) {
             return $result;
         } else {
-            return $this->param(Config::get('var_ajax')) ? true : $result;
+            return $this->param($this->config->get('var_ajax')) ? true : $result;
         }
     }
 
@@ -1228,7 +1235,7 @@ class Request
         if (true === $pjax) {
             return $result;
         } else {
-            return $this->param(Config::get('var_pjax')) ? true : $result;
+            return $this->param($this->config->get('var_pjax')) ? true : $result;
         }
     }
 
@@ -1357,7 +1364,11 @@ class Request
     {
         $contentType = $this->server('CONTENT_TYPE');
         if ($contentType) {
-            list($type) = explode(';', $contentType);
+            if (strpos($contentType, ';')) {
+                list($type) = explode(';', $contentType);
+            } else {
+                $type = $contentType;
+            }
             return trim($type);
         }
         return '';
@@ -1589,6 +1600,11 @@ class Request
         } else {
             $this->bind[$name] = $obj;
         }
+    }
+
+    public function getBind($name)
+    {
+        return isset($this->bind[$name]) ? $this->bind[$name] : null;
     }
 
     public function __set($name, $value)

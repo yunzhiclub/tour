@@ -13,7 +13,7 @@ namespace think;
 
 class Cookie
 {
-    protected static $config = [
+    protected $config = [
         // cookie 名称前缀
         'prefix'    => '',
         // cookie 保存时间
@@ -30,23 +30,29 @@ class Cookie
         'setcookie' => true,
     ];
 
-    protected static $init;
+    protected $init;
+    protected $app;
+
+    public function __construct(App $app)
+    {
+        $this->app = $app;
+    }
 
     /**
      * Cookie初始化
      * @param array $config
      * @return void
      */
-    public static function init(array $config = [])
+    public function init(array $config = [])
     {
         if (empty($config)) {
-            $config = Config::get('cookie');
+            $config = $this->app['config']->pull('cookie');
         }
-        self::$config = array_merge(self::$config, array_change_key_case($config));
-        if (!empty(self::$config['httponly'])) {
+        $this->config = array_merge($this->config, array_change_key_case($config));
+        if (!empty($this->config['httponly'])) {
             ini_set('session.cookie_httponly', 1);
         }
-        self::$init = true;
+        $this->init = true;
     }
 
     /**
@@ -54,12 +60,12 @@ class Cookie
      * @param string $prefix
      * @return string|void
      */
-    public static function prefix($prefix = '')
+    public function prefix($prefix = '')
     {
         if (empty($prefix)) {
-            return self::$config['prefix'];
+            return $this->config['prefix'];
         }
-        self::$config['prefix'] = $prefix;
+        $this->config['prefix'] = $prefix;
     }
 
     /**
@@ -72,9 +78,9 @@ class Cookie
      * @return mixed
      * @internal param mixed $options cookie参数
      */
-    public static function set($name, $value = '', $option = null)
+    public function set($name, $value = '', $option = null)
     {
-        !isset(self::$init) && self::init();
+        !isset($this->init) && $this->init();
         // 参数设置(会覆盖黙认设置)
         if (!is_null($option)) {
             if (is_numeric($option)) {
@@ -82,14 +88,14 @@ class Cookie
             } elseif (is_string($option)) {
                 parse_str($option, $option);
             }
-            $config = array_merge(self::$config, array_change_key_case($option));
+            $config = array_merge($this->config, array_change_key_case($option));
         } else {
-            $config = self::$config;
+            $config = $this->config;
         }
         $name = $config['prefix'] . $name;
         // 设置cookie
         if (is_array($value)) {
-            array_walk_recursive($value, 'self::jsonFormatProtect', 'encode');
+            array_walk_recursive($value, $this->jsonFormatProtect, 'encode');
             $value = 'think:' . json_encode($value);
         }
         $expire = !empty($config['expire']) ? $_SERVER['REQUEST_TIME'] + intval($config['expire']) : 0;
@@ -106,13 +112,13 @@ class Cookie
      * @param mixed  $option 可选参数 可能会是 null|integer|string
      * @return void
      */
-    public static function forever($name, $value = '', $option = null)
+    public function forever($name, $value = '', $option = null)
     {
         if (is_null($option) || is_numeric($option)) {
             $option = [];
         }
         $option['expire'] = 315360000;
-        self::set($name, $value, $option);
+        $this->set($name, $value, $option);
     }
 
     /**
@@ -121,10 +127,10 @@ class Cookie
      * @param string|null   $prefix cookie前缀
      * @return bool
      */
-    public static function has($name, $prefix = null)
+    public function has($name, $prefix = null)
     {
-        !isset(self::$init) && self::init();
-        $prefix = !is_null($prefix) ? $prefix : self::$config['prefix'];
+        !isset($this->init) && $this->init();
+        $prefix = !is_null($prefix) ? $prefix : $this->config['prefix'];
         $name   = $prefix . $name;
         return isset($_COOKIE[$name]);
     }
@@ -135,17 +141,17 @@ class Cookie
      * @param string|null   $prefix cookie前缀
      * @return mixed
      */
-    public static function get($name, $prefix = null)
+    public function get($name, $prefix = null)
     {
-        !isset(self::$init) && self::init();
-        $prefix = !is_null($prefix) ? $prefix : self::$config['prefix'];
+        !isset($this->init) && $this->init();
+        $prefix = !is_null($prefix) ? $prefix : $this->config['prefix'];
         $name   = $prefix . $name;
         if (isset($_COOKIE[$name])) {
             $value = $_COOKIE[$name];
             if (0 === strpos($value, 'think:')) {
                 $value = substr($value, 6);
                 $value = json_decode($value, true);
-                array_walk_recursive($value, 'self::jsonFormatProtect', 'decode');
+                array_walk_recursive($value, $this->jsonFormatProtect, 'decode');
             }
             return $value;
         } else {
@@ -159,10 +165,10 @@ class Cookie
      * @param string|null   $prefix cookie前缀
      * @return mixed
      */
-    public static function delete($name, $prefix = null)
+    public function delete($name, $prefix = null)
     {
-        !isset(self::$init) && self::init();
-        $config = self::$config;
+        !isset($this->init) && $this->init();
+        $config = $this->config;
         $prefix = !is_null($prefix) ? $prefix : $config['prefix'];
         $name   = $prefix . $name;
         if ($config['setcookie']) {
@@ -177,15 +183,15 @@ class Cookie
      * @param string|null $prefix cookie前缀
      * @return mixed
      */
-    public static function clear($prefix = null)
+    public function clear($prefix = null)
     {
         // 清除指定前缀的所有cookie
         if (empty($_COOKIE)) {
             return;
         }
-        !isset(self::$init) && self::init();
+        !isset($this->init) && $this->init();
         // 要删除的cookie前缀，不指定则删除config设置的指定前缀
-        $config = self::$config;
+        $config = $this->config;
         $prefix = !is_null($prefix) ? $prefix : $config['prefix'];
         if ($prefix) {
             // 如果前缀为空字符串将不作处理直接返回
@@ -201,7 +207,7 @@ class Cookie
         return;
     }
 
-    private static function jsonFormatProtect(&$val, $key, $type = 'encode')
+    private function jsonFormatProtect(&$val, $key, $type = 'encode')
     {
         if (!empty($val) && true !== $val) {
             $val = 'decode' == $type ? urldecode($val) : urlencode($val);

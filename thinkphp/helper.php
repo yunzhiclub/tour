@@ -13,32 +13,44 @@
 // ThinkPHP 助手函数
 //-------------------------
 
-use think\Cache;
-use think\Config;
-use think\Cookie;
+use think\Container;
 use think\Db;
-use think\Debug;
 use think\exception\HttpException;
 use think\exception\HttpResponseException;
-use think\Lang;
-use think\Loader;
-use think\Log;
-use think\Request;
+use think\facade\Cache;
+use think\facade\Config;
+use think\facade\Cookie;
+use think\facade\Debug;
+use think\facade\Lang;
+use think\facade\Log;
+use think\facade\Request;
+use think\facade\Session;
+use think\facade\Url;
 use think\Response;
-use think\Session;
-use think\Url;
-use think\View;
 
-if (!function_exists('load_trait')) {
+if (!function_exists('app')) {
     /**
-     * 快速导入Traits PHP5.5以上无需调用
-     * @param string    $class trait库
-     * @param string    $ext 类库后缀
-     * @return boolean
+     * 快速获取容器中的实例 支持依赖注入
+     * @param string    $name 类名或标识 默认获取当前应用实例
+     * @param array     $args 参数
+     * @return object
      */
-    function load_trait($class, $ext = EXT)
+    function app($name = 'think\App', $args = [])
     {
-        return Loader::import($class, TRAIT_PATH, $ext);
+        return Container::getInstance()->make($name, $args);
+    }
+}
+
+if (!function_exists('call')) {
+    /**
+     * 调用反射执行callable 支持依赖注入
+     * @param mixed $callable   支持闭包等callable写法
+     * @param array $args       变量
+     * @return mixed
+     */
+    function call($callable, $args = [])
+    {
+        return Container::getInstance()->invoke($callable, $args);
     }
 }
 
@@ -152,7 +164,7 @@ if (!function_exists('widget')) {
      */
     function widget($name, $data = [])
     {
-        return Loader::action($name, $data, 'widget');
+        return app()->action($name, $data, 'widget');
     }
 }
 
@@ -166,7 +178,7 @@ if (!function_exists('model')) {
      */
     function model($name = '', $layer = 'model', $appendSuffix = false)
     {
-        return Loader::model($name, $layer, $appendSuffix);
+        return app()->model($name, $layer, $appendSuffix);
     }
 }
 
@@ -180,7 +192,7 @@ if (!function_exists('validate')) {
      */
     function validate($name = '', $layer = 'validate', $appendSuffix = false)
     {
-        return Loader::validate($name, $layer, $appendSuffix);
+        return app()->validate($name, $layer, $appendSuffix);
     }
 }
 
@@ -208,7 +220,7 @@ if (!function_exists('controller')) {
      */
     function controller($name, $layer = 'controller', $appendSuffix = false)
     {
-        return Loader::controller($name, $layer, $appendSuffix);
+        return app()->controller($name, $layer, $appendSuffix);
     }
 }
 
@@ -223,34 +235,7 @@ if (!function_exists('action')) {
      */
     function action($url, $vars = [], $layer = 'controller', $appendSuffix = false)
     {
-        return Loader::action($url, $vars, $layer, $appendSuffix);
-    }
-}
-
-if (!function_exists('import')) {
-    /**
-     * 导入所需的类库 同java的Import 本函数有缓存功能
-     * @param string    $class 类库命名空间字符串
-     * @param string    $baseUrl 起始路径
-     * @param string    $ext 导入的文件扩展名
-     * @return boolean
-     */
-    function import($class, $baseUrl = '', $ext = EXT)
-    {
-        return Loader::import($class, $baseUrl, $ext);
-    }
-}
-
-if (!function_exists('vendor')) {
-    /**
-     * 快速导入第三方框架类库 所有第三方框架的类库文件统一放到 系统的Vendor目录下面
-     * @param string    $class 类库
-     * @param string    $ext 类库后缀
-     * @return boolean
-     */
-    function vendor($class, $ext = EXT)
-    {
-        return Loader::import($class, VENDOR_PATH, $ext);
+        return app()->action($url, $vars, $layer, $appendSuffix);
     }
 }
 
@@ -405,7 +390,7 @@ if (!function_exists('request')) {
      */
     function request()
     {
-        return Request::instance();
+        return app('request');
     }
 }
 
@@ -540,7 +525,81 @@ if (!function_exists('token')) {
      */
     function token($name = '__token__', $type = 'md5')
     {
-        $token = Request::instance()->token($name, $type);
+        $token = Request::token($name, $type);
         return '<input type="hidden" name="' . $name . '" value="' . $token . '" />';
+    }
+}
+
+if (!function_exists('parse_name')) {
+    /**
+     * 字符串命名风格转换
+     * type 0 将Java风格转换为C的风格 1 将C风格转换为Java的风格
+     * @param string  $name 字符串
+     * @param integer $type 转换类型
+     * @param bool    $ucfirst 首字母是否大写（驼峰规则）
+     * @return string
+     */
+    function parse_name($name, $type = 0, $ucfirst = true)
+    {
+        if ($type) {
+            $name = preg_replace_callback('/_([a-zA-Z])/', function ($match) {
+                return strtoupper($match[1]);
+            }, $name);
+            return $ucfirst ? ucfirst($name) : lcfirst($name);
+        } else {
+            return strtolower(trim(preg_replace("/[A-Z]/", "_\\0", $name), "_"));
+        }
+    }
+}
+
+if (!function_exists('class_basename')) {
+    /**
+     * 获取类名(不包含命名空间)
+     *
+     * @param  string|object $class
+     * @return string
+     */
+    function class_basename($class)
+    {
+        $class = is_object($class) ? get_class($class) : $class;
+        return basename(str_replace('\\', '/', $class));
+    }
+}
+
+if (!function_exists('class_uses_recursive')) {
+    /**
+     *获取一个类里所有用到的trait，包括父类的
+     *
+     * @param $class
+     * @return array
+     */
+    function class_uses_recursive($class)
+    {
+        if (is_object($class)) {
+            $class = get_class($class);
+        }
+        $results = [];
+        $classes = array_merge([$class => $class], class_parents($class));
+        foreach ($classes as $class) {
+            $results += trait_uses_recursive($class);
+        }
+        return array_unique($results);
+    }
+}
+
+if (!function_exists('trait_uses_recursive')) {
+    /**
+     * 获取一个trait里所有引用到的trait
+     *
+     * @param  string $trait
+     * @return array
+     */
+    function trait_uses_recursive($trait)
+    {
+        $traits = class_uses($trait);
+        foreach ($traits as $trait) {
+            $traits += trait_uses_recursive($trait);
+        }
+        return $traits;
     }
 }
