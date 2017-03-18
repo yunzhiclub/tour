@@ -1,53 +1,58 @@
-{extend name="index" /} {block name="content"}
-<div class="row">
-    <div class="col-md-12">
-        <div class="span12">
-            <hr />
-            <div class="row">
-                <div class="row">
-                <div class="col-md-10">
-                    <form action="{:url('index')}" method="get" class="form-inline">
-                        <div class="col-md-3">
-                            <label>类型</label>&nbsp;
-                            <select class="form-control">
-                                <option value="1">酒店</option>
-                                <option value="2">路线</option>
-                                <option value="2">身份证</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input name="title" type="text" class="form-control" placeholder="名称..." id="title" value="{:input('get.title')}">
-                            </div>
-                            <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="col-md-2 text-right">
-                    <tr>
-                        <a class="btn btn-success" href="{:url('add')}"><i class="glyphicon glyphicon-plus">新增</i></a>
-                    </tr>
-                </div>
-            </div>
-            <hr />
-            <table class="table table-hover table-bordered">
-                <tr class="info">
-                    <th>编号</th>
-                    <th>图片名称</th>
-                    <th>类型</th>
-                    <th>操作</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>香格里拉酒店</td>
-                    <td>酒店</td>
-                    <td> 
-                    <a class="btn btn-sm btn-primary" href="{:url('edit')}"><i class="glyphicon glyphicon-pencil"></i> 编辑</a>
-                    <a class="btn btn-sm btn-danger" href="#"><i class="glyphicon glyphicon-trash"></i> 删除</a>
-                    </td>
-                </tr>
-            </table>
+<div class="row" ng-app="app" ng-controller="test">
+    <div class="col-md-2 text-right">
+        图片
+    </div>
+    <div class="col-md-6">
+        <div flow-init="{target: '/tour/public/admin/picture/index'}"
+             flow-files-submitted="$flow.upload()"
+             flow-file-success="$file.msg = $message"
+             flow-name="files.flow">
+
+          <input type="file" flow-btn/>
+          Input OR Other element as upload button
+          <button type="button" ng-click="upload($flow)">Upload</button>
+
+          <table>
+            <tr ng-repeat="file in $flow.files">
+                <td>{{file.name}}</td>
+                <td>11{{file.msg}}</td>
+            </tr>
+            <img flow-img="$flow.files[0]" />
+          </table>
         </div>
     </div>
+    
 </div>
-{/block}
+
+
+
+<script>
+
+
+    app.controller('test', function ($scope, $http) {
+
+        $scope.upload = function(file) {
+            console.log(file.files);
+            $scope.file = file.files[0];
+            console.log($scope.file);
+
+            var fd = new FormData();
+             fd.append('file', $scope.file);
+          
+             $http.post('{:url("picture/index")}', fd, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+             })
+          
+             .success(function(){
+                console.log(1);
+             })
+          
+             .error(function(){
+                console.log(2);
+             });
+             
+        }
+        
+    });
+</script>
