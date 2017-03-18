@@ -14,11 +14,12 @@ class PictureController extends IndexController
     	//Config::set('app_trace', false);
     	//获取上传文件名
         $image = Request::instance()->file('image');
-        var_dump($image);
         $info = $image->move(ROOT_PATH . 'public' . DS . 'upload');
         $PictureModel = new PictureModel;
-        $PictureModel->path = '__PUBLIC__/upload/' .date('Ymd'). '/'.$info->getFilename();
+        $PictureModel->path = '/tour/public/upload/' .date('Ymd'). '/'.$info->getFilename();
         $PictureModel->save();
+        $response['url'] = $PictureModel->path;
+        return $response['url'];
 
         // $info = $file->move(ROOT_PATH . 'public' . DS . 'upload');
         // $Company->data($data);

@@ -2,11 +2,11 @@
   <div ng-controller="test">
     <div class="row">
       <div class="col-md-2 text-right">
-          图片
+        <lable>图片</lable>
       </div>
       <div class="col-md-3">
-        <input type="file" name="image" />
-        <button type="button" ngf-select="upload($file, key)">上传</button>
+      <img src="{{uploadImg}}"/> 
+        <button type="button" class="btn" ngf-select="upload($file, key)">上传</button>
       </div>
     </div>
   </div> 
@@ -14,17 +14,18 @@
 
 <script>
 app.controller('test', function ($scope, Upload) {
+      $scope.uploadImg = '';
      // upload on file select or drop
      $scope.upload = function (file, key) {
          Upload.upload({
              url: '{:url("picture/index")}',
              data: {image: file}
          }).then(function (resp) {
-             var imageInfo = resp.data.data;
-             console.log(imageInfo);
-             $scope.images[key] = imageInfo.url;
-         }, function (resp) {
-             console.log('Error status: ' + resp.status);
+            console.log(resp.data);
+            $scope.uploadImg = resp.data;
+         }, function (data) {
+             $scope.uploadImg = data;
+             console.log(data);
          }, function (evt) {
              // var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
              // console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
