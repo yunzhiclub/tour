@@ -11,11 +11,7 @@
 
 namespace think;
 
-use think\response\Json as JsonResponse;
-use think\response\Jsonp as JsonpResponse;
 use think\response\Redirect as RedirectResponse;
-use think\response\View as ViewResponse;
-use think\response\Xml as XmlResponse;
 
 class Response
 {
@@ -74,12 +70,10 @@ class Response
 
         $class = false !== strpos($type, '\\') ? $type : '\\think\\response\\' . ucfirst($type);
         if (class_exists($class)) {
-            $response = new $class($data, $code, $header, $options);
+            return new $class($data, $code, $header, $options);
         } else {
-            $response = new static($data, $code, $header, $options);
+            return new static($data, $code, $header, $options);
         }
-
-        return $response;
     }
 
     /**
@@ -94,17 +88,17 @@ class Response
         $data = $this->getContent();
 
         // Trace调试注入
-        if (Env::get('app_trace', Config::get('app_trace'))) {
-            Debug::inject($this, $data);
+        if (Env::get('app_trace', Facade::make('app')->config('app.app_trace'))) {
+            Facade::make('debug')->inject($this, $data);
         }
 
         if (200 == $this->code) {
-            $cache = Request::instance()->getCache();
+            $cache = Facade::make('request')->getCache();
             if ($cache) {
                 $this->header['Cache-Control'] = 'max-age=' . $cache[1] . ',must-revalidate';
                 $this->header['Last-Modified'] = gmdate('D, d M Y H:i:s') . ' GMT';
                 $this->header['Expires']       = gmdate('D, d M Y H:i:s', $_SERVER['REQUEST_TIME'] + $cache[1]) . ' GMT';
-                Cache::set($cache[0], [$data, $this->header], $cache[1]);
+                Facade::make('cache')->set($cache[0], [$data, $this->header], $cache[1]);
             }
         }
 
@@ -125,11 +119,11 @@ class Response
         }
 
         // 监听response_end
-        Hook::listen('response_end', $this);
+        Facade::make('hook')->listen('response_end', $this);
 
         // 清空当次请求有效的数据
         if (!($this instanceof RedirectResponse)) {
-            Session::flush();
+            Facade::make('session')->flush();
         }
     }
 

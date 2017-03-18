@@ -27,23 +27,19 @@ class View
     /**
      * 架构函数
      * @access public
-     * @param array $engine  模板引擎参数
+     * @param mixed $engine  模板引擎参数
      * @param array $replace  字符串替换参数
      */
     public function __construct($engine = [], $replace = [])
     {
         // 初始化模板引擎
-        $this->engine((array) $engine);
+        $this->engine($engine);
         // 基础替换字符串
-        $request = Request::instance();
-        $base    = $request->root();
-        $root    = strpos($base, '.') ? ltrim(dirname($base), DS) : $base;
-        if ('' != $root) {
-            $root = '/' . ltrim($root, '/');
-        }
+        $request     = Facade::make('request');
+        $root        = $request->rootUrl();
         $baseReplace = [
+            '__URL__'    => $request->root() . '/' . $request->module() . '/' . Loader::parseName($request->controller()),
             '__ROOT__'   => $root,
-            '__URL__'    => $base . '/' . $request->module() . '/' . Loader::parseName($request->controller()),
             '__STATIC__' => $root . '/static',
             '__CSS__'    => $root . '/static/css',
             '__JS__'     => $root . '/static/js',
@@ -161,7 +157,7 @@ class View
         // 获取并清空缓存
         $content = ob_get_clean();
         // 内容过滤标签
-        Hook::listen('view_filter', $content);
+        Facade::make('hook')->listen('view_filter', $content);
         // 允许用户自定义模板的字符串替换
         $replace = array_merge($this->replace, $replace);
         if (!empty($replace)) {
