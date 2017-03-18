@@ -228,7 +228,7 @@ controller('ModalInstanceCtrl', function($uibModalInstance, items, $scope) {
             old: '0~~25',
             sex: 1,
             money: undefined,
-        }
+        };
 
         // 双向数据绑定maxMoney
         $ctrl.maxMoney = items.room.room;
