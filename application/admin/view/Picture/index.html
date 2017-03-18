@@ -1,35 +1,225 @@
 <div ng-app="app">
-  <div ng-controller="test">
-    <div class="row">
-      <div class="col-md-2 text-right">
-        <lable>图片</lable>
-      </div>
-      <div class="col-md-3">
-      <img src="{{uploadImg}}"/> 
-        <button type="button" class="btn" ngf-select="upload($file, key)">上传</button>
-      </div>
+  <div ng-controller="AppController" nv-file-drop="" uploader="uploader">
+    <div class="container">
+
+
+        <div class="row">
+
+            <div class="col-md-3">
+
+                <h3>Select files</h3>
+
+
+                <!-- Example: nv-file-select="" uploader="{Object}" options="{Object}" filters="{String}" -->
+                <input type="file" nv-file-select="" uploader="uploader" multiple  /><br/>
+
+            </div>
+
+            <div class="col-md-9" style="margin-bottom: 40px">
+                <h2>Uploads only images (with canvas preview)</h2>
+                <h3>The queue</h3>
+                <p>Queue length: {{ uploader.queue.length }}</p>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th width="50%">Name</th>
+                            <th ng-show="uploader.isHTML5">Size</th>
+                            <th ng-show="uploader.isHTML5">Progress</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in uploader.queue">
+                            <td>
+                                <strong>{{ item.file.name }}</strong>
+                                <!-- Image preview -->
+                                <!--auto height-->
+                                <!--<div ng-thumb="{ file: item.file, width: 100 }"></div>-->
+                                <!--auto width-->
+                                <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                                <!--fixed width and height -->
+                                <!--<div ng-thumb="{ file: item.file, width: 100, height: 100 }"></div>-->
+                            </td>
+                            <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                            <td ng-show="uploader.isHTML5">
+                                <div class="progress" style="margin-bottom: 0;">
+                                    <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                                <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                                <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                            </td>
+                            <td nowrap>
+                                <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                    <span class="glyphicon glyphicon-upload"></span> Upload
+                                </button>
+                                <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                                    <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                                </button>
+                                <button type="button" class="btn btn-danger btn-xs" ng-click="delete(item)">
+                                    <span class="glyphicon glyphicon-trash"></span> Remove
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div>
+                    <div>
+                        Queue progress:
+                        <div class="progress" style="">
+                            <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+                        <span class="glyphicon glyphicon-upload"></span> Upload all
+                    </button>
+                    <button type="button" class="btn btn-warning btn-s" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
+                        <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
+                    </button>
+                    <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
+                        <span class="glyphicon glyphicon-trash"></span> Remove all
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
-  </div> 
+    
+  </div>  
 </div>
 
 <script>
-app.controller('test', function ($scope, Upload) {
-      $scope.uploadImg = '';
-     // upload on file select or drop
-     $scope.upload = function (file, key) {
-         Upload.upload({
-             url: '{:url("picture/index")}',
-             data: {image: file}
-         }).then(function (resp) {
-            console.log(resp.data);
-            $scope.uploadImg = resp.data;
-         }, function (data) {
-             $scope.uploadImg = data;
-             console.log(data);
-         }, function (evt) {
-             // var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-             // console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-         });
-     };    
-});
+app.controller('AppController', ['$scope', '$http', 'FileUploader', function($scope, $http, FileUploader) {
+
+        //删除图片
+        $scope.delete = function (item) {
+          console.log(1);
+          console.log(item.file.name);
+          item.remove();
+          var getData = {params: {name: item.file.name}};
+           $http
+           .get('{:url("picture/delete")}', getData)
+           .success(function(data){
+           })
+           .error(function(data){
+               alert("系统或网络错误");
+          });
+        };
+        var uploader = $scope.uploader = new FileUploader({
+            url: '{:url("picture/index")}'
+        });
+
+
+        // FILTERS
+
+        uploader.filters.push({
+            name: 'imageFilter',
+            fn: function(item /*{File|FileLikeObject}*/, options) {
+                var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+                return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+            }
+        });
+
+        // CALLBACKS
+
+        uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
+            console.info('onWhenAddingFileFailed', item, filter, options);
+        };
+        uploader.onAfterAddingFile = function(fileItem) {
+            console.info('onAfterAddingFile', fileItem);
+        };
+        uploader.onAfterAddingAll = function(addedFileItems) {
+            console.info('onAfterAddingAll', addedFileItems);
+        };
+        uploader.onBeforeUploadItem = function(item) {
+            console.info('onBeforeUploadItem', item);
+        };
+        uploader.onProgressItem = function(fileItem, progress) {
+            console.info('onProgressItem', fileItem, progress);
+        };
+        uploader.onProgressAll = function(progress) {
+            console.info('onProgressAll', progress);
+        };
+        uploader.onSuccessItem = function(fileItem, response, status, headers) {
+            console.info('onSuccessItem', fileItem, response, status, headers);
+        };
+        uploader.onErrorItem = function(fileItem, response, status, headers) {
+            console.info('onErrorItem', fileItem, response, status, headers);
+        };
+        uploader.onCancelItem = function(fileItem, response, status, headers) {
+            console.info('onCancelItem', fileItem, response, status, headers);
+        };
+        uploader.onCompleteItem = function(fileItem, response, status, headers) {
+            console.info('onCompleteItem', fileItem, response, status, headers);
+        };
+        uploader.onCompleteAll = function() {
+            console.info('onCompleteAll');
+        };
+
+        console.info('uploader', uploader);
+    }]);
+</script>
+
+<script type="text/javascript">
+      // Angular File Upload module does not include this directive
+      // Only for example
+
+
+      /**
+      * The ng-thumb directive
+      * @author: nerv
+      * @version: 0.1.2, 2014-01-09
+      */
+      app.directive('ngThumb', ['$window', function($window) {
+          var helper = {
+              support: !!($window.FileReader && $window.CanvasRenderingContext2D),
+              isFile: function(item) {
+                  return angular.isObject(item) && item instanceof $window.File;
+              },
+              isImage: function(file) {
+                  var type =  '|' + file.type.slice(file.type.lastIndexOf('/') + 1) + '|';
+                  return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+              }
+          };
+
+          return {
+              restrict: 'A',
+              template: '<canvas/>',
+              link: function(scope, element, attributes) {
+                  if (!helper.support) return;
+
+                  var params = scope.$eval(attributes.ngThumb);
+
+                  if (!helper.isFile(params.file)) return;
+                  if (!helper.isImage(params.file)) return;
+
+                  var canvas = element.find('canvas');
+                  var reader = new FileReader();
+
+                  reader.onload = onLoadFile;
+                  reader.readAsDataURL(params.file);
+
+                  function onLoadFile(event) {
+                      var img = new Image();
+                      img.onload = onLoadImage;
+                      img.src = event.target.result;
+                  }
+
+                  function onLoadImage() {
+                      var width = params.width || this.width / this.height * params.height;
+                      var height = params.height || this.height / this.width * params.width;
+                      canvas.attr({ width: width, height: height });
+                      canvas[0].getContext('2d').drawImage(this, 0, 0, width, height);
+                  }
+              }
+          };
+      }]);
+
 </script>
