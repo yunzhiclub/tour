@@ -46,13 +46,13 @@ router:#!/hourse
             <div class="weui-flex">
                 <div class="weui-flex__item" style="margin-right:20px;margin-left:10px">
                     <div class="placeholder">
-                        <button class="weui-btn weui-btn_plain-default" style="width:180px" ng-click="setOptions(1,1)">
+                        <button class="weui-btn weui-btn_plain-default" style="width:180px" ng-click="setOptions(1,firstRoom.money)">
                             <div class="weui-cell">
                                 <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
                                     <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block" />
                                 </div>
                                 <div class="weui-cell__bd">
-                                    <p style="width:60px;height:80px;">{{firstRoom.sex | format}}{{firstRoom.old}}</p>
+                                    <p style="width:60px;height:80px;">{{firstRoom.sex | format}}{{firstRoom.old | oldFilter}}</p>
                                     <p style="font-size: 13px;color: #888888;height:20px;width:70px">{{firstRoom.money | currency: '¥'}}</p>
                                 </div>
                             </div>
@@ -66,13 +66,13 @@ router:#!/hourse
                 </div>
                 <div class="weui-flex__item">
                     <div class="placeholder">
-                        <button class="weui-btn weui-btn_plain-default" style="width:180px" ng-click="setOptions(2,1)">
+                        <button class="weui-btn weui-btn_plain-default" style="width:180px" ng-click="setOptions(2,scendRoom.money)">
                             <div class="weui-cell">
                                 <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
                                     <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block" />
                                 </div>
                                 <div class="weui-cell__bd">
-                                    <p style="width:60px;height:80px;">{{scendRoom.sex | format}}{{scendRoom.old}}</p>
+                                    <p style="width:60px;height:80px;">{{scendRoom.sex | format}}{{scendRoom.old | oldFilter}}</p>
                                     <p style="font-size: 13px;color: #888888;height:20px;width:70px">{{scendRoom.money | currency: '¥'}}</p>
                                 </div>
                             </div>
@@ -89,13 +89,13 @@ router:#!/hourse
             <div class="weui-flex">
                 <div class="weui-flex__item" style="margin-right:20px;margin-left:10px">
                     <div class="placeholder">
-                        <button class="weui-btn weui-btn_plain-default" style="width:180px" ng-click="setOptions(3,2)">
+                        <button class="weui-btn weui-btn_plain-default" style="width:180px" ng-click="setOptions(3,thirdRoom.money )">
                             <div class="weui-cell">
                                 <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
                                     <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block" />
                                 </div>
                                 <div class="weui-cell__bd">
-                                    <p style="width:60px;height:80px;">{{thirdRoom.sex | format}}{{thirdRoom.old}}</p>
+                                    <p style="width:60px;height:80px;">{{thirdRoom.sex | format}}{{thirdRoom.old | oldFilter}}</p>
                                     <p style="font-size: 13px;color: #888888;height:20px;width:70px">{{thirdRoom.money | currency: '¥'}}</p>
                                 </div>
                             </div>
@@ -109,13 +109,13 @@ router:#!/hourse
                 </div>
                 <div class="weui-flex__item">
                     <div class="placeholder">
-                        <button class="weui-btn weui-btn_plain-default" style="width:180px" ng-click="setOptions(4,2)">
+                        <button class="weui-btn weui-btn_plain-default" style="width:180px" ng-click="setOptions(4,fourthRoom.money)">
                             <div class="weui-cell">
                                 <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
                                     <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block" />
                                 </div>
                                 <div class="weui-cell__bd">
-                                    <p style="width:60px;height:80px;">{{fourthRoom.sex | format}}{{fourthRoom.old}}</p>
+                                    <p style="width:60px;height:80px;">{{fourthRoom.sex | format}}{{fourthRoom.old | oldFilter}}</p>
                                     <p style="font-size: 13px;color: #888888;height:20px;width:70px">{{fourthRoom.money | currency: '¥'}}</p>
                                 </div>
                             </div>
@@ -132,13 +132,13 @@ router:#!/hourse
             <div class="weui-flex">
                 <div class="weui-flex__item" style="margin-right:20px;margin-left:10px">
                     <div class="placeholder">
-                        <button class="weui-btn weui-btn_plain-default" style="width:180px" ng-click="setOptions(5,3)">
+                        <button class="weui-btn weui-btn_plain-default" style="width:180px" ng-click="setOptions(5, fifthRoom.money)">
                             <div class="weui-cell">
                                 <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
                                     <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block" />
                                 </div>
                                 <div class="weui-cell__bd">
-                                    <p style="width:60px;height:80px;">{{fifthRoom.sex | format}}{{fifthRoom.old}}</p>
+                                    <p style="width:60px;height:80px;">{{fifthRoom.sex | format}}{{fifthRoom.old | oldFilter}}</p>
                                     <p style="font-size: 13px;color: #888888;height:20px;width:70px">{{fifthRoom.money | currency: '¥'}}</p>
                                 </div>
                             </div>
@@ -152,13 +152,13 @@ router:#!/hourse
                 </div>
                 <div class="weui-flex__item">
                     <div class="placeholder">
-                        <button class="weui-btn weui-btn_plain-default" style="width:180px" ng-click="setOptions(6,3)">
+                        <button class="weui-btn weui-btn_plain-default" style="width:180px" ng-click="setOptions(6, sixthRoom.money)">
                             <div class="weui-cell">
                                 <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
                                     <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block" />
                                 </div>
                                 <div class="weui-cell__bd">
-                                    <p style="width:60px;height:80px;">{{sixthRoom.sex | format}}{{sixthRoom.old}}</p>
+                                    <p style="width:60px;height:80px;">{{sixthRoom.sex | format}}{{sixthRoom.old | oldFilter}}</p>
                                     <p style="font-size: 13px;color: #888888;height:20px;width:70px">{{sixthRoom.money | currency: '¥'}}</p>
                                 </div>
                             </div>
@@ -192,10 +192,10 @@ router:#!/hourse
     <div class="modal-body" id="modal-body">
         <ul>
             <li ng-repeat="old in olds">
-                <a href="#" ng-click="$event.preventDefault(); selected.old = old">{{ old }}</a>
+                <a href="#" ng-click="$event.preventDefault(); selected.old = old">{{ old | oldFilter}}</a>
             </li>
         </ul>
-        年龄: <b>{{ selected.old }}</b>
+        年龄: <b>{{ selected.old | oldFilter}}</b>
         <ul>
             <li ng-repeat="sex in sexs">
                 <a href="#" ng-click="$event.preventDefault(); selected.sex = sex">{{ sex | format}}</a>
@@ -204,7 +204,7 @@ router:#!/hourse
         性别: <b>{{ selected.sex | format}}</b>
         <br>
         <div>金额:
-            <input type="number" max="{{maxMoney.maxMoney}}" min="0" placeholder="最多{{maxMoney.maxMoney | currency: '¥'}}" ng-model="selected.money">
+            <input type="number" max="{{maxMoney.maxMoney}}" min="0" placeholder="还需要{{maxMoney.maxMoney | currency: '¥'}}" ng-model="selected.money"><p>还需要{{maxMoney.maxMoney | currency: '¥'}}</p>
         </div>
     </div>
     <div class="modal-footer">

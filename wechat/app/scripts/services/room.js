@@ -13,7 +13,7 @@ angular.module('wechatApp')
         var self = this;
         self.room = {
             sex: 1,
-            old: '0~~25',
+            old: 1,
             money: '',
             maxMoney: '',
         };
