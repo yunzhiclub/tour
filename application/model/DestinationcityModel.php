@@ -6,23 +6,9 @@ namespace app\model;
  */
 class DestinationCityModel extends ModelModel
 {
-	private $CountryModel = null;
-
+	protected $autoWriteTimestamp = true;
 	/**
-	 * 获取地区地区对象
-	 * @return Object 获取的地区对象
-	 */
-	public function getCountryModel()
-	{
-		if (null === $this->CountryModel) {
-			$CountryId = $this->getData('country_id');
-
-			$this->CountryModel = CountryModel::get($CountryId);
-		}
-
-		return $this->CountryModel;
-	}
-	/**
+	 * 
 	 * 根据目的国家ID 取出 对应的目的城市ID
 	 * @param  int $id 目的国家ID
 	 * @author huangshuaibin
@@ -63,4 +49,48 @@ class DestinationCityModel extends ModelModel
 
 		return $DestinationCitys;
 	}
+	/**
+	 *   获得对应国家ID
+	 * @return object
+	 * @author zhangmengxiang
+	 */
+	public function getCountry()
+	{
+		$countryId = $this->getData('country_id');
+        $Country = CountryModel::get($countryId);
+        return $Country;
+	}
+	/**
+	 * 判断该目的城市是否为某航班的出发城市
+	 * @return boolean 
+	 * @author zhangmengxiang
+	 */
+	public function isXXXFlightStartCity() {
+		$FlightModels = FlightModel::all();
+
+		foreach ($FlightModels as $FlightModel) {
+			if ($FlightModel->down_city_id === $this->getData('id')) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+	/**
+	 * 判断该目的城市是否为某路线出发城市
+	 * @return boolean 
+	 * @author zhangmengxiang
+	 */
+	public function isXXXRouteStartCity() {
+		$RouteModels = RouteModel::all();
+
+		foreach ($RouteModels as $RouteModel) {
+			if ($RouteModel->destination_city_id === $this->getData('id')) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 }
