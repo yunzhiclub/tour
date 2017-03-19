@@ -12,6 +12,42 @@ class InviteModel extends ModelModel
 	private $BedModel = null;
 
 	/**
+	 * 输出是否公开的状态状态
+	 * @param  string $value 0 输出‘否’ 1 输出‘是’
+	 * @author huangshuaibin 
+	 * @return bool        true or false
+	 */
+	public function getIsPublicAttr($value)
+	{
+		$status = array(
+						'0' => '否',
+						'1' => '是'
+						);
+		$IsShow = $status[$value];
+
+		//如果没有$IsShow变量存在，默认输出  ‘是’,否则根据状态输出对应的状态
+		if (isset($IsPay)) {
+			return $IsShow;
+		} else {
+			return $status[0];
+		}
+	}
+
+	public function getStatusAttr($value)
+	{
+		$status = array(
+						'0' => '进行',
+						'1' => '完结',
+						);
+		$InviteStatus = $status[$value];
+
+		if (isset($InviteStatus)) {
+			return $InviteStatus;
+		} else {
+			return $status[0];
+		}
+	}
+	/**
 	 * 通过该Model的外键获取Route对应的对象
 	 * @return Objct 获取的RouteModel对象
 	 */
