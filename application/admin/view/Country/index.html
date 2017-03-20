@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="span12">
-            <hr />
+
             <div class="row">
                 <div class="col-md-10">
                     <form class="form-inline" action="{:url('', url('get.'))}"  method="get">
@@ -15,7 +15,7 @@
                     </form>
                 </div>
                  <div class="col-md-2  text-right">
-                    <a class="btn btn-success" href="{:url('add')}"><i class="glyphicon glyphicon-plus">新增</i></a>
+                    <a class="btn btn-success" href="{:url('add?region_id='.$region_id)}"><i class="glyphicon glyphicon-plus">新增</i></a>
                 </div>
             </div>
             <hr />
@@ -25,14 +25,16 @@
                     <th>国家</th>
                     <th>操作</th>
                 </tr>
+                {volist name="CountryModels" id="CountryModel" key="key"}
                 <tr>
-                	<td>1</td>
-                	<td>英国</td>
+                	<td>{$key}</td>
+                	<td>{$CountryModel->getData('name')}</td>
                 	<td>
-                    <a class="btn btn-sm btn-primary" href="{:url('edit')}"><i class="glyphicon glyphicon-pencil"></i> 编辑</a>
-                    <a class="btn btn-sm btn-danger" href="#"><i class="glyphicon glyphicon-trash"></i> 删除</a>
+                    <a class="btn btn-sm btn-primary" href="{:url('edit?id='.$CountryModel->getData('id'))}"><i class="glyphicon glyphicon-pencil"></i> 编辑</a>
+                    <a class="btn btn-sm btn-danger" href="{:url('delete?id='.$CountryModel->getData('id'))}"><i class="glyphicon glyphicon-trash"></i> 删除</a>
                     </td>
                 </tr>
+                {/volist}
             </table>
         </div>
     </div>
