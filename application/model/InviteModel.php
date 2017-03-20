@@ -12,6 +12,42 @@ class InviteModel extends ModelModel
 	private $BedModel = null;
 
 	/**
+	 * 输出是否公开的状态状态
+	 * @param  string $value 0 输出‘否’ 1 输出‘是’
+	 * @author huangshuaibin 
+	 * @return bool        true or false
+	 */
+	public function getIsPublicAttr($value)
+	{
+		$status = array(
+						'0' => '否',
+						'1' => '是'
+						);
+		$IsShow = $status[$value];
+
+		//如果没有$IsShow变量存在，默认输出  ‘是’,否则根据状态输出对应的状态
+		if (isset($IsPay)) {
+			return $IsShow;
+		} else {
+			return $status[0];
+		}
+	}
+
+	public function getStatusAttr($value)
+	{
+		$status = array(
+						'0' => '进行',
+						'1' => '完结',
+						);
+		$InviteStatus = $status[$value];
+
+		if (isset($InviteStatus)) {
+			return $InviteStatus;
+		} else {
+			return $status[0];
+		}
+	}
+	/**
 	 * 通过该Model的外键获取Route对应的对象
 	 * @return Objct 获取的RouteModel对象
 	 */
@@ -127,5 +163,56 @@ class InviteModel extends ModelModel
 
 		$invitations = $InviteModel->where('id', 'in', $temp)->select();
 		return $invitations;
+	}
+
+	/**
+	 * 保存邀约，保存对应的床位信息
+	 * @param  string $stringInvitation 前台传来的邀约的字符串，以及六个用户的床位信息
+	 * @author huangshuaibin
+	 * @return true or false                   true表示保存成功
+	 */
+	public static function saveInvitation($stringInvitation)
+	{
+		$Invitation = json_decode($stringInvitation);
+		$InviteModel = new InviteModel;
+
+		//邀约的相关信息放入InviteModel的对象中
+		$InviteModel->customer_id = $Invitation->customerId;
+		$InviteModel->start_time_id = $Invitation->startTimeId;
+		$InviteModel->route_id = $Invitation->routeId;
+		$InviteModel->is_public = $Invitation->isPublic;
+		$InviteModel->deadline = $Invitation->deadLine;
+
+		//保存邀约
+		$InviteModel->save();
+
+		//去除邀约的id,用于后边的保存
+		$inviteId = $InviteModel->id;
+		
+		//遍历保存六个床位
+		for ($i=0; $i < 6; $i++) { 
+			$BedModel = new BedModel;
+
+			$BedModel->invite_id = $inviteId;
+			$BedModel->sex = $Invitation->roomDatas[$i]->sex;
+
+			//TODO只是把前台的数据存入了数据库，并没有根据对年龄的范围进行判断，前后台对于年龄的标识一致后，进行进一步改写
+			$BedModel->old = $Invitation->roomDatas[$i]->old;
+			$BedModel->money = $Invitation->roomDatas[$i]->money;
+			$BedModel->type = $Invitation->roomDatas[$i]->type;
+
+			//如果前台的床位isPay字段是1的情况，表示该床位是当前用户的床位
+			if (1 === $Invitation->roomDatas[$i]->isPay) {
+				//TODO调用微信支付接口
+				//完成支付之后，将该用户保存进bed表
+				
+				//保存customer_id进相应的床位表
+				$BedModel->customer_id = $Invitation->customerId;
+			}
+
+			$BedModel->save();
+		}
+
+		return true;
 	}
 }

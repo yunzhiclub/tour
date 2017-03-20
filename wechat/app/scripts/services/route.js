@@ -11,7 +11,7 @@ angular.module('wechatApp')
     .factory('route', ['$q', 'config', 'server', function($q, config, server) {
         // Service logic
         var self = this;
-        self.routes = [{id:1,startCityName: '天津', content:'这是路线的详细的描述', beginTime: 69870990, actualPrice:5677}, {id:2, startCityName: '天津',content: '这是路线的详细的描述', beginTime: 69870990, actualPrice:5677}];
+        self.routes = [{id:1,startCityName: '天津', content:'这是路线的详细的描述', beginTime: 69870990, actualPrice:5677, deadLine:234343234}, {id:2, startCityName: '天津',content: '这是路线的详细的描述', beginTime: 69870990, actualPrice:5677,deadLine:234343234}];
         var url = 'Route/';
         var getChoosedRoutes = function() {
             // 定义promise 解决异步问题

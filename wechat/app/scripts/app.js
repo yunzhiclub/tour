@@ -219,23 +219,33 @@ angular
     }]).
 // 弹出框同一处理方法
 controller('ModalInstanceCtrl', function($uibModalInstance, items, $scope) {
+       // 给选项赋值
         var $ctrl = $scope;
         $ctrl.olds = items.olds;
         $ctrl.sexs = items.sexs;
+
+        // 那个房间触发的type和money
+        var money = items.money;
         // 赋默认值
-        
         $ctrl.selected = {
-            old: '0~~25',
+            old: 1,
             sex: 1,
             money: undefined,
-        }
+        };
 
         // 双向数据绑定maxMoney
+        console.log(items.room.room);
         $ctrl.maxMoney = items.room.room;
 
         $ctrl.ok = function() {
-             // 改变最大值
-            items.room.changeMaxMoney($ctrl.selected.money);
+             // 如果是第一次触发就去总金额中减去
+             if (money === 0 || money === undefined) {
+                items.room.changeMaxMoney($ctrl.selected.money);
+             } else {
+                items.room.changeMaxMoney($ctrl.selected.money);
+                items.room.room.maxMoney =  items.room.room.maxMoney + money;
+             }
+            
             $uibModalInstance.close($ctrl.selected);
         };
 
