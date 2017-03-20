@@ -37,4 +37,17 @@ class CountryModel extends ModelModel
 		
 		return $countrys;
 	}
+	public function isXXXDestinationCity()
+	{
+		$DestinationCityModels = DestinationCityModel::all();
+
+		foreach ($DestinationCityModels as $DestinationCityModel) {
+			if ($DestinationCityModel->is_delete === 0 && $DestinationCityModel->country_id === $this->getData('id')) {
+					return false;
+			}			
+		}
+
+		return true;
+	}
+	
 }

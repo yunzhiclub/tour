@@ -5,11 +5,12 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="row">
-                    <form class="form-horizontal">
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">国家</label>
+                    <form class="form-horizontal" action="{:url('update')}" method="post">
+                        <input type="hidden" name="id" value="{$CountryModel->id}">
+                        <div class="form-group" >
+                            <label class="col-md-2 control-label" for="name">国家</label>
                             <div class="col-md-3">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name="name" value="{$CountryModel->getData('name')}">
                             </div>
                         </div>
                         

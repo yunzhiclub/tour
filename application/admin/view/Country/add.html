@@ -5,11 +5,12 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="row">
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" action="{:url('save')}" method="post">
+                        <input type="hidden" name="region_id" value="{$region_id}">
                         <div class="form-group">
-                            <label class="col-md-2 control-label">国家</label>
+                            <label class="col-md-2 control-label" for="name">国家</label>
                             <div class="col-md-3">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name="name">
                             </div>
                         </div>
                         
