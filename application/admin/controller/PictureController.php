@@ -11,34 +11,45 @@ use think\File;
 class PictureController extends IndexController
 {
     public function index()
-    {	
-    	//Config::set('app_trace', false);
-    	//获取上传文件名
-        $image = Request::instance()->file('file');
-        var_dump($image);
-        $info = $image->move(ROOT_PATH . 'public' . DS . 'upload');
-        $PictureModel = new PictureModel;
-        $PictureModel->path = '/tour/public/upload/' .date('Ymd'). '/'.$info->getFilename();
-        $PictureModel->save();
-        $response['url'] = $PictureModel->path;
-        return $response['url'];
+    {
+        $this->fetch();
     }
-
     public function upload()
     {
-    	//获取上传文件名
-        $data = Request::instance()->param();
-        var_dump($data);
+    	//获取上传图片
+        $Picture = Request::instance()->file('file');
+        //保存图片
+        $result = PictureModel::savePicture($Picture);
+
+        return $result;
     }
 
     public function delete()
     {
-        $data = Request::instance()->param('name');
-        var_dump($data);
-        $image = Request::instance()->file();
-        var_dump($image);
-        $result = $image->buildSaveName($data);
-        var_dump($result);
+        $name = Request::instance()->param('name');
 
+        //根据图片名称获取该图片
+        $PictureModel = PictureModel::getPictureByPictureName($name);
+
+        //如果图片不存在，说明图片为上传
+        if ($PictureModel === null) {
+            return;
+        }
+
+        //删除图片
+        $PictureModel->is_delete = 1;
+        $result = $PictureModel->save();
+
+        return json_encode($result);
+
+
+    }
+
+    //获取所有图片名字
+    public function getAllPictureNames()
+    {
+        $AllPictureNames = PictureModel::getAllPictureNames();
+        
+        return $AllPictureNames;
     }
 }

@@ -1,33 +1,29 @@
 <div ng-app="app">
   <div ng-controller="AppController" nv-file-drop="" uploader="uploader">
-    <div class="container">
-
-
         <div class="row">
 
-            <div class="col-md-3">
+            <div class="col-md-2 text-right">
 
-                <h3>Select files</h3>
-
-
-                <!-- Example: nv-file-select="" uploader="{Object}" options="{Object}" filters="{String}" -->
-                <input type="file" nv-file-select="" uploader="uploader" multiple  /><br/>
+                <label>图片</label>
 
             </div>
-
-            <div class="col-md-9" style="margin-bottom: 40px">
-                <h2>Uploads only images (with canvas preview)</h2>
-                <h3>The queue</h3>
-                <p>Queue length: {{ uploader.queue.length }}</p>
+            <div class="col-md-3">
+              <input id="file" class="inputfile" type="file" nv-file-select="" uploader="uploader" multiple  />
+              <label for="file" class="btn"><i class="glyphicon glyphicon-cloud-upload"></i> 上传图片 </label>
+            </div>
+        </div>
+        <br>
+        <div class="row" ng-show="InfoShow">
+          <div class="col-md-8 col-md-offset-2">
 
                 <table class="table">
                     <thead>
                         <tr>
-                            <th width="50%">Name</th>
-                            <th ng-show="uploader.isHTML5">Size</th>
-                            <th ng-show="uploader.isHTML5">Progress</th>
-                            <th>Status</th>
-                            <th>Actions</th>
+                            <th width="50%">名称</th>
+                            <th ng-show="uploader.isHTML5">尺寸</th>
+                            <th ng-show="uploader.isHTML5">进度</th>
+                            <th>状态</th>
+                            <th>操作</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -55,13 +51,10 @@
                             </td>
                             <td nowrap>
                                 <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
-                                    <span class="glyphicon glyphicon-upload"></span> Upload
-                                </button>
-                                <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
-                                    <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                                    <span class="glyphicon glyphicon-upload"></span> 上传
                                 </button>
                                 <button type="button" class="btn btn-danger btn-xs" ng-click="delete(item)">
-                                    <span class="glyphicon glyphicon-trash"></span> Remove
+                                    <span class="glyphicon glyphicon-trash"></span> 删除
                                 </button>
                             </td>
                         </tr>
@@ -70,156 +63,221 @@
 
                 <div>
                     <div>
-                        Queue progress:
+                        总进度:
                         <div class="progress" style="">
                             <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
-                        <span class="glyphicon glyphicon-upload"></span> Upload all
-                    </button>
-                    <button type="button" class="btn btn-warning btn-s" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
-                        <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
-                    </button>
-                    <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
-                        <span class="glyphicon glyphicon-trash"></span> Remove all
-                    </button>
+                    <div class="row">
+
+                      <div class="col-md-6">
+                        <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+                            <span class="glyphicon glyphicon-upload"></span> 上传所有
+                        </button>
+                        <button type="button" class="btn btn-danger btn-s" ng-click="deleteAllPicture()" ng-disabled="!uploader.queue.length">
+                            <span class="glyphicon glyphicon-trash"></span> 删除所有
+                        </button>
+                      </div>
+                      <div class="col-md-6 text-right">
+                        <label>文件总数：{{ uploader.queue.length }}</label>
+                      </div>
+                    
+                    <div>
+                    
                 </div>
-
-            </div>
-
+          </div>
         </div>
+        <hr>
 
-    </div>
-    
   </div>  
 </div>
+<style>
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
 
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: #c9302c;
+    display: inline-block;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: #D10F0F;
+    color: white;
+}
+.inputfile + label {
+  cursor: pointer; /* "hand" cursor */
+}
+</style>
 <script>
 app.controller('AppController', ['$scope', '$http', 'FileUploader', function($scope, $http, FileUploader) {
+  
+  //删除图片
+  $scope.delete = function (item) {
+    //删除图片
+    item.remove();
+    
+    //删除数据库中的图片，根据图片名称删除图片，故上传图片名称不能一样
+    var getData = {params: {name: item.file.name}};
+    $http
+    .get('{:url("picture/delete")}', getData);
 
-        //删除图片
-        $scope.delete = function (item) {
-          console.log(1);
-          console.log(item.file.name);
-          item.remove();
-          var getData = {params: {name: item.file.name}};
-           $http
-           .get('{:url("picture/delete")}', getData)
-           .success(function(data){
-           })
-           .error(function(data){
-               alert("系统或网络错误");
-          });
-        };
-        var uploader = $scope.uploader = new FileUploader({
-            url: '{:url("picture/index")}'
-        });
+    //判断是否有图片，若不存在，则不显示图片信息
+    if ($scope.uploader.queue.length === 0) {
+      $scope.InfoShow = false;
+    }
+    
+  };
 
 
-        // FILTERS
+  //删除所有图片
+  $scope.deleteAllPicture = function () {
+    var length = $scope.uploader.queue.length;
+    for ($i = 0; $i < length; $i++) {
+      $scope.delete($scope.uploader.queue[0]);
+    }
+  }
 
-        uploader.filters.push({
-            name: 'imageFilter',
-            fn: function(item /*{File|FileLikeObject}*/, options) {
-                var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-                return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
-            }
-        });
 
-        // CALLBACKS
+  var uploader = $scope.uploader = new FileUploader({
+    url: '{:url("picture/upload")}'
+  });
 
-        uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
-            console.info('onWhenAddingFileFailed', item, filter, options);
-        };
-        uploader.onAfterAddingFile = function(fileItem) {
-            console.info('onAfterAddingFile', fileItem);
-        };
-        uploader.onAfterAddingAll = function(addedFileItems) {
-            console.info('onAfterAddingAll', addedFileItems);
-        };
-        uploader.onBeforeUploadItem = function(item) {
-            console.info('onBeforeUploadItem', item);
-        };
-        uploader.onProgressItem = function(fileItem, progress) {
-            console.info('onProgressItem', fileItem, progress);
-        };
-        uploader.onProgressAll = function(progress) {
-            console.info('onProgressAll', progress);
-        };
-        uploader.onSuccessItem = function(fileItem, response, status, headers) {
-            console.info('onSuccessItem', fileItem, response, status, headers);
-        };
-        uploader.onErrorItem = function(fileItem, response, status, headers) {
-            console.info('onErrorItem', fileItem, response, status, headers);
-        };
-        uploader.onCancelItem = function(fileItem, response, status, headers) {
-            console.info('onCancelItem', fileItem, response, status, headers);
-        };
-        uploader.onCompleteItem = function(fileItem, response, status, headers) {
-            console.info('onCompleteItem', fileItem, response, status, headers);
-        };
-        uploader.onCompleteAll = function() {
-            console.info('onCompleteAll');
-        };
+  // FILTERS
 
-        console.info('uploader', uploader);
-    }]);
+  uploader.filters.push({
+    name: 'imageFilter',
+    fn: function(item /*{File|FileLikeObject}*/, options) {
+        var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+        return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+    }
+  });
+
+  // CALLBACKS
+
+  uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
+      console.info('onWhenAddingFileFailed', item, filter, options);
+  };
+  uploader.onAfterAddingFile = function(fileItem) {
+    //请求所有图片名字，如果图片名字已存在，提示用户修改图片名字（图片名字不能重复，为删除图片做准备）
+    $http({
+        method: 'GET',
+        url: '{:url("picture/getAllPictureNames")}'
+     }).then(function (success){
+      //获取所有图片名称
+      var AllPictureNames = success.data;
+
+      //如果图片已存在，提示用户修改图片名称
+      if (AllPictureNames.indexOf(fileItem.file.name) !== -1) {
+        $scope.uploader.queue.pop();
+        alert('请修改图片名字，图片名字不能重复');
+        
+      }
+      
+     },function (error){
+        alert('上传文件出错');
+     });
+     
+     //显示图片信息
+     $scope.InfoShow = true;
+    console.info('onAfterAddingFile', fileItem);
+  };
+
+  uploader.onAfterAddingAll = function(addedFileItems) {
+      console.info('onAfterAddingAll', addedFileItems);
+  };
+  uploader.onBeforeUploadItem = function(item) {
+      console.info('onBeforeUploadItem', item);
+  };
+  uploader.onProgressItem = function(fileItem, progress) {
+      console.info('onProgressItem', fileItem, progress);
+  };
+  uploader.onProgressAll = function(progress) {
+      console.info('onProgressAll', progress);
+  };
+  uploader.onSuccessItem = function(fileItem, response, status, headers) {
+      console.info('onSuccessItem', fileItem, response, status, headers);
+  };
+  uploader.onErrorItem = function(fileItem, response, status, headers) {
+      console.info('onErrorItem', fileItem, response, status, headers);
+  };
+  uploader.onCancelItem = function(fileItem, response, status, headers) {
+      console.info('onCancelItem', fileItem, response, status, headers);
+  };
+  uploader.onCompleteItem = function(fileItem, response, status, headers) {
+      console.info('onCompleteItem', fileItem, response, status, headers);
+  };
+  uploader.onCompleteAll = function() {
+      console.info('onCompleteAll');
+  };
+
+  console.info('uploader', uploader);
+}]);
 </script>
 
 <script type="text/javascript">
-      // Angular File Upload module does not include this directive
-      // Only for example
+//裁切图片
+// Angular File Upload module does not include this directive
+// Only for example
 
 
-      /**
-      * The ng-thumb directive
-      * @author: nerv
-      * @version: 0.1.2, 2014-01-09
-      */
-      app.directive('ngThumb', ['$window', function($window) {
-          var helper = {
-              support: !!($window.FileReader && $window.CanvasRenderingContext2D),
-              isFile: function(item) {
-                  return angular.isObject(item) && item instanceof $window.File;
-              },
-              isImage: function(file) {
-                  var type =  '|' + file.type.slice(file.type.lastIndexOf('/') + 1) + '|';
-                  return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
-              }
-          };
+/**
+* The ng-thumb directive
+* @author: nerv
+* @version: 0.1.2, 2014-01-09
+*/
+app.directive('ngThumb', ['$window', function($window) {
+    var helper = {
+        support: !!($window.FileReader && $window.CanvasRenderingContext2D),
+        isFile: function(item) {
+            return angular.isObject(item) && item instanceof $window.File;
+        },
+        isImage: function(file) {
+            var type =  '|' + file.type.slice(file.type.lastIndexOf('/') + 1) + '|';
+            return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+        }
+    };
 
-          return {
-              restrict: 'A',
-              template: '<canvas/>',
-              link: function(scope, element, attributes) {
-                  if (!helper.support) return;
+    return {
+        restrict: 'A',
+        template: '<canvas/>',
+        link: function(scope, element, attributes) {
+            if (!helper.support) return;
 
-                  var params = scope.$eval(attributes.ngThumb);
+            var params = scope.$eval(attributes.ngThumb);
 
-                  if (!helper.isFile(params.file)) return;
-                  if (!helper.isImage(params.file)) return;
+            if (!helper.isFile(params.file)) return;
+            if (!helper.isImage(params.file)) return;
 
-                  var canvas = element.find('canvas');
-                  var reader = new FileReader();
+            var canvas = element.find('canvas');
+            var reader = new FileReader();
 
-                  reader.onload = onLoadFile;
-                  reader.readAsDataURL(params.file);
+            reader.onload = onLoadFile;
+            reader.readAsDataURL(params.file);
 
-                  function onLoadFile(event) {
-                      var img = new Image();
-                      img.onload = onLoadImage;
-                      img.src = event.target.result;
-                  }
+            function onLoadFile(event) {
+                var img = new Image();
+                img.onload = onLoadImage;
+                img.src = event.target.result;
+            }
 
-                  function onLoadImage() {
-                      var width = params.width || this.width / this.height * params.height;
-                      var height = params.height || this.height / this.width * params.width;
-                      canvas.attr({ width: width, height: height });
-                      canvas[0].getContext('2d').drawImage(this, 0, 0, width, height);
-                  }
-              }
-          };
-      }]);
+            function onLoadImage() {
+                var width = params.width || this.width / this.height * params.height;
+                var height = params.height || this.height / this.width * params.width;
+                canvas.attr({ width: width, height: height });
+                canvas[0].getContext('2d').drawImage(this, 0, 0, width, height);
+            }
+        }
+    };
+}]);
 
 </script>
