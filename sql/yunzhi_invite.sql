@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-03-06 20:41:05
+Date: 2017-03-18 18:06:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -32,12 +32,14 @@ CREATE TABLE `yunzhi_invite` (
   `is_public` tinyint(10) NOT NULL DEFAULT '1' COMMENT '0是不公开1是公开',
   `create_time` int(40) NOT NULL DEFAULT '0' COMMENT '订单生成时间',
   `deadline` int(40) NOT NULL DEFAULT '0' COMMENT '到期时间小与路线的结束时间',
+  `update_time` int(40) NOT NULL COMMENT '订单更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yunzhi_invite
 -- ----------------------------
-INSERT INTO `yunzhi_invite` VALUES ('1', '1', '1', '1', '1', '4', '1', '1', '1', '1', '1222', '0');
-INSERT INTO `yunzhi_invite` VALUES ('2', '1', '1', '0', '0', '0', '0', '0', '1', '0', '0', '0');
-INSERT INTO `yunzhi_invite` VALUES ('3', '2', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0');
+INSERT INTO `yunzhi_invite` VALUES ('1', '1', '1', '1', '1', '4', '1', '1', '1', '1', '1222', '0', '0');
+INSERT INTO `yunzhi_invite` VALUES ('2', '1', '1', '0', '0', '0', '0', '0', '1', '0', '0', '0', '0');
+INSERT INTO `yunzhi_invite` VALUES ('3', '2', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0');
+INSERT INTO `yunzhi_invite` VALUES ('4', '1', '1', '1', '0', '0', '0', '0', '0', '1', '1489831509', '234343234', '1489831509');
