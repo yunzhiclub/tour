@@ -1,3 +1,17 @@
+
+<div class="row">
+  <div class="col-md-10 col-md-offset-2">
+    <div style="padding-left:5px; border:1px solid #c8c8c8; width:200px; height:194px;">
+      <h4>flsfsdfsdfsdfsdfsdff</h4>
+      <div style="border:1px solid #c8c8c8; width:188px;">
+        <img style="width:182px; height:120px; padding-left:3px; margin-top:3px;" src="/tour/public/upload/20170321/e934e1a61bf134fbc88165c65cb91cc1.png" />
+
+      </div>
+      <button style="margin-left:3px; margin-top:3px; width:60px;" class="btn btn-danger btn-xs dropdown-toggle" type="button">删除</button>
+    </div>
+  </div>
+</div>
+<br>
 <div class="row">
   <div class="col-md-2 text-right">
       <label>图片</label>
@@ -84,6 +98,7 @@
 <hr>
 <div ng-show="hidden">
   <input type="text" ng-model="pictureIds" name="pictureIds"/>
+  
 </div>
 </div>
 <script>
@@ -172,7 +187,7 @@ app.controller('AppController', ['$scope', '$http', 'FileUploader', function($sc
         alert('请修改图片名字，图片名字不能重复');
       }
      },function (error){
-        alert('error');
+        alert(error);
      });
      //显示图片信息
      $scope.InfoShow = true;
@@ -232,7 +247,20 @@ app.controller('AppController', ['$scope', '$http', 'FileUploader', function($sc
 
 
   //用于上传图片的编辑
-  //$scope.id = document.getElementById("id").value;
+  var id = document.getElementById("id").value;
+  var model = document.getElementById("model").value;
+  var data = {params : {id : id, model: model}};
+  console.log(data);
+  $http
+  .get('{:url("picture/getRelationPicturesByXxxModelId")}', data)
+  .then(function successCallback(response) {
+    //删除上传的图片id
+    $scope.pictureIds.remove(response.data);
+
+  }, function errorCallback(response) {
+    // called asynchronously if an error occurs
+    // or server returns response with an error status.
+  });
 }]);
 </script>
 

@@ -97,11 +97,11 @@ class PictureModel extends ModelModel
 			$PictureXXXModel->save($data);
 		}
 
-		return 'error';
+		return;
 	}
 
 	/**
-	 * 将命名转化为驼峰是写法，例：destinationDityModel转变为destination_city_id
+	 * 将命名转化为驼峰是写法，例：destinationCityModel转变为destination_city_id
 	 * @param  string $name xxxModel
 	 * @return string       xxx_id
 	 * @author chuhang 

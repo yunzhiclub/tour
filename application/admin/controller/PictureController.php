@@ -3,8 +3,6 @@ namespace app\admin\controller;
 use think\Controller;
 use think\Request;
 use app\model\PictureModel;
-use think\Config;
-use think\File;
 /**
 * 图片管理
 */
@@ -16,7 +14,6 @@ class PictureController extends IndexController
     }
     public function upload()
     {
-        Config('app_trace', false);
     	//获取上传图片
         $Picture = Request::instance()->file('file');
         //保存图片
@@ -58,4 +55,13 @@ class PictureController extends IndexController
     {
         return $this->fetch();
     }
+
+    public function getRelationPicturesByXxxModelId()
+    {
+        $data = Request::instance()->param();
+        $relationPictures = PictureModel::getRelationPicturesByXxxModelId($data);
+        
+        var_dump($data);
+    }
+
 }
