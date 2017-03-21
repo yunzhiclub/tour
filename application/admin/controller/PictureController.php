@@ -53,4 +53,9 @@ class PictureController extends IndexController
         
         return $AllPictureNames;
     }
+
+    public function detail()
+    {
+        return $this->fetch();
+    }
 }
