@@ -1,135 +1,128 @@
-<div ng-app="app">
-  <div ng-controller="AppController" nv-file-drop="" uploader="uploader">
-        <div class="row">
-
-            <div class="col-md-2 text-right">
-
-                <label>图片</label>
-
-            </div>
-            <div class="col-md-3">
-              <input id="file" class="inputfile" type="file" nv-file-select="" uploader="uploader" multiple  />
-              <label for="file" class="btn"><i class="glyphicon glyphicon-cloud-upload"></i> 上传图片 </label>
-            </div>
-        </div>
-        <br>
-        <div class="row" ng-show="InfoShow">
-          <div class="col-md-8 col-md-offset-2">
-
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th width="50%">名称</th>
-                            <th ng-show="uploader.isHTML5">尺寸</th>
-                            <th ng-show="uploader.isHTML5">进度</th>
-                            <th>状态</th>
-                            <th>操作</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="item in uploader.queue">
-                            <td>
-                                <strong>{{ item.file.name }}</strong>
-                                <!-- Image preview -->
-                                <!--auto height-->
-                                <!--<div ng-thumb="{ file: item.file, width: 100 }"></div>-->
-                                <!--auto width-->
-                                <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
-                                <!--fixed width and height -->
-                                <!--<div ng-thumb="{ file: item.file, width: 100, height: 100 }"></div>-->
-                            </td>
-                            <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
-                            <td ng-show="uploader.isHTML5">
-                                <div class="progress" style="margin-bottom: 0;">
-                                    <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
-                                </div>
-                            </td>
-                            <td class="text-center">
-                                <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
-                                <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
-                                <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
-                            </td>
-                            <td nowrap>
-                                <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
-                                    <span class="glyphicon glyphicon-upload"></span> 上传
-                                </button>
-                                <button type="button" class="btn btn-danger btn-xs" ng-click="delete(item)">
-                                    <span class="glyphicon glyphicon-trash"></span> 删除
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div>
-                    <div>
-                        总进度:
-                        <div class="progress" style="">
-                            <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
-                        </div>
-                    </div>
-                    <div class="row">
-
-                      <div class="col-md-6">
-                        <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
-                            <span class="glyphicon glyphicon-upload"></span> 上传所有
-                        </button>
-                        <button type="button" class="btn btn-danger btn-s" ng-click="deleteAllPicture()" ng-disabled="!uploader.queue.length">
-                            <span class="glyphicon glyphicon-trash"></span> 删除所有
-                        </button>
-                      </div>
-                      <div class="col-md-6 text-right">
-                        <label>文件总数：{{ uploader.queue.length }}</label>
-                      </div>
-                    
-                    <div>
-                    
-                </div>
-          </div>
-        </div>
-        <hr>
-
-  </div>  
+<div class="row">
+  <div class="col-md-2 text-right">
+      <label>图片</label>
+  </div>
+  <div class="col-md-3">
+    <input id="file" class="inputfile" type="file" nv-file-select="" uploader="uploader" multiple  />
+    <label for="file" class="btn"><i class="glyphicon glyphicon-cloud-upload"></i> 上传图片 </label>
+  </div>
 </div>
-<style>
-.inputfile {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
-}
+<br>
 
-.inputfile + label {
-    font-size: 1.25em;
-    font-weight: 700;
-    color: white;
-    background-color: #c9302c;
-    display: inline-block;
-}
+<div class="row" ng-show="InfoShow">
+  <div class="col-md-8 col-md-offset-2">
+    <table class="table">
+        <thead>
+            <tr>
+                <th width="50%">名称</th>
+                <th ng-show="uploader.isHTML5">尺寸</th>
+                <th ng-show="uploader.isHTML5">进度</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in uploader.queue">
+                <td>
+                    <strong>{{ item.file.name }}</strong>
+                    <!-- Image preview -->
+                    <!--auto height-->
+                    <!--<div ng-thumb="{ file: item.file, width: 100 }"></div>-->
+                    <!--auto width-->
+                    <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                    <!--fixed width and height -->
+                    <!--<div ng-thumb="{ file: item.file, width: 100, height: 100 }"></div>-->
+                </td>
+                <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                <td ng-show="uploader.isHTML5">
+                    <div class="progress" style="margin-bottom: 0;">
+                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                    </div>
+                </td>
+                <td class="text-center">
+                    <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                    <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                    <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                </td>
+                <td nowrap>
+                    <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                        <span class="glyphicon glyphicon-upload"></span> 上传
+                    </button>
+                    <button type="button" class="btn btn-danger btn-xs" ng-click="delete(item)">
+                        <span class="glyphicon glyphicon-trash"></span> 删除
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <div>
+            总进度:
+            <div class="progress" style="">
+                <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length"
+            >
+                <span class="glyphicon glyphicon-upload"></span> 全部上传
+            </button>
+            <button type="button" class="btn btn-danger btn-s" ng-click="deleteAllPicture()" ng-disabled="!uploader.queue.length">
+                <span class="glyphicon glyphicon-trash"></span> 全部删除
+            </button>
+          </div>
+          <div class="col-md-6 text-right">
+            <label>文件总数：{{ uploader.queue.length }}</label>
+          </div>
+        <div>
+    </div>
+    <br><br><br>
+  </div>
+</div>
+  </div>
+<hr>
+<div ng-show="hidden">
+  <input type="text" ng-model="pictureIds" name="pictureIds"/>
+</div>
+</div>
 
-.inputfile:focus + label,
-.inputfile + label:hover {
-    background-color: #D10F0F;
-    color: white;
-}
-.inputfile + label {
-  cursor: pointer; /* "hand" cursor */
-}
-</style>
+
 <script>
 app.controller('AppController', ['$scope', '$http', 'FileUploader', function($scope, $http, FileUploader) {
-  
+
+  //上传所有图片的id
+  $scope.pictureIds = new Array();
+
+  //定义remove方法，删除数组中指定的元素
+  Array.prototype.remove = function(val) {
+    var index = this.indexOf(val);
+    if (index > -1) {
+        this.splice(index, 1);
+    }
+  };
+
+  $scope.submit = function() {
+    //提交前将图片id数组转化为json字符串
+    $scope.pictureIds = JSON.stringify($scope.pictureIds);
+  };
   //删除图片
   $scope.delete = function (item) {
     //删除图片
     item.remove();
-    
+    tempFileName.remove(item.file.name);
     //删除数据库中的图片，根据图片名称删除图片，故上传图片名称不能一样
     var getData = {params: {name: item.file.name}};
     $http
-    .get('{:url("picture/delete")}', getData);
+    .get('{:url("picture/delete")}', getData)
+    .then(function successCallback(response) {
+      //删除上传的图片id
+      $scope.pictureIds.remove(response.data);
+
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+    });
 
     //判断是否有图片，若不存在，则不显示图片信息
     if ($scope.uploader.queue.length === 0) {
@@ -146,7 +139,6 @@ app.controller('AppController', ['$scope', '$http', 'FileUploader', function($sc
       $scope.delete($scope.uploader.queue[0]);
     }
   }
-
 
   var uploader = $scope.uploader = new FileUploader({
     url: '{:url("picture/upload")}'
@@ -165,14 +157,14 @@ app.controller('AppController', ['$scope', '$http', 'FileUploader', function($sc
   // CALLBACKS
 
   uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
-      console.info('onWhenAddingFileFailed', item, filter, options);
+      //console.info('onWhenAddingFileFailed', item, filter, options);
   };
   uploader.onAfterAddingFile = function(fileItem) {
-    //请求所有图片名字，如果图片名字已存在，提示用户修改图片名字（图片名字不能重复，为删除图片做准备）
-    $http({
+      //请求所有图片名字，如果图片名字已存在，提示用户修改图片名字（图片名字不能重复，为删除图片做准备）
+      $http({
         method: 'GET',
         url: '{:url("picture/getAllPictureNames")}'
-     }).then(function (success){
+      }).then(function (success){
       //获取所有图片名称
       var AllPictureNames = success.data;
 
@@ -180,47 +172,64 @@ app.controller('AppController', ['$scope', '$http', 'FileUploader', function($sc
       if (AllPictureNames.indexOf(fileItem.file.name) !== -1) {
         $scope.uploader.queue.pop();
         alert('请修改图片名字，图片名字不能重复');
-        
       }
-      
      },function (error){
-        alert('上传文件出错');
+        alert('error');
      });
-     
      //显示图片信息
      $scope.InfoShow = true;
-    console.info('onAfterAddingFile', fileItem);
+     //console.info('onAfterAddingFile', fileItem);
   };
 
+  //防止用户添加同名的图片
+  var tempFileName = new Array();
   uploader.onAfterAddingAll = function(addedFileItems) {
-      console.info('onAfterAddingAll', addedFileItems);
+
+      if (tempFileName.indexOf(addedFileItems[0].file.name) !== -1) {
+        alert('对不起，不能上传同名的图片');
+        $scope.uploader.queue.pop();
+      } else {
+        tempFileName.push(addedFileItems[0].file.name);
+      }
+      //console.info('onAfterAddingAll', addedFileItems);
   };
   uploader.onBeforeUploadItem = function(item) {
-      console.info('onBeforeUploadItem', item);
+
+      //console.info('onBeforeUploadItem', item);
   };
   uploader.onProgressItem = function(fileItem, progress) {
-      console.info('onProgressItem', fileItem, progress);
+      //console.info('onProgressItem', fileItem, progress);
   };
   uploader.onProgressAll = function(progress) {
-      console.info('onProgressAll', progress);
+      if (progress === 100) {
+        $scope.progress = false;
+      } else {
+        $scope.progress = true;
+      }
+      //console.info('onProgressAll', progress);
   };
   uploader.onSuccessItem = function(fileItem, response, status, headers) {
-      console.info('onSuccessItem', fileItem, response, status, headers);
+      //console.info('onSuccessItem', fileItem, response, status, headers);
   };
   uploader.onErrorItem = function(fileItem, response, status, headers) {
-      console.info('onErrorItem', fileItem, response, status, headers);
+      //console.info('onErrorItem', fileItem, response, status, headers);
   };
   uploader.onCancelItem = function(fileItem, response, status, headers) {
-      console.info('onCancelItem', fileItem, response, status, headers);
+      //console.info('onCancelItem', fileItem, response, status, headers);
   };
   uploader.onCompleteItem = function(fileItem, response, status, headers) {
-      console.info('onCompleteItem', fileItem, response, status, headers);
+      //将上传的图片id添加到$scope.pictureIds数组中
+      $scope.pictureIds.push(response);
+      
+      //console.info('onCompleteItem', fileItem, response, status, headers);
   };
   uploader.onCompleteAll = function() {
-      console.info('onCompleteAll');
+      //console.info('onCompleteAll');
   };
 
-  console.info('uploader', uploader);
+  //隐藏传输的图片id
+  $scope.hidden = false;
+  //console.info('uploader', uploader);
 }]);
 </script>
 
@@ -281,3 +290,31 @@ app.directive('ngThumb', ['$window', function($window) {
 }]);
 
 </script>
+<style>
+/*设置“上传图片按钮”样式*/
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: #d9534f;
+    display: inline-block;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: #D10F0F;
+    color: white;
+}
+.inputfile + label {
+  cursor: pointer; /* "hand" cursor */
+}
+</style>

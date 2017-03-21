@@ -16,6 +16,7 @@ class PictureController extends IndexController
     }
     public function upload()
     {
+        Config('app_trace', false);
     	//获取上传图片
         $Picture = Request::instance()->file('file');
         //保存图片
@@ -40,7 +41,7 @@ class PictureController extends IndexController
         $PictureModel->is_delete = 1;
         $result = $PictureModel->save();
 
-        return json_encode($result);
+        return $PictureModel->getData('id');
 
 
     }
