@@ -83,7 +83,9 @@ class DestinationcityController extends IndexController
 		}
 
 		//将图片、目的地城市关联并存入到Picture_destination_city表中
-		$saveRelationPictures = PictureModel::saveRelationPictures($DestinationCityModel, $pictureIds);
+		if ($pictureIds !== null) {
+			$saveRelationPictures = PictureModel::saveRelationPictures($DestinationCityModel, $pictureIds);
+		}
 
 		return $this->success('保存成功', url('index'));
 	}
