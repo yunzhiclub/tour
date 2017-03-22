@@ -18,4 +18,15 @@ class OrderModel extends ModelModel
 		$orders = $Order->where('user_id', '=', $userId)->select();
 		return $orders;
 	}
+
+	public function Bed()
+	{
+		return $this->hasOne('BedModel');
+	}
+
+	public function getInviteModelByOrderId($order_id)
+	{
+		$InviteModel = new InviteModel;
+		$map['order_id'] = $order_id;
+	}
 }

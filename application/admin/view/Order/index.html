@@ -29,12 +29,13 @@
                 	 <th>金额</th>
                      <th>操作</th>
                 </tr>
+                {volist name="OrderModels" id="OrderModel" key="key"}
                 <tr>
-                    <td>1</td>
-                    <td><a href="{:url('detail')}">D1233211234567</a></td>
-                    <td><a href="{:url('Bed/index')}">Y1233211234567-1</a></td>
-                    <td>张三</td>
-                    <td><a href="{:url('Invite/index')}">Y1233211234567</a></td>
+                    <td>{$key}</td>
+                    <td><a href="{:url('detail?id=' . $OrderModel->getData('id'))}">{$OrderModel->getData('number')}</a></td>
+                    <td><a href="{:url('Bed/detail?id=' . $OrderModel->Bed->id)}">{$OrderModel->Bed->number}hhh{$OrderModel->Bed->id}</a></td>
+                    <td>{$OrderModel->Bed->Customer->nick_name}</td>
+                    <td><a href="{:url('Invite/index')}">{$OrderModel->getData('invite_id')}</a></td>
                     <td>男</td>
                 	<td>￥80000</td>
                 	<td>
@@ -42,6 +43,7 @@
 
                     </td>
                 </tr>
+                {/volist}
             </table>
         </div>
     </div>
