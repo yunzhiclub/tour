@@ -11,7 +11,7 @@ use app\model\PictureModel;//图片
  * 目的城市管理
  * @author zhangmengxiang
  */
-class DestinationcityController extends IndexController
+class DestinationCityController extends IndexController
 {
 	public function index()
 	{
