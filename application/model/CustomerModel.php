@@ -140,4 +140,5 @@ class CustomerModel extends ModelModel
 
         return true;
     }
+
 }

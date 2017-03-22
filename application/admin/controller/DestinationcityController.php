@@ -5,6 +5,7 @@ use think\Controller;
 use think\Request;
 use app\model\DestinationCityModel;//目的城市
 use app\model\CountryModel;//国家
+use app\model\PictureModel;//图片
 
 /**
  * 目的城市管理
@@ -32,6 +33,7 @@ class DestinationcityController extends IndexController
 		$CountryModels = CountryModel::all();
 
 		$this->assign('CountryModels', $CountryModels);
+		$this->assign('table', 'destination_city');
 		return $this->fetch();
 	}
 	public function edit()
@@ -73,9 +75,16 @@ class DestinationcityController extends IndexController
 	{
 		$data = Request::instance()->param();
 
+		//去除pictureIds字段
+		$pictureIds = array_pop($data);
 		$DestinationCityModel = new DestinationCityModel;
 		if(false === $DestinationCityModel->save($data)){
 			return $this->error($DestinationCityModel->getError());
+		}
+
+		//将图片、目的地城市关联并存入到Picture_destination_city表中
+		if ($pictureIds !== null) {
+			$saveRelationPictures = PictureModel::saveRelationPictures($DestinationCityModel, $pictureIds);
 		}
 
 		return $this->success('保存成功', url('index'));
