@@ -9,7 +9,7 @@ class InviteController extends IndexController
 	public function index()
 	{
 		$InviteModel = new InviteModel;
-		$InviteModels = $InviteModel->paginate(10);
+		$InviteModels = $InviteModel->paginate();
 		$this->assign('InviteModels', $InviteModels);
 		return $this->fetch();
 	}
