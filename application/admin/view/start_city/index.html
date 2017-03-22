@@ -8,7 +8,7 @@
                 <div class="col-md-10">
                     <form class="form-inline" action="{:url('', url('get.'))}"  method="get">
                         <div class="form-group">
-                            <input name="name" type="text" class="form-control" placeholder="名称..." id="name" value="{:input('get.name')}">
+                            <input name="name" type="text" class="form-control" placeholder="城市..." id="name" value="{:input('get.name')}">
                         </div>
                         <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>
                     </form>
@@ -21,7 +21,7 @@
             <table class="table table-hover table-bordered">
                 <tr class="info">
                     <th>序号</th>
-                    <th>名称</th>
+                    <th>城市</th>
                     <th>操作</th>
                 </tr>
                
@@ -37,6 +37,7 @@
                 {/volist}
                 
             </table>
+            {$StartCityModels->render()}
         </div>
     </div>
 </div>

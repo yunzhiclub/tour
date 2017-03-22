@@ -10,13 +10,13 @@
                             <div class="form-group">
                                 <label for="name" class="col-md-2 text-right">航班号</label>
                                 <div class="col-md-3">
-                                    <input name="number" class="form-control">
+                                    <input name="number" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="password" class="col-md-2 text-right">公司</label>
                                 <div class="col-md-3">
-                                    <input name="company" class="form-control">
+                                    <input name="company" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -34,7 +34,7 @@
                             <div class="form-group">
                                 <label for="password" class="col-md-2 text-right">出发城市</label>
                                 <div class="col-md-3">
-                                    <select class="form-control" name="up_city_id">
+                                    <select class="form-control" name="up_city_id" >
                                     {volist name="StartCityModels" id="StartCityModel"}
                                         <option value="{$StartCityModel->getData('id')}">{$StartCityModel->getData('name')}</option>
                                     {/volist}
