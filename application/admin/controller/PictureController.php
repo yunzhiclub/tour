@@ -3,6 +3,7 @@ namespace app\admin\controller;
 use think\Controller;
 use think\Request;
 use app\model\PictureModel;
+use think\Config;
 /**
 * 图片管理
 */
@@ -14,6 +15,7 @@ class PictureController extends IndexController
     }
     public function upload()
     {
+        Config::set('app_trace', false);
     	//获取上传图片
         $Picture = Request::instance()->file('file');
         //保存图片
@@ -56,12 +58,22 @@ class PictureController extends IndexController
         return $this->fetch();
     }
 
+    //通过对象id获取关联的图片。例：根据目的地城市对象id获取图片目的地城市模型中的信息，然后根据信息中的picture_id获取图片
     public function getRelationPicturesByXxxModelId()
     {
         $data = Request::instance()->param();
         $relationPictures = PictureModel::getRelationPicturesByXxxModelId($data);
-        
-        var_dump($data);
+
+        return json_encode($relationPictures);
+    }
+
+    public function deletePicture()
+    {
+        $data = Request::instance()->param();
+
+        $result = PictureModel::deletePicture($data);
+
+        return $result;
     }
 
 }

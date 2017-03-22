@@ -78,7 +78,7 @@ class PictureModel extends ModelModel
 		$getClassName = get_class($XXXModel);
 
 		//获取与图片关联的model名称
-		$PictureXXXModel = substr($getClassName, 0, 10) . 'Picture' . substr($getClassName, 10);
+		$PictureXXXModel = self::getRelationModel($getClassName);
 		
 		//获取xxxModel的id，将json格式的id转化为数组
 		$XXXModelId = $XXXModel->getData('id');
@@ -101,7 +101,7 @@ class PictureModel extends ModelModel
 	}
 
 	/**
-	 * 将命名转化为驼峰是写法，例：destinationCityModel转变为destination_city_id
+	 * 将命名转化为驼峰是写法，例：app\model\DestinationCityModel转变为destination_city_id
 	 * @param  string $name xxxModel
 	 * @return string       xxx_id
 	 * @author chuhang 
@@ -110,5 +110,79 @@ class PictureModel extends ModelModel
 	{
 		$tempName = strtolower(preg_replace('/((?<=[a-z])(?=[A-Z]))/', '_', substr($name, 10)));
 		return substr($tempName, 0, -6) . '_id';
+	}
+
+	/**
+	 * 通过对象id获取关联的图片。例：根据目的地城市对象id获取图片目的地城市模型中的信息，然后根据信息中的picture_id获取图片
+	 * @param  array $data 对象id和model名称
+	 * @return array       PictureModel数组
+	 * @author chuhang 
+	 */
+	static public function getRelationPicturesByXxxModelId($data)
+	{
+		
+		$XxxModel = self::getRelationModel($data['model']);
+
+		$PictureXxxModel = substr($XxxModel, 10);
+
+		$xxx_id = self::convertHump($data['model']);
+
+		//获取图片id
+		$map = [];
+		$map[$xxx_id] = (int)$data['id'];
+
+		$PictureXxxModel = 'app\model' . DS . "$PictureXxxModel";
+		$PictureXxxModel = new $PictureXxxModel;
+		$PictureXxxModels = $PictureXxxModel->where($map)->select();
+		
+		//根据图片id获取图片信息
+		$results = [];
+		foreach ($PictureXxxModels as $PictureXxxModel) {
+			$pictureId = $PictureXxxModel->getData('picture_id');
+			//判断是否存在该图片
+			if (null !== PictureModel::get($pictureId)) {
+				$results[] = PictureModel::get($pictureId);
+			}
+		}
+		return $results;
+	}
+
+	/**
+	 * 删除图片及与图片关联的表的信息
+	 * @param  [array] $data [图片信息]
+	 * @author chuhang 
+	 */
+	static public function deletePicture($data)
+	{
+		//删除picture表中的图片
+		$PictureModel = PictureModel::get($data['pictureId']);
+		$PictureModel->is_delete = 1;
+		$PictureModel->save();
+		
+		//删除关联表的数据，如PictureDestinationCityModel
+		$PictureXxxModel = substr(self::getRelationModel($data['model']), 10);
+
+		$PictureXxxModel = 'app\model' . DS . "$PictureXxxModel";
+
+		//获取查询条件
+		$map['picture_id'] = $data['id'];
+		$xxx_id = self::convertHump($data['model']);
+		$map[$xxx_id] = $data['id'];
+
+		//删除数据
+		$PictureXxxModel = $PictureXxxModel::get($map);
+		$PictureXxxModel->is_delete = 1;
+		$PictureXxxModel->save();
+
+	}
+
+	/**
+	 * 获取模型名称。例：根据app\model\DestinationCityModel获取app\model\PictureDestinationCityModel
+	 * @param  string $model [app\model\DestinationCityModel]
+	 * @return string        [app\model\PictureDestinationCityModel]
+	 */
+	static public function getRelationModel($model)
+	{
+		return substr($model, 0, 10) . 'Picture' . substr($model, 10);
 	}
 }

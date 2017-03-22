@@ -45,7 +45,7 @@
                     <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
                 </td>
                 <td nowrap>
-                    <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                    <button type="button" class="btn btn-success btn-xs" ng-click="item.upload('test')" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
                         <span class="glyphicon glyphicon-upload"></span> 上传
                     </button>
                     <button type="button" class="btn btn-danger btn-xs" ng-click="delete(item)">

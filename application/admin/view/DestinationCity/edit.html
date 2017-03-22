@@ -6,7 +6,7 @@
             <div class="panel-body">
                 <div class="row">
                     <form class="form-horizontal" action="{:url('update')}" method="
-                    post">
+                    post" name="myForm" ng-submit="submit()">
                     <input id="model" type="hidden" name="id" value="<?php echo get_class($DestinationCityModel); ?>">
 
                     <input id="id" type="hidden" name="id" value="{$DestinationCityModel->id}">
