@@ -26,18 +26,24 @@
                     <th>邮箱</th>
                     <th>操作</th>
                 </tr>
+                {volist name="CustomerModels" id="CustomerModel" key="key"}
                 <tr>
-                	<td>1</td>
-                	<td><a href="{:url('detail')}">小白菜</a></td>
-                	<td>15933008109</td>
-                	<td><a href="{:url('collection')}">详情</a></td>
-                	<td>130423199706101418</td>
-                	<td>191208828@qq.com</td>
+                	<td>{$key}</td>
+                	<td><a href="{:url('detail?id='.$CustomerModel->getData('id'))}">{$CustomerModel->getData('nick_name')}</a></td>
+                	<td>{$CustomerModel->getData('phone')}</td>
+                	<td><a href="{:url('collection?customer_id='.$CustomerModel->getData('id'))}">详情</a></td>
+                	<td>{$CustomerModel->getData('idcard')}</td>
+                	<td>{$CustomerModel->getData('email')}</td>
                 	<td>
-                     <a href="#" class="btn btn-warning">冻结</a>   
+                    {eq name="0" value="$CustomerModel->getData('status')"}
+                     <a href="{:url('status?id='.$CustomerModel->getData('id'))}" class="btn btn-warning">冻结</a>
+                    {else/}<a href="{:url('status?id='.$CustomerModel->getData('id'))}" class="btn btn-success">解冻</a>
+                    {/eq}
                     </td>
                 </tr>
+                {/volist}
             </table>
+            {$CustomerModels->render()}
         </div>
     </div>
 </div>
