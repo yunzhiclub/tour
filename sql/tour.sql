@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-03-21 13:56:08
+Date: 2017-03-23 17:04:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,8 +20,8 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `yunzhi_bed`;
 CREATE TABLE `yunzhi_bed` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `invite_id` int(11) unsigned zerofill NOT NULL DEFAULT '00000000000' COMMENT '邀约id',
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `invite_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '邀约id',
   `customer_id` int(11) DEFAULT NULL COMMENT '用户id',
   `wechat_pay_id` int(11) DEFAULT NULL COMMENT '微信支付id',
   `sex` int(11) unsigned DEFAULT NULL COMMENT '床上人的性别',
@@ -30,18 +30,21 @@ CREATE TABLE `yunzhi_bed` (
   `money` int(11) unsigned DEFAULT NULL COMMENT '该床位应付金额',
   `create_time` int(11) unsigned DEFAULT NULL COMMENT '创建时间',
   `update_time` int(11) unsigned DEFAULT NULL COMMENT '更新时间',
-  PRIMARY KEY (`id`,`invite_id`)
+  `order_id` int(11) unsigned DEFAULT NULL,
+  `number` varchar(18) DEFAULT '' COMMENT '床位编号',
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yunzhi_bed
 -- ----------------------------
-INSERT INTO `yunzhi_bed` VALUES ('10', '00000000018', '1', null, '1', '0', null, '1000', '1489834128', '1489834128');
-INSERT INTO `yunzhi_bed` VALUES ('11', '00000000018', null, null, '0', '0', null, '1000', '1489834128', '1489834128');
-INSERT INTO `yunzhi_bed` VALUES ('12', '00000000018', null, null, '1', '0', null, '1000', '1489834128', '1489834128');
-INSERT INTO `yunzhi_bed` VALUES ('13', '00000000018', null, null, '1', '0', null, '500', '1489834128', '1489834128');
-INSERT INTO `yunzhi_bed` VALUES ('14', '00000000018', null, null, '1', '0', null, '500', '1489834128', '1489834128');
-INSERT INTO `yunzhi_bed` VALUES ('15', '00000000018', null, null, '1', '0', null, '1000', '1489834128', '1489834128');
+INSERT INTO `yunzhi_bed` VALUES ('10', '1', '1', null, '1', '0', null, '1000', '1489834128', '1489834128', '1', '123');
+INSERT INTO `yunzhi_bed` VALUES ('11', '1', '2', null, '0', '0', null, '1000', '1489834128', '1489834128', '2', '1234');
+INSERT INTO `yunzhi_bed` VALUES ('12', '1', '3', null, '1', '0', null, '1000', '1489834128', '1489834128', '3', '1123');
+INSERT INTO `yunzhi_bed` VALUES ('13', '1', '4', null, '1', '0', null, '500', '1489834128', '1489834128', '4', '1223');
+INSERT INTO `yunzhi_bed` VALUES ('14', '1', '5', null, '1', '0', null, '500', '1489834128', '1489834128', '5', '1233');
+INSERT INTO `yunzhi_bed` VALUES ('15', '1', '6', null, '1', '0', null, '1000', '1489834128', '1489834128', '6', '1244');
 
 -- ----------------------------
 -- Table structure for `yunzhi_chosen`
@@ -126,7 +129,7 @@ INSERT INTO `yunzhi_country` VALUES ('8', '6', 'shahala', '', '1489997911', '148
 -- ----------------------------
 DROP TABLE IF EXISTS `yunzhi_customer`;
 CREATE TABLE `yunzhi_customer` (
-  `id` int(10) NOT NULL COMMENT '用户编号',
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户编号',
   `openid` varchar(50) NOT NULL COMMENT 'openid',
   `nick_name` varchar(20) DEFAULT '' COMMENT '昵称',
   `sex` int(11) unsigned DEFAULT NULL COMMENT '性别',
@@ -135,18 +138,27 @@ CREATE TABLE `yunzhi_customer` (
   `country` varchar(20) DEFAULT '' COMMENT '国家',
   `head_img_url` varchar(200) DEFAULT '' COMMENT '头像URL',
   `birthday` int(10) DEFAULT NULL COMMENT '出生日期',
-  `phone` int(10) DEFAULT NULL COMMENT '手机号码',
+  `phone` bigint(11) DEFAULT NULL COMMENT '手机号码',
   `email` varchar(40) DEFAULT '',
   `card_img_front_url` varchar(200) DEFAULT '' COMMENT '身份证正面URL',
   `card_img_back_url` varchar(200) DEFAULT '' COMMENT '身份证反面URL',
-  `idcard` int(10) DEFAULT NULL,
-  PRIMARY KEY (`openid`,`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `idcard` varchar(40) DEFAULT NULL,
+  `update_time` int(11) NOT NULL,
+  `create_time` int(11) NOT NULL,
+  `status` int(1) unsigned zerofill NOT NULL DEFAULT '0' COMMENT '0',
+  `is_delete` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '1(删除)',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yunzhi_customer
 -- ----------------------------
-INSERT INTO `yunzhi_customer` VALUES ('1', 'oYIbNwFiyIJK25Ifro0LKww03N2g', '成杰', '1', '', '天津', '中国', '20170304\\333b87ff9565d516fa4604542106c6a9e4a6db99.png', null, null, '', '', '', null);
+INSERT INTO `yunzhi_customer` VALUES ('1', 'oYIbNwFiyIJK25Ifro0LKww03N2g', '成杰', '0', '天津', '天津', '中国', '20170304\\333b87ff9565d516fa4604542106c6a9e4a6db99.png', '19970621', '17602220356', '55185294@qq.com', '', '', '140502199806219966', '1490098673', '0', '0', '0');
+INSERT INTO `yunzhi_customer` VALUES ('2', 'sjfksajdfjiihiohfadsfsjanbvkj', '张三', '1', '北京', '北京', '中国', '', '1992', '13599996666', 'wangyi@vip.com', '', '', '140xxxxxxxxxxxxxxxxx', '1490098812', '0', '1', '0');
+INSERT INTO `yunzhi_customer` VALUES ('3', '', '李四', null, '', '', '', '', null, null, '', '', '', null, '0', '0', '0', '0');
+INSERT INTO `yunzhi_customer` VALUES ('4', '', '王五', null, '', '', '', '', null, null, '', '', '', null, '0', '0', '0', '0');
+INSERT INTO `yunzhi_customer` VALUES ('5', '', '赵六', null, '', '', '', '', null, null, '', '', '', null, '0', '0', '0', '0');
+INSERT INTO `yunzhi_customer` VALUES ('6', '', '田七', null, '', '', '', '', null, null, '', '', '', null, '0', '0', '0', '0');
 
 -- ----------------------------
 -- Table structure for `yunzhi_destination_city`
@@ -323,17 +335,21 @@ INSERT INTO `yunzhi_invite` VALUES ('4', '1', '1', '1', '0', '0', '0', '0', '0',
 DROP TABLE IF EXISTS `yunzhi_order`;
 CREATE TABLE `yunzhi_order` (
   `id` int(10) NOT NULL,
-  `user_id` int(10) DEFAULT NULL,
-  `invite_id` int(10) DEFAULT NULL,
+  `customer_id` int(10) unsigned DEFAULT NULL COMMENT '用户id',
+  `invite_id` int(10) unsigned DEFAULT NULL COMMENT '邀约id',
+  `number` varchar(18) DEFAULT '' COMMENT '订单编号',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yunzhi_order
 -- ----------------------------
-INSERT INTO `yunzhi_order` VALUES ('1', '1', '1');
-INSERT INTO `yunzhi_order` VALUES ('2', '1', '3');
-INSERT INTO `yunzhi_order` VALUES ('3', '2', '2');
+INSERT INTO `yunzhi_order` VALUES ('1', '1', '1', 'D1233211234567');
+INSERT INTO `yunzhi_order` VALUES ('2', '2', '3', 'D1233211234568');
+INSERT INTO `yunzhi_order` VALUES ('3', '3', '2', 'D1233211234569');
+INSERT INTO `yunzhi_order` VALUES ('4', '4', '1', '11');
+INSERT INTO `yunzhi_order` VALUES ('5', '6', '1', '33');
+INSERT INTO `yunzhi_order` VALUES ('6', '5', '1', '22');
 
 -- ----------------------------
 -- Table structure for `yunzhi_picture`
@@ -534,3 +550,9 @@ INSERT INTO `yunzhi_user` VALUES ('1', 'admin', '59129aacfb6cebbe2c52f30ef342420
 -- ----------------------------
 DROP VIEW IF EXISTS `yunzhi_destination_city_route_hotel_flight_view`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `yunzhi_destination_city_route_hotel_flight_view` AS select `yunzhi_route`.`id` AS `id`,`yunzhi_route`.`name` AS `route_name`,`yunzhi_route`.`destination_city_id` AS `route_destination_city_id`,`yunzhi_route`.`hotel_id` AS `route_hotel_id`,`yunzhi_route`.`begin_flight_id` AS `route_begin_flight_id`,`yunzhi_route`.`back_flight_id` AS `route_back_flight_id`,`yunzhi_route`.`days` AS `route_days`,`yunzhi_route`.`description` AS `route_description`,`yunzhi_route`.`check_in_days` AS `route_check_in_days`,`yunzhi_route`.`check_in_rooms` AS `route_check_in_rooms`,`yunzhi_route`.`standard_price` AS `route_standard_price`,`yunzhi_route`.`deadline` AS `route_deadline`,`yunzhi_route`.`content` AS `route_content`,`yunzhi_route`.`click` AS `route_click`,`yunzhi_route`.`is_delete` AS `route_is_delete`,`yunzhi_hotel`.`title` AS `hotel_title`,`yunzhi_route`.`create_time` AS `route_create_time`,`yunzhi_route`.`udpate_time` AS `route_udpate_time`,`yunzhi_hotel`.`dress` AS `hotel_dress`,`yunzhi_hotel`.`phone` AS `hotel_phone`,`yunzhi_hotel`.`star` AS `hotel_star`,`yunzhi_hotel`.`content` AS `hotel_content`,`yunzhi_hotel`.`is_delete` AS `hotel_is_delete`,`yunzhi_hotel`.`create_time` AS `hotel_create_time`,`yunzhi_hotel`.`update_time` AS `hotel_update_time`,`yunzhi_flight`.`number` AS `flight_number`,`yunzhi_flight`.`company` AS `flight_company`,`yunzhi_flight`.`up_time` AS `flight_up_time`,`yunzhi_flight`.`down_time` AS `flight_down_time`,`yunzhi_flight`.`up_city_id` AS `flight_up_city_id`,`yunzhi_flight`.`down_city_id` AS `flight_down_city_id`,`yunzhi_flight`.`create_time` AS `flight_create_time`,`yunzhi_flight`.`update_time` AS `flight_update_time`,`yunzhi_destination_city`.`country_id` AS `destination_city_country_id`,`yunzhi_destination_city`.`name` AS `destination_city_name`,`yunzhi_start_city`.`name` AS `start_city_name`,`yunzhi_route`.`start_city_id` AS `route_start_city_id`,`yunzhi_route`.`starting_price` AS `route_starting_price`,`yunzhi_route`.`service_phone` AS `route_service_phone` from ((((`yunzhi_route` left join `yunzhi_hotel` on((`yunzhi_hotel`.`id` = `yunzhi_route`.`hotel_id`))) left join `yunzhi_flight` on(((`yunzhi_flight`.`id` = `yunzhi_route`.`begin_flight_id`) and (`yunzhi_route`.`back_flight_id` = `yunzhi_flight`.`id`)))) left join `yunzhi_start_city` on((`yunzhi_start_city`.`id` = `yunzhi_route`.`start_city_id`))) left join `yunzhi_destination_city` on((`yunzhi_destination_city`.`id` = `yunzhi_route`.`destination_city_id`))) ;
+
+-- ----------------------------
+-- View structure for `yunzhi_test_view`
+-- ----------------------------
+DROP VIEW IF EXISTS `yunzhi_test_view`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `yunzhi_test_view` AS select `yunzhi_start_city`.`id` AS `start_city__id`,`yunzhi_destination_city`.`id` AS `destination_city__id`,`yunzhi_route`.`id` AS `id`,`yunzhi_route`.`start_city_id` AS `start_city_id`,`yunzhi_route`.`destination_city_id` AS `destination_city_id` from ((`yunzhi_route` left join `yunzhi_start_city` on((`yunzhi_route`.`start_city_id` = `yunzhi_start_city`.`id`))) left join `yunzhi_destination_city` on((`yunzhi_route`.`destination_city_id` = `yunzhi_destination_city`.`id`))) ;
