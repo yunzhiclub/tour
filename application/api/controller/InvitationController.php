@@ -70,8 +70,13 @@ class InvitationController extends ApiController {
 	 */
 	public function saveInvitation() {
 		
+		$stringInvitation = Request::instance()->param('data');
 
-		return $this->response([]);
+		if (false === InviteModel::saveInvitation($stringInvitation)) {
+			return '保存失败';
+		}
+		
+		return $this->response(['1']);
 	}
 
 	/**

@@ -36,13 +36,12 @@
 
     <!-- Angularjs library -->
     <script src="/tour/public/bower_components/angular/angular.min.js"></script>  
+    <script src="/tour/public/bower_components/angular-resource/angular-resource.min.js"></script>  
 
    <script type="text/javascript">
-        var app = angular.module('app', ['flow']);
+        var app = angular.module('app', ['ngResource', 'angularFileUpload']);
    </script>
 
-   <script src="/tour/public/bower_components/ng-flow/dist/ng-flow-standalone.min.js"></script>
    <!-- or include the files separately -->
-   <script src="/tour/public/bower_components/flow.js/dist/flow.min.js"></script>
-   <script src="/tour/public/bower_components/ng-flow/dist/ng-flow.min.js"></script>
+   <script src="/tour/public/bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
 </head>
