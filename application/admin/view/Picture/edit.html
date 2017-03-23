@@ -1,6 +1,33 @@
-<div class="row">
+
+
+<br>
+<div class="row" ng-show="pictureZero">
   <div class="col-md-2 text-right">
       <label>图片</label>
+  </div>
+  <div class="col-md-10">
+    <div ng-repeat="(key, picture) in pictures" style="">
+      <div class="col-md-3">
+        <div class="box2">
+          <h4>{{picture.name}}</h4>
+          <div class="box1">
+            <img class="img-style" ng-src="{{picture.path}}" />
+
+          </div>
+          <button class="btn btn-danger btn-xs dropdown-toggle btn-class" ng-click="deletePicture(picture)" type="button">删除</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <br><br><br><br><br><br><br><br><br><br><br>
+</div>
+
+<div class="row">
+  <div class="col-md-2 text-right">
+    <div ng-show="!pictureZero">
+      <label>图片</label>
+    </div>
   </div>
   <div class="col-md-3">
     <input id="file" class="inputfile" type="file" nv-file-select="" uploader="uploader" multiple  />
@@ -8,7 +35,6 @@
   </div>
 </div>
 <br>
-
 <div class="row" ng-show="InfoShow">
   <div class="col-md-8 col-md-offset-2">
     <table class="table">
@@ -45,7 +71,7 @@
                     <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
                 </td>
                 <td nowrap>
-                    <button type="button" class="btn btn-success btn-xs" ng-click="item.upload('test')" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                    <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
                         <span class="glyphicon glyphicon-upload"></span> 上传
                     </button>
                     <button type="button" class="btn btn-danger btn-xs" ng-click="delete(item)">
@@ -84,11 +110,62 @@
 <hr>
 <div ng-show="hidden">
   <input type="text" ng-model="pictureIds" name="pictureIds"/>
+  
 </div>
 </div>
 <script>
 app.controller('AppController', ['$scope', '$http', 'FileUploader', function($scope, $http, FileUploader) {
-  
+
+  //用于上传图片的编辑
+  var id = document.getElementById("id").value;
+  var model = document.getElementById("model").value;
+  var data = {params : {id: id, model: model}};
+  console.log(data);
+  //请求图片信息
+  $http
+  .get('{:url("picture/getRelationPicturesByXxxModelId")}', data)
+  .then(function successCallback(response) {
+    $scope.pictures = response.data;
+    //截取图片标题长度
+    for (var $i = 0; $i < $scope.pictures.length; $i++) {
+      $scope.pictures[$i].name = $scope.pictures[$i].name.substr(0, 9);
+    }
+    
+    isShowPictures();
+
+  }, function errorCallback(response) {
+    alert(response);
+  });
+
+  //判断图片是否显示
+  var isShowPictures = function () {
+    if ($scope.pictures.length === 0) {
+      $scope.pictureZero = false;
+    } else {
+      $scope.pictureZero = true;
+    }
+  }
+
+  //用于删除图片
+  $scope.deletePicture = function (picture) {
+    //删除图片
+    $scope.pictures.remove(picture);
+    //删除picture表中的图片，删除对应模块的关联表
+    var data = {params : {id: id, pictureId: picture.id,  model: model}};
+
+    $http
+    .get('{:url("picture/deletePicture")}', data)
+    .then(function successCallback(response) {
+
+    }, function errorCallback(response) {
+      alert(response);
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+    });
+
+    isShowPictures();
+  }
+
   //上传所有图片的id
   $scope.pictureIds = new Array();
 
@@ -172,7 +249,7 @@ app.controller('AppController', ['$scope', '$http', 'FileUploader', function($sc
         alert('请修改图片名字，图片名字不能重复');
       }
      },function (error){
-        alert('error');
+        alert(error);
      });
      //显示图片信息
      $scope.InfoShow = true;
@@ -218,7 +295,6 @@ app.controller('AppController', ['$scope', '$http', 'FileUploader', function($sc
   uploader.onCompleteItem = function(fileItem, response, status, headers) {
       //将上传的图片id添加到$scope.pictureIds数组中
       $scope.pictureIds.push(response);
-      
       //console.info('onCompleteItem', fileItem, response, status, headers);
   };
   uploader.onCompleteAll = function() {
@@ -228,11 +304,6 @@ app.controller('AppController', ['$scope', '$http', 'FileUploader', function($sc
   $scope.hidden = false;
   //console.info('uploader', uploader);
 
-
-
-
-  //用于上传图片的编辑
-  //$scope.id = document.getElementById("id").value;
 }]);
 </script>
 
@@ -318,6 +389,35 @@ app.directive('ngThumb', ['$window', function($window) {
     color: white;
 }
 .inputfile + label {
-  cursor: pointer; /* "hand" cursor */
+    cursor: pointer; /* "hand" cursor */
+}
+.box1 {
+    border:1px solid #c8c8c8; 
+    width:188px;
+}
+.box2 {
+    padding-left:5px; 
+    border:1px solid #c8c8c8; 
+    width:200px; 
+    height:194px;
+    margin-top: 11px;
+}
+.img-style {
+  width:182px; 
+  height:120px; 
+  padding-left:3px; 
+  margin-top:3px;
+}
+.btn-class {
+  margin-left:3px; 
+  margin-top:3px; 
+  width:60px;
+}
+.col-md-10 {
+  margin-left:-15px;
+}
+h4 {
+    line-height: 0.8;
+    color: inherit;
 }
 </style>

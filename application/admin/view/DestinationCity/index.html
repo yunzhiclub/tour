@@ -24,6 +24,7 @@
                     <th>序号</th>
                     <th>国家</th>
                     <th>城市名</th>
+                    <th>图片</th>
                     <th>操作</th>
                 </tr>
                 {volist name="DestinationCityModels" id="DestinationModel" key="key"}
@@ -31,6 +32,7 @@
                     <td>{$key}</td>
                     <td>{$DestinationModel->getCountry()->getData('name')}</td>
                     <td>{$DestinationModel->getData('name')}</td>
+                    <td><a href="{:url('picture/detail')}">详情</a></td>
                 	<td>
                     <a class="btn btn-sm btn-primary" href="{:url('edit?id='.$DestinationModel->getData('id'))}"><i class="glyphicon glyphicon-pencil"></i> 编辑</a>
                     <a class="btn btn-sm btn-danger" href="{:url('delete?id='.$DestinationModel->getData('id'))}"><i class="glyphicon glyphicon-trash"></i> 删除</a>
