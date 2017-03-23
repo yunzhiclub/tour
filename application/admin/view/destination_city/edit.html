@@ -1,13 +1,15 @@
 {extend name="index" /} {block name="content"}
 <div class="panel-body"></div>
-<div class="row">
+<div class="row" class="row" ng-app="app" ng-controller="AppController" uploader="uploader">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="row">
                     <form class="form-horizontal" action="{:url('update')}" method="
-                    post">
-                    <input type="hidden" name="id" value="{$DestinationCityModel->id}">
+                    post" name="myForm" ng-submit="submit()">
+                    <input id="model" type="hidden" name="id" value="<?php echo get_class($DestinationCityModel); ?>">
+
+                    <input id="id" type="hidden" name="id" value="{$DestinationCityModel->id}">
                         <div class="form-group">
                             <label class="col-md-2 control-label" for="country_id">国家</label>
                             <div class="col-md-3">
@@ -23,13 +25,14 @@
                         <div class="form-group">
                             <label class="col-md-2 control-label" for="name">城市</label>
                             <div class="col-md-3">
-                                <input type="text" class="form-control" name="name" required>
+                                <input type="text" class="form-control"  value="{$CountryModel->getData('name')}" name="name" required>
+             
                             </div>
                         </div>
-                       
+                        {include file="/picture/edit"}
                         <div class="form-group">
                             <div class="col-md-offset-3 col-md-9">
-                               <button type="submit" class="btn btn-md btn-success"><i class="fa fa-check "></i>确认</button>
+                               <button type="submit" class="btn btn-md btn-success" ng-disabled="uploader.getNotUploadedItems().length || progress"><i class="fa fa-check "></i>确认</button>
                             </div>
                         </div>
                     </form>
