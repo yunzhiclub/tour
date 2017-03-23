@@ -11,7 +11,7 @@ use app\model\PictureModel;//图片
  * 目的城市管理
  * @author zhangmengxiang
  */
-class DestinationcityController extends IndexController
+class DestinationCityController extends IndexController
 {
 	public function index()
 	{
@@ -93,9 +93,17 @@ class DestinationcityController extends IndexController
 	{
 		$data = Request::instance()->param();
 
+		//去除pictureIds字段
+		$pictureIds = array_pop($data);
+
 		$DestinationCityModel = DestinationCityModel::get($data['id']);
 		if(false === $DestinationCityModel->isUpdate()->save($data)){
 			return $this->error($DestinationCityModel->getError());
+		}
+
+		//将图片、目的地城市关联并存入到Picture_destination_city表中
+		if ($pictureIds !== '') {
+			$saveRelationPictures = PictureModel::saveRelationPictures($DestinationCityModel, $pictureIds);
 		}
 
 		return $this->success('操作成功', url('index'));

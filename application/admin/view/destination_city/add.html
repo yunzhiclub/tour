@@ -1,6 +1,6 @@
 {extend name="index" /} {block name="content"}
 <div class="panel-body"></div>
-<div class="row"  ng-app="app" ng-controller="AppController" uploader="uploader">
+<div class="row" ng-app="app" ng-controller="AppController" uploader="uploader">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-body">
@@ -22,7 +22,7 @@
                         <div class="form-group">
                             <label class="col-md-2 control-label" for="name">城市</label>
                             <div class="col-md-3">
-                                <input type="text" class="form-control" name="name">
+                                <input type="text" class="form-control" name="name" required>
                             </div>
                         </div>
                         {include file="/picture/index"}
