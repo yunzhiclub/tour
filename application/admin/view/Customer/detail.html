@@ -3,32 +3,32 @@
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-default">
-            <div class="panel-body">
+            <div class="panel-body">   
                 <div class="row" style="font-size:20px;">
-                    <div class="col-md-12">
+                    <div class="col-md-12" >
                         <div class="">
-                            <label>昵称：</label>楚航
+                            <label>昵称:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>{$CustomerModel->getData('nick_name')}
                         </div>
                         <div class="">
-                            <label>性别：</label>男
+                            <label>性别:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>{eq name="0" value="$CustomerModel->getData('sex')"}男{else/}女{/eq}
                         </div>
                         <div class="">
-                            <label>电话号码：</label>13752603780
+                            <label>电话号码:</label>{$CustomerModel->getData('phone')}
                         </div>
                         <div class="">
-                            <label>邮件</label>103609364@qq.com
+                            <label>邮件:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>{$CustomerModel->getData('email')}
                         </div>
                         <div class="">
-                            <label>出生日期：</label>1997-08-20
+                            <label>出生日期:</label>{$CustomerModel->getData('birthday')}
                         </div>
                         <div class="">
-                            <label>国家</label>天津
+                            <label>国家:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>{$CustomerModel->getData('country')}
                         </div>
                         <div class="">
-                            <label>省份：</label>天津
+                            <label>省份:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>{$CustomerModel->getData('province')}
                         </div>
                         <div class="">
-                            <label>城市：</label>天津
+                            <label>城市:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>{$CustomerModel->getData('city')}
                         </div>
                     </div>
                 </div>
