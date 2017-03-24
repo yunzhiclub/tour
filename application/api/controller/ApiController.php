@@ -6,6 +6,7 @@ use think\Config;
 use think\Response;
 use think\exception\HttpResponseException;
 use think\Log;
+use think\Cookie;
 
 /**
 * 统一api控制器
@@ -18,6 +19,12 @@ class ApiController extends Controller
     public function __construct(Request $request = null)
     {
         parent::__construct($request);
+
+        // 为options请求，则不进行验证
+        if ('OPTIONS' === Request::instance()->method()) {
+            return $this->response([]);
+        }
+
         $this->postJsonData = json_decode(file_get_contents('php://input'));
     }
 
@@ -78,9 +85,17 @@ class ApiController extends Controller
         $type     = $this->getResponseType();
         $accessControlAllowOrigin = Config::get('api.access_control_allow_origin');
         $accessControlAllowOrigin = $accessControlAllowOrigin ? $accessControlAllowOrigin : '*';
+        // 允许进行跨域请求的域名
         $header['Access-Control-Allow-Origin'] = $accessControlAllowOrigin;
+        // 允许的请求方法
         $header['Access-Control-Allow-Methods'] = 'GET,POST,PUT,DELETE,OPTIONS';
-        $header['Access-Control-Allow-Headers'] = 'Content-Type';
+        // 允许发送的header类型
+        $header['Access-Control-Allow-Headers'] = 'Content-Type, Origin, X-Requested-With, Accept, ' . Config::get('cors.headerName');
+        // 允许
+        $header['Access-Control-Allow-Credentials'] = 'true';
+        // 允许客户端由headers中获取的字段
+        $header['Access-Control-Expose-Headers'] = 'content-type, ' . Config::get('cors.cookieName');
+        $header[Config::get('cors.cookieName')] = 'HELLO TOKEN';
         $response = Response::create($result, $type)->header($header);
         throw new HttpResponseException($response);
     }

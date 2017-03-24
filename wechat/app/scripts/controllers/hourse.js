@@ -10,9 +10,20 @@
 angular.module('wechatApp')
     .controller('HourseCtrl', ['$uibModal', '$log', '$document', '$scope', '$stateParams', 'order', 'room', '$state', 'invitation',
         function($uibModal, $log, $document, $scope, $stateParams, order, room, $state, invitation) {
+           
+            // 先默认设置默认的单价
+            var defaultPrice = order.defaultPrice;
             if ($stateParams.timeId !== undefined) {
                 // 选用选择的出发时间给本次邀约实体复制
                 order.startTimeId = $stateParams.timeId;
+
+                // 获取本次出发时间的价格
+                invitation.getPriceByStartTimeId($stateParams.timeId).then(function successCallBack(response) {
+                    console.log(response);
+                    // defaultPrice = response.price;
+                }, function errorCallBack() {
+
+                });
             } else {
                 // 选用默认出发时间
                 order.startTimeId = null;
@@ -25,13 +36,22 @@ angular.module('wechatApp')
             var deadLine = order.deadLine;
             $scope.deadLine = new Date(deadLine);
 
+            // 设置默认选择支付房间
+            $scope.payRoomNumber = 1;
+
+            // 设置开始的最大的金额
+            var maxMoney = 5000;
+
+            // maxMoney = defaultPrice * 6;
+            room.room.maxMoney = maxMoney;
+
+            // 是否接受条款
+            $scope.isAgree = false;
 
 
+            // 弹出框
             var $ctrl = $scope;
-
             $ctrl.animationsEnabled = true;
-
-
             // 打开弹出框
             var open = function(size, parentSelector, room, money, callBack = undefined) {
                 var parentElem = parentSelector ?
@@ -63,7 +83,9 @@ angular.module('wechatApp')
                 });
             };
 
-            // 六间房间人员信息 0 不支付
+
+
+            // 六间房间人员信息 0 不支付 tag是用来查找要支付的房间
             var roomDatas = [];
             $scope.firstRoom = {
                 tag: 1,
@@ -115,16 +137,12 @@ angular.module('wechatApp')
             };
 
 
-            // 设置默认选择支付房间
-            $scope.payRoomNumber = 1;
 
-            // 设置开始的最大的金额
-            var maxMoney = 5000;
-            room.room.maxMoney = maxMoney;
 
-            /*
+
+        /*
          设置房间人员信息
-         房间选择是类型type(1, 2, 3)房间上type数组一样说明是一间房间
+         房间选择是类型type(1, 2, 3), 房间上type数字相同说明是一间房间
          @param whichRoom int(1,2,3,4,5,6)那个房间 
          @param type
         */
@@ -172,17 +190,21 @@ angular.module('wechatApp')
                 });
             };
 
-            // 是否接受条款
-            $scope.isAgree = false;
+            
             // 必须是六人组必须每个房间都设置人的信息,目前生成邀约的所有的信息已经全有了
             $scope.submit = function() {
+
+                // 把六个房间信息push进数组
                 roomDatas.push($scope.firstRoom);
                 roomDatas.push($scope.scendRoom);
                 roomDatas.push($scope.thirdRoom);
                 roomDatas.push($scope.fourthRoom);
                 roomDatas.push($scope.fifthRoom);
                 roomDatas.push($scope.sixthRoom);
+
+                // 定义变量
                 var totalMoney = 0;
+
                 // 求出选择房间设置的总金额
                 angular.forEach(roomDatas, function(value, key) {
                     totalMoney += value.money;
