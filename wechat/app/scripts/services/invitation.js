@@ -18,7 +18,7 @@ angular.module('wechatApp')
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
-            var paramUrl = url + 'getChoosedInvitations';
+            var paramUrl = url + 'getChosenInvites';
             var data = null;
 
 
