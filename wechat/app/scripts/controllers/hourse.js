@@ -10,13 +10,20 @@
 angular.module('wechatApp')
     .controller('HourseCtrl', ['$uibModal', '$log', '$document', '$scope', '$stateParams', 'order', 'room', '$state', 'invitation',
         function($uibModal, $log, $document, $scope, $stateParams, order, room, $state, invitation) {
-            var default = 0;
+           
+            // 先默认设置默认的单价
+            var defaultPrice = order.defaultPrice;
             if ($stateParams.timeId !== undefined) {
                 // 选用选择的出发时间给本次邀约实体复制
                 order.startTimeId = $stateParams.timeId;
 
                 // 获取本次出发时间的价格
-                
+                invitation.getPriceByStartTimeId($stateParams.timeId).then(function successCallBack(response) {
+                    console.log(response);
+                    // defaultPrice = response.price;
+                }, function errorCallBack() {
+
+                });
             } else {
                 // 选用默认出发时间
                 order.startTimeId = null;
@@ -34,6 +41,8 @@ angular.module('wechatApp')
 
             // 设置开始的最大的金额
             var maxMoney = 5000;
+
+            // maxMoney = defaultPrice * 6;
             room.room.maxMoney = maxMoney;
 
             // 是否接受条款
