@@ -1,7 +1,7 @@
 <?php
 namespace app\model;
 use app\model\DestinationCityModel;	//目的城市
-use app\model\DestinationCityRouteHotelFlightViewModel; //与路线有关信息组成的视图
+use app\model\DestinationCityRouteHotelViewModel; //与路线有关信息组成的视图
 /**
  * 路线
  */
@@ -121,8 +121,8 @@ class RouteModel extends ModelModel
 	public static function getRoutesDetails($routeIds)
 	{
 		
-		$DestinationCityRouteHotelFlightViewModel = new DestinationCityRouteHotelFlightViewModel;
-		$RouteDetails = $DestinationCityRouteHotelFlightViewModel->where('id', 'in', $routeIds)->select();
+		$DestinationCityRouteHotelViewModel = new DestinationCityRouteHotelViewModel;
+		$RouteDetails = $DestinationCityRouteHotelViewModel->where('id', 'in', $routeIds)->select();
 		
 		return $RouteDetails;
 	}
