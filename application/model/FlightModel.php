@@ -67,28 +67,4 @@ class FlightModel extends ModelModel
 		$result = substr($time, 0, -3);
 		return $result;
 	}
-
-	static public function getStartFlightAndBackFlightByRoutes($Routes)
-	{
-		// var_dump($Routes);
-		// die();
-		//检测数组长度
-		$length = sizeof($Routes);
-		
-		$RouteAndFlightDetail = [];
-
-		for ($i=0; $i < $length; $i++) { 
-
-			$temp = [];
-
-			$BeginFlightId = $Routes[$i]->data['route_begin_flight_id' ];
-
-			$BeginFlightModel = FlightModel::get($BeginFlightId);
-			
-			$a = array_push($RouteAndFlightDetail, $temp);
-		}
-
-		var_dump($RouteAndFlightDetail);
-		die();
-	}
 }

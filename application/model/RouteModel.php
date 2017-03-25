@@ -116,17 +116,38 @@ class RouteModel extends ModelModel
 	/**
 	 * 获取路线的详情信息，从视图中查询数据
 	 * @param  array or int $routeIds 一个路线id构成的数组或者单个的id
+	 * @author huangshuaibin 
 	 * @return array           array中的每一项都是一个对象，路线的详细信息
 	 */
 	public static function getRoutesDetails($routeIds)
 	{
 		
 		$DestinationCityRouteHotelViewModel = new DestinationCityRouteHotelViewModel;
+
+		//从视图中取出相应的信息
 		$RouteDetails = $DestinationCityRouteHotelViewModel->where('id', 'in', $routeIds)->select();
+
+		//用来存放全部数据的数组
+		$RouteAndFlight = [];
+		for ($i=0; $i < sizeof($RouteDetails); $i++) { 
+			//每轮之后将数组置空
+			$temp = [];
+
+			//取出该路线的出发航班，并放入临时数组中
+			$temp['BeginFlight'] = FlightModel::get($RouteDetails[$i]->data['route_begin_flight_id']);
+
+			//取出该路线的返回航班，并放入临时数组中
+			$temp['BackFlight'] = FlightModel::get($RouteDetails[$i]->data['route_back_flight_id']);
+
+			//路线的主要数据
+			$temp['route'] =  $RouteDetails[$i];
+
+			//每次把新的temp push进数据的数组
+			array_push($RouteAndFlight, $temp);
+		}
 		
-		return $RouteDetails;
+		return $RouteAndFlight;
 	}
-	
 	/**
 	 * 获取该路线的评价数量
 	 * @return int 该路线评价的数量
