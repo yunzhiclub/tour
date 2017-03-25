@@ -10,8 +10,7 @@
 
             </div>
             <hr />
-            <input type="hidden" name="id" value="{$BedModel->id}">
-            {:var_dump($BedModel)}
+            <input type="hidden" name="id" value="{$Bed->id}">
             <table class="table table-hover table-bordered">
                 <tr class="info">
                     <th>床位号</th>
@@ -21,11 +20,11 @@
                     <th>金额</th>
                 </tr>
                 <tr>
-                    <td>{$BedModel->number}</td>
-                    <td>{$BedModel->Invite->number}</td>
-                    <td>{$BedModel->Customer->nick_name}</td>
-                    <td>{$BedModel->Customer->sex}</td>
-                    <td>{$BedModel->money}</td>
+                    <td>{$Bed->number}</td>
+                    <td>{$Bed->Invite->number}</td>
+                    <td>{$Bed->Customer->nick_name}</td>
+                    <td>{$Bed->Customer->sex}</td>
+                    <td>{$Bed->money}</td>
                 </tr>
             </table>
         </div>

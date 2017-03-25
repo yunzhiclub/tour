@@ -64,6 +64,8 @@ angular.module('wechatApp')
             order.routeId = routeId;
             order.deadLine = routeDetail.deadLine;
 
+            // 借用order传入选择房间的c层
+            order.defaultPrice = routeDetail.actualPrice;
             // 获取路线对应的出发时间和价格
             // route.getStarTimeByid(routeId).then(function successCallBack(response) {
             //   console.log(response);

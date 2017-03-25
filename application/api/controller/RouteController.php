@@ -99,4 +99,10 @@ class RouteController extends ApiController {
 		CollectionModel::saveCollection($userId, $routeId);
 		return $this->response([]);
 	}
+
+	// 获取感兴趣的路线 
+	public function getInterestedRoutes() {
+		$customerId  = Request::instance()->param('customerId');
+		return $this->response([]);
+	}
 }

@@ -28,7 +28,7 @@
                 {volist name="RegionModels" id="RegionModel" key="key"}
                 <tr>
                 	<td>{$key}</td>
-                	<td> <a href="{:url('Country/index')}">{$RegionModel->getData('name')}</a></td>
+                	<td> <a href="{:url('Country/index?id='.$RegionModel->getData('id'))}">{$RegionModel->getData('name')}</a></td>
                 	<td>
                     <a class="btn btn-sm btn-primary" href="{:url('edit?id='.$RegionModel->getData('id'))}"><i class="glyphicon glyphicon-pencil"></i> 编辑</a>
                     <a class="btn btn-sm btn-danger" href="{:url('delete?id='.$RegionModel->getData('id'))}"><i class="glyphicon glyphicon-trash"></i> 删除</a>

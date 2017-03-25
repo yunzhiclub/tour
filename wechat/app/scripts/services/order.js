@@ -16,5 +16,6 @@ angular.module('wechatApp')
         startTimeId: '',
         isPublic: '',
         deadLine: '',
+        defaultPrice:0,
         roomDatas: [],
     });
