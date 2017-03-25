@@ -4,7 +4,7 @@ namespace app\admin\controller;
 use think\Controller;
 use think\Request;
 use app\model\StartCityModel;       //出发城市
-class StartcityController extends IndexController
+class StartCityController extends IndexController
 {
 	public function index()
     {

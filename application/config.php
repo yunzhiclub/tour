@@ -226,7 +226,7 @@ return [
     'paginate'               => [
         'type'      => 'bootstrap',
         'var_page'  => 'page',
-        'list_rows' => 15,
+        'list_rows' => 10,
     ],
 
     // +----------------------------------------------------------------------
@@ -293,10 +293,17 @@ return [
 
     'api' => [
         // 设置允许的跨域的域名
-        'access_control_allow_origin' => '*',
+        'access_control_allow_origin' => 'http://localhost:9000',
         
     ],
 
     // 配置uploads路径
     'uploads' => RUNTIME_PATH .'uploads',
+
+    // 跨域请求设置
+    'cors' => [
+        'headerName' => 'mengyunzhi-tour-x-xsrf-token',
+        'cookieName' => 'mengyunzhi-tour-xsrf-token'
+    ]
+
 ];

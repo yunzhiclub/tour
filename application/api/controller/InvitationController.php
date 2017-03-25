@@ -134,5 +134,13 @@ class InvitationController extends ApiController {
 		return $this->response([]);
 	}
 
-	
+	/*
+	* 通过出发时间id获取对应路线的金额
+	*/
+	public function getPriceByStartTimeId() {
+		
+		$startTimeId = Request::instance()->param('startTimeId');
+
+		return $this->response(['price' => 5688]);
+	}
 }

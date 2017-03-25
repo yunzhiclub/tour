@@ -4,7 +4,7 @@
     <div class="col-md-12">
         <div class="span12">
             <hr>
-                <h4>小白菜的收藏</h4>
+                <h4 align="center">{$CustomerModel->getData('nick_name')}的收藏</h4>
             <hr>
             <table class="table table-hover table-bordered">
                 <tr class="info">
@@ -12,11 +12,13 @@
                     <th>信息</th>
                     <th>状态</th>
                 </tr>
+                {volist name="CollectionModels" id="CollectionModel" key="key"}
                 <tr>
-                    <td>1</td>
-                    <td>英国三日游</td>
-                    <td>已过期</td>
+                    <td>{$key}</td>
+                    <td>{$CollectionModel->getRoute()->getData('name')}</td>
+                    <td>{eq name="0" value="$CollectionModel->getData('status')"}正常{else}已过期{/eq}</td>
                 </tr>
+                {/volist}
             </table>
         </div>
     </div>
