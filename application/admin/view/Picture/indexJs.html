@@ -1,0 +1,143 @@
+<script>
+app.controller('AppController', ['$scope', '$http', 'FileUploader', function($scope, $http, FileUploader) {
+  
+  //上传所有图片的id
+  $scope.pictureIds = new Array();
+
+  //定义remove方法，删除数组中指定的元素
+  Array.prototype.remove = function(val) {
+    var index = this.indexOf(val);
+    if (index > -1) {
+        this.splice(index, 1);
+    }
+  };
+
+  $scope.submit = function() {
+    //提交前将图片id数组转化为json字符串
+    $scope.pictureIds = JSON.stringify($scope.pictureIds);
+  };
+  //删除图片
+  $scope.delete = function (item) {
+    //删除图片
+    item.remove();
+    tempFileName.remove(item.file.name);
+    //删除数据库中的图片，根据图片名称删除图片，故上传图片名称不能一样
+    var getData = {params: {name: item.file.name}};
+    $http
+    .get('{:url("picture/delete")}', getData)
+    .then(function successCallback(response) {
+      //删除上传的图片id
+      $scope.pictureIds.remove(response.data);
+
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+    });
+
+    //判断是否有图片，若不存在，则不显示图片信息
+    if ($scope.uploader.queue.length === 0) {
+      $scope.InfoShow = false;
+    }
+    
+  };
+
+
+  //删除所有图片
+  $scope.deleteAllPicture = function () {
+    var length = $scope.uploader.queue.length;
+    for ($i = 0; $i < length; $i++) {
+      $scope.delete($scope.uploader.queue[0]);
+    }
+  }
+
+  var uploader = $scope.uploader = new FileUploader({
+    url: '{:url("picture/upload")}'
+  });
+
+  // FILTERS
+
+  uploader.filters.push({
+    name: 'imageFilter',
+    fn: function(item /*{File|FileLikeObject}*/, options) {
+        var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+        return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+    }
+  });
+
+  // CALLBACKS
+
+  uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
+      //console.info('onWhenAddingFileFailed', item, filter, options);
+  };
+  uploader.onAfterAddingFile = function(fileItem) {
+      //请求所有图片名字，如果图片名字已存在，提示用户修改图片名字（图片名字不能重复，为删除图片做准备）
+      $http({
+        method: 'GET',
+        url: '{:url("picture/getAllPictureNames")}'
+      }).then(function (success){
+      //获取所有图片名称
+      var AllPictureNames = success.data;
+
+      //如果图片已存在，提示用户修改图片名称
+      if (AllPictureNames.indexOf(fileItem.file.name) !== -1) {
+        $scope.uploader.queue.pop();
+        alert('请修改图片名字，图片名字不能重复');
+      }
+     },function (error){
+        alert('error');
+     });
+     //显示图片信息
+     $scope.InfoShow = true;
+     //console.info('onAfterAddingFile', fileItem);
+  };
+
+  //防止用户添加同名的图片
+  var tempFileName = new Array();
+  uploader.onAfterAddingAll = function(addedFileItems) {
+
+      if (tempFileName.indexOf(addedFileItems[0].file.name) !== -1) {
+        alert('对不起，不能上传同名的图片');
+        $scope.uploader.queue.pop();
+      } else {
+        tempFileName.push(addedFileItems[0].file.name);
+      }
+      //console.info('onAfterAddingAll', addedFileItems);
+  };
+  uploader.onBeforeUploadItem = function(item) {
+
+      //console.info('onBeforeUploadItem', item);
+  };
+  uploader.onProgressItem = function(fileItem, progress) {
+      //console.info('onProgressItem', fileItem, progress);
+  };
+  uploader.onProgressAll = function(progress) {
+      if (progress === 100) {
+        $scope.progress = false;
+      } else {
+        $scope.progress = true;
+      }
+      //console.info('onProgressAll', progress);
+  };
+  uploader.onSuccessItem = function(fileItem, response, status, headers) {
+      //console.info('onSuccessItem', fileItem, response, status, headers);
+  };
+  uploader.onErrorItem = function(fileItem, response, status, headers) {
+      //console.info('onErrorItem', fileItem, response, status, headers);
+  };
+  uploader.onCancelItem = function(fileItem, response, status, headers) {
+      //console.info('onCancelItem', fileItem, response, status, headers);
+  };
+  uploader.onCompleteItem = function(fileItem, response, status, headers) {
+      //将上传的图片id添加到$scope.pictureIds数组中
+      $scope.pictureIds.push(response);
+      
+      //console.info('onCompleteItem', fileItem, response, status, headers);
+  };
+  uploader.onCompleteAll = function() {
+      //console.info('onCompleteAll');
+  };
+  //隐藏传输的图片id
+  $scope.hidden = false;
+  //console.info('uploader', uploader);
+}]);
+</script>
