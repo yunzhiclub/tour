@@ -120,7 +120,6 @@ class PictureModel extends ModelModel
 	 */
 	static public function getRelationPicturesByXxxModelId($data)
 	{
-		
 		$XxxModel = self::getRelationModel($data['model']);
 
 		$PictureXxxModel = substr($XxxModel, 10);
@@ -130,6 +129,7 @@ class PictureModel extends ModelModel
 		//获取图片id
 		$map = [];
 		$map[$xxx_id] = (int)$data['id'];
+		$map['is_delete'] = 0;
 
 		$PictureXxxModel = 'app\model' . DS . "$PictureXxxModel";
 		$PictureXxxModel = new $PictureXxxModel;
@@ -140,7 +140,10 @@ class PictureModel extends ModelModel
 		foreach ($PictureXxxModels as $PictureXxxModel) {
 			$pictureId = $PictureXxxModel->getData('picture_id');
 			//判断是否存在该图片
-			if (null !== PictureModel::get($pictureId)) {
+			$map = [];
+			$map['id'] = $pictureId;
+			$map['is_delete'] = 0;
+			if (null !== PictureModel::get($map)) {
 				$results[] = PictureModel::get($pictureId);
 			}
 		}
@@ -165,14 +168,17 @@ class PictureModel extends ModelModel
 		$PictureXxxModel = 'app\model' . DS . "$PictureXxxModel";
 
 		//获取查询条件
-		$map['picture_id'] = $data['id'];
+		$map['picture_id'] = $data['pictureId'];
 		$xxx_id = self::convertHump($data['model']);
 		$map[$xxx_id] = $data['id'];
 
 		//删除数据
 		$PictureXxxModel = $PictureXxxModel::get($map);
-		$PictureXxxModel->is_delete = 1;
-		$PictureXxxModel->save();
+		if ($PictureXxxModel !== null) {
+			$PictureXxxModel->is_delete = 1;
+			$PictureXxxModel->save();
+		}
+		
 
 	}
 
@@ -184,5 +190,35 @@ class PictureModel extends ModelModel
 	static public function getRelationModel($model)
 	{
 		return substr($model, 0, 10) . 'Picture' . substr($model, 10);
+	}
+
+	/**
+	 * 获取图片
+	 * @param  array $data xxxmodelId
+	 * @return array       图片
+	 * @author chuhang
+	 */
+	static public function getPictureModels($data) {
+		//将数组转化为对应的格式，直接调用model层方法
+		$temp = [];
+		$temp['id'] = current($data);
+		$temp['model'] = 'app/model/'. substr(key($data), 0, -3) . 'Model';
+		$PictureModels = self::getRelationPicturesByXxxModelId($temp);
+		
+		return $PictureModels;
+	}
+
+	/**
+	 * 通过modelid获取标题
+	 * @param  array $data post信息
+	 * @return string       对象的标题
+	 * @author chuhang
+	 */
+	static public function getTitleById($data)
+	{
+		$XxxModelName = 'app\model\\' .substr(key($data), 0, -3) . 'Model';
+		$XxxModel = $XxxModelName::get(current($data));
+		
+		return $XxxModel->getData('name');
 	}
 }

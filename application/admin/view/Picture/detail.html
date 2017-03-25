@@ -2,25 +2,22 @@
 <!-- slider css -->
 <link href="/tour/public/theme/css/jssorb05.css" rel="stylesheet">
 <br>
-<center><h1>贴身挺舒服</h1></center>
+<center><h1>{$title}</h1></center>
 <hr>
 <div style="padding:0px; margin:0px; background-color:#fff;font-family:'Open Sans',sans-serif,arial,helvetica,verdana">
-    <div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:600px;height:300px;overflow:hidden;visibility:hidden;">
+    <div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:800px;height:400px;overflow:hidden;visibility:hidden;">
         <!-- Loading Screen -->
         <div data-u="loading" style="position:absolute;top:0px;left:0px;background-color:rgba(0,0,0,0.7);">
             <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
             <div style="position:absolute;display:block;background:url('/tour/public/theme/img/loading.gif') no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
         </div>
-        <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:600px;height:300px;overflow:hidden;">
+        <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:800px;height:400px;overflow:hidden;">
+        {eq name="PictureModels" value=""}1{/eq}
+        {volist name="PictureModels" id="PictureModel" key="key"}
             <div>
-                <img data-u="image" src="/tour/public/upload/20170321/195baf38c25ce4e734acfca087172109.jpg" />
+                <img data-u="image" src="{$PictureModel->getData('path')}" />
             </div>
-            <div>
-                <img data-u="image" src="/tour/public/upload/20170321/e934e1a61bf134fbc88165c65cb91cc1.png" />
-            </div>
-            <div>
-                <img data-u="image" src="/tour/public/upload/20170321/e934e1a61bf134fbc88165c65cb91cc1.png" />
-            </div>
+        {/volist}
         </div>
         <!-- Bullet Navigator -->
         <div data-u="navigator" class="jssorb05" style="bottom:16px;right:16px;" data-autocenter="1">
