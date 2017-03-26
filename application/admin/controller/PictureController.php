@@ -55,6 +55,16 @@ class PictureController extends IndexController
 
     public function detail()
     {
+        $data = Request::instance()->param(
+            );
+        //获取图片
+        $PictureModels = PictureModel::getPictureModels($data);
+        $this->assign('PictureModels', $PictureModels);
+
+        //获取图片标题
+        $title = PictureModel::getTitleById($data);
+        $this->assign('title', $title);
+        
         return $this->fetch();
     }
 

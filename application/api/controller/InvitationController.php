@@ -7,6 +7,7 @@ use app\model\ChosenModel;	//精选
 use app\model\DestinationCityModel;	//目的地城市
 use app\mode\StartTimeModel;	//出发时间
 use app\model\StartCityModel;	//出发城市
+use app\model\InvRuteStarciyDesciyCusStatimViewModel; // 邀约视图
 
 class InvitationController extends ApiController {
 	/**
@@ -19,8 +20,11 @@ class InvitationController extends ApiController {
 		$map = ChosenModel::ChosenInvite();
 		
 		//从邀约表中查询
-		$Invitations = InviteModel::getInviteByRouteId($map);
+		$type = 'route_id';
+		$Invitations = InvRuteStarciyDesciyCusStatimViewModel::getInviteByMap($type, $map);
 
+		dump($Invitations);
+		die();
 		return $this->response($Invitations);
 	}
 
