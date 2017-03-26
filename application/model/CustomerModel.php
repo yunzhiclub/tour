@@ -16,7 +16,7 @@ class CustomerModel extends ModelModel
      */ 
     static public function getCustomerByOpenid($openid = '') {
         // 查找数据库是否存在
-        $CustomerModel = CustomerModel::get($openid);
+        $CustomerModel = CustomerModel::where('openid', '=', $openid)->find();
         
         //图片的路径拼接
         $pathconfig = 'public' . DS . 'upload' . DS;
