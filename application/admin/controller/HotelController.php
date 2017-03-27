@@ -4,6 +4,7 @@ namespace app\admin\controller;
 use think\Controller;
 use app\model\HotelModel;           //酒店管理
 use think\Request;
+use app\model\PictureModel;         //图片
 /**
 * 酒店管理
 * @author chuhang 
@@ -14,12 +15,12 @@ class HotelController extends IndexController
     public function index()
     {
         //获取查询到的名字
-        $title = input('get.title');
+        $name = input('get.name');
 
         //模糊查询
         $HotelModel = new HotelModel;
         $map['is_delete'] = 0;
-        $HotelModels = $HotelModel->where($map)->where('title', 'like', '%' . $title . '%')->paginate();
+        $HotelModels = $HotelModel->where($map)->where('name', 'like', '%' . $name . '%')->paginate();
 
         $this->assign('HotelModels', $HotelModels);
         return $this->fetch();
@@ -51,10 +52,17 @@ class HotelController extends IndexController
     public function save()
     {
         $data = Request::instance()->param();
+        //去除pictureIds字段
+        $pictureIds = current(array_splice($data, 4, 1));
 
         $HotelModel = new HotelModel;
         if (false === $HotelModel->save($data)) {
             return $this->error($HotelModel->getError());
+        }
+
+        //将图片、酒店关联并存入到Picture_hotel表中
+        if ($pictureIds !== null) {
+            $saveRelationPictures = PictureModel::saveRelationPictures($HotelModel, $pictureIds);
         }
 
         return $this->success('保存成功', url('index'));
@@ -80,10 +88,17 @@ class HotelController extends IndexController
 
     public function update(){
         $data = Request::instance()->param();
+        //去除pictureIds字段
+        $pictureIds = current(array_splice($data, 5, 1));
         $HotelModel = HotelModel::get($data['id']);
         
         if (false === $HotelModel->isUpdate()->save($data)) {
             return $this->error($HotelModel->getError());
+        }
+
+        //将图片、酒店关联并存入到Picture_hotel表中
+        if ($pictureIds !== null) {
+            $saveRelationPictures = PictureModel::saveRelationPictures($HotelModel, $pictureIds);
         }
 
         return $this->success('操作成功', url('index'));
