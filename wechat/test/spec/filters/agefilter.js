@@ -12,8 +12,8 @@ describe('Filter: ageFilter', function () {
   }));
 
   it('should return the input prefixed with "ageFilter filter:"', function () {
-    var text = 'angularjs';
-    expect(ageFilter(text)).toBe('ageFilter filter: ' + text);
+    var text = 20160326;
+    expect(ageFilter(text)).toBe('ageFilter filter: ' + 1);
   });
 
 });
