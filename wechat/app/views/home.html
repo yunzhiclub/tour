@@ -93,7 +93,7 @@ router:#!/home
                 <div class="weui-form-preview__item ">
                     <div class="weui-cells ">
                         <div class="weui-cell ">
-                            <div class="weui-cell__hd "><img src="{{}}" alt=" " style="width:80px;margin-right:5px;display:block "></div>
+                            <div class="weui-cell__hd "><img src="{{urlPrefix + invitation.customer_head_img_url}}" alt=" " style="margin-right:5px;display:block " height="60" width="60" class="img-circle"></div>
                             <div class="weui-cell__bd ">
                                 <p>{{invitation.customer_nick_name}} ♂ {{invitation.customer_birthday | ageFilter}}岁</p>
                             </div>
@@ -106,8 +106,9 @@ router:#!/home
                         <div class="weui-flex__item">
                             <div class="placeholder"></div>
                         </div>
-                        <div class="weui-flex__item">
-                            <div class="placeholder"><img src="weui/src/example/images/lhead1.png " alt=" " style="width:30px;margin-right:5px;margin-top:8px;display:block "></div>
+                        <div class="weui-flex__item"  ng-repeat="bed in  invitation.beds">
+                            <div> <div class="placeholder"><img src="weui/src/example/images/lhead1.png " alt=" " style="margin-right:5px;margin-top:8px;display:block "  height="30" width="30" class="img-circle"></div></div>
+                           
                         </div>
                         <div class="weui-flex__item">
                             <div class="placeholder"><img src="weui/src/example/images/lhead3.png " alt=" " style="width:30px;margin-right:5px;margin-top:8px;display:block "></div>
