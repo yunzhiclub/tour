@@ -2,6 +2,7 @@
 namespace app\admin\controller;
 use think\Controller;
 use app\model\RouteModel;
+use think\Request;
 /**
 * 路线管理
 */
@@ -36,5 +37,11 @@ class RouteController extends IndexController
     public function detail() 
     {
         return $this->fetch();
+    }
+
+    public function save()
+    {
+        $data = Request::instance()->param();
+        var_dump($data);
     }
 }
