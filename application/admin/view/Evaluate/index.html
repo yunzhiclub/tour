@@ -33,9 +33,9 @@
                                 <td>
                                 <a class="btn btn-sm btn-info" href="{:url('detail?id=' . $RouteModel->getData('id'))}"><i class="glyphicon glyphicon-align-justify"></i> 查看</a></td>
                             </tr>
-
                             {/volist}
                         </table>
+                        {$RouteModels->render()}
                     </div>
                 </div>
             </div>
