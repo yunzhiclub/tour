@@ -8,20 +8,20 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="row">
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" action="{:url('save')}" method="post">
                             <div class="form-group">
                                 <label class="col-md-2 control-label">名称</label>
                                 <div class="col-md-3">
-                                    <input type="text" class="form-control" name="name">
+                                    <input type="text" class="form-control" name="name" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label">出发地</label>
                                 <div class="col-md-3">
                                     <select class="form-control" name="start_city_id" >
-                                        <option value="1">北京</option>
-                                        <option value="2">上海</option>
-                                        <option value="2">天津</option>
+                                       {volist name="basicInfo['StartCityModels']" id="StartCityModel"}
+                                       <option>{$StartCityModel->getData('name')}</option>
+                                       {/volist}
                                     </select>
                                 </div>
                             </div>
@@ -29,9 +29,9 @@
                                 <label class="col-md-2 control-label">目的地</label>
                                 <div class="col-md-3">
                                     <select class="form-control" name="destination_city_id">
-                                        <option value="1">伦敦</option>
-                                        <option value="2">巴黎</option>
-                                        <option value="2">苏黎世</option>
+                                        {volist name="basicInfo['DestinationCityModels']" id="DestinationCityModel"}
+                                       <option>{$DestinationCityModel->getData('name')}</option>
+                                       {/volist}
                                     </select>
                                 </div>
                             </div>
@@ -39,9 +39,9 @@
                                 <label class="col-md-2 control-label">酒店</label>
                                 <div class="col-md-3">
                                     <select class="form-control" name="hotel_id">
-                                        <option value="1">希尔顿</option>
-                                        <option value="2">希尔顿</option>
-                                        <option value="2">希尔顿</option>
+                                        {volist name="basicInfo['HotelModels']" id="HotelModel"}
+                                       <option>{$HotelModel->getData('name')}</option>
+                                       {/volist}
                                     </select>
                                 </div>
                             </div>
@@ -49,9 +49,9 @@
                                 <label class="col-md-2 control-label">出发航班</label>
                                 <div class="col-md-3">
                                     <select class="form-control"  name="begin_flight_id">
-                                        <option value="1">G1259</option>
-                                        <option value="2">G1596</option>
-                                        <option value="2">希尔顿</option>
+                                        {volist name="basicInfo['FlightModels']" id="FlightModel"}
+                                       <option>{$FlightModel->getData('number')}</option>
+                                       {/volist}
                                     </select>
                                 </div>
                             </div>
@@ -59,22 +59,22 @@
                                 <label class="col-md-2 control-label">返回航班</label>
                                 <div class="col-md-3">
                                     <select class="form-control"  name="back_flight_id">
-                                        <option value="1">G1259</option>
-                                        <option value="2">G1596</option>
-                                        <option value="2">希尔顿</option>
+                                        {volist name="basicInfo['FlightModels']" id="FlightModel"}
+                                       <option>{$FlightModel->getData('number')}</option>
+                                       {/volist}
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label">开始日期</label>
                                 <div class="col-md-3">
-                                    <input type="date" name="startTime" class="form-control" ng-model="begin_time">
+                                    <input type="date" name="startTime" class="form-control" ng-model="begin_time" required />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label">截止日期</label>
                                 <div class="col-md-3">
-                                    <input type="date" class="form-control" ng-model="deadline">
+                                    <input type="date" class="form-control" ng-model="deadline" required />
                                 </div>
                             </div>
                             <div ng-show="myValue">
@@ -85,45 +85,45 @@
                                 </tr>
                                 <tr ng-repeat="(key, date) in dates">
                                     <td>{{date}}</td>
-                                    <td><input type="text" class="form-control"/></td>
+                                    <td><input type="number" class="form-control" min="0" required/></td>
                                 </tr>
                             </table>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label">描述信息</label>
                                 <div class="col-md-3">
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label">选择间数</label>
                                 <div class="col-md-3">
-                                    <input type="number" class="form-control" min="0">
+                                    <input type="number" class="form-control" min="0" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label">入住天数</label>
                                 <div class="col-md-3">
-                                    <input type="number" class="form-control" min="0">
+                                    <input type="number" class="form-control" min="0" required/>
                                 </div>
                             </div>
                             
                             <div class="form-group">
                                 <label class="col-md-2 control-label">起价</label>
                                 <div class="col-md-3">
-                                    <input type="number" class="form-control">
+                                    <input type="number" class="form-control" required/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label">标价</label>
                                 <div class="col-md-3">
-                                    <input type="number" class="form-control">
+                                    <input type="number" class="form-control" required/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label">选择客服</label>
                                 <div class="col-md-3">
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" required/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -195,14 +195,13 @@ app.controller('routeController', function($scope) {
         //判断用户是否在开始日期、截止日期输入值
         if ($scope.begin_time && $scope.deadline) {
             //判断截止日期是否大于开始日期
-            if ($scope.begin_time < $scope.deadline) {
+            if ($scope.begin_time <= $scope.deadline) {
                 $scope.myValue = true;
             } else {
                 $scope.myValue = false;
             }
             
         }
-        console.log($index);
 
     });
 

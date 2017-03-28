@@ -223,4 +223,25 @@ class RouteModel extends ModelModel
 		return count($EvaluateModels);
 	}
 
+
+	static public function getBasicInfo()
+	{
+		$map = [];
+		$map['is_delete'] = 0;
+		//获取出发成市信息
+		$StartCityModel = new StartCityModel;
+		$result['StartCityModels'] = $StartCityModel->where($map)->select();
+		//获取目的地城市信息
+		$DestinationCityModel = new DestinationCityModel;
+		$result['DestinationCityModels'] = $DestinationCityModel->where($map)->select();
+		//获取酒店信息
+		$HotelModel = new HotelModel;
+		$result['HotelModels'] = $HotelModel->where($map)->select();
+		//获取航班信息
+		$FlightModel = new FlightModel;
+		$result['FlightModels'] = $FlightModel->where($map)->select();
+
+		return $result;
+	}
+
 }
