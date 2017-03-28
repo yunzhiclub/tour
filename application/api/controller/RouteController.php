@@ -45,7 +45,7 @@ class RouteController extends ApiController {
 	 */
 	public function getStarTimeByid() {
 		$id = Request::instance()->param('id');
-
+		
 		//通过路线id取出所有的出发时间以及价格
 		$startTimes = StartTimeModel::getStartTimeByRouteId($id);
 
