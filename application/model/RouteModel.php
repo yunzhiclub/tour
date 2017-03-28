@@ -223,7 +223,11 @@ class RouteModel extends ModelModel
 		return count($EvaluateModels);
 	}
 
-
+	/**
+	 * 获取路线的出发成市、目的地城市、酒店、航班、的基本信息	
+	 * @return [array] 
+	 * @author chuhang 
+	 */
 	static public function getBasicInfo()
 	{
 		$map = [];
@@ -242,6 +246,24 @@ class RouteModel extends ModelModel
 		$result['FlightModels'] = $FlightModel->where($map)->select();
 
 		return $result;
+	}
+
+	static public function saveRouteInfo($data)
+	{
+		var_dump($data);
+		$RouteModel = new RouteModel;
+		// if ($data['isHomeRecommend'] === '1') {
+		// 	var_dump(1);
+		// }
+		$weightRelation = array_splice($data, 16, 4);
+		$startTime = array_splice($data, 8, 2);
+		var_dump($startTime);
+
+		var_dump($weightRelation);
+		var_dump($data);
+
+
+		die();
 	}
 
 }

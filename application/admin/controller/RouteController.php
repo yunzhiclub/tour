@@ -42,6 +42,11 @@ class RouteController extends IndexController
     public function save()
     {
         $data = Request::instance()->param();
-        var_dump($data);
+        
+        if (false === RouteModel::saveRouteInfo($data)) {
+            return $this->error('保存失败');
+        }
+
+        return $this->success('保存成功');
     }
 }

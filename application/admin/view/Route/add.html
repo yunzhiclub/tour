@@ -20,7 +20,7 @@
                                 <div class="col-md-3">
                                     <select class="form-control" name="start_city_id" >
                                        {volist name="basicInfo['StartCityModels']" id="StartCityModel"}
-                                       <option>{$StartCityModel->getData('name')}</option>
+                                       <option value="{$StartCityModel->getData('id')}">{$StartCityModel->getData('name')}</option>
                                        {/volist}
                                     </select>
                                 </div>
@@ -30,7 +30,7 @@
                                 <div class="col-md-3">
                                     <select class="form-control" name="destination_city_id">
                                         {volist name="basicInfo['DestinationCityModels']" id="DestinationCityModel"}
-                                       <option>{$DestinationCityModel->getData('name')}</option>
+                                       <option value="{$DestinationCityModel->getData('id')}">{$DestinationCityModel->getData('name')}</option>
                                        {/volist}
                                     </select>
                                 </div>
@@ -40,7 +40,7 @@
                                 <div class="col-md-3">
                                     <select class="form-control" name="hotel_id">
                                         {volist name="basicInfo['HotelModels']" id="HotelModel"}
-                                       <option>{$HotelModel->getData('name')}</option>
+                                       <option value="{$HotelModel->getData('id')}">{$HotelModel->getData('name')}</option>
                                        {/volist}
                                     </select>
                                 </div>
@@ -50,7 +50,7 @@
                                 <div class="col-md-3">
                                     <select class="form-control"  name="begin_flight_id">
                                         {volist name="basicInfo['FlightModels']" id="FlightModel"}
-                                       <option>{$FlightModel->getData('number')}</option>
+                                       <option value="{$FlightModel->getData('id')}">{$FlightModel->getData('number')}</option>
                                        {/volist}
                                     </select>
                                 </div>
@@ -60,7 +60,7 @@
                                 <div class="col-md-3">
                                     <select class="form-control"  name="back_flight_id">
                                         {volist name="basicInfo['FlightModels']" id="FlightModel"}
-                                       <option>{$FlightModel->getData('number')}</option>
+                                       <option value="{$FlightModel->getData('id')}">{$FlightModel->getData('number')}</option>
                                        {/volist}
                                     </select>
                                 </div>
@@ -68,13 +68,13 @@
                             <div class="form-group">
                                 <label class="col-md-2 control-label">开始日期</label>
                                 <div class="col-md-3">
-                                    <input type="date" name="startTime" class="form-control" ng-model="begin_time" required />
+                                    <input type="date" name="begin_time" class="form-control" ng-model="begin_time" required />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label">截止日期</label>
                                 <div class="col-md-3">
-                                    <input type="date" class="form-control" ng-model="deadline" required />
+                                    <input type="date" class="form-control" ng-model="deadline" name="deadline" required />
                                 </div>
                             </div>
                             <div ng-show="myValue">
@@ -84,46 +84,46 @@
                                     <th width="70%">价格</th>
                                 </tr>
                                 <tr ng-repeat="(key, date) in dates">
-                                    <td>{{date}}</td>
-                                    <td><input type="number" class="form-control" min="0" required/></td>
+                                    <td><input type="hidden" name="date[]" value="{{date}}">{{date}}</td>
+                                    <td><input type="number" class="form-control" min="0" name="price[]" required/></td>
                                 </tr>
                             </table>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label">描述信息</label>
                                 <div class="col-md-3">
-                                    <input type="text" class="form-control" required>
+                                    <input type="text" name="content" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label">选择间数</label>
                                 <div class="col-md-3">
-                                    <input type="number" class="form-control" min="0" required>
+                                    <input type="number" name="check_in_rooms" class="form-control" min="0" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label">入住天数</label>
                                 <div class="col-md-3">
-                                    <input type="number" class="form-control" min="0" required/>
+                                    <input type="number" name="check_id_days" class="form-control" min="0" required/>
                                 </div>
                             </div>
                             
                             <div class="form-group">
                                 <label class="col-md-2 control-label">起价</label>
                                 <div class="col-md-3">
-                                    <input type="number" class="form-control" required/>
+                                    <input type="number" name="starting_price" class="form-control" required/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label">标价</label>
                                 <div class="col-md-3">
-                                    <input type="number" class="form-control" required/>
+                                    <input type="number" name="standard_price" class="form-control" required/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label">选择客服</label>
                                 <div class="col-md-3">
-                                    <input type="text" class="form-control" required/>
+                                    <input type="text" name="service_phone" class="form-control" required/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -131,7 +131,7 @@
                                 <div class="col-md-3">
                                     <input id="radio1" type="radio"  ng-model="isHomeRecommend" name="isHomeRecommend" value="true">&nbsp;&nbsp;
                                     <label for="radio1">是</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input id="radio2" type="radio" ng-model="isHomeRecommend" name="isHomeRecommend" value="false">&nbsp;&nbsp;
+                                    <input id="radio2" type="radio" ng-model="isHomeRecommend" name="isHomeRecommend" value="1">&nbsp;&nbsp;
                                     <label for="radio2">否</label>
                                 </div>
                                 <div ng-show="isHomeRecommend == 'true'" class="form-group">
@@ -148,12 +148,12 @@
                             <div class="form-group">
                                 <label class="col-md-2 text-right" value="">精选</label>
                                 <div class="col-md-3">
-                                    <input id="radio3" type="radio"  ng-model="isChosen" name="isChosen" value="true">&nbsp;&nbsp;
+                                    <input id="radio3" type="radio"  ng-model="isChosen" name="isChosen" value="0">&nbsp;&nbsp;
                                     <label for="radio3">是</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input id="radio4" type="radio" ng-model="isChosen" name="isChosen" value="false">&nbsp;&nbsp;
+                                    <input id="radio4" type="radio" ng-model="isChosen" name="isChosen" value="1">&nbsp;&nbsp;
                                     <label for="radio4">否</label>
                                 </div>
-                                <div ng-show="isChosen == 'true'" class="form-group">
+                                <div ng-show="isChosen == '0'" class="form-group">
                                     <label class="col-md-1 control-label">权重</label>
                                     <div class="col-md-3">
                                        <input class="form-control" type="number" min="0" name="chosenWeight">
@@ -166,7 +166,7 @@
                             <div class="form-group">
                                 <label class="col-md-2 text-right">详情</label>
                                 <div class="col-md-9">
-                                    <textarea id="textarea1">
+                                    <textarea name="content" id="textarea1">
                                     <p>请输入内容...</p>
                                 </textarea>
                                 </div>
