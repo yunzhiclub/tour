@@ -33,7 +33,6 @@ class DestinationCityController extends IndexController
 		$CountryModels = CountryModel::all();
 
 		$this->assign('CountryModels', $CountryModels);
-		$this->assign('table', 'destination_city');
 		return $this->fetch();
 	}
 	public function edit()

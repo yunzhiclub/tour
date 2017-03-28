@@ -70,4 +70,12 @@ class DestinationController extends ApiController {
 	 
 		return $this->response($data);
 	}
+
+	// 获取用户感兴趣的目的地
+	public function getInterstedDestinations() {
+
+		$countryid = Request::instance()->param('customerId');
+		
+		return $this->response([]);	
+	}
 }

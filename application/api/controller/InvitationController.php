@@ -7,6 +7,7 @@ use app\model\ChosenModel;	//精选
 use app\model\DestinationCityModel;	//目的地城市
 use app\mode\StartTimeModel;	//出发时间
 use app\model\StartCityModel;	//出发城市
+use app\model\InvRuteStarciyDesciyCusStatimViewModel; // 邀约视图
 
 class InvitationController extends ApiController {
 	/**
@@ -19,8 +20,11 @@ class InvitationController extends ApiController {
 		$map = ChosenModel::ChosenInvite();
 		
 		//从邀约表中查询
-		$Invitations = InviteModel::getInviteByRouteId($map);
+		$type = 'route_id';
+		$Invitations = InvRuteStarciyDesciyCusStatimViewModel::getInviteByMap($type, $map);
 
+		dump($Invitations);
+		die();
 		return $this->response($Invitations);
 	}
 
@@ -134,5 +138,13 @@ class InvitationController extends ApiController {
 		return $this->response([]);
 	}
 
-	
+	/*
+	* 通过出发时间id获取对应路线的金额
+	*/
+	public function getPriceByStartTimeId() {
+		
+		$startTimeId = Request::instance()->param('startTimeId');
+
+		return $this->response(['price' => 5688]);
+	}
 }
