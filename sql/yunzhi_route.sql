@@ -1,22 +1,22 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : test
-Source Server Version : 50625
-Source Host           : 127.0.0.1:3306
+Source Server         : localhost_3306
+Source Server Version : 50505
+Source Host           : localhost:3306
 Source Database       : tour
 
 Target Server Type    : MYSQL
-Target Server Version : 50625
+Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-03-13 21:02:40
+Date: 2017-03-27 16:01:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for yunzhi_route
+-- Table structure for `yunzhi_route`
 -- ----------------------------
 DROP TABLE IF EXISTS `yunzhi_route`;
 CREATE TABLE `yunzhi_route` (
@@ -40,13 +40,15 @@ CREATE TABLE `yunzhi_route` (
   `is_delete` tinyint(1) NOT NULL,
   `create_time` int(11) unsigned NOT NULL,
   `udpate_time` int(11) unsigned NOT NULL,
+  `actual_price` int(10) DEFAULT NULL COMMENT '默认实际价格',
+  `begin_time` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yunzhi_route
 -- ----------------------------
-INSERT INTO `yunzhi_route` VALUES ('1', null, '1', '1', '1', '1', '1', '3', '这是一个路线比较简短的描述信息', '3', '3', '9688', '9000', '5', '这个是一个路线的内容的详细描述', '0', '00000000000000000000', '0', '0', '0');
-INSERT INTO `yunzhi_route` VALUES ('2', null, '1', '1', '1', '1', '1', '1', '路线的描述信息2', '2', '2', '9655', '9500', '5', '这是路线的详细描述2', '0', '00000000000000000000', '0', '0', '0');
-INSERT INTO `yunzhi_route` VALUES ('3', null, '1', '2', null, null, null, null, '', null, null, null, null, null, '', '0', '00000000000000000000', '0', '0', '0');
-INSERT INTO `yunzhi_route` VALUES ('4', null, '2', '2', null, null, null, null, '', null, null, null, null, null, '', '0', '00000000000000000000', '0', '0', '0');
+INSERT INTO `yunzhi_route` VALUES ('1', '南非食人部落三日游', '1', '1', '1', '1', '1', '3', '这是一个路线比较简短的描述信息', '3', '3', '9688', '9000', '5', '这个是一个路线的内容的详细描述', '0', '00000000000000000000', '0', '0', '0', null, '0');
+INSERT INTO `yunzhi_route` VALUES ('2', '中华三月游', '1', '1', '1', '1', '1', '1', '路线的描述信息2', '2', '2', '9655', '9500', '5', '这是路线的详细描述2', '0', '00000000000000000000', '0', '0', '0', null, '0');
+INSERT INTO `yunzhi_route` VALUES ('3', '东南亚月月游', '1', '2', null, null, null, null, '', null, null, null, null, null, '', '0', '00000000000000000000', '0', '0', '0', null, '0');
+INSERT INTO `yunzhi_route` VALUES ('4', '澳洲捉袋鼠节三日游', '2', '2', null, null, null, null, '', null, null, null, null, null, '', '0', '00000000000000000000', '0', '0', '0', null, '0');
