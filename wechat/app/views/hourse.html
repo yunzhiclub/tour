@@ -204,7 +204,7 @@ router:#!/hourse
         性别: <b>{{ selected.sex | format}}</b>
         <br>
         <div>金额:
-            <input type="number" max="{{maxMoney.maxMoney}}" min="0" placeholder="还需要{{maxMoney.maxMoney | currency: '¥'}}" ng-model="selected.money"><p>还需要{{maxMoney.maxMoney | currency: '¥'}}</p>
+            <input type="number" max="{{maxMoney}}" min="0" placeholder="还需要{{maxMoney | currency: '¥'}}" ng-model="selected.money"><p>还需要{{maxMoney | currency: '¥'}}</p>
         </div>
     </div>
     <div class="modal-footer">
