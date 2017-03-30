@@ -212,19 +212,19 @@ angular
                 templateUrl: 'views/tuisong2.html',
                 controller: 'Tuisong2Ctrl',
             });
-            
+
         // 为angularjs设置图片安全域    
         $compileProvider.imgSrcSanitizationWhitelist(/^\s*(wxlocalresource|https?|ftp|mailto|chrome-extension):/);
 
     }]).
-// 弹出框同一处理方法
+    // 弹出框同一处理方法
 controller('ModalInstanceCtrl', function($uibModalInstance, items, $scope) {
-       // 给选项赋值
+        // 给选项赋值
         var $ctrl = $scope;
         $ctrl.olds = items.olds;
         $ctrl.sexs = items.sexs;
 
-        // 那个房间触发的type和money
+        // 那个房间触发的money
         var money = items.money;
         // 赋默认值
         $ctrl.selected = {
@@ -234,18 +234,23 @@ controller('ModalInstanceCtrl', function($uibModalInstance, items, $scope) {
         };
 
         // 双向数据绑定maxMoney
-        console.log(items.room.room);
-        $ctrl.maxMoney = items.room.room;
+        $ctrl.maxMoney = items.room.getRoom().maxMoney;
 
         $ctrl.ok = function() {
-             // 如果是第一次触发就去总金额中减去
-             if (money === 0 || money === undefined) {
-                items.room.changeMaxMoney($ctrl.selected.money);
-             } else {
-                items.room.changeMaxMoney($ctrl.selected.money);
-                items.room.room.maxMoney =  items.room.room.maxMoney + money;
-             }
-            
+            // 如果是第一次触发就去总金额中减去
+            if (money === 0 && money === undefined) {
+                if (0 < $ctrl.selected.money && $ctrl.selected.money <= $ctrl.maxMoney) {
+                    items.room.changeMaxMoney($ctrl.selected.money);
+                }
+                alert("输入的数字不正确");
+            } else {
+                if (0 < $ctrl.selected.money && $ctrl.selected.money <= $ctrl.maxMoney) {
+                    items.room.changeMaxMoney($ctrl.selected.money);
+                    items.room.setMaxMoneyValue(items.room.getRoom().maxMoney + money);
+                }
+                alert("输入的数字不正确");
+            }
+
             $uibModalInstance.close($ctrl.selected);
         };
 
