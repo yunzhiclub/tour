@@ -54,17 +54,19 @@ router:#!/ivdetail
                 <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
                     <img src="{{urlPrefix + bed.customer_head_img_url}}" style="width: 50px;display: block" class="img-circle"  height="65" width="55" ng-if="bed.customer_id !== 0 "/>
                     <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block" class="img-circle"  height="65" width="55" ng-if="bed.customer_id === 0 "/>
+                    <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">可选</span>
                 </div>
                 <div class="weui-cell__bd">
                     <!-- <p>♀</p>-->  
-                    <p style="width:60px;height:80px;">{{bed.sex | sexFilter}}</p>                   
-                    <p style="font-size: 13px;color: #888888;height:20px;width:70px">￥5,0000.00</p>
+                    <p style="width:60px;height:80px;">{{bed.sex | sexFilter}}{{bed.old | oldFilter}}</p>                   
+                    <p style="font-size: 13px;color: #888888;height:20px;width:70px">{{bed.money | currency: '¥'}}</p>
                 </div>
              </div>
           </a>
           <div class="weui-cell">
                 <div class="weui-cell__bd">
-                    <p>已支付</p>
+                    <p ng-if="bed.customer_id !== 0 ">已支付</p>
+                    <p ng-if="bed.customer_id === 0 ">未支付</p>
                 </div>
             </div>
         </div>
