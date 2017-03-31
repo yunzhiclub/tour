@@ -12,7 +12,8 @@ router:#!/ivdetail
             </div>
             <div class="weui-form-preview__bd">
                 <div class="weui-form-preview__item">
-                    <span class="weui-form-preview__value"><泰国-普吉岛-甲米6或7日游>天津往返直飞，入住泳池别墅，2晚国五酒店，无自费，畅游甲米，大堡礁浮潜，幻多奇主题乐园，预定赠送出海跟拍
+                    <span class="weui-form-preview__value">
+                    {{invitation.route_content}}
                     </span>
                 </div>
             </div>
@@ -27,11 +28,11 @@ router:#!/ivdetail
             <div class="weui-form-preview__bd">
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">人均支付金额</label>
-                    <font class="weui-form-preview__value" color="red">￥10,000.00</font>
+                    <font class="weui-form-preview__value" color="red">{{perMoney}}</font>
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">出发时间</label>
-                    <span class="weui-form-preview__value">2016-11-06</span>
+                    <span class="weui-form-preview__value"><p ng-if="invitation.start_time_date === null">{{invitation.route_begin_time | date: 'yyyy-MM-dd'}}</p><p ng-if="invitation.start_time_date !== null">{{invitation.start_time_date | date: 'yyyy-MM-dd'}}</p></span>
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">归来时间</label>
@@ -45,17 +46,19 @@ router:#!/ivdetail
 <div class="weui-cells__title">选择房间</div>
 <br>
 <hr>
-<div class="weui-flex">
-    <div class="weui-flex__item" style="margin-right:20px;margin-left:10px">
+<div class="weui-flex" ng-repeat="beds in invitation.beds">
+    <div class="weui-flex__item" style="margin-right:20px;margin-left:10px" ng-repeat="bed in beds">
         <div class="placeholder"> 
          <a ui-sref="" class="weui-btn weui-btn_plain-default" style="width:160px"> 
              <div class="weui-cell">
                 <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-                    <img src="weui/src/example/images/lhead1.png" style="width: 50px;display: block"/>
+                    <img src="{{urlPrefix + bed.customer_head_img_url}}" style="width: 50px;display: block" class="img-circle"  height="65" width="55" ng-if="bed.customer_id !== 0 "/>
+                    <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block" class="img-circle"  height="65" width="55" ng-if="bed.customer_id === 0 "/>
                 </div>
                 <div class="weui-cell__bd">
-                    <p>♀</p>
-                    <p style="font-size: 13px;color: #888888;">￥5,0000.00</p>
+                    <!-- <p>♀</p>-->  
+                    <p style="width:60px;height:80px;">{{bed.sex}}</p>                   
+                    <p style="font-size: 13px;color: #888888;height:20px;width:70px">￥5,0000.00</p>
                 </div>
              </div>
           </a>
@@ -66,7 +69,7 @@ router:#!/ivdetail
             </div>
         </div>
     </div>
-    <div class="weui-flex__item" >
+<!--     <div class="weui-flex__item" >
       <div class="placeholder">
        <a ui-sref="" class="weui-btn weui-btn_plain-default" style="width:160px" style="margin-right:20px;margin-left:20px">
           <div class="weui-cell">
@@ -85,10 +88,10 @@ router:#!/ivdetail
                 </div>
             </div>
       </div>
-      </div>
+      </div> -->
 </div>
 <hr>
-<div class="weui-flex">
+<!-- <div class="weui-flex">
     <div class="weui-flex__item" style="margin-right:20px;margin-left:10px">
         <div class="placeholder"> 
          <a ui-sref="" class="weui-btn weui-btn_plain-default" style="width:160px"> 
@@ -175,5 +178,5 @@ router:#!/ivdetail
             </div>
       </div>
       </div>
-</div>
+</div> -->
 <br>
