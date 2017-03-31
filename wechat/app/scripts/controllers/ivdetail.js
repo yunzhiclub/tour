@@ -8,7 +8,7 @@
  * Controller of the wechatApp
  */
 angular.module('wechatApp')
-    .controller('IvdetailCtrl', ['$scope', 'invitation', '$stateParams', 'commonTools', 'config', function($scope, invitation, $stateParams, commonTools, config) {
+    .controller('IvdetailCtrl', ['$scope', 'invitation', '$stateParams', 'commonTools', 'config',  '$state', function($scope, invitation, $stateParams, commonTools, config, $state) {
 
         // 应邀的对象实体
         var index = $stateParams.invitationIndex;
@@ -74,5 +74,4 @@ angular.module('wechatApp')
         invitation.beds = commonTools.formatArray(invitation.beds, 2);
         console.log(invitation);
         $scope.invitation = invitation;
-
     }]);
