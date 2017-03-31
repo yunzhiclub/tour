@@ -36,7 +36,7 @@
                 <tr>
                 	<td>{$key}</td>
                     <td>{$InviteModel->getData('number')}</td>
-                	<td>{$InviteModel->getRouteModel()->getData('name')}</td>
+                	<td><a href="{:url('Route/detail?id='. $InviteModel->getRouteModel()->id)}">{$InviteModel->getRouteModel()->getData('name')}</a></td>
                     <td>{$InviteModel->getCustomerModel()->getData('nick_name')}</td>
                     <td>{$InviteModel->start_time_id}</td>
                     <td><a href="{:url('Bed/index?id='. $InviteModel->getData('id'))}">详情</a></td>
