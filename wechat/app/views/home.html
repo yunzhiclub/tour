@@ -167,7 +167,7 @@ router:#!/home
                 </div>
             </div>
             <div class="page__bd page__bd_spacing">
-                <button ui-sref="ivdetail" class="weui-btn weui-btn_primary" style="margin-right:40px;margin-left:20px;margin-top: 20px;margin-bottom: 10px" ng-disabled="invitation === 1">
+                <button ui-sref="ivdetail({invitationIndex: $index})" class="weui-btn weui-btn_primary" style="margin-right:40px;margin-left:20px;margin-top: 20px;margin-bottom: 10px" ng-disabled="invitation === 1">
                          <p ng-if="invitation === 1">已经下架</p><p ng-if="invitation !== 1">{{invitation | minvalue | currency: '¥'}}</p>
                         </button>
             </div>

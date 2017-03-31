@@ -235,6 +235,9 @@ angular.module('wechatApp')
             return promise;
         };
 
+        var getInvitations = function() {
+            return self.invitations;
+        };
 
 
 
@@ -283,5 +286,10 @@ angular.module('wechatApp')
             getPriceByStartTimeId: function(startTimeId) {
                 return getPriceByStartTimeId(startTimeId);
             },
+
+            // 获取请求回来的邀约
+            getInvitations: function() {
+                return getInvitations();
+            }
         };
     }]);
