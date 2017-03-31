@@ -250,20 +250,114 @@ class RouteModel extends ModelModel
 
 	static public function saveRouteInfo($data)
 	{
-		var_dump($data);
+		//将数组进行拆分，一部分存入路线表中，一部分存入出发时间表中，一部分存入首页推荐表和精选表中
+		$weightRelation = array_splice($data, 18, 5);
+		$data['content'] = array_pop($weightRelation);
+		$startTime = array_splice($data, 10, 2);
+		//将数据存入路线表中
 		$RouteModel = new RouteModel;
-		// if ($data['isHomeRecommend'] === '1') {
-		// 	var_dump(1);
-		// }
-		$weightRelation = array_splice($data, 16, 4);
-		$startTime = array_splice($data, 8, 2);
-		var_dump($startTime);
+		$RouteModel->save($data);
+		//将路线的出发日期及对应的价钱存入出发时间表中
+		self::saveStartTimeInfo($startTime, $RouteModel->getData('id'));
+		//将路线的首页推荐存入首页推荐表中
+		if ($weightRelation['isHomeRecommend'] === '0') {
+			$HomeRecommendModel = new HomeRecommendModel;
+			$HomeRecommendModel->route_id = $RouteModel->getData('id');
+			$HomeRecommendModel->weight = $weightRelation['homeRecommendWeight'];
+			$HomeRecommendModel->save();
+		}
+		//将路线的精选存入精选表中
+		if ($weightRelation['isChosen'] === '0') {
+			$ChosenModel = new ChosenModel;
+			$ChosenModel->route_id = $RouteModel->getData('id');
+			$ChosenModel->weight = $weightRelation['chosenWeight'];
+			$ChosenModel->save();
+		}
 
-		var_dump($weightRelation);
-		var_dump($data);
-
-
-		die();
+		unset($RouteModel);
+		unset($HomeRecommendModel);
+		unset($ChosenModel);
 	}
+
+	/**
+	 * 将路线的出发次数及每次的价格存入StartTimeModel
+	 * @param  array $data    时间和价钱
+	 * @param  int $routeId 路线id
+	 * @author chuhang
+	 */
+	static public function saveStartTimeInfo($data, $routeId) {
+		//根据出发的次数，分别存库
+		for ($i = 0; $i < count($data['date']); $i++) {
+			$StartTimeModel = new StartTimeModel;
+			$StartTimeModel->route_id = $routeId;
+			$StartTimeModel->price = $data['price'][$i];
+			$StartTimeModel->date = $data['date'][$i];
+			$StartTimeModel->save();
+		}
+
+		unset($StartTimeModel);
+
+	}
+
+	/**
+	 * 根据用户的筛选条件查询信息
+	 * @param  array $data [用户的查询条件]
+	 * @return [object]       [路线信息]
+	 * @author chuhang 
+	 */
+	public function getSearchInfo($data) {
+        $map['is_delete'] = 0;
+
+		if (isset($data['start_city_id']) && $data['start_city_id'] !== '0') {
+			$map['start_city_id'] = $data['start_city_id'];
+		}
+		if (isset($data['destination_city_id']) && $data['destination_city_id'] !== '0') {
+			$map['destination_city_id'] = $data['destination_city_id'];
+		}
+
+		if (isset($data['name'])) {
+			$this->where($map)->where('name', 'like', '%' . $data['name'] . '%');
+		}
+
+		unset($map);
+		return $this;
+	}
+
+	/**
+	 * 获取其他信息，首页推荐权重、精选权重、路程天数及价格
+	 * @param  int $id 路线id
+	 * @return array     
+	 * @author chuhang 
+	 */
+	static public function getOtherInfo($id)
+	{
+		//定义查询条件 
+		$map = [];
+		$map['route_id'] = $id;
+		$map['is_delete'] = 0;
+		//判断精选表中是否有该条路线信息，如果有取出权重
+		$ChosenModel = ChosenModel::get($map);
+		if ($ChosenModel !== null) {
+			$result['isChosen'] = 0;
+			$result['chosenWeight'] = $ChosenModel->getData('weight');
+		} else {
+			$result['isChosen'] = 1;
+		}
+		//同上
+		$HomeRecommendModel = HomeRecommendModel::get($map);
+		if ($HomeRecommendModel !== null) {
+			$result['isHomeRecommend'] = 0;
+			$result['homeRecommendWeight'] = $HomeRecommendModel->getData('weight');
+		} else {
+			$result['isHomeRecommend'] = 1;
+		}
+		//获取该路线的出发时间及价格
+		$StartTimeModel = new StartTimeModel;
+		$StartTimeModels = $StartTimeModel->where($map)->select();
+		$result['start_time'] = $StartTimeModels;
+
+		return $result;
+	}
+
 
 }

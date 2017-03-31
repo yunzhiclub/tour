@@ -68,15 +68,31 @@
                             <div class="form-group">
                                 <label class="col-md-2 control-label">开始日期</label>
                                 <div class="col-md-3">
+                                    <input type="date" name="start_time" class="form-control" min="0" required/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">行程天数</label>
+                                <div class="col-md-3">
+                                    <input type="number" name="days" class="form-control" min="0" required/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">出发日期——起</label>
+                                <div class="col-md-3">
                                     <input type="date" name="begin_time" class="form-control" ng-model="begin_time" required />
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-2 control-label">截止日期</label>
+                                <label class="col-md-2 control-label">出发日期——止</label>
                                 <div class="col-md-3">
                                     <input type="date" class="form-control" ng-model="deadline" name="deadline" required />
                                 </div>
+                                <p class="text-danger" ng-show="promptInfo">
+                                    <span>须大于等于“出发日期——起”</span>
+                                </p>
                             </div>
+                            
                             <div ng-show="myValue">
                             <table class="table table-hover table-bordered" style="width: 400px;margin-left: 178px;">
                                 <tr>
@@ -92,7 +108,7 @@
                             <div class="form-group">
                                 <label class="col-md-2 control-label">描述信息</label>
                                 <div class="col-md-3">
-                                    <input type="text" name="content" class="form-control" required>
+                                    <input type="text" name="description" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -104,7 +120,7 @@
                             <div class="form-group">
                                 <label class="col-md-2 control-label">入住天数</label>
                                 <div class="col-md-3">
-                                    <input type="number" name="check_id_days" class="form-control" min="0" required/>
+                                    <input type="number" name="check_in_days" class="form-control" min="0" required/>
                                 </div>
                             </div>
                             
@@ -129,12 +145,12 @@
                             <div class="form-group">
                                 <label class="col-md-2 text-right" value="">首页推荐</label>
                                 <div class="col-md-3">
-                                    <input id="radio1" type="radio"  ng-model="isHomeRecommend" name="isHomeRecommend" value="true">&nbsp;&nbsp;
+                                    <input id="radio1" type="radio"  ng-model="isHomeRecommend" name="isHomeRecommend" value="0">&nbsp;&nbsp;
                                     <label for="radio1">是</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <input id="radio2" type="radio" ng-model="isHomeRecommend" name="isHomeRecommend" value="1">&nbsp;&nbsp;
                                     <label for="radio2">否</label>
                                 </div>
-                                <div ng-show="isHomeRecommend == 'true'" class="form-group">
+                                <div ng-show="isHomeRecommend == '0'" class="form-group">
                                     <label class="col-md-1 control-label">权重</label>
                                     <div class="col-md-3">
                                         <input class="form-control" type="number" min="0" name="homeRecommendWeight">
@@ -173,7 +189,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-offset-3 col-md-9">
-                                    <button type="submit" class="btn btn-md btn-success"><i class="fa fa-check "></i>确认</button>
+                                    <button type="submit" ng-disabled="promptInfo" class="btn btn-md btn-success"><i class="fa fa-check "></i>确认</button>
                                 </div>
                             </div>
                         </form>
@@ -199,11 +215,14 @@ app.controller('routeController', function($scope) {
                 $scope.myValue = true;
             } else {
                 $scope.myValue = false;
+                $scope.promptInfo = true;
             }
             
         }
 
     });
+
+    //判断“出发日期——起”是否小于“出发日期——止”
 
     //获取两个日期的中间天数
     function getDates( d1, d2 ){
