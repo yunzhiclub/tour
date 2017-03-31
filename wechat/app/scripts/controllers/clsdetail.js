@@ -10,69 +10,35 @@
 angular.module('wechatApp')
     .controller('ClsdetailCtrl', ['$scope', '$stateParams', 'route', 'order', 'commonTools',
         function($scope, $stateParams, route, order, commonTools) {
-            // 对应路线的出发时间测试数据
-            var dataArray = [{
-                id: 1,
-                date: 214323432,
-                money: 5999
-            }, {
-                id: 2,
-                date: 214323432,
-                money: 5999
-            }, {
-                id: 3,
-                date: 214323432,
-                money: 5999
-            }, {
-                id: 4,
-                date: 214323432,
-                money: 5999
-            }, {
-                id: 5,
-                date: 214323432,
-                money: 5999
-            }, {
-                id: 6,
-                date: 214323432,
-                money: 5999
-            }, {
-                id: 7,
-                date: 214323432,
-                money: 5999
-            }, {
-                id: 8,
-                date: 214323432,
-                money: 5999
-            }];
-            $scope.startTimes = commonTools.formatArray(dataArray, 4);
-
-
+            // route m层传值   
+            var routes = route.getRoutes();
 
             // 根据路由传过来的数组索引获取路线详细信息
             var index = $stateParams.routeId;
-            var routeDetail = route.routes[index];
-        
+            var routeDetail = routes[index];
+          
             // 提取路线的出发城市名字和路线id和详细内容描述和默认出发时间和默认价格
-            $scope.startCityName = routeDetail.startCityName;
-            $scope.content = routeDetail.content;
-            $scope.beginTime = routeDetail.beginTime;
-            $scope.actualPrice = routeDetail.actualPrice;
+            $scope.startCityName = routeDetail.route.start_city_name;
+            $scope.content = routeDetail.route.route_content;
+            $scope.beginTime = routeDetail.route.begin_time;
+            $scope.actualPrice = routeDetail.route.actual_price;
 
-            var routeId = routeDetail.id;
+            var routeId = routeDetail.route.id;
 
-            // 向这次的邀约中添加路线的id
+            // 向这次的邀约中添加路线的id和默认截止日期
             order.routeId = routeId;
-            order.deadLine = routeDetail.deadLine;
+            order.deadLine = routeDetail.route.route_deadline;
 
-            // 借用order传入选择房间的c层
-            order.defaultPrice = routeDetail.actualPrice;
+            // 借用order把默认价格传入选择房间的c层
+            order.defaultPrice = routeDetail.route.actual_price;
+
             // 获取路线对应的出发时间和价格
-            // route.getStarTimeByid(routeId).then(function successCallBack(response) {
-            //   console.log(response);
-            //   $scope.startTimes = commonTools.formatArray(response, 4);
-            // }, function errorCallBack(response) {
-            //   console.log(response);
-            // });
+            route.getStarTimeByid(routeId).then(function successCallBack(response) {
+                console.log(response);
+              $scope.startTimes = commonTools.formatArray(response, 4);
+            }, function errorCallBack(response) {
+              console.log(response);
+            });
 
 
             // 获取路线的评价

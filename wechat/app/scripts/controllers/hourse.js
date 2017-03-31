@@ -10,44 +10,46 @@
 angular.module('wechatApp')
     .controller('HourseCtrl', ['$uibModal', '$log', '$document', '$scope', '$stateParams', 'order', 'room', '$state', 'invitation',
         function($uibModal, $log, $document, $scope, $stateParams, order, room, $state, invitation) {
-           
+
+            // 定义总价
+            var maxMoney = 0;
             // 先默认设置默认的单价
             var defaultPrice = order.defaultPrice;
             if ($stateParams.timeId !== undefined) {
-                // 选用选择的出发时间给本次邀约实体复制
+                // 选用选择的出发时间id给本次邀约实体赋值
                 order.startTimeId = $stateParams.timeId;
 
-                // 获取本次出发时间的价格
+                // 获取本次出发时间的价格替换默认价格
                 invitation.getPriceByStartTimeId($stateParams.timeId).then(function successCallBack(response) {
                     console.log(response);
-                    // defaultPrice = response.price;
+                    // 设置总金额
+                    defaultPrice = response.price;
+                    maxMoney = defaultPrice * 6;
+                    room.setMaxMoneyValue(maxMoney);
                 }, function errorCallBack() {
 
                 });
             } else {
-                // 选用默认出发时间
+                // 设置总金额
+                maxMoney = defaultPrice * 6;
+                room.setMaxMoneyValue(maxMoney);
+
+                // 选用默认出发时间所以出发时间id赋空值
                 order.startTimeId = null;
             }
 
             // 设置默认是公开
             $scope.isPublic = 1;
 
-            // 默认实例截止时间
+            // 双向绑定路线上的默认截止时间
             var deadLine = order.deadLine;
             $scope.deadLine = new Date(deadLine);
 
             // 设置默认选择支付房间
             $scope.payRoomNumber = 1;
 
-            // 设置开始的最大的金额
-            var maxMoney = 5000;
-
-            // maxMoney = defaultPrice * 6;
-            room.room.maxMoney = maxMoney;
-
             // 是否接受条款
             $scope.isAgree = false;
-
 
             // 弹出框
             var $ctrl = $scope;
@@ -140,12 +142,12 @@ angular.module('wechatApp')
 
 
 
-        /*
-         设置房间人员信息
-         房间选择是类型type(1, 2, 3), 房间上type数字相同说明是一间房间
-         @param whichRoom int(1,2,3,4,5,6)那个房间 
-         @param type
-        */
+            /*
+             设置房间人员信息
+             房间选择是类型type(1, 2, 3), 房间上type数字相同说明是一间房间
+             @param whichRoom int(1,2,3,4,5,6)那个房间 
+             @param type
+            */
 
             $scope.setOptions = function(whichRoom, money) {
                 open(null, null, room, money, function callBack(selectedItems) {
@@ -153,44 +155,53 @@ angular.module('wechatApp')
                         case 1:
                             $scope.firstRoom.sex = selectedItems.sex;
                             $scope.firstRoom.old = selectedItems.old;
-                            $scope.firstRoom.money = selectedItems.money;
-
+                            if (selectedItems.money !== undefined) {
+                                $scope.firstRoom.money = selectedItems.money;
+                            }
                             break;
                         case 2:
                             $scope.scendRoom.sex = selectedItems.sex;
                             $scope.scendRoom.old = selectedItems.old;
-                            $scope.scendRoom.money = selectedItems.money;
-
+                            if (selectedItems.money !== undefined) {
+                                $scope.scendRoom.money = selectedItems.money;
+                            }
                             break;
                         case 3:
                             $scope.thirdRoom.sex = selectedItems.sex;
                             $scope.thirdRoom.old = selectedItems.old;
-                            $scope.thirdRoom.money = selectedItems.money;
+                            if (selectedItems.money !== undefined) {
+                                $scope.thirdRoom.money = selectedItems.money;
+                            }
 
                             break;
                         case 4:
                             $scope.fourthRoom.sex = selectedItems.sex;
                             $scope.fourthRoom.old = selectedItems.old;
-                            $scope.fourthRoom.money = selectedItems.money;
+                            if (selectedItems.money !== undefined) {
+                                $scope.fourthRoom.money = selectedItems.money;
+                            }
 
                             break;
                         case 5:
                             $scope.fifthRoom.sex = selectedItems.sex;
                             $scope.fifthRoom.old = selectedItems.old;
-                            $scope.fifthRoom.money = selectedItems.money;
+                            if (selectedItems.money !== undefined) {
+                                $scope.fifthRoom.money = selectedItems.money;
+                            }  
 
                             break;
                         case 6:
                             $scope.sixthRoom.sex = selectedItems.sex;
                             $scope.sixthRoom.old = selectedItems.old;
-                            $scope.sixthRoom.money = selectedItems.money;
-
+                            if (selectedItems.money !== undefined) {
+                                $scope.sixthRoom.money = selectedItems.money;
+                            }
                             break;
                     }
                 });
             };
 
-            
+
             // 必须是六人组必须每个房间都设置人的信息,目前生成邀约的所有的信息已经全有了
             $scope.submit = function() {
 
@@ -209,8 +220,6 @@ angular.module('wechatApp')
                 angular.forEach(roomDatas, function(value, key) {
                     totalMoney += value.money;
                 });
-
-
                 if (totalMoney !== maxMoney) {
                     // 还需要的钱数
                     var moreMoney = maxMoney - totalMoney;

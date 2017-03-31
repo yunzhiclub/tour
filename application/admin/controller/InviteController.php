@@ -13,14 +13,7 @@ class InviteController extends IndexController
 		$this->assign('InviteModels', $InviteModels);
 		return $this->fetch();
 	}
-	public function add()
-	{
-		return $this->fetch();
-	}
-	public function edit()
-	{
-		return $this->fetch();
-	}
+
 	public function delete()
 	{
 		$Id = Request::instance()->param('id/d');
@@ -42,8 +35,4 @@ class InviteController extends IndexController
 		return $this->success('删除成功', url('index'));
 	}
 
-	public function bedDetail()
-	{
-		return $this->fetch('Bed/index');
-	}
 }
