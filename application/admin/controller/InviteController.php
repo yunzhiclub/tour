@@ -9,7 +9,10 @@ class InviteController extends IndexController
 	public function index()
 	{
 		$InviteModel = new InviteModel;
-		$InviteModels = $InviteModel->paginate();
+
+		// 模糊查询
+        $number = Request::instance()->get('number');
+		$InviteModels = $InviteModel->where('number', 'like', '%' . $number . '%')->paginate();
 		$this->assign('InviteModels', $InviteModels);
 		return $this->fetch();
 	}
