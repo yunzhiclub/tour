@@ -106,11 +106,16 @@ router:#!/home
                         <div class="weui-flex__item">
                             <div class="placeholder"></div>
                         </div>
-                        <div class="weui-flex__item"  ng-repeat="bed in  invitation.beds">
-                            <div> <div class="placeholder"><img src="weui/src/example/images/lhead1.png " alt=" " style="margin-right:5px;margin-top:8px;display:block "  height="30" width="30" class="img-circle"></div></div>
-                           
+                        <div class="weui-flex__item" ng-repeat="bed in  invitation.beds">
+                            <div class="placeholder" ng-if="bed.customer_id !== invitation.customer_id">
+                                <img src="{{urlPrefix + bed.customer_head_img_url}} " alt=" " style="margin-right:5px;margin-top:8px;display:block " height="30" width="30" class="img-circle" ng-if="bed.customer_id !== null ">
+                                <div ng-if="bed.customer_id === null">
+                                    <img src="weui/src/example/images/whitehead.png" alt=" " style="margin-right:5px;margin-top:8px;display:block " height="30" width="30" class="img-circle">
+                                    <font size="1" color="red">{{bed.money | currency: '¥'}}</font>
+                                </div>
+                            </div>
                         </div>
-                        <div class="weui-flex__item">
+                        <!--  <div class="weui-flex__item">
                             <div class="placeholder"><img src="weui/src/example/images/lhead3.png " alt=" " style="width:30px;margin-right:5px;margin-top:8px;display:block "></div>
                         </div>
                         <div class="weui-flex__item">
@@ -127,18 +132,18 @@ router:#!/home
                                 <a ui-sref="topay"><img src="weui/src/example/images/whitehead.png " alt=" " style="width:30px;margin-right:5px;margin-top:8px;display:block "></a>
                                 <font size="1" color="red">￥0.01</font>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
             <div class="weui-form-preview__bd ">
                 <div class="weui-form-preview__item ">
                     <label class="weui-form-preview__label ">距结束</label>
-                    <span class="weui-form-preview__value ">01:15:23</span>
+                    <span class="weui-form-preview__value ">{{invitation.invite_deadline | hhmmss}}</span>
                 </div>
                 <div class="weui-form-preview__item ">
                     <label class="weui-form-preview__label ">出发地</label>
-                    <span class="weui-form-preview__value ">北京</span>
+                    <span class="weui-form-preview__value ">{{invitation.start_city_name}}</span>
                 </div>
                 <div class="weui-form-preview__item ">
                     <label class="weui-form-preview__label ">出发时间</label>
@@ -162,11 +167,9 @@ router:#!/home
                 </div>
             </div>
             <div class="page__bd page__bd_spacing">
-                 <a ui-sref="ivdetail" class="weui-btn weui-btn_primary" style="margin-right:20px;margin-left:20px;margin-top: 20px;margin-bottom: 10px">
+                <a ui-sref="ivdetail" class="weui-btn weui-btn_primary" style="margin-right:20px;margin-left:20px;margin-top: 20px;margin-bottom: 10px">
                          ￥0.01
                         </a>
             </div>
             <br>
         </div>
-        
-      
