@@ -9,8 +9,10 @@
  */
 angular.module('wechatApp')
     .controller('IvdetailCtrl', ['$scope', 'invitation', '$stateParams', 'commonTools', 'config', function($scope, invitation, $stateParams, commonTools, config) {
+
         // 应邀的对象实体
         var index = $stateParams.invitationIndex;
+        $scope.index = index;
         var invitations = invitation.getInvitations();
         var invitation = invitations[index];
         var getAge = function(birthday) {
@@ -53,7 +55,7 @@ angular.module('wechatApp')
 
         	// 获取用户的年龄
             var age = getAge($scope.customer.birthday);
-         
+
             // 获取用户年龄类别
             if (age !== -1) {
             		oldType = getOldType(age);

@@ -53,7 +53,7 @@ angular
                 controller: 'IvdetailCtrl',
             })
             .state('topay', {
-                url: '/topay', // 支付界面
+                url: '/topay/:bedIdIndex', // 支付界面
                 templateUrl: 'views/topay.html',
                 controller: 'TopayCtrl',
             })

@@ -49,12 +49,12 @@ router:#!/ivdetail
 <div class="weui-flex" ng-repeat="beds in invitation.beds">
     <div class="weui-flex__item" style="margin-right:20px;margin-left:10px" ng-repeat="bed in beds">
         <div class="placeholder"> 
-         <a ui-sref="" class="weui-btn weui-btn_plain-default" style="width:160px"> 
+         <button ui-sref="topay({bedIdIndex:{index:index, dedId: bed.id}})" class="weui-btn weui-btn_plain-default" style="width:160px" ng-disabled="bed.isQualified !== 1"> 
              <div class="weui-cell">
                 <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
                     <img src="{{urlPrefix + bed.customer_head_img_url}}" style="width: 50px;display: block" class="img-circle"  height="65" width="55" ng-if="bed.customer_id !== 0 "/>
                     <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block" class="img-circle"  height="65" width="55" ng-if="bed.customer_id === 0 "/>
-                    <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">可选</span>
+                    <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;" ng-if="bed.isQualified === 1">可选</span>
                 </div>
                 <div class="weui-cell__bd">
                     <!-- <p>♀</p>-->  
@@ -62,7 +62,7 @@ router:#!/ivdetail
                     <p style="font-size: 13px;color: #888888;height:20px;width:70px">{{bed.money | currency: '¥'}}</p>
                 </div>
              </div>
-          </a>
+          </button>
           <div class="weui-cell">
                 <div class="weui-cell__bd">
                     <p ng-if="bed.customer_id !== 0 ">已支付</p>
