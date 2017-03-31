@@ -8,8 +8,8 @@
                 <div class="col-md-10">
                     <form class="form-inline" action="{:url('', url('get.'))}"  method="get">
                         <div class="form-group">
-                            <label class="sr-only" for="name">姓名</label>
-                            <input name="name" type="text" class说="form-control" placeholder="订单号..." id="name" value="{:input('get.name')}">
+                            <label class="sr-only" for="number">订单号</label>
+                            <input name="number" type="text" class="form-control" placeholder="订单号..." id="number" value="{:input('get.number')}">
                         </div>
                         <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>
                     </form>
@@ -36,10 +36,10 @@
                 <tr>
                 	<td>{$key}</td>
                     <td>{$InviteModel->getData('number')}</td>
-                	<td>{$InviteModel->getRouteModel()->getData('name')}</td>
+                	<td><a href="{:url('Route/detail?id='. $InviteModel->getRouteModel()->id)}">{$InviteModel->getRouteModel()->getData('name')}</a></td>
                     <td>{$InviteModel->getCustomerModel()->getData('nick_name')}</td>
                     <td>{$InviteModel->start_time_id}</td>
-                    <td><a href="{:url('Bed/index')}">详情</a></td>
+                    <td><a href="{:url('Bed/index?id='. $InviteModel->getData('id'))}">详情</a></td>
                     <td>6</td>
                     <td>{$InviteModel->getData('pay_num')}</td>
                     <td>

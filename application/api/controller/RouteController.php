@@ -45,7 +45,7 @@ class RouteController extends ApiController {
 	 */
 	public function getStarTimeByid() {
 		$id = Request::instance()->param('id');
-
+		
 		//通过路线id取出所有的出发时间以及价格
 		$startTimes = StartTimeModel::getStartTimeByRouteId($id);
 
@@ -65,9 +65,8 @@ class RouteController extends ApiController {
 		$routeIds = RouteModel::getRouteIdsByCountryIdAndStartCityId($StartCityId, $CountryId);
 
 		//取出所有的符合查询条件的路线的详细信息，从DestinationCityRouteHotelFlightView视图中查询，返回的包含路线详情的对象数组
-		$routes = RouteModel::getRoutesDetails([1,2]);
+		$routes = RouteModel::getRoutesDetails($routeIds);
 		
-		$test = FlightModel::getStartFlightAndBackFlightByRoutes($routes);
 		return $this->response($routes);
 	}
 

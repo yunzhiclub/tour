@@ -7,6 +7,67 @@ use app\model\DestinationCityRouteHotelViewModel; //与路线有关信息组成�
  */
 class RouteModel extends ModelModel
 {
+	private $StartCityModel = null;		//对应的出发城市模型
+	private $DestinationCityModel = null;	 //对应的目的地城市模型
+	private $HotelModel = null;     	//对应的酒店模型
+	private $FlightModel = null;  		//对应的航班的模型
+
+	/**
+	 * 当前模型与出发城市关系为n:1
+	 * @return lists StartCityModels
+	 * @author chuhang 
+	 */
+	public function StartCityModel() {
+
+		if (null === $this->StartCityModel) {
+			$this->StartCityModel = StartCityModel::get($this->getData('start_city_id'));
+		}
+
+		return $this->StartCityModel;
+	}
+
+	/**
+	 * 当前模型与目的地城市的型为n:1
+	 * @return lists DestinationCityModel
+	 * @author chuhang 
+	 */
+	public function DestinationCityModel() {
+
+		if (null === $this->DestinationCityModel) {
+			$this->DestinationCityModel = DestinationCityModel::get($this->getData('destination_city_id'));
+		}
+
+		return $this->DestinationCityModel;
+	}
+
+	/**
+	 * 当前模型与酒店关系为n:1
+	 * @return lists HotelModels
+	 * @author chuhang 
+	 */
+	public function HotelModel() {
+
+		if (null === $this->HotelModel) {
+			$this->HotelModel = HotelModel::get($this->getData('hotel_id'));
+		}
+
+		return $this->HotelModel;
+	}
+
+	/**
+	 * 当前模型与航班关系为n:1
+	 * @return lists FlightModels
+	 * @author chuhang 
+	 */
+	public function FlightModel() {
+
+		if (null === $this->FlightModel) {
+			$this->FlightModel = FlightModel::get($this->getData('hotel_id'));
+		}
+
+		return $this->FlightModel;
+	}
+
 	/**
 	 * 获取路线ID By 目的地ID
 	 * @param  array $id 路线的ID
@@ -160,6 +221,27 @@ class RouteModel extends ModelModel
 		$EvaluateModels = $EvaluateModel->where($map)->select();
 
 		return count($EvaluateModels);
+	}
+
+
+	static public function getBasicInfo()
+	{
+		$map = [];
+		$map['is_delete'] = 0;
+		//获取出发成市信息
+		$StartCityModel = new StartCityModel;
+		$result['StartCityModels'] = $StartCityModel->where($map)->select();
+		//获取目的地城市信息
+		$DestinationCityModel = new DestinationCityModel;
+		$result['DestinationCityModels'] = $DestinationCityModel->where($map)->select();
+		//获取酒店信息
+		$HotelModel = new HotelModel;
+		$result['HotelModels'] = $HotelModel->where($map)->select();
+		//获取航班信息
+		$FlightModel = new FlightModel;
+		$result['FlightModels'] = $FlightModel->where($map)->select();
+
+		return $result;
 	}
 
 }
