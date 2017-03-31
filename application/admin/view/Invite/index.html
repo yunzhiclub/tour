@@ -1,0 +1,64 @@
+{extend name="index" /}
+{block name="content"}
+<div class="row">
+    <div class="col-md-12">
+        <div class="span12">
+            <hr />
+            <div class="row">
+                <div class="col-md-10">
+                    <form class="form-inline" action="{:url('', url('get.'))}"  method="get">
+                        <div class="form-group">
+                            <label class="sr-only" for="name">姓名</label>
+                            <input name="name" type="text" class说="form-control" placeholder="订单号..." id="name" value="{:input('get.name')}">
+                        </div>
+                        <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>
+                    </form>
+                </div>
+                
+            </div>
+            <hr />
+            <table class="table table-hover table-bordered">
+                <tr class="info">
+                    <th>序号</th>
+                    <th>订单编号</th>
+                    <th>路线</th>
+                    <th>生成客户</th>
+                    <th>出发时间</th>
+                    <th>床位</th>
+                    <th>邀约人数</th>
+                    <th>已支付</th>
+                    <th>未支付</th>
+                    <th>订单状态</th>
+                    <th>是否公开</th>
+                    <th>操作</th>
+                </tr>
+                {volist name="InviteModels" id="InviteModel" key="key"}
+                <tr>
+                	<td>{$key}</td>
+                    <td>{$InviteModel->getData('number')}</td>
+                	<td>{$InviteModel->getRouteModel()->getData('name')}</td>
+                    <td>{$InviteModel->getCustomerModel()->getData('nick_name')}</td>
+                    <td>{$InviteModel->start_time_id}</td>
+                    <td><a href="{:url('Bed/index')}">详情</a></td>
+                    <td>6</td>
+                    <td>{$InviteModel->getData('pay_num')}</td>
+                    <td>
+                        <?php $temp = $InviteModel->getData('pay_num');
+                              $unPayNum = 6-$temp;
+                              echo $unPayNum;
+                         ?>
+                    </td>
+                    <td>{$InviteModel->status}</td>
+                    <td>{$InviteModel->is_public}</td>
+                	<td>
+                    <a class="btn btn-sm btn-danger" href="{:url('delete?id=' . $InviteModel->getData('id'))}"><i class="glyphicon glyphicon-trash"></i> 删除</a>
+                    </td>
+                </tr>
+                {/volist}
+            </table>
+            {$InviteModels->render()}
+        </div>
+    </div>
+</div>
+{/block}
+

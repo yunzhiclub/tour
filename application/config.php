@@ -19,7 +19,7 @@ return [
     // 应用调试模式
     'app_debug'              => true,
     // 应用Trace
-    'app_trace'              => false,
+    'app_trace'              => true,
     // 应用模式状态
     'app_status'             => '',
     // 是否支持多模块
@@ -28,6 +28,8 @@ return [
     'auto_bind_module'       => false,
     // 注册的根命名空间
     'root_namespace'         => [],
+    // 扩展配置文件
+    'extra_config_list'      => ['database', 'validate'],
     // 扩展函数文件
     'extra_file_list'        => [THINK_PATH . 'helper' . EXT],
     // 默认输出类型
@@ -47,9 +49,9 @@ return [
     // 默认语言
     'default_lang'           => 'zh-cn',
     // 应用类库后缀
-    'class_suffix'           => false,
+    'class_suffix'           => true,
     // 控制器类后缀
-    'controller_suffix'      => false,
+    'controller_suffix'      => true,
 
     // +----------------------------------------------------------------------
     // | 模块设置
@@ -90,15 +92,13 @@ return [
     'url_param_type'         => 0,
     // 是否开启路由
     'url_route_on'           => true,
-    // 路由使用完整匹配
-    'route_complete_match'   => false,
     // 路由配置文件（支持配置多个）
     'route_config_file'      => ['route'],
     // 是否强制使用路由
     'url_route_must'         => false,
     // 域名部署
     'url_domain_deploy'      => false,
-    // 域名根，如thinkphp.cn
+    // 域名根，如.thinkphp.cn
     'url_domain_root'        => '',
     // 是否自动转换URL中的控制器和操作名
     'url_convert'            => true,
@@ -106,14 +106,6 @@ return [
     'url_controller_layer'   => 'controller',
     // 表单请求类型伪装变量
     'var_method'             => '_method',
-    // 表单ajax伪装变量
-    'var_ajax'               => '_ajax',
-    // 表单pjax伪装变量
-    'var_pjax'               => '_pjax',
-    // 是否开启请求缓存 true自动缓存 支持设置请求缓存规则
-    'request_cache'          => false,
-    // 请求缓存有效期
-    'request_cache_expire'   => null,
 
     // +----------------------------------------------------------------------
     // | 模板设置
@@ -234,6 +226,84 @@ return [
     'paginate'               => [
         'type'      => 'bootstrap',
         'var_page'  => 'page',
-        'list_rows' => 15,
+        'list_rows' => 10,
     ],
+
+    // +----------------------------------------------------------------------
+    // | 微信设置
+    // +----------------------------------------------------------------------
+    'wechat'        => [
+        /**
+         * Debug 模式，bool 值：true/false
+         *
+         * 当值为 false 时，所有的日志都不会记录
+         */
+        'debug'  => false,
+        /**
+         * 账号基本信息，请从微信公众平台/开放平台获取
+         */
+        'app_id'  => 'wx91d4563fddff9b28',         // AppID
+        'secret'  => 'f6d816bbfd813c51956c1f9f6e078b00',     // AppSecret
+        'token'   => 'yunzhi',          // Token
+        'aes_key' => '',                    // EncodingAESKey，安全模式下请一定要填写！！！
+        /**
+         * 日志配置
+         *
+         * level: 日志级别, 可选为：
+         *         debug/info/notice/warning/error/critical/alert/emergency
+         * file：日志文件位置(绝对路径!!!)，要求可写权限
+         */
+        'log' => [
+            'level' => 'debug',
+            'file'  => '/tmp/easywechat.log',
+        ],
+        /**
+         * OAuth 配置
+         *
+         * scopes：公众平台（snsapi_userinfo / snsapi_base），开放平台：snsapi_login
+         * callback：OAuth授权完成后的回调页地址
+         */
+        'oauth' => [
+            'scopes'   => ['snsapi_userinfo'],
+            // 'callback' => '/examples/oauth_callback.php',
+        ],
+        /**
+         * 微信支付
+         */
+        'payment' => [
+            'merchant_id'        => 'your-mch-id',
+            'key'                => 'key-for-signature',
+            'cert_path'          => 'path/to/your/cert.pem', // XXX: 绝对路径！！！！
+            'key_path'           => 'path/to/your/key',      // XXX: 绝对路径！！！！
+            // 'device_info'     => '013467007045764',
+            // 'sub_app_id'      => '',
+            // 'sub_merchant_id' => '',
+            // ...
+        ],
+        /**
+         * Guzzle 全局设置
+         *
+         * 更多请参考： http://docs.guzzlephp.org/en/latest/request-options.html
+         */
+        'guzzle' => [
+            'timeout' => 3.0, // 超时时间（秒）
+            //'verify' => false, // 关掉 SSL 认证（强烈不建议！！！）
+        ],
+    ],
+
+    'api' => [
+        // 设置允许的跨域的域名
+        'access_control_allow_origin' => 'http://localhost:9000',
+        
+    ],
+
+    // 配置uploads路径
+    'uploads' => RUNTIME_PATH .'uploads',
+
+    // 跨域请求设置
+    'cors' => [
+        'headerName' => 'mengyunzhi-tour-x-xsrf-token',
+        'cookieName' => 'mengyunzhi-tour-xsrf-token'
+    ]
+
 ];

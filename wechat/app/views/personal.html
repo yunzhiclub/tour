@@ -1,0 +1,105 @@
+<!-- 
+description 个人中心的页面
+router:#!/personal
+ -->
+<div class="weui-cells">
+    <a class="weui-cell weui-cell_access" ui-sref="changeps">
+        <div class="weui-cell__hd"><img src="{{customer.headImg.headImgUrl}}" alt="" style="width:60px;margin-right:5px;display:block" class="img-circle"></div>
+        <div class="weui-cell__bd">
+            <p>昵称：{{customer.nickName}}</p>
+        </div>
+        <div class="weui-cell__ft"><img src="weui/src/example/images/certificate.png" alt="" style="width:40px;margin-right:5px;display:block">
+            <h5>优质会员</h5></div>
+    </a>
+</div>
+<div class="weui-cells">
+    <a class="weui-cell weui-cell_access" ui-sref="orderls">
+        <div class="weui-cell__bd">
+            <p>全部订单</p>
+        </div>
+        <div class="weui-cell__ft">
+        </div>
+    </a>
+</div>
+<br>
+<div class="page__bd page__bd_spacing">
+    <div class="weui-flex">
+        <div class="weui-flex__item" style="margin-right:5px">
+            <div class="placeholder"> <a ui-sref="nopayed" class="weui-btn weui-btn_plain-default">待支付</a></div>
+        </div>
+        <div class="weui-flex__item" style="margin-right:5px">
+            <div class="placeholder"> <a ui-sref="nofinish" class="weui-btn weui-btn_plain-default">未成团</a></div>
+        </div>
+        <div class="weui-flex__item" style="margin-right:5px">
+            <div class="placeholder"> <a ui-sref="noevaluate" class="weui-btn weui-btn_plain-default">待点评</a></div>
+        </div>
+    </div>
+</div>
+<div class="weui-cells">
+    <a class="weui-cell weui-cell_access" ui-sref="collectionls">
+        <div class="weui-cell__bd">
+            <p>收藏列表</p>
+        </div>
+        <div class="weui-cell__ft">
+        </div>
+    </a>
+</div>
+<br>
+<div class="weui-cells">
+    <div class="page">
+        <div class="page__hd">
+            <p class="page__desc">随便逛逛</p>
+        </div>
+        <div class="page__bd">
+            <article class="weui-article">
+                <section>
+                    <p> 
+                    <a ui-sref="clsdetail">
+                        <img src="weui/src/example/images/trip1.png" alt="" style="width:100%;display:block">
+                    </a>
+                    </p>
+                    <p>
+                        全程无自费，点评过百，私人沙滩，两晚椰子岛，VILLA别墅，海豚岛，送大堡礁帝王岛。
+                    </p>
+                    <p>
+                        Just go,just go down to the road with no destination走，不是要去哪，而是在路上
+                    </p>
+                </section>
+            </article>
+        </div>
+        <div class="page__bd">
+            <article class="weui-article">
+                <section>
+                    <p>
+                    <a ui-sref="clsdetail">
+                        <img src="weui/src/example/images/trip1.png" alt="" style="width:100%;display:block">
+                    </a>
+                    </p>
+                    <p>
+                        全程无自费，点评过百，私人沙滩，两晚椰子岛，VILLA别墅，海豚岛，送大堡礁帝王岛。
+                    </p>
+                    <p>
+                        Just go,just go down to the road with no destination走，不是要去哪，而是在路上
+                    </p>
+                </section>
+            </article>
+        </div>
+        <div class="page__bd">
+            <article class="weui-article">
+                <section>
+                    <p>
+                    <a ui-sref="clsdetail">
+                        <img src="weui/src/example/images/trip1.png" alt="" style="width:100%;display:block">
+                    </a>
+                    </p>
+                    <p>
+                        全程无自费，点评过百，私人沙滩，两晚椰子岛，VILLA别墅，海豚岛，送大堡礁帝王岛。
+                    </p>
+                    <p>
+                        Just go,just go down to the road with no destination走，不是要去哪，而是在路上
+                    </p>
+                </section>
+            </article>
+        </div>
+    </div>
+</div>

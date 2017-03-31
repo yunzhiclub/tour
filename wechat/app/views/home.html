@@ -1,0 +1,175 @@
+<!-- 
+description 这是首页页面 
+router:#!/home
+ -->
+<div class="page">
+    <div class="page__hd">
+    </div>
+    <div class="page__bd page__bd_spacing">
+        <div class="weui-flex">
+            <div>
+                <a class="weui-cell weui-cell_access" href="javascript:;">
+                    <div class="weui-cell__bd">
+                        <p>天津</p>
+                    </div>
+                    <div class="weui-cell__ft">
+                    </div>
+                </a>
+            </div>
+            <div class="weui-flex__item">
+                <div class="placeholder">
+                    <div class="page">
+                        <div class="page__bd">
+                            <!--<a href="javascript:;" class="weui-btn weui-btn_primary">点击展现searchBar</a>-->
+                            <div class="weui-search-bar" id="searchBar" style="margin-top:2px">
+                                <form class="weui-search-bar__form">
+                                    <div class="weui-search-bar__box">
+                                        <i class="weui-icon-search"></i>
+                                        <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required/>
+                                        <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+                                    </div>
+                                    <label class="weui-search-bar__label" id="searchText">
+                                        <i class="weui-icon-search"></i>
+                                        <span>搜索</span>
+                                    </label>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="placeholder" style="margin-right:5px;margin-left:5px;margin-top:7px">
+                    <a ui-sref="personal"><img src="{{customer.headImg.headImgUrl}}" alt="个人中心" height="40" width="40" class="img-circle"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page__ft">
+    </div>
+</div>
+<br>
+<div style="margin-left:20px">
+    <font color="orange" style="font-weight:bold">{{customer.nickName}}</font>
+</div>
+<br>
+<div class="weui-flex">
+    <div class="weui-flex__item" style="margin-right:20px;margin-left:20px">
+        <div class="placeholder"> <a ui-sref="toinvite" class="weui-btn weui-btn_warn" style="background:orange">发布邀约</a></div>
+    </div>
+    <div class="weui-flex__item" style="margin-right:20px;margin-left:20px">
+        <div class="placeholder"><a ui-sref="invitedls" class="weui-btn weui-btn_warn " style="background:orange">寻找邀约</a></div>
+    </div>
+</div>
+<div class="weui-cell " style="margin-left:5px ">
+    <h4 class="title ">最新邀约</h4>
+</div>
+<div class="weui-flex " style="margin-left:15px ">
+    <div class="weui-flex__item ">
+        <div class="placeholder ">
+            <button ng-click="getChoosedInvitations()" class="weui-btn weui-btn_mini weui-btn_primary " style="width:70px;height:30px">精 选</button>
+        </div>
+    </div>
+    <div class="weui-flex__item " ng-repeat="region in homeRegions">
+        <div class="placeholder ">
+            <button ng-click="getInvitationsByPlaceId(region.id)" class="weui-btn weui-btn_mini weui-btn_default " style="width:70px;height:30px">{{region}}</button>
+        </div>
+    </div>
+</div>
+<div class="weui-flex " style="margin-left:15px ">
+    <div class="weui-flex__item " ng-repeat="country in homeCountrys">
+        <div class="placeholder ">
+            <button ng-click="getInvitationsByCountryId(country.id)" class="weui-btn weui-btn_mini weui-btn_default " style="width:70px;height:30px">{{country}}</button>
+        </div>
+    </div>
+</div>
+<br>
+<div class="page ">
+    <div class="page__hd ">
+    </div>
+    <div class="page__bd ">
+        <div class="weui-form-preview " ng-repeat="invitation in invitations">
+            <div class="weui-form-preview__hd ">
+                <div class="weui-form-preview__item ">
+                    <div class="weui-cells ">
+                        <div class="weui-cell ">
+                            <div class="weui-cell__hd "><img src="{{urlPrefix + invitation.customer_head_img_url}}" alt=" " style="margin-right:5px;display:block " height="60" width="60" class="img-circle"></div>
+                            <div class="weui-cell__bd ">
+                                <p>{{invitation.customer_nick_name}} ♂ {{invitation.customer_birthday | ageFilter}}岁</p>
+                            </div>
+                            <div class="weui-cell__ft "></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-form-preview__item ">
+                    <div class="weui-flex">
+                        <div class="weui-flex__item">
+                            <div class="placeholder"></div>
+                        </div>
+                        <div class="weui-flex__item" ng-repeat="bed in  invitation.beds">
+                            <div class="placeholder" ng-if="bed.customer_id !== invitation.customer_id">
+                                <img src="{{urlPrefix + bed.customer_head_img_url}} " alt=" " style="margin-right:5px;margin-top:8px;display:block " height="30" width="30" class="img-circle" ng-if="bed.customer_id !== null ">
+                                <div ng-if="bed.customer_id === null">
+                                    <img src="weui/src/example/images/whitehead.png" alt=" " style="margin-right:5px;margin-top:8px;display:block " height="30" width="30" class="img-circle">
+                                    <font size="1" color="red">{{bed.money | currency: '¥'}}</font>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  <div class="weui-flex__item">
+                            <div class="placeholder"><img src="weui/src/example/images/lhead3.png " alt=" " style="width:30px;margin-right:5px;margin-top:8px;display:block "></div>
+                        </div>
+                        <div class="weui-flex__item">
+                            <div class="placeholder"><img src="weui/src/example/images/lhead5.png " alt=" " style="width:30px;margin-right:5px;margin-top:8px;display:block "></div>
+                        </div>
+                        <div class="weui-flex__item">
+                            <div class="placeholder">
+                                <a ui-sref="topay"><img src="weui/src/example/images/whitehead.png " alt=" " style="width:30px;margin-right:5px;margin-top:8px;display:block "></a>
+                                <font size="1" color="red">￥10,000.00</font>
+                            </div>
+                        </div>
+                        <div class="weui-flex__item">
+                            <div class="placeholder">
+                                <a ui-sref="topay"><img src="weui/src/example/images/whitehead.png " alt=" " style="width:30px;margin-right:5px;margin-top:8px;display:block "></a>
+                                <font size="1" color="red">￥0.01</font>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="weui-form-preview__bd ">
+                <div class="weui-form-preview__item ">
+                    <label class="weui-form-preview__label ">距结束</label>
+                    <span class="weui-form-preview__value ">{{invitation.invite_deadline | hhmmss}}</span>
+                </div>
+                <div class="weui-form-preview__item ">
+                    <label class="weui-form-preview__label ">出发地</label>
+                    <span class="weui-form-preview__value ">{{invitation.start_city_name}}</span>
+                </div>
+                <div class="weui-form-preview__item ">
+                    <label class="weui-form-preview__label ">出发时间</label>
+                    <span class="weui-form-preview__value "><p ng-if="start_time_date === null">{{invitation.route_begin_time | date: 'yyyy-MM-dd'}}</p><p ng-if="start_time_date !== null">{{invitation.start_time_date | date: 'yyyy-MM-dd'}}</p></span>
+                </div>
+                <div class="weui-form-preview__item ">
+                    <label class="weui-form-preview__label ">详情</label>
+                    <span class="weui-form-preview__value ">{{invitation.route_content}}</span>
+                </div>
+                <div class="weui-form-preview__item ">
+                    <label class="weui-form-preview__label ">总价</label>
+                    <span class="weui-form-preview__value ">{{invitation.totalMoney}}</span>
+                </div>
+                <div class="weui-form-preview__item ">
+                    <label class="weui-form-preview__label ">已支付</label>
+                    <span class="weui-form-preview__value ">{{invitation.beds | payedMoney | currency: '¥'}}</span>
+                </div>
+                <div class="weui-form-preview__item ">
+                    <label class="weui-form-preview__label ">最高可省</label>
+                    <font class="weui-form-preview__value " color="red ">{{invitation | savemaxmoney | currency: '¥'}}</font>
+                </div>
+            </div>
+            <div class="page__bd page__bd_spacing">
+                <button ui-sref="ivdetail({invitationIndex: $index})" class="weui-btn weui-btn_primary" style="margin-right:40px;margin-left:20px;margin-top: 20px;margin-bottom: 10px" ng-disabled="invitation === 1">
+                         <p ng-if="invitation === 1">已经下架</p><p ng-if="invitation !== 1">{{invitation | minvalue | currency: '¥'}}</p>
+                        </button>
+            </div>
+            <br>
+        </div>

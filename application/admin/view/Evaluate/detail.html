@@ -1,0 +1,36 @@
+{extend name="index" /}{block name="content"}
+<div class="row">
+    <center><h2>{$routeName}</h2></center>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="span12">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="span12">
+                        <hr />
+                        <table class="table table-hover table-bordered">
+                            <tr class="info">
+                                <th width="6%">序号</th>
+                                <th width="11%">客户</th>
+                                <th width="6%">星级</th>
+                                <th>评价</th>
+                                <th width="20%">操作</th>
+                            </tr>
+                            {volist name="EvaluateModels" id="EvaluateModel" key="key"}
+                            <tr>
+                                <td>{$key}</td>
+                                <td><a href="{:url('customer/detail')}">{$EvaluateModel->CustomerModel()->getData('nick_name')}</a></td>
+                                <td>{$EvaluateModel->getData('star')}</td>
+                                <td>{$EvaluateModel->getData('content')}</td>
+                                <td><a class="btn btn-sm btn-danger" href="{:url('delete?id=' . $EvaluateModel->getData('id'))}"><i class="glyphicon glyphicon-trash"></i> 删除</a></td>
+                            </tr>
+                            {/volist}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
