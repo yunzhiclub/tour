@@ -32,7 +32,7 @@
                 {volist name="OrderModels" id="OrderModel" key="key"}
                 <tr>
                     <td>{$key}</td>
-                    <td><a href="{:url('detail?id=' . $OrderModel->getData('id'))}">{$OrderModel->getData('number')}</a></td>
+                    <td>{$OrderModel->getData('number')}</td>
                     <td><a href="{:url('Bed/detail?id=' . $OrderModel->Bed->id)}">{$OrderModel->Bed->number}</a></td>
                     <td>{$OrderModel->Bed->Customer->nick_name}</td>
                     <td><a href="{:url('Invite/index')}">{$OrderModel->getData('invite_id')}</a></td>

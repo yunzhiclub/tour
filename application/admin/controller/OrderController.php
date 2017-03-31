@@ -22,11 +22,6 @@ class OrderController extends IndexController
 
         return $this->fetch();
     }
-    
-    public function detail()
-    {
-    	return $this->fetch();
-    }
 
     public function delete()
     {
