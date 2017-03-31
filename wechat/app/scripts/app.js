@@ -48,7 +48,7 @@ angular
                 controller: 'InvitedlsCtrl',
             })
             .state('ivdetail', {
-                url: '/ivdetail', // 趣约详情
+                url: '/ivdetail/:invitationIndex', // 趣约详情
                 templateUrl: 'views/ivdetail.html',
                 controller: 'IvdetailCtrl',
             })
