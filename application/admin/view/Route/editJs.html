@@ -1,0 +1,69 @@
+<script>
+app.controller('routeController', function($scope) {
+    //出发时间赋值
+    var RouteModel = <?php echo $RouteModel; ?>;
+    $scope.deadline = new Date(RouteModel.deadline);
+    $scope.begin_time = new Date(RouteModel.begin_time);
+    //给不同出发时间的价格赋值
+    $scope.dates = <?php echo json_encode($otherInfo['start_time']); ?>;
+    $scope.price = [];
+    for (var i = 0; i < $scope.dates.length; i++) {
+        $scope.price[i] = $scope.dates[i].price;
+    }
+    //判断精选和首页推荐是否显示
+    $scope.isChosen = <?php echo $otherInfo['isChosen']; ?>;
+    $scope.isHomeRecommend = <?php echo $otherInfo['isHomeRecommend']; ?>;
+    //监听开始时间和出发时间两个字段
+    $scope.$watch('[begin_time, deadline]', function() {
+        //获取开始日期和截止日期之间相隔的天数
+        $scope.dates = getDates($scope.begin_time, $scope.deadline);
+
+        //判断用户是否在开始日期、截止日期输入值
+        if ($scope.begin_time && $scope.deadline) {
+            //判断截止日期是否大于开始日期
+            if ($scope.begin_time <= $scope.deadline) {
+                $scope.myValue = true;
+            } else {
+                $scope.myValue = false;
+            }
+            
+        }
+
+    });
+
+    //获取两个日期的中间天数
+    function getDates( d1, d2 ){
+      var oneDay = 24*3600*1000;
+      for (var d=[],ms=d1*1,last=d2*1;ms<last;ms+=oneDay){
+        d.push(new Date(ms).Format("yyyy-MM-dd"));
+
+      }
+      d.push(d2.Format("yyyy-MM-dd"));
+      return d;
+    }
+
+    //设置日期格式
+    // 对Date的扩展，将 Date 转化为指定格式的String
+    // 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符， 
+    // 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字) 
+    // 例子： 
+    // (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423 
+    // (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18 
+    Date.prototype.Format = function (fmt) {  
+        var o = {
+            "M+": this.getMonth() + 1, //月份 
+            "d+": this.getDate(), //日 
+            "h+": this.getHours(), //小时 
+            "m+": this.getMinutes(), //分 
+            "s+": this.getSeconds(), //秒 
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+            "S": this.getMilliseconds() //毫秒 
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    }
+
+});
+</script>
