@@ -3,6 +3,7 @@ namespace app\admin\controller;
 use think\Controller;
 use app\model\RouteModel;
 use think\Request;
+use app\model\PictureModel;         //图片
 /**
 * 路线管理
 */
@@ -62,8 +63,15 @@ class RouteController extends IndexController
     public function save()
     {
         $data = Request::instance()->param();
+        //去除pictureIds字段
+        $pictureIds = current(array_splice($data, -2, 1));
         //保存数据
-        RouteModel::saveRouteInfo($data);
+        $RouteModel = RouteModel::saveRouteInfo($data);
+
+        //将图片、路线关联并存入到Picture_route表中
+        if ($pictureIds !== null) {
+            $saveRelationPictures = PictureModel::saveRelationPictures($RouteModel, $pictureIds);
+        }
 
         return $this->success('保存成功', url('index'));
     }
@@ -72,6 +80,8 @@ class RouteController extends IndexController
     public function update()
     {
         $data = Request::instance()->param();
+        //去除pictureIds字段
+        $pictureIds = current(array_splice($data, -2, 1));
         //删除数据
         RouteModel::deleteRouteInfo($data['id']);
         $RouteModel = RouteModel::get($data['id']);
@@ -80,7 +90,11 @@ class RouteController extends IndexController
         }
         //保存数据
         $id = array_shift($data);
-        RouteModel::updateRouteInfo($data, $id);
+        $RouteModel = RouteModel::updateRouteInfo($data, $id);
+        //将图片、酒店关联并存入到Picture_hotel表中
+        if ($pictureIds !== null) {
+            $saveRelationPictures = PictureModel::saveRelationPictures($RouteModel, $pictureIds);
+        }
        
         return $this->success('保存成功', url('index'));
     }

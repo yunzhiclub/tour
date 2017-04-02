@@ -520,6 +520,7 @@ class RouteModel extends ModelModel
 
 		unset($HomeRecommendModel);
 		unset($ChosenModel);
+		return $RouteModel;
 
 	}
 }

@@ -1,14 +1,15 @@
 {extend name="index" /} {block name="content"}
 <div class="panel-body"></div>
-<div ng-app="app" ng-controller="routeController">
+<div ng-app="app">
     
-    <div class="row">
+    <div class="row"  ng-controller="AppController" uploader="uploader">
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="row">
-                        <form class="form-horizontal" action="{:url('update')}" method="post">
-                        <input type="hidden" name="id" value="{$RouteModel->id}">
+                        <form class="form-horizontal" action="{:url('update')}" method="post" name="myForm" ng-submit="submit()">
+                        <input id="model" type="hidden" name="id" value="<?php echo get_class($RouteModel); ?>">
+                        <input id="id" type="hidden" name="id" value="{$RouteModel->id}">
                             <div class="form-group">
                                 <label class="col-md-2 control-label">名称</label>
                                 <div class="col-md-3">
@@ -77,6 +78,7 @@
                                     <input type="number" name="days" value="{$RouteModel->getData('days')}" class="form-control" min="0" required/>
                                 </div>
                             </div>
+                            <div ng-controller="RouteController">
                             <div class="form-group">
                                 <label class="col-md-2 control-label">出发日期——起</label>
                                 <div class="col-md-3">
@@ -179,6 +181,8 @@
                                     </p>
                                 </div>
                             </div>
+                            </div>
+                            {include file="/picture/edit"}
                             <div class="form-group">
                                 <label class="col-md-2 text-right">详情</label>
                                 <div class="col-md-9">
@@ -189,7 +193,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-offset-3 col-md-9">
-                                    <button type="submit" class="btn btn-md btn-success"><i class="fa fa-check "></i>确认</button>
+                                    <button type="submit" ng-disabled="uploader.getNotUploadedItems().length || progress" class="btn btn-md btn-success"><i class="fa fa-check "></i>确认</button>
                                 </div>
                             </div>
                         </form>
