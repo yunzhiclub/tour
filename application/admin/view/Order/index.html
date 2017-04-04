@@ -8,8 +8,8 @@
                 <div class="col-md-10">
                     <form class="form-inline" action="{:url('', url('get.'))}"  method="get">
                         <div class="form-group">
-                            <label class="sr-only" for="name">姓名</label>
-                            <input name="name" type="text" class="form-control" placeholder="订单号..." id="name" value="{:input('get.name')}">
+                            <label class="sr-only" for="number">订单号</label>
+                            <input name="number" type="text" class="form-control" placeholder="订单号..." id="number" value="{:input('get.number')}">
                         </div>
                         <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>
                     </form>
@@ -32,14 +32,14 @@
                 {volist name="OrderModels" id="OrderModel" key="key"}
                 <tr>
                     <td>{$key}</td>
-                    <td><a href="{:url('detail?id=' . $OrderModel->getData('id'))}">{$OrderModel->getData('number')}</a></td>
+                    <td>{$OrderModel->getData('number')}</td>
                     <td><a href="{:url('Bed/detail?id=' . $OrderModel->Bed->id)}">{$OrderModel->Bed->number}</a></td>
                     <td>{$OrderModel->Bed->Customer->nick_name}</td>
                     <td><a href="{:url('Invite/index')}">{$OrderModel->getData('invite_id')}</a></td>
                     <td>男</td>
                 	<td>￥80000</td>
                 	<td>
-                    <a class="btn btn-sm btn-danger" href="#"><i class="glyphicon glyphicon-trash"></i> 删除</a>
+                    <a class="btn btn-sm btn-danger" href="{:url('delete?id=' . $OrderModel->getData('id'))}"><i class="glyphicon glyphicon-trash"></i> 删除</a>
 
                     </td>
                 </tr>
