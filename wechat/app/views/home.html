@@ -108,8 +108,9 @@ router:#!/home
                         </div>
                         <div class="weui-flex__item" ng-repeat="bed in  invitation.beds">
                             <div class="placeholder" ng-if="bed.customer_id !== invitation.customer_id">
-                                <img src="{{urlPrefix + bed.customer_head_img_url}} " alt=" " style="margin-right:5px;margin-top:8px;display:block " height="30" width="30" class="img-circle" ng-if="bed.customer_id !== null ">
-                                <div ng-if="bed.customer_id === null">
+                            <!-- 用customer_id是否为0判断是否该床位是否有人 -->
+                                <img src="{{urlPrefix + bed.customer_head_img_url}} " alt=" " style="margin-right:5px;margin-top:8px;display:block " height="30" width="30" class="img-circle" ng-if="bed.customer_id !== 0 ">
+                                <div ng-if="bed.customer_id === 0">
                                     <img src="weui/src/example/images/whitehead.png" alt=" " style="margin-right:5px;margin-top:8px;display:block " height="30" width="30" class="img-circle">
                                     <font size="1" color="red">{{bed.money | currency: '¥'}}</font>
                                 </div>
@@ -147,7 +148,7 @@ router:#!/home
                 </div>
                 <div class="weui-form-preview__item ">
                     <label class="weui-form-preview__label ">出发时间</label>
-                    <span class="weui-form-preview__value "><p ng-if="start_time_date === null">{{invitation.route_begin_time | date: 'yyyy-MM-dd'}}</p><p ng-if="start_time_date !== null">{{invitation.start_time_date | date: 'yyyy-MM-dd'}}</p></span>
+                    <span class="weui-form-preview__value "><p ng-if="invitation.start_time_date === null">{{invitation.route_begin_time | date: 'yyyy-MM-dd'}}</p><p ng-if="invitation.start_time_date !== null">{{invitation.start_time_date | date: 'yyyy-MM-dd'}}</p></span>
                 </div>
                 <div class="weui-form-preview__item ">
                     <label class="weui-form-preview__label ">详情</label>
