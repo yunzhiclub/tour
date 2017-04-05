@@ -7,6 +7,14 @@ use think\Model;
 */
 class ModelModel extends Model
 {
+    /**
+     * 重写 查找单条记录
+     * 当返回值为null时，强制返回当前调用对象
+     * @param null $data
+     * @param array $with
+     * @param bool $cache
+     * @return object
+     */
     public static function get($data = null, $with = [], $cache = false)
     {
         $query = self::parseQuery($data, $with, $cache);
