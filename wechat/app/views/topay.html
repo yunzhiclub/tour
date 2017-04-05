@@ -12,7 +12,8 @@ router:#!/topay
             </div>
             <div class="weui-form-preview__bd">
                 <div class="weui-form-preview__item">
-                    <span class="weui-form-preview__value"><泰国-普吉岛-甲米6或7日游>天津往返直飞，入住泳池别墅，2晚国五酒店，无自费，畅游甲米，大堡礁浮潜，幻多奇主题乐园，预定赠送出海跟拍
+                    <span class="weui-form-preview__value">
+                    {{invitation.route_content}}
                     </span>
                 </div>
             </div>
@@ -24,21 +25,21 @@ router:#!/topay
         <div class="weui-form-preview">
             <div class="weui-form-preview__hd">
                 <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">邀约详情：</label>
+                    <label class="weui-form-preview__label">邀约详情：{{invitation.route_content}}</label>
                 </div>
             </div>
             <div class="weui-form-preview__bd">
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">需支付金额</label>
-                    <span class="weui-form-preview__value">￥10,000.00</span>
+                    <span class="weui-form-preview__value">{{money | currency: '¥' }}</span>
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">预定时间</label>
-                    <span class="weui-form-preview__value">2016-10-25</span>
+                    <span class="weui-form-preview__value">{{orderTime | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">出发时间</label>
-                    <span class="weui-form-preview__value">2016-11-05</span>
+                    <span class="weui-form-preview__value"><p ng-if="invitation.start_time_date === null">{{invitation.route_begin_time | date: 'yyyy-MM-dd'}}</p><p ng-if="invitation.start_time_date !== null">{{invitation.start_time_date | date: 'yyyy-MM-dd'}}</p></span>
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">归来时间</label>
@@ -48,7 +49,7 @@ router:#!/topay
         </div>
     </div>
     <hr>
-<div class="weui-flex">
+<!-- <div class="weui-flex">
     <div class="weui-flex__item" style="margin-right:20px;margin-left:10px">
         <div class="placeholder"> 
          <a ui-sref="" class="weui-btn weui-btn_plain-default" style="width:160px"> 
@@ -89,9 +90,34 @@ router:#!/topay
             </div>
       </div>
       </div>
-</div>
+</div> -->
+<div class="weui-flex" ng-repeat="beds in invitation.beds">
+    <div class="weui-flex__item" style="margin-right:20px;margin-left:10px" ng-repeat="bed in beds">
+        <div class="placeholder"> 
+         <div  class="weui-btn weui-btn_plain-default" style="width:160px" > 
+             <div class="weui-cell">
+                <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+                    <img src="{{urlPrefix + bed.customer_head_img_url}}" style="width: 50px;display: block" class="img-circle"  height="65" width="55" ng-if="bed.customer_id !== 0 "/>
+                    <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block" class="img-circle"  height="65" width="55" ng-if="bed.customer_id === 0 "/>
+                    <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;" ng-if="bed.isQualified === 1"><p ng-if="bed.id === bedId">已选中</p><p ng-if="bed.id !== bedId">可选</p></span>
+                </div>
+                <div class="weui-cell__bd">
+                    <!-- <p>♀</p>-->  
+                    <p style="width:60px;height:80px;">{{bed.sex | sexFilter}}{{bed.old | oldFilter}}</p>                   
+                    <p style="font-size: 13px;color: #888888;height:20px;width:70px">{{bed.money | currency: '¥'}}</p>
+                </div>
+             </div>
+          </div>
+          <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p ng-if="bed.customer_id !== 0 ">已支付</p>
+                    <p ng-if="bed.customer_id === 0 ">未支付</p>
+                </div>
+            </div>
+        </div>
+    </div>
 <hr>
-<div class="weui-flex">
+<!-- <div class="weui-flex">
     <div class="weui-flex__item" style="margin-right:20px;margin-left:10px">
         <div class="placeholder"> 
          <a ui-sref="" class="weui-btn weui-btn_plain-default" style="width:160px"> 
@@ -177,12 +203,12 @@ router:#!/topay
                 </div>
             </div>
       </div>
-      </div>
+      </div> -->
 </div>
 <hr>
 </div>
 <div class="weui-cells__title">支付方式</div>
         <div class="weui-btn-area">
-            <a class="weui-btn weui-btn_primary" ui-sref="paysuccess" id="showTooltips">微信支付</a>
+            <button class="weui-btn weui-btn_primary"  id="showTooltips" ng-click="paysubmit()">微信支付</button>
         </div>
 
