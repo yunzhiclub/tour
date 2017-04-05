@@ -20,7 +20,6 @@ class EvaluateController extends IndexController
         $RouteModel = new RouteModel;
         $map['is_delete'] = 0;
         $RouteModels = $RouteModel->where($map)->where('name', 'like', '%' . $name . '%')->paginate();
-    	//$RouteModels = RouteModel::getRouteModels();
 
     	$this->assign('RouteModels', $RouteModels);
         return $this->fetch();

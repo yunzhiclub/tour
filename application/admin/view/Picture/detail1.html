@@ -1,0 +1,21 @@
+<div ng-app="app" ng-controller="DetailController">
+<div class="form-group">
+    <label>图片：</label>
+</div>
+</div><!-- 
+<input type="hidden" id="id" value="{$RouteModel->getData('id')}">
+<script type="text/javascript">
+app.controller('DetailController', function ($scope, $http) {
+	var id = document.getElementById("id").value;
+	//请求图片信息
+	var data = {params : {Hotel_id: id}};
+	$http
+	.get('{:url("picture/detail")}', data)
+	.then(function successCallback(response) {
+		console.log(response);
+	}, function errorCallback(response) {
+	  alert("无法获取图片信息");
+	});
+});
+	
+</script> -->
