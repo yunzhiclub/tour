@@ -2,6 +2,7 @@
 namespace app\model;
 use app\model\DestinationCityModel;	//目的城市
 use app\model\DestinationCityRouteHotelViewModel; //与路线有关信息组成的视图
+use think\Db;
 /**
  * 路线
  */
@@ -10,7 +11,10 @@ class RouteModel extends ModelModel
 	private $StartCityModel = null;		//对应的出发城市模型
 	private $DestinationCityModel = null;	 //对应的目的地城市模型
 	private $HotelModel = null;     	//对应的酒店模型
-	private $FlightModel = null;  		//对应的航班的模型
+	private $BackFlightModel = null;  		//对应的返回航班的模型
+	private $BeginFlightModel = null;  		//对应的出发航班的模型
+	private $HomeRecommendModel = null;  		//对应的出发航班的模型
+	private $ChosenModel = null;  		//对应的出发航班的模型
 
 	/**
 	 * 当前模型与出发城市关系为n:1
@@ -55,17 +59,57 @@ class RouteModel extends ModelModel
 	}
 
 	/**
-	 * 当前模型与航班关系为n:1
-	 * @return lists FlightModels
-	 * @author chuhang 
+	 * 获取路线返回航班模型
+	 * @author chuhang
 	 */
-	public function FlightModel() {
+	public function BackFlightModel() {
 
-		if (null === $this->FlightModel) {
-			$this->FlightModel = FlightModel::get($this->getData('hotel_id'));
+		if (null === $this->BackFlightModel) {
+			$this->BackFlightModel = FlightModel::get($this->getData('back_flight_id'));
 		}
 
-		return $this->FlightModel;
+		return $this->BackFlightModel;
+	}
+
+	/**
+	 * 获取路线出发航班模型
+	 * @author chuhang 
+	 */
+	public function BeginFlightModel() {
+
+		if (null === $this->BeginFlightModel) {
+			$this->BeginFlightModel = FlightModel::get($this->getData('begin_flight_id'));
+		}
+
+		return $this->BeginFlightModel;
+	}
+
+	/**
+	 * 路线与首页推荐模型
+	 * @author chuhang 
+	 */
+	public function HomeRecommendModel() {
+		if (null === $this->HomeRecommendModel) {
+			$map['route_id'] = $this->getData('id');
+			$map['is_delete'] = 0;
+			$this->HomeRecommendModel = HomeRecommendModel::get($map);
+		}
+
+		return $this->HomeRecommendModel;
+	}
+
+	/**
+	 * 获取路线与精选模型
+	 * @author chuhang 
+	 */
+	public function ChosenModel() {
+		if (null === $this->ChosenModel) {
+			$map['route_id'] = $this->getData('id');
+			$map['is_delete'] = 0;
+			$this->ChosenModel = ChosenModel::get($map);
+		}
+
+		return $this->ChosenModel;
 	}
 
 	/**
@@ -219,6 +263,8 @@ class RouteModel extends ModelModel
 		$EvaluateModel = new EvaluateModel;
 		$map['route_id'] = $this->id;
 		$EvaluateModels = $EvaluateModel->where($map)->select();
+		unset($EvaluateModel);
+		unset($EvaluateModels);
 
 		return count($EvaluateModels);
 	}
@@ -244,6 +290,11 @@ class RouteModel extends ModelModel
 		//获取航班信息
 		$FlightModel = new FlightModel;
 		$result['FlightModels'] = $FlightModel->where($map)->select();
+
+		unset($FlightModel);
+		unset($HotelModel);
+		unset($DestinationCityModel);
+		unset($StartCityModel);
 
 		return $result;
 	}
@@ -274,9 +325,10 @@ class RouteModel extends ModelModel
 			$ChosenModel->save();
 		}
 
-		unset($RouteModel);
 		unset($HomeRecommendModel);
 		unset($ChosenModel);
+
+		return $RouteModel;
 	}
 
 	/**
@@ -314,11 +366,11 @@ class RouteModel extends ModelModel
 		if (isset($data['destination_city_id']) && $data['destination_city_id'] !== '0') {
 			$map['destination_city_id'] = $data['destination_city_id'];
 		}
-
 		if (isset($data['name'])) {
 			$this->where($map)->where('name', 'like', '%' . $data['name'] . '%');
+		} else {
+			$this->where($map);
 		}
-
 		unset($map);
 		return $this;
 	}
@@ -355,9 +407,120 @@ class RouteModel extends ModelModel
 		$StartTimeModel = new StartTimeModel;
 		$StartTimeModels = $StartTimeModel->where($map)->select();
 		$result['start_time'] = $StartTimeModels;
+		unset($StartTimeModel);
+		unset($StartTimeModels);
+		unset($HomeRecommendModel);
+		unset($ChosenModel);
 
 		return $result;
 	}
 
+	/**
+	 * 删除路线表及出发时间表、精选表、首页推荐表中的路线信息
+	 * @param  int $id 路线id
+	 * @author chuhang 
+	 */
+	static public function deleteRouteInfo($id)
+	{
+		$map = [];
+		$map['is_delete'] = 0;
+		$map['route_id'] = $id;
+		//删除路线表中的信息
+		$RouteModel = RouteModel::get($id);
+		$RouteModel->is_delete = 1;
+		$RouteModel->save();
+		//删除出发时间表的路线信息
+		$StartTimeModel = new StartTimeModel;
+		$StartTimeModels = $StartTimeModel->where($map)->select();
+		if (!empty($StartTimeModels)) {
+			foreach ($StartTimeModels as $StartTimeModel) {
+			$StartTimeModel->is_delete = 1;
+			$StartTimeModel->save();
+			}
+		}
+		
+		//删除首页推荐表中的路线信息
+		$HomeRecommendModel = HomeRecommendModel::get($map);
+		if (null !== $HomeRecommendModel) {
+			$HomeRecommendModel->is_delete = 1;
+			$HomeRecommendModel->save();
+		}
+		
+		//删除精选表中的路线信息
+		$ChosenModel = ChosenModel::get($map);
+		if (null !== $ChosenModel) {
+			$ChosenModel->is_delete = 1;
+			$ChosenModel->save();
+		}
+		
+		unset($map);
+		unset($RouteModel);
+		unset($StartTimeModels);
+		unset($StartTimeModel);
+		unset($HomeRecommendModel);
+		unset($ChosenModel);
+	}
 
+
+	/**
+	 * 对money过滤，因为具有strfmon 的系统才有 money_format() 函数。 例如 Windows 不具备，所以 Windows 系统上 money_format() 未定义。用引此方法对money过滤
+	 * @param  int  $val    价钱
+	 * @param  string  $symbol money类型
+	 * @param  integer $r      保留位数
+	 * @return string          过滤后的价钱，如：￥897,897
+	 * @author chuhang 
+	 */
+	static public function money_format($val,$symbol='￥',$r=0)
+	{
+	    $n = $val; 
+	    $c = is_float($n) ? 1 : number_format($n,$r);
+	    $d = '.';
+	    $t = ',';
+	    $sign = ($n < 0) ? '-' : '';
+	    $i = $n=number_format(abs($n),$r); 
+	    $j = (($j = strlen($i)) > 2) ? $j % 2 : 0; 
+
+	   return  $symbol.$sign .($j ? substr($i,0, $j) + $t : '').preg_replace('/(\d{3})(?=\d)/',"$1" + $t,substr($i,$j)) ;
+	}
+
+	/**
+	 * 更新路线信息
+	 * @param  array $data post的信息
+	 * @param  int $id   路线id
+	 * @author chuhang 
+	 */
+	static public function updateRouteInfo($data, $id)
+	{
+		//将数组进行拆分，一部分存入路线表中，一部分存入出发时间表中，一部分存入首页推荐表和精选表中
+		$weightRelation = array_splice($data, 18, 5);
+		$data['content'] = array_pop($weightRelation);
+		$startTime = array_splice($data, 10, 2);
+		//将数据存入路线表中
+		$RouteModel = new RouteModel;
+		$RouteModel->save($data);
+		//将路线的id修改为原路线的id
+		Db::table('yunzhi_route')->where('id', $RouteModel->id)->update(['id' => $id]);
+		$RouteModel = RouteModel::get($id);
+		//将路线的出发日期及对应的价钱存入出发时间表中
+		self::saveStartTimeInfo($startTime, $RouteModel->getData('id'));
+		//将路线的首页推荐存入首页推荐表中
+		if ($weightRelation['isHomeRecommend'] === '0') {
+			$HomeRecommendModel = new HomeRecommendModel;
+			$HomeRecommendModel->route_id = $RouteModel->getData('id');
+			$HomeRecommendModel->weight = $weightRelation['homeRecommendWeight'];
+			$HomeRecommendModel->save();
+		}
+		//将路线的精选存入精选表中
+		if ($weightRelation['isChosen'] === '0') {
+			$ChosenModel = new ChosenModel;
+			$ChosenModel->route_id = $RouteModel->getData('id');
+			$ChosenModel->weight = $weightRelation['chosenWeight'];
+			$ChosenModel->save();
+		}
+
+		unset($HomeRecommendModel);
+		unset($ChosenModel);
+		return $RouteModel;
+
+	}
 }
