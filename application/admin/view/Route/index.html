@@ -9,24 +9,25 @@
                     <form action="{:url('index')}" method="get" class="form-inline">
                         <div class="col-md-3">
                             <label>出发地</label>&nbsp;
-                            <select class="form-control">
-                                <option value="1">天津</option>
-                                <option value="2">北京</option>
-                                <option value="3">上海</option>
+                            <select class="form-control" name="start_city_id" >
+                                <option value="0">无</option>
+                               {volist name="basicInfo['StartCityModels']" id="StartCityModel"}
+                               <option value="{$StartCityModel->getData('id')}">{$StartCityModel->getData('name')}</option>
+                               {/volist}
                             </select>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <label>目的地</label>&nbsp;
-                            <select class="form-control">
-                                <option value="1">首尔</option>
-                                <option value="2">伦敦</option>
-                                <option value="3">巴黎</option>
-                            </select>
+                                <select class="form-control" name="destination_city_id">
+                                    <option value="0">无</option>
+                                    {volist name="basicInfo['DestinationCityModels']" id="DestinationCityModel"}
+                                   <option value="{$DestinationCityModel->getData('id')}">{$DestinationCityModel->getData('name')}</option>
+                                   {/volist}
+                                </select>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <div class="form-group">
-                                <label class="sr-only" for="name">路线</label>
-                                <input name="title" type="text" class="form-control" placeholder="路线..." id="title" value="{:input('get.title')}">
+                                <input name="name" type="text" class="form-control" placeholder="名称..." id="name" value="{:input('get.name')}">
                             </div>
                             <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>
                         </div>
@@ -45,25 +46,25 @@
                     <th>名称</th>
                     <th>出发地</th>
                     <th>目的地</th>
-                    <th>出发日期</th>
-                    <th>返程日期</th>
-                    <th>价格</th>
+                    <th style="text-align:right">标价</th>
+                    <th>酒店</th>
                     <th>操作</th>
                 </tr>
+                
+                {volist name="RouteModels" id="RouteModel" key="key"}
                 <tr>
-                    <td>1</td>
-                	<td>欧洲七日游</td>
-                	<td>天津</td>
-                	<td>伦敦</td>
-                	<td>2017/11/12</td>
-                    <td>2017/11/20</td>
-                	<td>8000</td>
-                	<td>
-                     <a href="{:url('detail')}" class="btn btn-primary"><i class="glyphicon glyphicon-align-justify"></i> 查看</a>   
-                     <a href="{:url('edit')}" class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i> 编辑</a>   
-                     <a href="#" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> 删除</a>   
-                    </td>
+                    <td>{$key}</td>
+                    <td><a href="{:url('detail?id=' . $RouteModel->getData('id'))}">{$RouteModel->getData('name')}</a></td>
+                    <td>{eq name="$RouteModel->StartCityModel()" value=""}无{else /}{$RouteModel->StartCityModel()->getData('name')}{/eq}</td>
+                    <td>{eq name="$RouteModel->DestinationCityModel()" value=""}无{else /}{$RouteModel->DestinationCityModel()->getData('name')}{/eq}</td>
+                    <td style="text-align:right">{$RouteModel->money_format($RouteModel->getData('standard_price'))}</td>
+                    <td>{$RouteModel->HotelModel()->getData('name')}</td>
+                        <td>
+                         <a class="btn btn-sm btn-primary" href="{:url('edit?id=' . $RouteModel->getData('id'))}"><i class="glyphicon glyphicon-pencil"></i> 编辑</a>
+                        <a class="btn btn-sm btn-danger" href="{:url('delete?id=' . $RouteModel->getData('id'))}"><i class="glyphicon glyphicon-trash"></i> 删除</a>  
+                        </td>
                 </tr>
+                {/volist}
             </table>
         </div>
     </div>
