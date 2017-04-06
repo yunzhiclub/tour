@@ -69,12 +69,12 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                {neq name="$RouteModel->HomeRecommendModel()" value=""}
+                                {eq name="$RouteModel->isShowHomeRecommendWeight()" value="0"}
                                 <div>
                                     <label>权重：</label>
                                     {$RouteModel->HomeRecommendModel()->getData('weight')}
                                 </div>
-                                {/neq}
+                                {/eq}
                             </div>
                         </div>
                         <div class="row">
@@ -84,14 +84,15 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                {neq name="$RouteModel->ChosenModel()" value=""}
+                                {eq name="$RouteModel->isShowChosenWeight()" value="0"}
                                 <div>
                                     <label>权重：</label>
                                     {$RouteModel->ChosenModel()->getData('weight')}
                                 </div>
-                                {/neq}
+                                {/eq}
                             </div>
                         </div>
+                        {include file="picture/detail1"}
                         <div>
                         	<label>路线简介:</label>{$RouteModel->getData('content')}
                         </div>
