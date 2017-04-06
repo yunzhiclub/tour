@@ -51,7 +51,8 @@ class InvitationController extends ApiController {
 	 */
 	public function getInvitationsByCountryId() {
 		$id = Request::instance()->param('id');
-
+		var_dump($id);
+		die();
 		//获取国家对应目的城市ID
 		$destinationcityIds = DestinationcityModel::getDestinationIdByCountryId($id);
 
