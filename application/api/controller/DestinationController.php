@@ -78,4 +78,10 @@ class DestinationController extends ApiController {
 		
 		return $this->response([]);	
 	}
+
+	// 获取全部目的地城市
+	public function getDestinationCountrys(){
+		 $data = ['美国', '韩国', '日本'];
+		 return $this->response($data);	
+	}
 }

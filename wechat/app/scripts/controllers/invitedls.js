@@ -33,4 +33,13 @@ angular.module('wechatApp')
 
     		});
     	};
+
+    	// 获取全部目的地国家
+    	$scope.getDestinationCountrys = function() {
+    		startcity.getStartCitys().then(function successCallBack(response) {
+    			$scope.destinationCountrys = response;
+    		}, function errorCallBack(){
+
+    		});
+    	};
   }]);
