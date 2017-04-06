@@ -39,12 +39,12 @@ angular.module('wechatApp')
             return promise;
         };
 
-        var getInvitationsByPlaceId = function(placeId) {
+        var getInvitationsByRegionId = function(regionId) {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
-            var paramUrl = url + 'getInvitationsByPlaceId';
-            var data = { placeId: placeId };
+            var paramUrl = url + 'getInvitationsByRegionId';
+            var data = { id: regionId };
 
 
             // $http去后台获取数据
@@ -69,7 +69,7 @@ angular.module('wechatApp')
             var deferred = $q.defer();
             var promise = deferred.promise;
             var paramUrl = url + 'getInvitationsByCountryId';
-            var data = { countryId: countryId };
+            var data = { id: countryId };
 
 
             // $http去后台获取数据
@@ -163,12 +163,12 @@ angular.module('wechatApp')
             return promise;
         };
 
-        var getInvitationsByCityId = function(cityId) {
+        var getInvitationsByStartCityId = function(cityId) {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
             var data = { cityId: cityId };
-            var paramUrl = url + 'getInvitationsByCityId';
+            var paramUrl = url + 'getInvitationsByStartCityId';
 
             // $http去后台获取数据
             server.http(paramUrl, data, function successCallback(response) {
@@ -249,8 +249,8 @@ angular.module('wechatApp')
             },
 
             // 按目的地(地区id)选出趣约
-            getInvitationsByPlaceId: function(placeId) {
-                return getInvitationsByPlaceId(placeId);
+            getInvitationsByRegionId: function(regionId) {
+                return getInvitationsByRegionId(regionId);
             },
             // 按目的地(国家id)选出趣约
             getInvitationsByCountryId: function(countryId) {
@@ -273,8 +273,8 @@ angular.module('wechatApp')
             },
 
             // 按出发城市id选出趣约
-            getInvitationsByCityId: function(cityId) {
-                return getInvitationsByCityId(cityId);
+            getInvitationsByStartCityId: function(cityId) {
+                return getInvitationsByStartCityId(cityId);
             },
 
             // 获取趣约详情by趣约id
