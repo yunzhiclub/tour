@@ -163,12 +163,12 @@ angular.module('wechatApp')
             return promise;
         };
 
-        var getInvitationsByCityId = function(cityId) {
+        var getInvitationsByStartCityId = function(cityId) {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
             var data = { cityId: cityId };
-            var paramUrl = url + 'getInvitationsByCityId';
+            var paramUrl = url + 'getInvitationsByStartCityId';
 
             // $http去后台获取数据
             server.http(paramUrl, data, function successCallback(response) {
@@ -273,8 +273,8 @@ angular.module('wechatApp')
             },
 
             // 按出发城市id选出趣约
-            getInvitationsByCityId: function(cityId) {
-                return getInvitationsByCityId(cityId);
+            getInvitationsByStartCityId: function(cityId) {
+                return getInvitationsByStartCityId(cityId);
             },
 
             // 获取趣约详情by趣约id

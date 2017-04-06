@@ -83,7 +83,7 @@ router:#!/home
         </div>
     </div>
 </div>
-<br>
+
 <div class="page ">
     <div class="page__hd ">
     </div>
@@ -108,7 +108,7 @@ router:#!/home
                         </div>
                         <div class="weui-flex__item" ng-repeat="bed in  invitation.beds">
                             <div class="placeholder" ng-if="bed.customer_id !== invitation.customer_id">
-                            <!-- 用customer_id是否为0判断是否该床位是否有人 -->
+                                <!-- 用customer_id是否为0判断是否该床位是否有人 -->
                                 <img src="{{urlPrefix + bed.customer_head_img_url}} " alt=" " style="margin-right:5px;margin-top:8px;display:block " height="30" width="30" class="img-circle" ng-if="bed.customer_id !== 0 ">
                                 <div ng-if="bed.customer_id === 0">
                                     <img src="weui/src/example/images/whitehead.png" alt=" " style="margin-right:5px;margin-top:8px;display:block " height="30" width="30" class="img-circle">
@@ -169,8 +169,11 @@ router:#!/home
             </div>
             <div class="page__bd page__bd_spacing">
                 <button ui-sref="ivdetail({invitationIndex: $index})" class="weui-btn weui-btn_primary" style="margin-right:40px;margin-left:20px;margin-top: 20px;margin-bottom: 10px" ng-disabled="invitation.type === 1">
-                         <p ng-if="invitation.type === 1">已经下架</p><p ng-if="invitation.type !== 1">{{invitation | minvalue | currency: '¥'}}</p>
-                        </button>
+                    <p ng-if="invitation.type === 1">已经下架</p>
+                    <p ng-if="invitation.type !== 1">{{invitation | minvalue | currency: '¥'}}</p>
+                </button>
             </div>
             <br>
         </div>
+    </div>
+</div>
