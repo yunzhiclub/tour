@@ -220,6 +220,6 @@ angular.module('wechatApp')
             // 获取全部目的地城市
             getDestinationCountrys: function() {
                 return getDestinationCountrys();
-            };
+            }
         };
     }]);

@@ -11,7 +11,12 @@ router:#!/invitedls
               </ul>
         </div>
     </div>
-    <div class="weui-flex__item" style="margin-left:8px"><div class="placeholder"><a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">目的地</a></div></div>
+    <div class="weui-flex__item" style="margin-left:8px"> <div class="placeholder btn-group">
+            <button ng-click="getDestinationCountrys()" class="weui-btn weui-btn_mini weui-btn_default btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">目的地&nbsp&nbsp<span class="caret"></button>
+              <ul class="dropdown-menu">
+                <li ng-repeat="destinationCountry in destinationCountrys"><a ng-click="getInvitationsByCountryId(destinationCountry.id)">{{destinationCountry.name}}</a></li>
+              </ul>
+        </div></div>
     <div class="weui-flex__item" style="margin-left:8px"><div class="placeholder"><a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">出发时</a></div></div>
     <div class="weui-flex__item" style="margin-left:8px"><div class="placeholder"><a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">价格</a></div></div>
 </div>
@@ -46,7 +51,7 @@ router:#!/invitedls
                                     <font size="1" color="red">{{bed.money | currency: '¥'}}</font>
                                 </div>
                             </div>
-                        </div>
+                        </div> 
                     </div>
                 </div>
             </div>
@@ -54,38 +59,38 @@ router:#!/invitedls
                 <div class="weui-form-preview__item ">
                     <label class="weui-form-preview__label ">距结束</label>
                     <span class="weui-form-preview__value ">{{invitation.invite_deadline | hhmmss}}</span>
-                 </div>
-                <div class="weui-form-preview__item ">
+                </div>
+               <div class="weui-form-preview__item ">
             <label class="weui-form-preview__label ">出发地</label>
             <span class="weui-form-preview__value ">{{invitation.start_city_name}}</span>
                 </div>
-                <div class="weui-form-preview__item ">
+               <div class="weui-form-preview__item ">
             <label class="weui-form-preview__label ">出发时间</label>
             <span class="weui-form-preview__value "><p ng-if="invitation.start_time_date === null">{{invitation.route_begin_time | date: 'yyyy-MM-dd'}}</p><p ng-if="invitation.start_time_date !== null">{{invitation.start_time_date | date: 'yyyy-MM-dd'}}</p></span>
-                </div>
-                <div class="weui-form-preview__item ">
+              </div>
+             <div class="weui-form-preview__item ">
             <label class="weui-form-preview__label ">详情</label>
             <span class="weui-form-preview__value ">{{invitation.route_content}}</span>
-                </div>
-                <div class="weui-form-preview__item ">
+              </div>
+            <div class="weui-form-preview__item ">
             <label class="weui-form-preview__label ">总价</label>
             <span class="weui-form-preview__value ">{{invitation.totalMoney}}</span>
-                </div>
-                <div class="weui-form-preview__item ">
+            </div>
+              <div class="weui-form-preview__item ">
             <label class="weui-form-preview__label ">已支付</label>
             <span class="weui-form-preview__value ">{{invitation.beds | payedMoney | currency: '¥'}}</span>
-                </div>
-                <div class="weui-form-preview__item ">
+            </div>
+             <div class="weui-form-preview__item ">
             <label class="weui-form-preview__label ">最高可省</label>
             <font class="weui-form-preview__value " color="red ">{{invitation | savemaxmoney | currency: '¥'}}</font>
-                </div>
-            </div>
-          <div class="page__bd page__bd_spacing">
+              </div>
+          </div>
+    <div class="page__bd page__bd_spacing">
         <button ui-sref="ivdetail({invitationIndex: $index})" class="weui-btn weui-btn_primary" style="margin-right:40px;margin-left:20px;margin-top: 20px;margin-bottom: 10px" ng-disabled="invitation.type === 1">
             <p ng-if="invitation.type === 1">已经下架</p>
             <p ng-if="invitation.type !== 1">{{invitation | minvalue | currency: '¥'}}</p>
         </button>
-           </div>
+    </div>
     <br>
 </div>
 </div>
