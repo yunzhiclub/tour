@@ -264,7 +264,6 @@ class RouteModel extends ModelModel
 		$map['route_id'] = $this->id;
 		$EvaluateModels = $EvaluateModel->where($map)->select();
 		unset($EvaluateModel);
-		unset($EvaluateModels);
 
 		return count($EvaluateModels);
 	}
@@ -389,7 +388,8 @@ class RouteModel extends ModelModel
 		$map['is_delete'] = 0;
 		//判断精选表中是否有该条路线信息，如果有取出权重
 		$ChosenModel = ChosenModel::get($map);
-		if ($ChosenModel !== null) {
+
+		if (!empty($ChosenModel->getData())) {
 			$result['isChosen'] = 0;
 			$result['chosenWeight'] = $ChosenModel->getData('weight');
 		} else {
@@ -397,7 +397,7 @@ class RouteModel extends ModelModel
 		}
 		//同上
 		$HomeRecommendModel = HomeRecommendModel::get($map);
-		if ($HomeRecommendModel !== null) {
+		if (!empty($HomeRecommendModel->getData())) {
 			$result['isHomeRecommend'] = 0;
 			$result['homeRecommendWeight'] = $HomeRecommendModel->getData('weight');
 		} else {
@@ -441,14 +441,14 @@ class RouteModel extends ModelModel
 		
 		//删除首页推荐表中的路线信息
 		$HomeRecommendModel = HomeRecommendModel::get($map);
-		if (null !== $HomeRecommendModel) {
+		if (!empty($HomeRecommendModel->getData())) {
 			$HomeRecommendModel->is_delete = 1;
 			$HomeRecommendModel->save();
 		}
 		
 		//删除精选表中的路线信息
 		$ChosenModel = ChosenModel::get($map);
-		if (null !== $ChosenModel) {
+		if (!empty($ChosenModel->getData())) {
 			$ChosenModel->is_delete = 1;
 			$ChosenModel->save();
 		}
@@ -522,5 +522,37 @@ class RouteModel extends ModelModel
 		unset($ChosenModel);
 		return $RouteModel;
 
+	}
+
+	/**
+	 * 判断精选权重是否显示
+	 * @return int 0为显示，反之
+	 * @author chuhang 
+	 */
+	public function isShowChosenWeight()
+	{
+		if (!empty($this->ChosenModel()->getData())) {
+            $result = 0;
+        } else {
+            $result = 1;
+        }
+
+        return $result;
+	}
+
+	/**
+	 * 判断首页推荐权重是否显示
+	 * @return int 0为显示，反之
+	 * @author chuhang 
+	 */
+	public function isShowHomeRecommendWeight()
+	{
+		if (!empty($this->HomeRecommendModel()->getData())) {
+            $result = 0;
+        } else {
+            $result = 1;
+        }
+
+        return $result;
 	}
 }
