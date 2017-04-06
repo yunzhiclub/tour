@@ -8,10 +8,14 @@
  * Controller of the wechatApp
  */
 angular.module('wechatApp')
-  .controller('InvitedlsCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('InvitedlsCtrl', ['$scope', 'startcity', 'destination', 'invitation', function ($scope, startcity, destination, invitation) {
+    	// 获取全部出发城市
+    	$scope.getStartCitys = function() {
+    		startcity.getStartCitys().then(function successCallBack(response) {
+    			$scope.startCitys = response;
+    			console.log(response);
+    		}, function errorCallBack(){
+
+    		});
+    	};
+  }]);
