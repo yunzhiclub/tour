@@ -36,9 +36,9 @@
                 <tr>
                 	<td>{$key}</td>
                     <td>{$InviteModel->getData('number')}</td>
-                	<td><a href="{:url('Route/detail?id='. $InviteModel->getRouteModel()->id)}">{$InviteModel->getRouteModel()->getData('name')}</a></td>
+                	<td><a href="{:url('Route/detail?id='. $InviteModel->getRouteModel()->getData('id'))}">{$InviteModel->getRouteModel()->getData('name')}</a></td>
                     <td>{$InviteModel->getCustomerModel()->getData('nick_name')}</td>
-                    <td>{$InviteModel->start_time_id}</td>
+                    <td>{$InviteModel->getData('start_time_id')}</td>
                     <td><a href="{:url('Bed/index?id='. $InviteModel->getData('id'))}">详情</a></td>
                     <td>6</td>
                     <td>{$InviteModel->getData('pay_num')}</td>
@@ -48,8 +48,8 @@
                               echo $unPayNum;
                          ?>
                     </td>
-                    <td>{$InviteModel->status}</td>
-                    <td>{$InviteModel->is_public}</td>
+                    <td>{$InviteModel->getData('status')}</td>
+                    <td>{$InviteModel->getData('is_public')}</td>
                 	<td>
                     <a class="btn btn-sm btn-danger" href="{:url('delete?id=' . $InviteModel->getData('id'))}"><i class="glyphicon glyphicon-trash"></i> 删除</a>
                     </td>
