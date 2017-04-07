@@ -28,10 +28,10 @@
                             {volist name="RouteModels" id="RouteModel" key="key"}
                             <tr>
                                 <td>{$key}</td>
-                                <td><a href="{:url('route/detail')}">{$RouteModel->getData('name')}</a></td>
+                                <td><a href="{:url('Route/detail?id=' . $RouteModel->getData('id'))}">{$RouteModel->getData('name')}</a></td>
                                 <td>{$RouteModel->getRouteEvaluateCount()}</td>
                                 <td>
-                                <a class="btn btn-sm btn-info" href="{:url('detail?id=' . $RouteModel->getData('id'))}"><i class="glyphicon glyphicon-align-justify"></i> 查看</a></td>
+                                <a class="btn btn-sm btn-primary" href="{:url('detail?id=' . $RouteModel->getData('id'))}"><i class="glyphicon glyphicon-align-justify"></i> 查看</a></td>
                             </tr>
                             {/volist}
                         </table>
