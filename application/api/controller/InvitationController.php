@@ -43,7 +43,7 @@ use app\model\InvRuteStarciyDesciyCusStatimViewModel; // 邀约视图
  *      // 6个床位信息
  *      "beds": [
  *                {
-                        "id": 2,  
+ *                       "id": 2,
  *                      "invite_id": 3,
  *                      "customer_id": null or 2,
  *                      // 如果有客户就有下面的字段
