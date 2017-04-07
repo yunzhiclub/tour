@@ -1,7 +1,6 @@
 {extend name="index" /} {block name="content"}
 <div class="panel-body"></div>
 <div ng-app="app">
-    
     <div class="row"  ng-controller="AppController" uploader="uploader">
         <div class="col-md-12">
             <div class="panel panel-default">
@@ -147,10 +146,10 @@
                             <div class="form-group">
                                 <label class="col-md-2 text-right" value="">首页推荐</label>
                                 <div class="col-md-3">
-                                    <input id="radio1" type="radio"  ng-model="isHomeRecommend" name="isHomeRecommend" {eq name="$otherInfo['isHomeRecommend']" value="0"} ng-checked='true' {/eq} value="0">&nbsp;&nbsp;
-                                    <label for="radio1">是</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input id="radio2" type="radio" {eq name="$otherInfo['isHomeRecommend']" value="1"} ng-checked='true' {/eq} ng-model="isHomeRecommend" name="isHomeRecommend" value="1">&nbsp;&nbsp;
-                                    <label for="radio2">否</label>
+                                    <input id="radio1" type="radio"  ng-model="isHomeRecommend" name="isHomeRecommend" {eq name="$otherInfo['isHomeRecommend']" value="0"} ng-checked='true' {/eq} value="0">
+                                    <label for="radio1">&nbsp;&nbsp;是&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                                    <input id="radio2" type="radio" {eq name="$otherInfo['isHomeRecommend']" value="1"} ng-checked='true' {/eq} ng-model="isHomeRecommend" name="isHomeRecommend" value="1">
+                                    <label for="radio2">&nbsp;&nbsp;否</label>
                                 </div>
                                 <div ng-show="isHomeRecommend == '0'" class="form-group">
                                     <label class="col-md-1 control-label">权重</label>
@@ -166,10 +165,10 @@
                             <div class="form-group">
                                 <label class="col-md-2 text-right" value="">精选</label>
                                 <div class="col-md-3">
-                                    <input id="radio3" type="radio"  ng-model="isChosen" name="isChosen" value="0" {eq name="$otherInfo['isChosen']" value="0"} ng-checked='true' {/eq}>&nbsp;&nbsp;
-                                    <label for="radio3">是</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input id="radio4" type="radio" ng-model="isChosen" {eq name="$otherInfo['isChosen']" value="1"} ng-checked='true' {/eq} name="isChosen" value="1">&nbsp;&nbsp;
-                                    <label for="radio4">否</label>
+                                    <input id="radio3" type="radio"  ng-model="isChosen" name="isChosen" value="0" {eq name="$otherInfo['isChosen']" value="0"} ng-checked='true' {/eq}>
+                                    <label for="radio3">&nbsp;&nbsp;是&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                                    <input id="radio4" type="radio" ng-model="isChosen" {eq name="$otherInfo['isChosen']" value="1"} ng-checked='true' {/eq} name="isChosen" value="1">
+                                    <label for="radio4">&nbsp;&nbsp;否</label>
                                 </div>
                                 <div ng-show="isChosen == '0'" class="form-group">
                                     <label class="col-md-1 control-label">权重</label>
