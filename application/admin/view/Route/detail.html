@@ -63,11 +63,10 @@
                         </div>
                         <div>
                             <label>选择客服：</label>{$RouteModel->getData('service_phone')}
-                        </div>
                         <div class="row">
                             <div class="col-md-3">
                                 <div>
-                                    <label>首页推荐：</label>{eq name="$RouteModel->HomeRecommendModel()" value=""} 否 {else /} 是 {/eq}
+                                    <label>首页推荐：</label>{eq name="$RouteModel->isShowHomeRecommendWeight()" value=""} 是 {else /} 否 {/eq}
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -82,7 +81,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div>
-                                    <label>精选：</label>{eq name="$RouteModel->ChosenModel()" value=""} 否 {else /} 是 {/eq}
+                                    <label>精选：</label>{eq name="$RouteModel->isShowChosenWeight()" value=""} 是 {else /} 否 {/eq}
                                 </div>
                             </div>
                             <div class="col-md-3">
