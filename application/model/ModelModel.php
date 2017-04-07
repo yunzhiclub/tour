@@ -7,6 +7,14 @@ use think\Model;
 */
 class ModelModel extends Model
 {
+	/**
+	 * @param null  $data
+	 * @param array $with
+	 * @param bool  $cache
+	 * @return object
+	 * @author: mengyunzhi www.mengyunzhi.com
+	 * @Date&Time: 2017-04-05 21:16
+	 */
     public static function get($data = null, $with = [], $cache = false)
     {
         $query = self::parseQuery($data, $with, $cache);

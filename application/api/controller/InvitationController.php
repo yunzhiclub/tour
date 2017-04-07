@@ -51,7 +51,8 @@ class InvitationController extends ApiController {
 	 */
 	public function getInvitationsByCountryId() {
 		$id = Request::instance()->param('id');
-
+		var_dump($id);
+		die();
 		//获取国家对应目的城市ID
 		$destinationcityIds = DestinationcityModel::getDestinationIdByCountryId($id);
 
@@ -113,8 +114,8 @@ class InvitationController extends ApiController {
 	 * @return             array;
 	 */
 	public function getInvitationsByStartCityId() {
-		$StartCityId = Request::instance()->param('cityid');
-
+		$StartCityId = Request::instance()->param('cityId');
+		
 		//根据出发城市id(一个id)取出对应路线ID数组
 		$routeIds = RouteModel::getRouteIdByStartId($StartCityId);
 

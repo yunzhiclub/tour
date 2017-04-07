@@ -10,7 +10,7 @@
 angular.module('wechatApp')
     .factory('commonTools', function() {
         // Service logic
-        // ...
+        // 变成二维数组
         var formatArray = function(items, length = 3) {
             if (items === undefined) {
                 return items;
