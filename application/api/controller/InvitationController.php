@@ -52,7 +52,7 @@ use app\model\InvRuteStarciyDesciyCusStatimViewModel; // 邀约视图
  *                      "customer_birthday": 19941109,
  *                      // 下面的都有
  *                      "money": 1000,
- *                      "old": 12313213423,  // 时间戳
+ *                      "old": 1,  // 1,2,3表示不同年龄段
  *                      "sex": 1,
  *                  },
  *              ],
