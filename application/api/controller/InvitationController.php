@@ -11,7 +11,7 @@ use app\model\InvRuteStarciyDesciyCusStatimViewModel; // 邀约视图
 /**
  * 返回所有邀约的json单条实例数据
  * {
- *      "id": 1,                                // 邀约的id
+ *      "id": 1,
  *      "customer_id": 1,                       // "customer_"打头的是发布邀约的人的信息"
  *      "customer_nick_name": "成杰",
  *      "customer_birthday"：19970621,
