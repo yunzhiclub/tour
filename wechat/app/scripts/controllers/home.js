@@ -48,7 +48,7 @@ angular.module('wechatApp')
         });
 
         // 获取精选邀约
-        $scope.getChoosedInvitations = function() {
+        var getChoosedInvitations = function() {
             // 开始加载数据
             $scope.loading = true;
             invitation.getChoosedInvitations().then(function successCallBack(response) {
@@ -75,7 +75,9 @@ angular.module('wechatApp')
                 $scope.loading = false;
             }, function errorCallBack() {});
         };
-
+        $scope.getChoosedInvitations = function () {
+            getChoosedInvitations();
+        }
         // 以目的国家id获取的邀约
         $scope.getInvitationsByCountryId = function(countryId) {
             // 开始加载数据
@@ -133,5 +135,6 @@ angular.module('wechatApp')
             }, function errorCallBack() {
             });
         }
-
+        // 默认进首页时显示精选邀约
+        getChoosedInvitations();
     }]);
