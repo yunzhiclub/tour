@@ -77,7 +77,7 @@ class OauthController extends WechatController {
             $data['province'] = $customer['original']['province'];
             $data['country'] = $customer['original']['country']; 
             $data['city'] = $customer['original']['city']; 
-            $data['headimgurl'] = $customer['original']['headimgurl']; 
+            $data['headimgurlwechat'] = $customer['original']['headimgurl'];
 
             // save
             $CustomerModel->save($data);
