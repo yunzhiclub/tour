@@ -17,14 +17,14 @@
                     <th>邀约编号</th>
                     <th>入住人姓名</th>
                     <th>性别</th>
-                    <th>金额</th>
+                    <th style="text-align:right">金额</th>
                 </tr>
                 <tr>
                     <td>{$Bed->getData('number')}</td>
                     <td>{$Bed->Invite->getData('number')}</td>
                     <td>{$Bed->Customer->getData('nick_name')}</td>
                     <td>{$Bed->Customer->getData('sex')}</td>
-                    <td>{$Bed->getData('money')}</td>
+                    <td style="text-align:right">{$Bed->money_format($Bed->getData('money'))}</td>
                 </tr>
             </table>
         </div>
