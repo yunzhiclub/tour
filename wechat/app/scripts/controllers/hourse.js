@@ -25,6 +25,7 @@ angular.module('wechatApp')
                     // 设置总金额
                     defaultPrice = response.price;
                     maxMoney = defaultPrice * 6;
+                    // 通过room模型层传到弹出框中
                     room.setMaxMoneyValue(maxMoney);
                 }, function errorCallBack() {
 
@@ -48,7 +49,7 @@ angular.module('wechatApp')
             // 设置默认选择支付房间
             $scope.payRoomNumber = 1;
 
-            // 是否接受条款
+            // 是否接受条款, 默认是不接受
             $scope.isAgree = false;
 
             // 弹出框
@@ -90,12 +91,12 @@ angular.module('wechatApp')
             // 六间房间人员信息 0 不支付 tag是用来查找要支付的房间
             var roomDatas = [];
             $scope.firstRoom = {
-                tag: 1,
-                sex: 1,
-                old: 1,
-                money: 0,
-                type: 1,
-                isPay: 0
+                tag: 1,     // 用来标识第几个房间
+                sex: 1,     // 默认性别是男
+                old: 1,     // 默认年龄阶段是 '0~~25'
+                money: 0,   // 默认支付的金额是0元
+                type: 1,    // 用来标识哪两个床位是一个房间
+                isPay: 0    // 用来标识哪个房间去支付 默认是都不支付0
             };
             $scope.scendRoom = {
                 tag: 2,
