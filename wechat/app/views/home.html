@@ -83,8 +83,14 @@ router:#!/home
         </div>
     </div>
 </div>
-
-<div class="page ">
+<div class="page"  ng-show="loading">
+    <div class="page__bd">
+        <div class="weui-loadmore weui-loadmore_line">
+            <span class="weui-loadmore__tips">暂无数据</span>
+        </div>
+    </div>
+</div>
+<div class="page" ng-hide="loading">
     <div class="page__hd ">
     </div>
     <div class="page__bd ">
@@ -116,24 +122,6 @@ router:#!/home
                                 </div>
                             </div>
                         </div>
-                        <!--  <div class="weui-flex__item">
-                            <div class="placeholder"><img src="weui/src/example/images/lhead3.png " alt=" " style="width:30px;margin-right:5px;margin-top:8px;display:block "></div>
-                        </div>
-                        <div class="weui-flex__item">
-                            <div class="placeholder"><img src="weui/src/example/images/lhead5.png " alt=" " style="width:30px;margin-right:5px;margin-top:8px;display:block "></div>
-                        </div>
-                        <div class="weui-flex__item">
-                            <div class="placeholder">
-                                <a ui-sref="topay"><img src="weui/src/example/images/whitehead.png " alt=" " style="width:30px;margin-right:5px;margin-top:8px;display:block "></a>
-                                <font size="1" color="red">￥10,000.00</font>
-                            </div>
-                        </div>
-                        <div class="weui-flex__item">
-                            <div class="placeholder">
-                                <a ui-sref="topay"><img src="weui/src/example/images/whitehead.png " alt=" " style="width:30px;margin-right:5px;margin-top:8px;display:block "></a>
-                                <font size="1" color="red">￥0.01</font>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </div>
@@ -148,7 +136,7 @@ router:#!/home
                 </div>
                 <div class="weui-form-preview__item ">
                     <label class="weui-form-preview__label ">出发时间</label>
-                    <span class="weui-form-preview__value "><p ng-if="invitation.start_time_date === null">{{invitation.route_begin_time | date: 'yyyy-MM-dd'}}</p><p ng-if="invitation.start_time_date !== null">{{invitation.start_time_date | date: 'yyyy-MM-dd'}}</p></span>
+                    <span class="weui-form-preview__value ">{{invitation.route_begin_time | date: 'yyyy-MM-dd'}}</span>
                 </div>
                 <div class="weui-form-preview__item ">
                     <label class="weui-form-preview__label ">详情</label>
@@ -174,6 +162,12 @@ router:#!/home
                 </button>
             </div>
             <br>
+        </div>
+    </div>
+    <div class="weui-msg" ng-show="isEmpty">
+        <div class="weui-msg__icon-area"><i class="weui-icon-info weui-icon_msg"></i></div>
+        <div class="weui-msg__text-area">
+            <p class="weui-msg__desc">系统暂未查询到相关数据</p>
         </div>
     </div>
 </div>
