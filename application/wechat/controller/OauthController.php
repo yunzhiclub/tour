@@ -72,12 +72,12 @@ class OauthController extends WechatController {
             // 保存数据
             $CustomerModel = new CustomerModel;
             $data['openid'] = $customer['original']['openid'];
-            $data['nickname'] = $customer['original']['nickname'];
+            $data['nick_name'] = $customer['original']['nickname'];
             $data['sex'] = $customer['original']['sex'];
             $data['province'] = $customer['original']['province'];
             $data['country'] = $customer['original']['country']; 
             $data['city'] = $customer['original']['city']; 
-            $data['headimgurl'] = $customer['original']['headimgurl']; 
+            $data['head_img_url_wechat'] = $customer['original']['headimgurl'];
 
             // save
             $CustomerModel->save($data);
