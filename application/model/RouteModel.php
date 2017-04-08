@@ -301,7 +301,7 @@ class RouteModel extends ModelModel
 	static public function saveRouteInfo($data)
 	{
 		//将数组进行拆分，一部分存入路线表中，一部分存入出发时间表中，一部分存入首页推荐表和精选表中
-		$weightRelation = array_splice($data, 18, 5);
+		$weightRelation = array_splice($data, 19, 5);
 		$data['content'] = array_pop($weightRelation);
 		$startTime = array_splice($data, 10, 2);
 		//将数据存入路线表中
@@ -492,7 +492,7 @@ class RouteModel extends ModelModel
 	static public function updateRouteInfo($data, $id)
 	{
 		//将数组进行拆分，一部分存入路线表中，一部分存入出发时间表中，一部分存入首页推荐表和精选表中
-		$weightRelation = array_splice($data, 18, 5);
+		$weightRelation = array_splice($data, 19, 5);
 		$data['content'] = array_pop($weightRelation);
 		$startTime = array_splice($data, 10, 2);
 		//将数据存入路线表中
@@ -555,4 +555,5 @@ class RouteModel extends ModelModel
 
         return $result;
 	}
+
 }

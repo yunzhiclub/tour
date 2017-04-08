@@ -1,11 +1,13 @@
 {extend name="index" /} {block name="content"}
 <div class="panel-body"></div>
-<div class="row" ng-app="app" ng-controller="routeController">
+<div class="row" ng-app="app"  ng-controller="routeController">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="row" style="font-size:20px;">
                     <div class="col-md-12">
+                        <input id="model" type="hidden" name="id" value="<?php echo get_class($RouteModel); ?>">
+                        <input id="id" type="hidden" name="id" value="{$RouteModel->id}">
                         <h1>{$RouteModel->getData('name')}</h1>
                         <hr>
                         <div>
@@ -61,11 +63,10 @@
                         </div>
                         <div>
                             <label>选择客服：</label>{$RouteModel->getData('service_phone')}
-                        </div>
                         <div class="row">
                             <div class="col-md-3">
                                 <div>
-                                    <label>首页推荐：</label>{eq name="$RouteModel->HomeRecommendModel()" value=""} 否 {else /} 是 {/eq}
+                                    <label>首页推荐：</label>{eq name="$RouteModel->isShowHomeRecommendWeight()" value=""} 是 {else /} 否 {/eq}
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -80,7 +81,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div>
-                                    <label>精选：</label>{eq name="$RouteModel->ChosenModel()" value=""} 否 {else /} 是 {/eq}
+                                    <label>精选：</label>{eq name="$RouteModel->isShowChosenWeight()" value=""} 是 {else /} 否 {/eq}
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -93,7 +94,7 @@
                             </div>
                         </div>
                         {include file="picture/detail1"}
-                        <div>
+                        <div style="float:left">
                         	<label>路线简介:</label>{$RouteModel->getData('content')}
                         </div>
                     </div>

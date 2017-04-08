@@ -5,26 +5,26 @@
             <hr />
             <div class="row">
                 <div class="col-md-10">
-
+                    <h3>邀约为 {$Bed->Invite->getData('number')} 的床位</h3>
                 </div>
 
             </div>
             <hr />
-            <input type="hidden" name="id" value="{$Bed->id}">
+            <input type="hidden" name="id" value="{$Bed->getData('id')}">
             <table class="table table-hover table-bordered">
                 <tr class="info">
                     <th>床位号</th>
                     <th>邀约编号</th>
                     <th>入住人姓名</th>
                     <th>性别</th>
-                    <th>金额</th>
+                    <th style="text-align:right">金额</th>
                 </tr>
                 <tr>
-                    <td>{$Bed->number}</td>
-                    <td>{$Bed->Invite->number}</td>
-                    <td>{$Bed->Customer->nick_name}</td>
-                    <td>{$Bed->Customer->sex}</td>
-                    <td>{$Bed->money}</td>
+                    <td>{$Bed->getData('number')}</td>
+                    <td>{$Bed->Invite->getData('number')}</td>
+                    <td>{$Bed->Customer->getData('nick_name')}</td>
+                    <td>{$Bed->Customer->getData('sex')}</td>
+                    <td style="text-align:right">{$Bed->money_format($Bed->getData('money'))}</td>
                 </tr>
             </table>
         </div>
