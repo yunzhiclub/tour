@@ -9,8 +9,7 @@
  */
 angular.module('wechatApp')
   .controller('InvitedlsCtrl', ['$scope', 'startcity', 'destination', 'invitation', 'config', function ($scope, startcity, destination, invitation, config) {
-	  	// 为获取来的图片URL加上前缀
-      	$scope.urlPrefix = config.siteUrl + 'public/upload/';
+
 
   		// 获取全部出发城市
     	$scope.getStartCitys = function() {
