@@ -195,4 +195,11 @@ class InvitationController extends ApiController {
 
 		return $this->response(['price' => 5688]);
 	}
+
+	/**
+     * 获取全部的趣约
+	 * */
+	public function getAllInvitations() {
+        return $this->response([]);
+    }
 }
