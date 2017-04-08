@@ -4,6 +4,7 @@ use think\Controller;
 use app\model\RouteModel;
 use think\Request;
 use app\model\PictureModel;         //图片
+use app\model\PictureRouteModel;         //图片
 /**
 * 路线管理
 */
@@ -56,6 +57,9 @@ class RouteController extends IndexController
         $this->assign('RouteModel', $RouteModel);
         //获取其他信息，首页推荐权重、精选权重、路程天数及价格
         $otherInfo = RouteModel::getOtherInfo($id);
+        //获取图片信息
+        $PictureModels = PictureRouteModel::getPictureRouteModels($id);
+        $this->assign('PictureModels', $PictureModels);
         $this->assign('otherInfo', $otherInfo);
         return $this->fetch();
     }

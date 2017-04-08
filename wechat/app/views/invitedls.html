@@ -17,14 +17,16 @@ router:#!/invitedls
                 <li ng-repeat="destinationCountry in destinationCountrys"><a ng-click="getInvitationsByCountryId(destinationCountry.id)">{{destinationCountry.name}}</a></li>
               </ul>
         </div></div>
-    <div class="weui-flex__item" style="margin-left:8px"><div class="placeholder"><a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">出发时</a></div></div>
-    <div class="weui-flex__item" style="margin-left:8px"><div class="placeholder"><a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">价格</a></div></div>
+    <div class="weui-flex__item" style="margin-left:8px"><div class="placeholder"><button ng-click="changeSortTypeToRouteBeginTime()" class="weui-btn weui-btn_mini weui-btn_default">出发时&nbsp<span class="glyphicon glyphicon-menu-down" aria-hidden="true" ng-hide="!isAscended2"></span><span class="glyphicon glyphicon-menu-up" aria-hidden="true" ng-hide="isAscended2"></span>
+    </button></div></div>
+    <div class="weui-flex__item" style="margin-left:8px"><div class="placeholder"><button ng-click="changeSortTypeToTotalMoney()" class="weui-btn weui-btn_mini weui-btn_default">价格&nbsp<span class="glyphicon glyphicon-menu-down" aria-hidden="true" ng-hide="!isAscended1"></span><span class="glyphicon glyphicon-menu-up" aria-hidden="true" ng-hide="isAscended1"></span>
+    </button></div></div>
 </div>
 <div class="page ">
     <div class="page__hd ">
     </div>
     <div class="page__bd ">
-        <div class="weui-form-preview " ng-repeat="invitation in invitations">
+        <div class="weui-form-preview " ng-repeat="invitation in invitations | orderBy: sortField : isAscended">
             <div class="weui-form-preview__hd ">
                 <div class="weui-form-preview__item ">
                     <div class="weui-cells ">
@@ -66,7 +68,7 @@ router:#!/invitedls
                 </div>
                <div class="weui-form-preview__item ">
             <label class="weui-form-preview__label ">出发时间</label>
-            <span class="weui-form-preview__value "><p ng-if="invitation.start_time_date === null">{{invitation.route_begin_time | date: 'yyyy-MM-dd'}}</p><p ng-if="invitation.start_time_date !== null">{{invitation.start_time_date | date: 'yyyy-MM-dd'}}</p></span>
+            <span class="weui-form-preview__value ">{{invitation.route_begin_time | date: 'yyyy-MM-dd'}}</span>
               </div>
              <div class="weui-form-preview__item ">
             <label class="weui-form-preview__label ">详情</label>

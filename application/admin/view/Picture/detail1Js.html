@@ -1,0 +1,20 @@
+<script type="text/javascript">
+app.controller('DetailController', function ($scope, $http) {
+	var id = document.getElementById("id").value;
+	//用于上传图片的编辑
+  var id = document.getElementById("id").value;
+  var model = document.getElementById("model").value;
+  var data = {params : {id: id, model: model}};
+  //请求图片信息
+  $http
+  .get('{:url("picture/getRelationPicturesByXxxModelId")}', data)
+  .then(function successCallback(response) {
+    $scope.pictures = response.data;
+    console.log($scope.pictures);
+    //todo
+  }, function errorCallback(response) {
+    alert("无法获取图片信息");
+  });
+});
+	
+</script>
