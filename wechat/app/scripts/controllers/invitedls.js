@@ -10,6 +10,11 @@
 angular.module('wechatApp')
   .controller('InvitedlsCtrl', ['$scope', 'startcity', 'destination', 'invitation', 'config', function ($scope, startcity, destination, invitation, config) {
 
+        // 数据加载过程中隐藏邀约页面
+        $scope.loading = true;
+
+        // 为找到数据时显示数据未找到界面
+        $scope.isEmpty = true;
 
   		// 获取全部出发城市
     	$scope.getStartCitys = function() {
@@ -22,6 +27,8 @@ angular.module('wechatApp')
 
     	// 获取按出发城市为筛选条件的邀约
     	$scope.getInvitationsByStartCityId = function(cityId) {
+            // 开始加载数据
+            $scope.loading = true;
     		invitation.getInvitationsByStartCityId(cityId).then(function successCallBack(response) {
     			 angular.forEach(response, function(value) {
                     // 计算离截止时间的秒数
@@ -34,6 +41,15 @@ angular.module('wechatApp')
                     value.type = 0;
                 });
                 $scope.invitations = response;
+                // 判断是否获取邀约信息,用来判断是否显示未获取到数据的页面
+                if (response.length > 0) {
+                    $scope.isEmpty = false;
+                } else {
+                    $scope.isEmpty = true;
+                }
+
+                // 数据加载完成
+                $scope.loading = false;
                 console.log(response);
     		}, function errorCallBack(){
 
@@ -52,6 +68,8 @@ angular.module('wechatApp')
 
     	// 获取按目的地国家为筛选条件的邀约
     	$scope.getInvitationsByCountryId = function(countryId) {
+            // 开始加载数据
+            $scope.loading = true;
     		invitation.getInvitationsByCountryId(countryId).then(function successCallBack(response) {
     			 angular.forEach(response, function(value) {
                     // 计算离截止时间的秒数
@@ -64,6 +82,15 @@ angular.module('wechatApp')
                     value.type = 0;
                 });
                 $scope.invitations = response;
+                // 判断是否获取邀约信息,用来判断是否显示未获取到数据的页面
+                if (response.length > 0) {
+                    $scope.isEmpty = false;
+                } else {
+                    $scope.isEmpty = true;
+                }
+
+                // 数据加载完成
+                $scope.loading = false;
                 console.log(response);
     		}, function errorCallBack(){
 
@@ -96,6 +123,8 @@ angular.module('wechatApp')
       };
       // 获取全部邀约
       var getAllInvitations = function () {
+          // 开始加载数据
+          $scope.loading = true;
           invitation.getAllInvitations().then(function successCallBack(response) {
               angular.forEach(response, function(value) {
                   // 计算离截止时间的秒数
@@ -108,6 +137,15 @@ angular.module('wechatApp')
                   value.type = 0;
               });
               $scope.invitations = response;
+              // 判断是否获取邀约信息,用来判断是否显示未获取到数据的页面
+              if (response.length > 0) {
+                  $scope.isEmpty = false;
+              } else {
+                  $scope.isEmpty = true;
+              }
+
+              // 数据加载完成
+              $scope.loading = false;
               console.log(response);
           }, function errorCallBack(){
           });
