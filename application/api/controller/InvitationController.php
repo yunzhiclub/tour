@@ -7,6 +7,8 @@ use app\model\ChosenModel;	//精选
 use app\model\DestinationCityModel;	//目的地城市
 use app\mode\StartTimeModel;	//出发时间
 use app\model\StartCityModel;	//出发城市
+use app\model\RegionModel;		//地区
+use app\model\CountryModel;		//国家
 use app\model\InvRuteStarciyDesciyCusStatimViewModel; // 邀约视图
 /**
  * 返回所有邀约的json单条实例数据
@@ -75,45 +77,44 @@ class InvitationController extends ApiController {
 	}
 
 	/**
-	 * 按目的地(地区id)返回趣约
-	 * @param              int
-	 * @author huangshuaibin
-	 * @return             array;
+	 * 1.首先根据地区获取地区所包含的国家
+	 * 2.根据国家获取所包含的目的地城市
+	 * 3.根据目的地城市查询InvRuteStarciyDesciyCusStatimViewModel视图，获取该地区所包含的邀约	
+	 * @return array
+	 * @author chuhang
 	 */
-	public function getInvitationsByRegionId() {
+	public function getInvitationsByRegionId()
+	{
 		$id = Request::instance()->param('id');
+		//获取地区中包含的目的地城市id
+		$map = RegionModel::getDestinationCityIdsByRegionId($id);
 
-		//获取路线ID By目的地ID
-		$map = RouteModel::getRouteIdByDestinationId($id);
-		
-		//通过路线id查询邀约
-		$invitions = InviteModel::getInviteByRouteId($map);
-		
-		return $this->response($invitions);
+		//从邀约视图中查询
+		$type = 'destination_city_id';
+		$Invitations = InvRuteStarciyDesciyCusStatimViewModel::getInviteByMap($type, $map);
+
+		return $this->response($Invitations);
+
 	}
 
 	/**
-	 * 按目的地(国家id)返回趣约
-	 * @param              int
-	 * @author huangshuaibin
-	 * @return             array;
+	 * 1.获取国家包含的目的地城市id
+	 * 2.从邀约视图中获取对应目的地城市id的邀约
+	 * @return array 
+	 * @author chuhang 
 	 */
-	public function getInvitationsByCountryId() {
+	public function getInvitationsByCountryId()
+	{
 		$id = Request::instance()->param('id');
-		var_dump($id);
-		die();
-		//获取国家对应目的城市ID
-		$destinationcityIds = DestinationcityModel::getDestinationIdByCountryId($id);
+		//获取地区中包含的目的地城市id
+		$map = CountryModel::getDestinationCityIdsByConuntryId($id);
 
-		//根据目的城市ID取出对应路线ID
-		$routeIds = RouteModel::getRouteIdByDestinationId($destinationcityIds);
+		//从邀约视图中查询
+		$type = 'destination_city_id';
+		$Invitations = InvRuteStarciyDesciyCusStatimViewModel::getInviteByMap($type, $map);
 
-		//根据路线ID取出对应趣约ID
-		$invites = InviteModel::getInviteByRouteId($routeIds);
-
-		return $this->response($invites);
+		return $this->response($Invitations);
 	}
-
 	/**
 	 * 保存趣约
 	 * @param              string

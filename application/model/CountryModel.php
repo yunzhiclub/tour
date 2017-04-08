@@ -50,4 +50,32 @@ class CountryModel extends ModelModel
 		return true;
 	}
 	
+	/**
+	 * 根据国家id获取对应的目的地城市id
+	 * @param  int $id 国家id
+	 * @return array     
+	 * @author chuhang 
+	 */
+	static public function getDestinationCityIdsByConuntryId($id)
+	{
+		//获取改过家对应的目的地城市
+		$map = [];
+		$map['is_delete'] = 0;
+		$map['country_id'] = $id;
+		$DestinationCityModel = new DestinationCityModel;
+		$DestinationCityModels = $DestinationCityModel->where($map)->select();
+
+		//获取目的地城市的id
+		foreach ($DestinationCityModels as $DestinationCityModel) {
+			$result[] = $DestinationCityModel->getData('id');
+		}
+
+		//判断该国家是否有对应的目的地城市
+		if (isset($result)) {
+			return $result;
+		}
+
+		return null;
+
+	}
 }
