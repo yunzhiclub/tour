@@ -13,7 +13,7 @@ router:#!/ivdetail
             <div class="weui-form-preview__bd">
                 <div class="weui-form-preview__item">
                     <span class="weui-form-preview__value">
-                    {{invitation.route_content}}
+                    {{invitation.route_description}}
                     </span>
                 </div>
             </div>
@@ -32,7 +32,7 @@ router:#!/ivdetail
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">出发时间</label>
-                    <span class="weui-form-preview__value">{{invitation.route_begin_time | date: 'yyyy-MM-dd'}}</span>
+                    <span class="weui-form-preview__value">{{invitation.route_start_time | date: 'yyyy-MM-dd'}}</span>
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">归来时间</label>
