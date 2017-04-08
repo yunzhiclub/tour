@@ -94,4 +94,8 @@ angular.module('wechatApp')
               $scope.isAscended2 = false;
           }
       };
+      // 获取全部邀约
+      var getAllInvitations = function () {
+
+      };
   }]);
