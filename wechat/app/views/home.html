@@ -99,7 +99,7 @@ router:#!/home
                 <div class="weui-form-preview__item ">
                     <div class="weui-cells ">
                         <div class="weui-cell ">
-                            <div class="weui-cell__hd "><img src="{{urlPrefix + invitation.customer_head_img_url}}" alt=" " style="margin-right:5px;display:block " height="60" width="60" class="img-circle"></div>
+                            <div class="weui-cell__hd "><img src="{{invitation.customer_head_img_url}}" alt=" " style="margin-right:5px;display:block " height="60" width="60" class="img-circle"></div>
                             <div class="weui-cell__bd ">
                                 <p>{{invitation.customer_nick_name}} ♂ {{invitation.customer_birthday | ageFilter}}岁</p>
                             </div>
@@ -115,7 +115,7 @@ router:#!/home
                         <div class="weui-flex__item" ng-repeat="bed in  invitation.beds">
                             <div class="placeholder" ng-if="bed.customer_id !== invitation.customer_id">
                                 <!-- 用customer_id是否为0判断是否该床位是否有人 -->
-                                <img src="{{urlPrefix + bed.customer_head_img_url}} " alt=" " style="margin-right:5px;margin-top:8px;display:block " height="30" width="30" class="img-circle" ng-if="bed.customer_id !== 0 ">
+                                <img src="{{bed.customer_head_img_url}} " alt=" " style="margin-right:5px;margin-top:8px;display:block " height="30" width="30" class="img-circle" ng-if="bed.customer_id !== 0 ">
                                 <div ng-if="bed.customer_id === 0">
                                     <img src="weui/src/example/images/whitehead.png" alt=" " style="margin-right:5px;margin-top:8px;display:block " height="30" width="30" class="img-circle">
                                     <font size="1" color="red">{{bed.money | currency: '¥'}}</font>
