@@ -47,6 +47,7 @@
                     <th>出发地</th>
                     <th>目的地</th>
                     <th style="text-align:right">标价</th>
+                    <th style="text-align:right">实际价格</th>
                     <th>酒店</th>
                     <th>首页推荐</th>
                     <th>操作</th>
@@ -59,6 +60,7 @@
                     <td>{eq name="$RouteModel->StartCityModel()" value=""}无{else /}{$RouteModel->StartCityModel()->getData('name')}{/eq}</td>
                     <td>{eq name="$RouteModel->DestinationCityModel()" value=""}无{else /}{$RouteModel->DestinationCityModel()->getData('name')}{/eq}</td>
                     <td style="text-align:right">{$RouteModel->money_format($RouteModel->getData('standard_price'))}</td>
+                    <td style="text-align:right">{$RouteModel->money_format($RouteModel->getData('actual_price'))}</td>
                     <td>{$RouteModel->HotelModel()->getData('name')}</td>
                     <td>{eq name="$RouteModel->isShowHomeRecommendWeight()" value=""} 是 {else /} 否 {/eq}</td>
                         <td>
