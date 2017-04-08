@@ -81,7 +81,7 @@ class DestinationController extends ApiController {
 
 	// 获取全部目的地城市
 	public function getDestinationCountrys(){
-		 $data = ['美国', '韩国', '日本'];
-		 return $this->response($data);	
+		 $DestinationCountrys = DestinationCityModel::all();
+		 return $this->response($DestinationCountrys);
 	}
 }
