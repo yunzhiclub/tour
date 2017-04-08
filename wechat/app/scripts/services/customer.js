@@ -100,14 +100,14 @@ angular.module('wechatApp')
                             openid: customer.openid,
                             nickName: customer.nick_name,
                             sex: customer.sex,
-                            headImg: { headImgUrl: siteUrl + customer.head_img_url, serverId: null },
+                            headImg: { headImgUrl: customer.head_img_url, serverId: null },
                             city: customer.city,
                             phone: customer.phone,
                             email: customer.email,
                             idcard: customer.idcard,
                             birthday: customer.birthday,
-                            frontIdCardImg: { frontIdCardImgUrl: siteUrl + customer.card_img_front_url, serverId: null },
-                            backIdCardImg: { backIdCardImgUrl: siteUrl + customer.card_img_back_url, serverId: null },
+                            frontIdCardImg: { frontIdCardImgUrl:  customer.card_img_front_url, serverId: null },
+                            backIdCardImg: { backIdCardImgUrl: customer.card_img_back_url, serverId: null },
                         };
                         cookies.put('openid', customer.openid);
                     }

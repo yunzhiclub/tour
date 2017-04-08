@@ -34,9 +34,13 @@ class BedModel extends ModelModel
     */
 
     public function setCustomerInfor($customerId) {
+        // 如果这个床位上没有用户直接返回false
         if (empty($customerId)) {
             return false;
         }
+
+        //头像的路径拼接
+        $pathconfig = 'http://127.0.0.1/tour'. DS .'public' . DS . 'upload' . DS;
 
         // 如果有值就一定能取出数据来
         $customerId = CustomerModel::where('id', $customerId)->find();
@@ -52,9 +56,15 @@ class BedModel extends ModelModel
             $this->customer_sex = $sex;
         }
         $head_img_url = $customerId->getData('head_img_url');
+        $head_img_url_wechat = $customerId->getData('head_img_url_wechat');
           if (!empty($head_img_url)) {
-            $this->customer_head_img_url = $head_img_url;
-        }
+            $this->customer_head_img_url = $pathconfig.$head_img_url;
+        }else {
+                if(!empty($head_img_url_wechat)) {
+                    $this->customer_head_img_url = $head_img_url_wechat;
+                }
+
+          }
 
         return true;
 }
