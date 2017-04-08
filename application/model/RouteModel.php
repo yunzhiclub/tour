@@ -1,7 +1,7 @@
 <?php
 namespace app\model;
 use app\model\DestinationCityModel;	//目的城市
-use app\model\DestinationCityRouteHotelViewModel; //与路线有关信息组成的视图
+use app\model\DestinationCityRouteHotelFlightViewModel; //与路线有关信息组成的视图
 use think\Db;
 /**
  * 路线
@@ -227,10 +227,10 @@ class RouteModel extends ModelModel
 	public static function getRoutesDetails($routeIds)
 	{
 		
-		$DestinationCityRouteHotelViewModel = new DestinationCityRouteHotelViewModel;
+		$DestinationCityRouteHotelFlightViewModel = new DestinationCityRouteHotelFlightViewModel;
 
 		//从视图中取出相应的信息
-		$RouteDetails = $DestinationCityRouteHotelViewModel->where('id', 'in', $routeIds)->select();
+		$RouteDetails = $DestinationCityRouteHotelFlightViewModel->where('id', 'in', $routeIds)->select();
 
 		//用来存放全部数据的数组
 		$RouteAndFlight = [];
