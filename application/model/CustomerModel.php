@@ -19,12 +19,14 @@ class CustomerModel extends ModelModel
         $CustomerModel = CustomerModel::where('openid', '=', $openid)->find();
         
         //图片的路径拼接
-        $pathconfig = 'public' . DS . 'upload' . DS;
+        $pathconfig = 'http://127.0.0.1/tour'. DS .'public' . DS . 'upload' . DS;
         
         //对Customer中的部分数据进行简单的加工
         //图片URL的拼接
         if ('' !== $CustomerModel->head_img_url) {
             $CustomerModel->head_img_url = $pathconfig . $CustomerModel->head_img_url;
+        } else {
+            $CustomerModel->head_img_url = $CustomerModel->head_img_url_wechat;
         }
         if ('' !== $CustomerModel->card_img_front_url) {
             $CustomerModel->card_img_front_url = $pathconfig . $CustomerModel->card_img_front_url; 
