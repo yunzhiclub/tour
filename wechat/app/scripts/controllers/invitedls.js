@@ -28,7 +28,7 @@ angular.module('wechatApp')
                     value.invite_deadline = Math.floor((value.invite_deadline - new Date().getTime()) / 1000);
                      // 如果有路线对应的出发时间id证明选用出发时间表中的日期并给路线默认出发时间赋值
                      if (value.start_time_id === 0) {
-                         value.route_begin_time = value.start_time_date;
+                         value.route_start_time = value.start_time_date;
                      }
                     // 加上是否下架的标识 1 是下架默认是 0
                     value.type = 0;
@@ -58,7 +58,7 @@ angular.module('wechatApp')
                     value.invite_deadline = Math.floor((value.invite_deadline - new Date().getTime()) / 1000);
                      // 如果有路线对应的出发时间id证明选用出发时间表中的日期并给路线默认出发时间赋值
                      if (value.start_time_id === 0) {
-                         value.route_begin_time = value.start_time_date;
+                         value.route_start_time = value.start_time_date;
                      }
                     // 加上是否下架的标识 1 是下架默认是 0
                     value.type = 0;
