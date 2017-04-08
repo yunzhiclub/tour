@@ -96,6 +96,23 @@ angular.module('wechatApp')
       };
       // 获取全部邀约
       var getAllInvitations = function () {
-
+          invitation.getAllInvitations().then(function successCallBack(response) {
+              angular.forEach(response, function(value) {
+                  // 计算离截止时间的秒数
+                  value.invite_deadline = Math.floor((value.invite_deadline - new Date().getTime()) / 1000);
+                  // 如果有路线对应的出发时间id证明选用出发时间表中的日期并给路线默认出发时间赋值
+                  if (value.start_time_id === 0) {
+                      value.route_start_time = value.start_time_date;
+                  }
+                  // 加上是否下架的标识 1 是下架默认是 0
+                  value.type = 0;
+              });
+              $scope.invitations = response;
+              console.log(response);
+          }, function errorCallBack(){
+          });
       };
+
+      // 执行获取全部邀约的方法
+      getAllInvitations();
   }]);
