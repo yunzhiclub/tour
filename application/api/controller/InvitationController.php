@@ -73,6 +73,7 @@ class InvitationController extends ApiController {
 		//从邀约表中查询
 		$type = 'route_id';
 		$Invitations = InvRuteStarciyDesciyCusStatimViewModel::getInviteByMap($type, $map);
+		var_dump($Invitations);die();
 		return $this->response($Invitations);
 	}
 
