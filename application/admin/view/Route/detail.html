@@ -1,11 +1,13 @@
 {extend name="index" /} {block name="content"}
 <div class="panel-body"></div>
-<div class="row" ng-app="app" ng-controller="routeController">
+<div class="row" ng-app="app"  ng-controller="routeController">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="row" style="font-size:20px;">
                     <div class="col-md-12">
+                        <input id="model" type="hidden" name="id" value="<?php echo get_class($RouteModel); ?>">
+                        <input id="id" type="hidden" name="id" value="{$RouteModel->id}">
                         <h1>{$RouteModel->getData('name')}</h1>
                         <hr>
                         <div>
@@ -93,7 +95,7 @@
                             </div>
                         </div>
                         {include file="picture/detail1"}
-                        <div>
+                        <div style="float:left">
                         	<label>路线简介:</label>{$RouteModel->getData('content')}
                         </div>
                     </div>
