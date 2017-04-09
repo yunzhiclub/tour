@@ -73,7 +73,6 @@ class InvitationController extends ApiController {
 		//从邀约表中查询
 		$type = 'route_id';
 		$Invitations = InvRuteStarciyDesciyCusStatimViewModel::getInviteByMap($type, $map);
-		var_dump($Invitations);die();
 		return $this->response($Invitations);
 	}
 
@@ -159,24 +158,6 @@ class InvitationController extends ApiController {
 	}
 
 	/**
-	 * 按出发城市id返回趣约
-	 * @param              int
-	 * @author huangshuaibin
-	 * @return             array;
-	 */
-	public function getInvitationsByStartCityId() {
-		$StartCityId = Request::instance()->param('cityId');
-		
-		//根据出发城市id(一个id)取出对应路线ID数组
-		$routeIds = RouteModel::getRouteIdByStartId($StartCityId);
-
-		//根据路线ID数组 取出对应邀约
-		$invites = InviteModel::getInviteByRouteId($routeIds);
-		
-		return $this->response($invites);
-	}
-
-	/**
 	 * 按趣约id返回趣约详情
 	 * @param              int
 	 * @return             array;
@@ -201,6 +182,37 @@ class InvitationController extends ApiController {
      * 获取全部的趣约
 	 * */
 	public function getAllInvitations() {
-        return $this->response([]);
+		$Invitations = InvRuteStarciyDesciyCusStatimViewModel::all();
+		return $this->response($Invitations);
+    }
+
+    /**
+     * 通过目的地城市获取邀约
+     * @return array 
+     * @author chuhang 
+     */
+    public function getInvitationsByDestinationCityId()
+    {
+    	$id = Request::instance()->param('id');
+
+    	$map[] = $id;
+
+    	//从邀约视图中查询
+    	$type = 'destination_city_id';
+    	$Invitations = InvRuteStarciyDesciyCusStatimViewModel::getInviteByMap($type, $map);
+
+    	return $this->response($Invitations);
+    }
+
+    public function getInvitationsByStartCityId()
+    {
+    	$id = Request::instance()->param('id');
+    	$map[] = $id;
+
+    	//从邀约视图中查询
+    	$type = 'start_city_id';
+    	$Invitations = InvRuteStarciyDesciyCusStatimViewModel::getInviteByMap($type, $map);
+
+    	return $this->response($Invitations);
     }
 }
