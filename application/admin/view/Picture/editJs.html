@@ -12,7 +12,9 @@ app.controller('AppController', ['$scope', '$http', 'FileUploader', function($sc
     $scope.pictures = response.data;
     //截取图片标题长度
     for (var $i = 0; $i < $scope.pictures.length; $i++) {
-      $scope.pictures[$i].name = $scope.pictures[$i].name.substr(0, 9);
+      if ($scope.pictures[$i].name) {
+        $scope.pictures[$i].name = $scope.pictures[$i].name.substr(0, 9);
+      }
     }
     
     isShowPictures();
