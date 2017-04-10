@@ -27,13 +27,17 @@ class ChosenModel extends ModelModel
 	 */
 	public static function ChosenInvite()
 	{
-		$temp = ChosenModel::all();
-		$map = [];
+		//获取精选数据
+		$map['is_delete'] = 0;
+		$ChosenModel = new ChosenModel;
+		$ChosenModels = $ChosenModel->where($map)->select();
+
+		$result = [];
 
 		//遍历Chosen表中的route_id  合并成数组
-		foreach ($temp as $key => $value) {
-			array_push($map, $value->route_id);
+		foreach ($ChosenModels as $key => $value) {
+			array_push($result, $value->route_id);
 		}
-		return $map;
+		return $result;
 	}
 }

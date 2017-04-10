@@ -30,7 +30,7 @@ class RouteController extends ApiController {
 	 * @param              int
 	 * @return             object;
 	 */
-	public function getRouteByid() {
+	public function getRouteById() {
 		$id = Request::instance()->param('id');
 		//通过id取出路线
 		$route = RouteModel::getRouteById($id);
@@ -43,7 +43,7 @@ class RouteController extends ApiController {
 	 * @param              int
 	 * @return             array;
 	 */
-	public function getStarTimeByid() {
+	public function getStarTimeById() {
 		$id = Request::instance()->param('id');
 		
 		//通过路线id取出所有的出发时间以及价格
@@ -53,11 +53,14 @@ class RouteController extends ApiController {
 	}
 
 	/**
-	 * 取出对应目的地(国家id)和出发城市id的所有路线
-	 * @param              int
-	 * @return             object 
+	 * @param $CountryId
+	 * @param $StartCityId
+	 * @return json
+	 * @author: mengyunzhi www.mengyunzhi.com
+	 * @Date&Time:2017-04-08 21:45
+	 * 根据国家ID和出发城市ID获取全部路线
 	 */
-	public function getRoutesByCountryId() {
+	public function getRoutesByCountryId($CountryId,$StartCityId) {
 		$CountryId = Request::instance()->param('countryid');
 		$StartCityId = Request::instance()->param('cityid');
 		
@@ -90,7 +93,7 @@ class RouteController extends ApiController {
 	 * @param              array
 	 * @return             array(空数组);
 	 */
-	public function collecteRoute() 
+	public function collectRoute()
 	{
 		$userId  = Request::instance()->param('user_id');
 		$routeId = Request::instance()->param('route_id');

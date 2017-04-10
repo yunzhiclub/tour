@@ -22,7 +22,14 @@ router:#!/invitedls
     <div class="weui-flex__item" style="margin-left:8px"><div class="placeholder"><button ng-click="changeSortTypeToTotalMoney()" class="weui-btn weui-btn_mini weui-btn_default">价格&nbsp<span class="glyphicon glyphicon-menu-down" aria-hidden="true" ng-hide="!isAscended1"></span><span class="glyphicon glyphicon-menu-up" aria-hidden="true" ng-hide="isAscended1"></span>
     </button></div></div>
 </div>
-<div class="page ">
+<div class="page"  ng-show="loading">
+    <div class="page__bd">
+        <div class="weui-loadmore weui-loadmore_line">
+            <span class="weui-loadmore__tips">暂无数据</span>
+        </div>
+    </div>
+</div>
+<div class="page" ng-hide="loading">
     <div class="page__hd ">
     </div>
     <div class="page__bd ">
@@ -31,7 +38,7 @@ router:#!/invitedls
                 <div class="weui-form-preview__item ">
                     <div class="weui-cells ">
                         <div class="weui-cell ">
-                            <div class="weui-cell__hd "><img src="{{urlPrefix + invitation.customer_head_img_url}}" alt=" " style="margin-right:5px;display:block " height="60" width="60" class="img-circle"></div>
+                            <div class="weui-cell__hd "><img src="{{invitation.customer_head_img_url}}" alt=" " style="margin-right:5px;display:block " height="60" width="60" class="img-circle"></div>
                             <div class="weui-cell__bd ">
                                 <p>{{invitation.customer_nick_name}} ♂ {{invitation.customer_birthday | ageFilter}}岁</p>
                             </div>
@@ -47,7 +54,7 @@ router:#!/invitedls
                         <div class="weui-flex__item" ng-repeat="bed in  invitation.beds">
                             <div class="placeholder" ng-if="bed.customer_id !== invitation.customer_id">
                                 <!-- 用customer_id是否为0判断是否该床位是否有人 -->
-                                <img src="{{urlPrefix + bed.customer_head_img_url}} " alt=" " style="margin-right:5px;margin-top:8px;display:block " height="30" width="30" class="img-circle" ng-if="bed.customer_id !== 0 ">
+                                <img src="{{bed.customer_head_img_url}} " alt=" " style="margin-right:5px;margin-top:8px;display:block " height="30" width="30" class="img-circle" ng-if="bed.customer_id !== 0 ">
                                 <div ng-if="bed.customer_id === 0">
                                     <img src="weui/src/example/images/whitehead.png" alt=" " style="margin-right:5px;margin-top:8px;display:block " height="30" width="30" class="img-circle">
                                     <font size="1" color="red">{{bed.money | currency: '¥'}}</font>
@@ -68,7 +75,7 @@ router:#!/invitedls
                 </div>
                <div class="weui-form-preview__item ">
             <label class="weui-form-preview__label ">出发时间</label>
-            <span class="weui-form-preview__value ">{{invitation.route_begin_time | date: 'yyyy-MM-dd'}}</span>
+            <span class="weui-form-preview__value ">{{invitation.route_start_time | date: 'yyyy-MM-dd'}}</span>
               </div>
              <div class="weui-form-preview__item ">
             <label class="weui-form-preview__label ">详情</label>
@@ -96,4 +103,10 @@ router:#!/invitedls
     <br>
 </div>
 </div>
+    <div class="weui-msg" ng-show="isEmpty">
+        <div class="weui-msg__icon-area"><i class="weui-icon-info weui-icon_msg"></i></div>
+        <div class="weui-msg__text-area">
+            <p class="weui-msg__desc">系统暂未查询到相关数据</p>
+        </div>
+    </div>
 </div>

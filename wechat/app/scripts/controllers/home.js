@@ -31,8 +31,7 @@ angular.module('wechatApp')
         // 为找到数据时显示数据未找到界面
         $scope.isEmpty = true;
 
-        // 为获取来的图片URL加上前缀
-        $scope.urlPrefix = config.siteUrl + 'public/upload/';
+
         // 获取首页的citys
         destination.getHomeCitys().then(function successCallBack(homeCountrys) {
             $scope.homeCountrys = homeCountrys;
