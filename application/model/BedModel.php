@@ -28,19 +28,42 @@ class BedModel extends ModelModel
         return $this->belongsTo('InviteModel','invite_id');
     }
 
-    /*
-     *为该床位添加客户详细信息 获取的用户没有用is_delete判断
-     *@return true or false
-    */
+	/**
+	 * @param $value
+	 * @return mixed
+	 * @author: mengyunzhi www.mengyunzhi.com
+	 * @Date&Time:2017-04-10 21:59
+	 * 输出性别
+	 */
+    public function getSexAttr($value)
+	{
+		$status = array('0'=>'男','1'=>'女');
+		$sex = $status[$value];
+		if (isset($sex))
+		{
+			return $sex;
+		} else {
+			return $status[0];
+		}
+	}
 
-    public function setCustomerInfor($customerId) {
+	/**
+	 * @param $customerId
+	 * @return bool
+	 * @author: mengyunzhi www.mengyunzhi.com
+	 * @Date&Time:2017-04-10 22:01
+	 * 为该床位添加客户详细信息 (获取的用户没有用is_delete判断)
+	 * 判断该床位是否有用户，无则直接返回false
+	 * 有用户返回用户的头像和性别年龄信息
+	 */
+    public function setCustomerInfo($customerId) {
         // 如果这个床位上没有用户直接返回false
         if (empty($customerId)) {
             return false;
         }
 
         //头像的路径拼接
-        $pathconfig = 'http://127.0.0.1/tour'. DS .'public' . DS . 'upload' . DS;
+        $pathConfig = 'http://127.0.0.1/tour'. DS .'public' . DS . 'upload' . DS;
 
         // 如果有值就一定能取出数据来
         $customerId = CustomerModel::where('id', $customerId)->find();
@@ -58,7 +81,7 @@ class BedModel extends ModelModel
         $head_img_url = $customerId->getData('head_img_url');
         $head_img_url_wechat = $customerId->getData('head_img_url_wechat');
           if (!empty($head_img_url)) {
-            $this->customer_head_img_url = $pathconfig.$head_img_url;
+            $this->customer_head_img_url = $pathConfig.$head_img_url;
         }else {
                 if(!empty($head_img_url_wechat)) {
                     $this->customer_head_img_url = $head_img_url_wechat;
