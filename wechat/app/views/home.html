@@ -72,7 +72,7 @@ router:#!/home
     </div>
     <div class="weui-flex__item " ng-repeat="region in homeRegions">
         <div class="placeholder ">
-            <button ng-click="getInvitationsByPlaceId(region.id)" class="weui-btn weui-btn_mini weui-btn_default " style="width:70px;height:30px">{{region}}</button>
+            <button ng-click="getInvitationsByRegionId(region.id)" class="weui-btn weui-btn_mini weui-btn_default " style="width:70px;height:30px">{{region}}</button>
         </div>
     </div>
 </div>
@@ -83,8 +83,14 @@ router:#!/home
         </div>
     </div>
 </div>
-<br>
-<div class="page ">
+<div class="page"  ng-show="loading">
+    <div class="page__bd">
+        <div class="weui-loadmore weui-loadmore_line">
+            <span class="weui-loadmore__tips">暂无数据</span>
+        </div>
+    </div>
+</div>
+<div class="page" ng-hide="loading">
     <div class="page__hd ">
     </div>
     <div class="page__bd ">
@@ -93,7 +99,7 @@ router:#!/home
                 <div class="weui-form-preview__item ">
                     <div class="weui-cells ">
                         <div class="weui-cell ">
-                            <div class="weui-cell__hd "><img src="{{urlPrefix + invitation.customer_head_img_url}}" alt=" " style="margin-right:5px;display:block " height="60" width="60" class="img-circle"></div>
+                            <div class="weui-cell__hd "><img src="{{invitation.customer_head_img_url}}" alt=" " style="margin-right:5px;display:block " height="60" width="60" class="img-circle"></div>
                             <div class="weui-cell__bd ">
                                 <p>{{invitation.customer_nick_name}} ♂ {{invitation.customer_birthday | ageFilter}}岁</p>
                             </div>
@@ -108,32 +114,14 @@ router:#!/home
                         </div>
                         <div class="weui-flex__item" ng-repeat="bed in  invitation.beds">
                             <div class="placeholder" ng-if="bed.customer_id !== invitation.customer_id">
-                            <!-- 用customer_id是否为0判断是否该床位是否有人 -->
-                                <img src="{{urlPrefix + bed.customer_head_img_url}} " alt=" " style="margin-right:5px;margin-top:8px;display:block " height="30" width="30" class="img-circle" ng-if="bed.customer_id !== 0 ">
+                                <!-- 用customer_id是否为0判断是否该床位是否有人 -->
+                                <img src="{{bed.customer_head_img_url}} " alt=" " style="margin-right:5px;margin-top:8px;display:block " height="30" width="30" class="img-circle" ng-if="bed.customer_id !== 0 ">
                                 <div ng-if="bed.customer_id === 0">
                                     <img src="weui/src/example/images/whitehead.png" alt=" " style="margin-right:5px;margin-top:8px;display:block " height="30" width="30" class="img-circle">
                                     <font size="1" color="red">{{bed.money | currency: '¥'}}</font>
                                 </div>
                             </div>
                         </div>
-                        <!--  <div class="weui-flex__item">
-                            <div class="placeholder"><img src="weui/src/example/images/lhead3.png " alt=" " style="width:30px;margin-right:5px;margin-top:8px;display:block "></div>
-                        </div>
-                        <div class="weui-flex__item">
-                            <div class="placeholder"><img src="weui/src/example/images/lhead5.png " alt=" " style="width:30px;margin-right:5px;margin-top:8px;display:block "></div>
-                        </div>
-                        <div class="weui-flex__item">
-                            <div class="placeholder">
-                                <a ui-sref="topay"><img src="weui/src/example/images/whitehead.png " alt=" " style="width:30px;margin-right:5px;margin-top:8px;display:block "></a>
-                                <font size="1" color="red">￥10,000.00</font>
-                            </div>
-                        </div>
-                        <div class="weui-flex__item">
-                            <div class="placeholder">
-                                <a ui-sref="topay"><img src="weui/src/example/images/whitehead.png " alt=" " style="width:30px;margin-right:5px;margin-top:8px;display:block "></a>
-                                <font size="1" color="red">￥0.01</font>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </div>
@@ -148,11 +136,11 @@ router:#!/home
                 </div>
                 <div class="weui-form-preview__item ">
                     <label class="weui-form-preview__label ">出发时间</label>
-                    <span class="weui-form-preview__value "><p ng-if="invitation.start_time_date === null">{{invitation.route_begin_time | date: 'yyyy-MM-dd'}}</p><p ng-if="invitation.start_time_date !== null">{{invitation.start_time_date | date: 'yyyy-MM-dd'}}</p></span>
+                    <span class="weui-form-preview__value ">{{invitation.route_start_time | date: 'yyyy-MM-dd'}}</span>
                 </div>
                 <div class="weui-form-preview__item ">
                     <label class="weui-form-preview__label ">详情</label>
-                    <span class="weui-form-preview__value ">{{invitation.route_content}}</span>
+                    <span class="weui-form-preview__value ">{{invitation.route_description}}</span>
                 </div>
                 <div class="weui-form-preview__item ">
                     <label class="weui-form-preview__label ">总价</label>
@@ -168,9 +156,18 @@ router:#!/home
                 </div>
             </div>
             <div class="page__bd page__bd_spacing">
-                <button ui-sref="ivdetail({invitationIndex: $index})" class="weui-btn weui-btn_primary" style="margin-right:40px;margin-left:20px;margin-top: 20px;margin-bottom: 10px" ng-disabled="invitation === 1">
-                         <p ng-if="invitation === 1">已经下架</p><p ng-if="invitation !== 1">{{invitation | minvalue | currency: '¥'}}</p>
-                        </button>
+                <button ui-sref="ivdetail({invitationIndex: $index})" class="weui-btn weui-btn_primary" style="margin-right:40px;margin-left:20px;margin-top: 20px;margin-bottom: 10px" ng-disabled="invitation.type === 1">
+                    <p ng-if="invitation.type === 1">已经下架</p>
+                    <p ng-if="invitation.type !== 1">{{invitation | minvalue | currency: '¥'}}</p>
+                </button>
             </div>
             <br>
         </div>
+    </div>
+    <div class="weui-msg" ng-show="isEmpty">
+        <div class="weui-msg__icon-area"><i class="weui-icon-info weui-icon_msg"></i></div>
+        <div class="weui-msg__text-area">
+            <p class="weui-msg__desc">系统暂未查询到相关数据</p>
+        </div>
+    </div>
+</div>

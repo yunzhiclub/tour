@@ -1,7 +1,7 @@
 <?php
 namespace app\model;
 use app\model\DestinationCityModel;	//目的城市
-use app\model\DestinationCityRouteHotelViewModel; //与路线有关信息组成的视图
+use app\model\DestinationCityRouteHotelFlightViewModel; //与路线有关信息组成的视图
 use think\Db;
 /**
  * 路线
@@ -227,10 +227,10 @@ class RouteModel extends ModelModel
 	public static function getRoutesDetails($routeIds)
 	{
 		
-		$DestinationCityRouteHotelViewModel = new DestinationCityRouteHotelViewModel;
+		$DestinationCityRouteHotelFlightViewModel = new DestinationCityRouteHotelFlightViewModel;
 
 		//从视图中取出相应的信息
-		$RouteDetails = $DestinationCityRouteHotelViewModel->where('id', 'in', $routeIds)->select();
+		$RouteDetails = $DestinationCityRouteHotelFlightViewModel->where('id', 'in', $routeIds)->select();
 
 		//用来存放全部数据的数组
 		$RouteAndFlight = [];
@@ -264,7 +264,6 @@ class RouteModel extends ModelModel
 		$map['route_id'] = $this->id;
 		$EvaluateModels = $EvaluateModel->where($map)->select();
 		unset($EvaluateModel);
-		unset($EvaluateModels);
 
 		return count($EvaluateModels);
 	}
@@ -302,7 +301,7 @@ class RouteModel extends ModelModel
 	static public function saveRouteInfo($data)
 	{
 		//将数组进行拆分，一部分存入路线表中，一部分存入出发时间表中，一部分存入首页推荐表和精选表中
-		$weightRelation = array_splice($data, 18, 5);
+		$weightRelation = array_splice($data, 19, 5);
 		$data['content'] = array_pop($weightRelation);
 		$startTime = array_splice($data, 10, 2);
 		//将数据存入路线表中
@@ -389,7 +388,8 @@ class RouteModel extends ModelModel
 		$map['is_delete'] = 0;
 		//判断精选表中是否有该条路线信息，如果有取出权重
 		$ChosenModel = ChosenModel::get($map);
-		if ($ChosenModel !== null) {
+
+		if (!empty($ChosenModel->getData())) {
 			$result['isChosen'] = 0;
 			$result['chosenWeight'] = $ChosenModel->getData('weight');
 		} else {
@@ -397,7 +397,7 @@ class RouteModel extends ModelModel
 		}
 		//同上
 		$HomeRecommendModel = HomeRecommendModel::get($map);
-		if ($HomeRecommendModel !== null) {
+		if (!empty($HomeRecommendModel->getData())) {
 			$result['isHomeRecommend'] = 0;
 			$result['homeRecommendWeight'] = $HomeRecommendModel->getData('weight');
 		} else {
@@ -441,14 +441,14 @@ class RouteModel extends ModelModel
 		
 		//删除首页推荐表中的路线信息
 		$HomeRecommendModel = HomeRecommendModel::get($map);
-		if (null !== $HomeRecommendModel) {
+		if (!empty($HomeRecommendModel->getData())) {
 			$HomeRecommendModel->is_delete = 1;
 			$HomeRecommendModel->save();
 		}
 		
 		//删除精选表中的路线信息
 		$ChosenModel = ChosenModel::get($map);
-		if (null !== $ChosenModel) {
+		if (!empty($ChosenModel->getData())) {
 			$ChosenModel->is_delete = 1;
 			$ChosenModel->save();
 		}
@@ -492,7 +492,7 @@ class RouteModel extends ModelModel
 	static public function updateRouteInfo($data, $id)
 	{
 		//将数组进行拆分，一部分存入路线表中，一部分存入出发时间表中，一部分存入首页推荐表和精选表中
-		$weightRelation = array_splice($data, 18, 5);
+		$weightRelation = array_splice($data, 19, 5);
 		$data['content'] = array_pop($weightRelation);
 		$startTime = array_splice($data, 10, 2);
 		//将数据存入路线表中
@@ -523,4 +523,37 @@ class RouteModel extends ModelModel
 		return $RouteModel;
 
 	}
+
+	/**
+	 * 判断精选权重是否显示
+	 * @return int 0为显示，反之
+	 * @author chuhang 
+	 */
+	public function isShowChosenWeight()
+	{
+		if (!empty($this->ChosenModel()->getData())) {
+            $result = 0;
+        } else {
+            $result = 1;
+        }
+
+        return $result;
+	}
+
+	/**
+	 * 判断首页推荐权重是否显示
+	 * @return int 0为显示，反之
+	 * @author chuhang 
+	 */
+	public function isShowHomeRecommendWeight()
+	{
+		if (!empty($this->HomeRecommendModel()->getData())) {
+            $result = 0;
+        } else {
+            $result = 1;
+        }
+
+        return $result;
+	}
+
 }

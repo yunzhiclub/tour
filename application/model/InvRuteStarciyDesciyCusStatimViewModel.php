@@ -15,11 +15,10 @@ class InvRuteStarciyDesciyCusStatimViewModel extends ModelModel
 	 */
 	public static function getInviteByMap($type, $map) {
 
-		// 为查询条件添加is_delete信息
-		// $map->start_city_is_delete = 0;
-		// $map->destination_city_is_delete = 0;
-		// $map->customer_is_delete = 0;
-		// $map->route_is_delete = 0;
+        //图片的路径拼接
+        $pathconfig = 'http://127.0.0.1/tour'. DS .'public' . DS . 'upload' . DS;
+
+		// 查询视图数据
 		$InvRuteStarciyDesciyCusStatimViewModel = new InvRuteStarciyDesciyCusStatimViewModel;
 		$invitations = $InvRuteStarciyDesciyCusStatimViewModel->where($type, 'in', $map)->select();
 		 // 添加床位信息
@@ -27,6 +26,13 @@ class InvRuteStarciyDesciyCusStatimViewModel extends ModelModel
 			return $invitations;
 		} else {
 			foreach ($invitations as $invitation) {
+			    // 如果没上传图片使用微信上的头像
+			    if (empty($invitation->customer_head_img_url)) {
+                    $invitation->customer_head_img_url = $invitation->customer_head_img_url_wechat;
+                } else {
+                    $invitation->customer_head_img_url = $pathconfig.$invitation->customer_head_img_url;
+                }
+
 				$invitation->setBedInformations();
 			}
 		}
@@ -68,6 +74,7 @@ class InvRuteStarciyDesciyCusStatimViewModel extends ModelModel
 		 	// 为邀约视图添加床位信息
 		 	$this->beds = $bedInformations;
 		 }
+		 // 为视图添加总价和支付的价格信息
 		 $this->totalMoney = $totalMoney;
 		 $this->payedMoney = $payedMoney;
 	}	
