@@ -187,7 +187,7 @@ class InvitationController extends ApiController {
     }
 
     /**
-     * 通过目的地城市获取邀约
+     * 通过目的地城市id获取邀约
      * @return array 
      * @author chuhang 
      */
@@ -204,6 +204,11 @@ class InvitationController extends ApiController {
     	return $this->response($Invitations);
     }
 
+    /**
+     * 通过出发城市id获取邀约
+     * @return array 
+     * @author chuhang 
+     */
     public function getInvitationsByStartCityId()
     {
     	$id = Request::instance()->param('id');
