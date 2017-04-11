@@ -19,7 +19,7 @@ use app\model\FlightModel;
  *     		 	"route_standard_price": 6777,
  *      		"route_starting_price": 8999,
  * 				"actualPrice": 5000,
- *				"beginTime": "2343243243", // 时间戳
+ *				"begin_time": "2343243243", // 时间戳
  *				"hotel_title": "金门之星",
  *				"hotel_picture" "", // 目前数据库还没有该字段,
  *				"content":  "这是一个详细的路线描述",
