@@ -87,9 +87,6 @@ class RouteController extends ApiController {
 	 * method:get,
 	 * params: countryid 目的城市id , cityid 出发城市id,
 	 * return json [{上面的实例json}],
-	 * @param $CountryId
-	 * @param $StartCityId
-	 * @return json
 	 * @author: mengyunzhi www.mengyunzhi.com
 	 * @Date&Time:2017-04-08 21:45
 	 * 根据国家ID和出发城市ID获取全部路线

@@ -19,7 +19,7 @@ angular.module('wechatApp')
           
             // 提取路线的出发城市名字和路线id和详细内容描述和默认出发时间和默认价格
             $scope.startCityName = routeDetail.route.start_city_name;
-            $scope.content = routeDetail.route.route_content;
+            $scope.content = routeDetail.route.route_description;
             $scope.beginTime = routeDetail.route.start_time;
             $scope.actualPrice = routeDetail.route.actual_price;
 
