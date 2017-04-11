@@ -8,7 +8,7 @@ router:#!/choseroute
         <p class="page__desc"><img src="weui/src/example/images/mudidi.png" alt="">按目的地选</p>
     </div>
     <div class="page__bd page__bd_spacing">
-    <div class="weui-flex">
+    <div class="weui-flex" ng-repeat="iterm in regions">
        <!--  <article class="weui-article">
                 <section> 
                     <p>
@@ -16,7 +16,7 @@ router:#!/choseroute
                     </p>
                 </section>
         </article> -->
-         <div class="weui-flex__item" ng-repeat="region in regions">
+         <div class="weui-flex__item" ng-repeat="region in iterm">
                <div class="placeholder"> 
                   <div class="page__bd">
                    <article class="weui-article">
