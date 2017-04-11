@@ -21,7 +21,7 @@ angular.module('wechatApp')
                 $scope.selectedStartCityId = startCitys[0].id;
             }, function error() {});
 
-            // 监听selectedStartCityId
+            // 监听selectedStartCityId 并给邀约的单例的邀约startCityId赋值
             $scope.$watch('selectedStartCityId', function(newValue, oldValue) {
                 order.startCityId = newValue;
             });

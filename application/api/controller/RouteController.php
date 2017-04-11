@@ -84,6 +84,9 @@ class RouteController extends ApiController {
 	}
 
 	/**
+	 * method:get,
+	 * params: countryid 目的城市id , cityid 出发城市id,
+	 * return json [{上面的实例json}],
 	 * @param $CountryId
 	 * @param $StartCityId
 	 * @return json
@@ -91,7 +94,7 @@ class RouteController extends ApiController {
 	 * @Date&Time:2017-04-08 21:45
 	 * 根据国家ID和出发城市ID获取全部路线
 	 */
-	public function getRoutesByCountryId($CountryId,$StartCityId) {
+	public function getRoutesByCountryId() {
 		$CountryId = Request::instance()->param('countryid');
 		$StartCityId = Request::instance()->param('cityid');
 		
