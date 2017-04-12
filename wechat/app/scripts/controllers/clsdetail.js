@@ -48,7 +48,9 @@ angular.module('wechatApp')
 
 
             // 收藏这条路线
-
+            $scope.collecteTheRoute = function () {
+                route.collecteTheRoute();
+            };
 
             // 客服电话去掉拨号功能
 
