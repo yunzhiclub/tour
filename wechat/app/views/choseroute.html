@@ -3,12 +3,19 @@ description 这是选取路线的界面
 router:#!/choseroute
  -->
 <div class="weui-cells">
- <div class="page">
+<div class="page"  ng-show="loading">
+    <div class="page__bd">
+        <div class="weui-loadmore weui-loadmore_line">
+            <span class="weui-loadmore__tips">暂无数据</span>
+        </div>
+    </div>
+</div>
+<div class="page" ng-hide="loading">
     <div class="page__hd" style="margin-left:2px">
         <p class="page__desc"><img src="weui/src/example/images/mudidi.png" alt="">按目的地选</p>
     </div>
     <div class="page__bd page__bd_spacing">
-    <div class="weui-flex">
+    <div class="weui-flex" ng-repeat="iterm in regions">
        <!--  <article class="weui-article">
                 <section> 
                     <p>
@@ -16,7 +23,7 @@ router:#!/choseroute
                     </p>
                 </section>
         </article> -->
-         <div class="weui-flex__item" ng-repeat="region in regions">
+         <div class="weui-flex__item" ng-repeat="region in iterm">
                <div class="placeholder"> 
                   <div class="page__bd">
                    <article class="weui-article">
@@ -36,7 +43,13 @@ router:#!/choseroute
             </div>
         </div>
     </div>
- </div>
+    <div class="weui-msg" ng-show="isEmpty">
+        <div class="weui-msg__icon-area"><i class="weui-icon-info weui-icon_msg"></i></div>
+        <div class="weui-msg__text-area">
+            <p class="weui-msg__desc">系统暂未查询到相关数据</p>
+        </div>
+    </div>
+</div>
 </div>
 <!-- 第一种目的地选择-->
 <div class="page">

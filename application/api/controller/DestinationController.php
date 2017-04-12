@@ -8,8 +8,16 @@ use app\model\HomeCityModel;	//首页城市
 use app\model\HomeRegionModel;	//首页地区
 
 class DestinationController extends ApiController {
+	
 	/**
 	 * 获取全部的目的地(地区)
+	 * method: get
+	 * return json数据
+	 * {
+	 *      "id": 1,
+	 *		"pictureUrl":     , // 目前数据库中没有该字段
+	 *      "name": "美洲",
+	 * }
 	 * @author huangshuaibin 
 	 * @return             array;
 	 */
@@ -22,6 +30,13 @@ class DestinationController extends ApiController {
 
 	/**
 	 * 获取全部的目的地国家   通过地区id
+	 * method: get
+	 * param: id
+	 * return json {
+	 * 		"id": 1,
+	 *      "name": "美国",
+	 *      "pictureUrl":     , //数据库中暂时没有该字段 
+	 * }
 	 * @author huangshuaibin
 	 * @return             array;
 	 */
@@ -79,7 +94,7 @@ class DestinationController extends ApiController {
 
 	// 获取全部目的地城市
 	public function getDestinationCountrys(){
-		 $data = ['美国', '韩国', '日本'];
-		 return $this->response($data);	
+		 $DestinationCountrys = DestinationCityModel::all();
+		 return $this->response($DestinationCountrys);
 	}
 }
