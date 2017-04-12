@@ -22,7 +22,7 @@ angular.module('wechatApp')
             $scope.content = routeDetail.route.route_description;
             $scope.beginTime = routeDetail.route.begin_time;
             $scope.actualPrice = routeDetail.route.actual_price;
-
+            $scope.routeId = routeDetail.route.id;
             var routeId = routeDetail.route.id;
 
             // 向这次的邀约中添加路线的id和默认截止日期
@@ -49,7 +49,9 @@ angular.module('wechatApp')
 
             // 收藏这条路线
             $scope.collecteTheRoute = function () {
-                route.collecteTheRoute();
+                var customerId = $scope.customer.id;
+                var routeId = $scope.routeId;
+                route.collecteTheRoute(customerId, routeId);
             };
 
             // 客服电话去掉拨号功能

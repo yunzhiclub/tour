@@ -126,10 +126,10 @@ class RouteController extends ApiController {
 	 */
 	public function collectRoute()
 	{
-		$userId  = Request::instance()->param('user_id');
-		$routeId = Request::instance()->param('route_id');
+		$customerId  = Request::instance()->param('customerId');
+		$routeId = Request::instance()->param('routeId');
 		
-		CollectionModel::saveCollection($userId, $routeId);
+		CollectionModel::saveCollection($customerId, $routeId);
 		return $this->response([]);
 	}
 
