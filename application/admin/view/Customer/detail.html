@@ -1,0 +1,39 @@
+{extend name="index" /} {block name="content"}
+<div class="panel-body"></div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body">   
+                <div class="row" style="font-size:20px;">
+                    <div class="col-md-12" >
+                        <div class="">
+                            <label>昵称：</label>{$CustomerModel->getData('nick_name')}
+                        </div>
+                        <div class="">
+                            <label>性别：</label>{eq name="0" value="$CustomerModel->getData('sex')"}男{else/}女{/eq}
+                        </div>
+                        <div class="">
+                            <label>电话号码：</label>{$CustomerModel->getData('phone')}
+                        </div>
+                        <div class="">
+                            <label>邮件：</label>{$CustomerModel->getData('email')}
+                        </div>
+                        <div class="">
+                            <label>出生日期：</label>{$CustomerModel->getData('birthday')}
+                        </div>
+                        <div class="">
+                            <label>国家：</label>{$CustomerModel->getData('country')}
+                        </div>
+                        <div class="">
+                            <label>省份：</label>{$CustomerModel->getData('province')}
+                        </div>
+                        <div class="">
+                            <label>城市：</label>{$CustomerModel->getData('city')}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

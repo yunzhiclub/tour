@@ -1,0 +1,77 @@
+<!-- 
+description 具体国家中的路线列表 
+router:#!/routes
+ -->
+<div class="page"  ng-show="loading">
+    <div class="page__bd">
+        <div class="weui-loadmore weui-loadmore_line">
+            <span class="weui-loadmore__tips">暂无数据</span>
+        </div>
+    </div>
+</div>
+<div class="page" ng-repeat="route in routes" ng-hide="loading">
+    <div class="page__bd">
+        <div class="weui-form-preview">
+            <div class="weui-form-preview__hd">
+                <label class="weui-form-preview__label">{{route.route.start_city_name}}-{{route.route.destination_city_name}}</label>
+                <em class="weui-form-preview__value">{{route.route.route_standard_price | currency: '¥'}}/人</em>
+            </div>
+            <div class="weui-form-preview__bd">
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">价格详情</label>
+                    <font class="weui-form-preview__value" color="red">已省{{route.route.route_starting_price - route.route.route_standard_price | currency: '¥'}}</font>
+                </div>
+               <!--  <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">热卖</label>
+                    <span class="weui-form-preview__value">No.1</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">好评</label>
+                    <span class="weui-form-preview__value">No.1</span>
+                </div> -->
+                <div class="weui-form-preview__item">
+                    <div class="page">
+                        <div class="page__hd">
+                            <div class="page__bd">
+                                <div class="weui-panel weui-panel_access">
+                                    <div class="weui-panel__hd">{{route.route.hotel_title}}</div>
+                                    <div class="weui-panel__bd">
+                                        <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+                                            <div class="weui-media-box__hd">
+                                                <img class="weui-media-box__thumb" src="weui/src/example/images/HOTEL.png" alt="">
+                                            </div>
+                                            <div class="weui-media-box__bd">
+                                                <h4 class="weui-media-box__title">标准房</h4>
+                                                <p class="weui-media-box__desc">一间一晚</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">去</label>
+                    <span class="weui-form-preview__value">{{route.BeginFlight.up_time}}-{{route.BeginFlight.down_time}}+1 {{route.BeginFlight.company}}</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">返</label>
+                    <span class="weui-form-preview__value">{{route.BackFlight.up_time}}-{{route.BackFlight.down_time}}+1 {{route.BackFlight.company}}</span>
+                </div>
+            </div>
+            <div class="weui-form-preview__ft">
+                <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">收藏</a>
+                <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" ui-sref="clsdetail({routeId: $index})">立即预定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="weui-msg" ng-show="isEmpty">
+        <div class="weui-msg__icon-area"><i class="weui-icon-info weui-icon_msg"></i></div>
+        <div class="weui-msg__text-area">
+            <p class="weui-msg__desc">系统暂未查询到相关数据</p>
+        </div>
+</div>
+<br/>
+

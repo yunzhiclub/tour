@@ -1,0 +1,214 @@
+{extend name="index" /} {block name="content"}
+<div class="panel-body"></div>
+<div ng-app="app">
+    <div class="row"  ng-controller="AppController" uploader="uploader">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <form class="form-horizontal" action="{:url('update')}" method="post" name="myForm" ng-submit="submit()">
+                        <input id="model" type="hidden" name="id" value="<?php echo get_class($RouteModel); ?>">
+                        <input id="id" type="hidden" name="id" value="{$RouteModel->id}">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">名称</label>
+                                <div class="col-md-3">
+                                    <input type="text" value="{$RouteModel->getData('name')}" class="form-control" name="name" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">出发地</label>
+                                <div class="col-md-3">
+                                    <select class="form-control" name="start_city_id" >
+                                       {volist name="basicInfo['StartCityModels']" id="StartCityModel"}
+                                       <option value="{$StartCityModel->getData('id')}" {eq name="$RouteModel->getData('start_city_id')" value="$StartCityModel->getData('id')" }  selected="selected" {/eq}>{$StartCityModel->getData('name')}</option>
+                                       {/volist}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">目的地</label>
+                                <div class="col-md-3">
+                                    <select class="form-control" name="destination_city_id">
+                                        {volist name="basicInfo['DestinationCityModels']" id="DestinationCityModel"}
+                                       <option value="{$DestinationCityModel->getData('id')}" {eq name="$RouteModel->getData('destination_city_id')" value="$DestinationCityModel->getData('id')" } selected="selected" {/eq}>{$DestinationCityModel->getData('name')}</option>
+                                       {/volist}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">酒店</label>
+                                <div class="col-md-3">
+                                    <select class="form-control" name="hotel_id">
+                                        {volist name="basicInfo['HotelModels']" id="HotelModel"}
+                                       <option value="{$HotelModel->getData('id')}" {eq name="$RouteModel->getData('hotel_id')" value="$HotelModel->getData('id')" } selected="selected" {/eq}>{$HotelModel->getData('name')}</option>
+                                       {/volist}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">出发航班</label>
+                                <div class="col-md-3">
+                                    <select class="form-control"  name="begin_flight_id">
+                                        {volist name="basicInfo['FlightModels']" id="FlightModel"}
+                                       <option value="{$FlightModel->getData('id')}" {eq name="$RouteModel->getData('begin_flight_id')" value="$FlightModel->getData('id')" } selected="selected" {/eq}>{$FlightModel->getData('number')}</option>
+                                       {/volist}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">返回航班</label>
+                                <div class="col-md-3">
+                                    <select class="form-control"  name="back_flight_id">
+                                        {volist name="basicInfo['FlightModels']" id="FlightModel"}
+                                       <option value="{$FlightModel->getData('id')}" {eq name="$RouteModel->getData('back_flight_id')" value="$FlightModel->getData('id')" } selected="selected" {/eq}>{$FlightModel->getData('number')}</option>
+                                       {/volist}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">开始日期</label>
+                                <div class="col-md-3">
+                                    <input type="date" name="start_time" class="form-control" min="0" value="{$RouteModel->getData('start_time')}" required/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">行程天数</label>
+                                <div class="col-md-3">
+                                    <input type="number" name="days" value="{$RouteModel->getData('days')}" class="form-control" min="0" required/>
+                                </div>
+                            </div>
+                            <div ng-controller="RouteController">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">出发日期——起</label>
+                                <div class="col-md-3">
+                                    <input type="date" name="begin_time" ng-model="begin_time" class="form-control"  required/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">出发日期——止</label>
+                                <div class="col-md-3">
+                                    <input type="date" class="form-control"  ng-model="deadline" name="deadline"  required/>
+                                </div>
+                            </div>
+                            <div>
+                            <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
+                            <table class="table table-hover table-bordered" style="width: 400px;">
+                                <tr>
+                                    <th width="30%">日期</th>
+                                    <th width="70%">价格</th>
+                                </tr>
+                                <tr ng-repeat="(key, date) in dates">
+                                    <td><input type="hidden" name="date[]" value="{{date}}">{{date}}</td>
+                                    <td><input type="text" class="form-control" min="0" name="price[]" ng-model="price[key]" /></td>
+                                </tr>
+                            </table>
+                            </div>
+                            </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">描述信息</label>
+                                <div class="col-md-3">
+                                    <input type="text" value="{$RouteModel->getData('description')}" name="description" class="form-control" required/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">选择间数</label>
+                                <div class="col-md-3">
+                                    <input type="number" value="{$RouteModel->getData('check_in_rooms')}" name="check_in_rooms" class="form-control" min="0" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">入住天数</label>
+                                <div class="col-md-3">
+                                    <input type="number" value="{$RouteModel->getData('check_in_days')}" name="check_in_days" class="form-control" min="0" required/>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">起价</label>
+                                <div class="col-md-3">
+                                    <input type="number" value="{$RouteModel->getData('starting_price')}" name="starting_price" class="form-control" required/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">标价</label>
+                                <div class="col-md-3">
+                                    <input type="number" value="{$RouteModel->getData('standard_price')}" name="standard_price" class="form-control" required/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">实际价格</label>
+                                <div class="col-md-3">
+                                    <input type="number" value="{$RouteModel->getData('actual_price')}" name="actual_price" class="form-control" required/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">选择客服</label>
+                                <div class="col-md-3">
+                                    <input type="text" value="{$RouteModel->getData('service_phone')}" name="service_phone" class="form-control" required/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 text-right" value="">首页推荐</label>
+                                <div class="col-md-3">
+                                    <input id="radio1" type="radio"  ng-model="isHomeRecommend" name="isHomeRecommend" {eq name="$otherInfo['isHomeRecommend']" value="0"} ng-checked='true' {/eq} value="0">
+                                    <label for="radio1">&nbsp;&nbsp;是&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                                    <input id="radio2" type="radio" {eq name="$otherInfo['isHomeRecommend']" value="1"} ng-checked='true' {/eq} ng-model="isHomeRecommend" name="isHomeRecommend" value="1">
+                                    <label for="radio2">&nbsp;&nbsp;否</label>
+                                </div>
+                                <div ng-show="isHomeRecommend == '0'" class="form-group">
+                                    <label class="col-md-1 control-label">权重</label>
+                                    <div class="col-md-3">
+                                        <input class="form-control" type="number" min="1" name="homeRecommendWeight" {present name="$otherInfo['homeRecommendWeight']"} value="{$otherInfo['homeRecommendWeight']}" {/present}>
+                                       
+                                    </div>
+                                    <p class="text-danger">
+                                        <span >*权重越大，显示越靠前</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 text-right" value="">精选</label>
+                                <div class="col-md-3">
+                                    <input id="radio3" type="radio"  ng-model="isChosen" name="isChosen" value="0" {eq name="$otherInfo['isChosen']" value="0"} ng-checked='true' {/eq}>
+                                    <label for="radio3">&nbsp;&nbsp;是&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                                    <input id="radio4" type="radio" ng-model="isChosen" {eq name="$otherInfo['isChosen']" value="1"} ng-checked='true' {/eq} name="isChosen" value="1">
+                                    <label for="radio4">&nbsp;&nbsp;否</label>
+                                </div>
+                                <div ng-show="isChosen == '0'" class="form-group">
+                                    <label class="col-md-1 control-label">权重</label>
+                                    <div class="col-md-3">
+                                       <input class="form-control" type="number" min="1" name="chosenWeight" {present name="$otherInfo['chosenWeight']"} value="{$otherInfo['chosenWeight']}" {/present}>
+                                    </div>
+                                    <p class="text-danger">
+                                        <span >*权重越大，显示越靠前</span>
+                                    </p>
+                                </div>
+                            </div>
+                            </div>
+                            {include file="/picture/edit"}
+                            <div class="form-group">
+                                <label class="col-md-2 text-right">详情</label>
+                                <div class="col-md-9">
+                                    <textarea name="content" id="textarea1">
+                                    {$RouteModel->getData('content')}
+                                    </textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <button type="submit" ng-disabled="uploader.getNotUploadedItems().length || progress" class="btn btn-md btn-success"><i class="fa fa-check "></i>确认</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="Route/editJs"}
+
+{/block}

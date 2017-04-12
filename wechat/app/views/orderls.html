@@ -1,0 +1,321 @@
+<!-- 
+description 订单列表页面
+router:#!/orderls
+ -->
+<div class="page">
+    <div class="page__bd">
+    <div class="weui-form-preview">
+            <div class="weui-form-preview__hd">
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">邀约|未成行 </label>
+                     <div class="weui-cell__bd">是否公开订单</div>
+                       <div class="weui-cell__ft">
+                         <label for="switchCP" class="weui-switch-cp">
+                           <input id="switchCP" class="weui-switch-cp__input" type="checkbox" checked="checked" />
+                           <div class="weui-switch-cp__box"></div>
+                         </label>
+                       </div>
+                </div>
+            </div>
+            <div class="weui-form-preview__bd">
+            <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">订单号</label>
+                    <span class="weui-form-preview__value">432017020100078</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">路线</label>
+                    <span class="weui-form-preview__value"><泰国-普吉岛-甲米6或7日游></span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">详情</label>
+                    <span class="weui-form-preview__value">天津往返直飞，入住泳池别墅，2晚国五酒店，无自费，畅游甲米，大堡礁浮潜，幻多奇主题乐园，预定赠送出海跟拍</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">预定时间</label>
+                    <span class="weui-form-preview__value">2016-10-25</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">出发时间</label>
+                    <span class="weui-form-preview__value">2016-11-05</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">归来时间</label>
+                    <span class="weui-form-preview__value">2016-11-10</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">出发城市</label>
+                    <span class="weui-form-preview__value">天津</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">出游人数</label>
+                    <span class="weui-form-preview__value">6成人</span>
+                </div>
+            </div>
+              <div class="weui-form-preview__ft">
+                <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" ui-sref="nofinish">查看详细订单</button>
+             </div>
+        </div>
+        <br>
+         <div class="weui-form-preview">
+            <div class="weui-form-preview__hd">
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">应邀|已支付 </label>
+                       <div class="weui-cell__bd">是否公开订单</div>
+                       <div class="weui-cell__ft">
+                         <label for="switchCP" class="weui-switch-cp">
+                           <input id="switchCP" class="weui-switch-cp__input" type="checkbox" checked="checked" />
+                           <div class="weui-switch-cp__box"></div>
+                         </label>
+                       </div>
+                </div>
+            </div>
+            <div class="weui-form-preview__bd">
+                            <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">订单号</label>
+                    <span class="weui-form-preview__value">432017011700023</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">路线</label>
+                    <span class="weui-form-preview__value"><泰国-普吉岛-甲米6或7日游></span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">详情</label>
+                    <span class="weui-form-preview__value">天津往返直飞，入住泳池别墅，2晚国五酒店，无自费，畅游甲米，大堡礁浮潜，幻多奇主题乐园，预定赠送出海跟拍</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">预定时间</label>
+                    <span class="weui-form-preview__value">2016-10-25</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">出发时间</label>
+                    <span class="weui-form-preview__value">2016-11-05</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">归来时间</label>
+                    <span class="weui-form-preview__value">2016-11-10</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">出发城市</label>
+                    <span class="weui-form-preview__value">天津</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">出游人数</label>
+                    <span class="weui-form-preview__value">6成人</span>
+                </div>
+            </div>
+              <div class="weui-form-preview__ft">
+                <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" ui-sref="paydetail">查看支付详情</button>
+            </div>
+        </div>
+        <br>
+        <div class="weui-form-preview">
+            <div class="weui-form-preview__hd">
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">应邀|已取消 </label>
+                       <div class="weui-cell__bd">是否公开订单</div>
+                       <div class="weui-cell__ft">
+                         <label for="switchCP" class="weui-switch-cp">
+                           <input id="switchCP" class="weui-switch-cp__input" type="checkbox" checked="checked" />
+                           <div class="weui-switch-cp__box"></div>
+                         </label>
+                       </div>
+                </div>
+            </div>
+            <div class="weui-form-preview__bd">
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">订单号</label>
+                    <span class="weui-form-preview__value">432016122100013</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">路线</label>
+                    <span class="weui-form-preview__value"><泰国-普吉岛-甲米6或7日游></span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">详情</label>
+                    <span class="weui-form-preview__value">天津往返直飞，入住泳池别墅，2晚国五酒店，无自费，畅游甲米，大堡礁浮潜，幻多奇主题乐园，预定赠送出海跟拍</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">预定时间</label>
+                    <span class="weui-form-preview__value">2016-10-25</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">出发时间</label>
+                    <span class="weui-form-preview__value">2016-11-05</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">归来时间</label>
+                    <span class="weui-form-preview__value">2016-11-10</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">出发城市</label>
+                    <span class="weui-form-preview__value">天津</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">出游人数</label>
+                    <span class="weui-form-preview__value">6成人</span>
+                </div>
+            </div>
+              <div class="weui-form-preview__ft">
+                <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" ui-sref="paydetail">查看订单</button>
+            </div>
+        </div>
+        <br>
+       <div class="weui-form-preview">
+            <div class="weui-form-preview__hd">
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">应邀|未支付 </label>
+                       <div class="weui-cell__bd">是否公开订单</div>
+                       <div class="weui-cell__ft">
+                         <label for="switchCP" class="weui-switch-cp">
+                           <input id="switchCP" class="weui-switch-cp__input" type="checkbox" checked="checked" />
+                           <div class="weui-switch-cp__box"></div>
+                         </label>
+                       </div>
+                </div>
+            </div>
+            <div class="weui-form-preview__bd">
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">订单号</label>
+                    <span class="weui-form-preview__value">432016122300035</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">路线</label>
+                    <span class="weui-form-preview__value"><泰国-普吉岛-甲米6或7日游></span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">详情</label>
+                    <span class="weui-form-preview__value">天津往返直飞，入住泳池别墅，2晚国五酒店，无自费，畅游甲米，大堡礁浮潜，幻多奇主题乐园，预定赠送出海跟拍</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">预定时间</label>
+                    <span class="weui-form-preview__value">2016-10-25</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">出发时间</label>
+                    <span class="weui-form-preview__value">2016-11-05</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">归来时间</label>
+                    <span class="weui-form-preview__value">2016-11-10</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">出发城市</label>
+                    <span class="weui-form-preview__value">天津</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">出游人数</label>
+                    <span class="weui-form-preview__value">6成人</span>
+                </div>
+            </div>
+            <div class="weui-form-preview__ft">
+                <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" ui-sref="topay">去支付</button>
+            </div>
+        </div>
+        <br>
+        <div class="weui-form-preview">
+            <div class="weui-form-preview__hd">
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">应邀|待评价 </label>
+                       <div class="weui-cell__bd">是否公开订单</div>
+                       <div class="weui-cell__ft">
+                         <label for="switchCP" class="weui-switch-cp">
+                           <input id="switchCP" class="weui-switch-cp__input" type="checkbox" checked="checked" />
+                           <div class="weui-switch-cp__box"></div>
+                         </label>
+                       </div>
+                </div>
+            </div>
+            <div class="weui-form-preview__bd">
+                <div class="weui-form-preview__item">
+                 <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">订单号</label>
+                    <span class="weui-form-preview__value">432017011700023</span>
+                </div>
+                    <label class="weui-form-preview__label">路线</label>
+                    <span class="weui-form-preview__value"><泰国-普吉岛-甲米6或7日游></span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">详情</label>
+                    <span class="weui-form-preview__value">天津往返直飞，入住泳池别墅，2晚国五酒店，无自费，畅游甲米，大堡礁浮潜，幻多奇主题乐园，预定赠送出海跟拍</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">预定时间</label>
+                    <span class="weui-form-preview__value">2016-10-25</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">出发时间</label>
+                    <span class="weui-form-preview__value">2016-11-05</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">归来时间</label>
+                    <span class="weui-form-preview__value">2016-11-10</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">出发城市</label>
+                    <span class="weui-form-preview__value">天津</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">出游人数</label>
+                    <span class="weui-form-preview__value">6成人</span>
+                </div>
+            </div>
+              <div class="weui-form-preview__ft">
+                <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" ui-sref="evaluate">去评价</button>
+            </div>
+        </div>
+        <br>
+            <div class="weui-form-preview">
+            <div class="weui-form-preview__hd">
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">应邀|已成行 </label>
+                       <div class="weui-cell__bd">是否公开订单</div>
+                       <div class="weui-cell__ft">
+                         <label for="switchCP" class="weui-switch-cp">
+                           <input id="switchCP" class="weui-switch-cp__input" type="checkbox" checked="checked" />
+                           <div class="weui-switch-cp__box"></div>
+                         </label>
+                       </div>
+                </div>
+            </div>
+            <div class="weui-form-preview__bd">
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">订单号</label>
+                    <span class="weui-form-preview__value">432017011700023</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">路线</label>
+                    <span class="weui-form-preview__value"><泰国-普吉岛-甲米6或7日游></span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">详情</label>
+                    <span class="weui-form-preview__value">天津往返直飞，入住泳池别墅，2晚国五酒店，无自费，畅游甲米，大堡礁浮潜，幻多奇主题乐园，预定赠送出海跟拍</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">预定时间</label>
+                    <span class="weui-form-preview__value">2016-10-25</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">出发时间</label>
+                    <span class="weui-form-preview__value">2016-11-05</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">归来时间</label>
+                    <span class="weui-form-preview__value">2016-11-10</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">出发城市</label>
+                    <span class="weui-form-preview__value">天津</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">出游人数</label>
+                    <span class="weui-form-preview__value">6成人</span>
+                </div>
+            </div>
+              <div class="weui-form-preview__ft">
+                <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" ui-sref="paydetail">查看详情</button>
+            </div>
+        </div>
+        <br>
+    <div class="weui-form-preview__ft">
+    </div>
+</div>

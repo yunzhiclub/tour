@@ -1,0 +1,67 @@
+{extend name="index" /} {block name="content"}
+<div class="panel-body"></div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form class="form-horizontal" action="{:url('update')}" method="post">
+                        <input type="hidden" name="id" value="{$FlightModel->id}">
+                            <div class="form-group">
+                                <label for="name" class="col-md-2 text-right">航班号</label>
+                                <div class="col-md-3">
+                                    <input name="number" class="form-control" value="{$FlightModel->getData('number')}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="col-md-2 text-right">公司</label>
+                                <div class="col-md-3">
+                                    <input name="company" class="form-control" value="{$FlightModel->getData('company')}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="col-md-2 text-right">起飞时间</label>
+                                <div class="col-md-3">
+                                    <input name="up_time" type="time" class="form-control" value="{$FlightModel->getData('up_time')}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 text-right" value="">抵达时间</label>
+                                    <div class="col-md-3">
+                                        <input name="down_time" type="time" class="form-control" value="{$FlightModel->getData('down_time')}">
+                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="col-md-2 text-right">出发城市</label>
+                                <div class="col-md-3">
+                                    <select class="form-control" name="up_city_id">
+                                    {volist name="StartCityModels" id="StartCityModel"}
+                                        <option value="{$StartCityModel->getData('id')}" {eq name="$FlightModel->getData('up_city_id')" value="$StartCityModel->getData('id')"} selected="selected" {/eq} >{$StartCityModel->getData('name')}</option>
+                                    {/volist}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="col-md-2 text-right">抵达城市</label>
+                                <div class="col-md-3">
+                                    <select class="form-control" name="down_city_id">
+                                    {volist name="DestinationCityModels" id="DestinationCityModel"}
+                                        <option value="{$DestinationCityModel->getData('id')}">{$DestinationCityModel->getData('name')}</option>
+                                    {/volist}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-7 text-center">
+                                    <button type="submit" class="btn btn-md btn-success"><i class="fa fa-check "></i> 确认</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</d iv>
+{/block}

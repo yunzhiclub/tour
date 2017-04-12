@@ -1,0 +1,18 @@
+{extend name="index" /} {block name="content"}
+<div class="panel-body"></div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>{$ConfigModel->getData('title')}<small>[2017-03-08]</small></h1>
+                        <hr>
+                         {$ConfigModel->getData('content')}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</d iv>
+{/block}

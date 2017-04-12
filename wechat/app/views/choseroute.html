@@ -1,0 +1,146 @@
+<!-- 
+description 这是选取路线的界面
+router:#!/choseroute
+ -->
+<div class="weui-cells">
+<div class="page"  ng-show="loading">
+    <div class="page__bd">
+        <div class="weui-loadmore weui-loadmore_line">
+            <span class="weui-loadmore__tips">暂无数据</span>
+        </div>
+    </div>
+</div>
+<div class="page" ng-hide="loading">
+    <div class="page__hd" style="margin-left:2px">
+        <p class="page__desc"><img src="weui/src/example/images/mudidi.png" alt="">按目的地选</p>
+    </div>
+    <div class="page__bd page__bd_spacing">
+    <div class="weui-flex" ng-repeat="iterm in regions">
+       <!--  <article class="weui-article">
+                <section> 
+                    <p>
+                        <img src="weui/src/example/images/trip5.png" alt="" style="width:100%;display:block">
+                    </p>
+                </section>
+        </article> -->
+         <div class="weui-flex__item" ng-repeat="region in iterm">
+               <div class="placeholder"> 
+                  <div class="page__bd">
+                   <article class="weui-article">
+                     <section> 
+                       <p>
+                        <a ui-sref="placelist({regionId: region.id})">
+                        <img src="weui/src/example/images/England.png" alt="">
+                         </a>
+                       </p>
+                       <p>
+                        {{region.name}}
+                       </p>
+                     </section>
+                   </article>
+                  </div>
+               </div>
+            </div>
+        </div>
+    </div>
+    <div class="weui-msg" ng-show="isEmpty">
+        <div class="weui-msg__icon-area"><i class="weui-icon-info weui-icon_msg"></i></div>
+        <div class="weui-msg__text-area">
+            <p class="weui-msg__desc">系统暂未查询到相关数据</p>
+        </div>
+    </div>
+</div>
+</div>
+<!-- 第一种目的地选择-->
+<div class="page">
+    <div class="page__hd" style="margin-left:2px">
+        <p class="page__desc"><img src="weui/src/example/images/xin.png" alt="">您可能感兴趣的目的地</p>
+    </div>
+    <div class="page__bd page__bd_spacing">
+        <div class="weui-flex">
+            <div class="weui-flex__item">
+               <div class="placeholder"> 
+                  <div class="page__bd">
+                   <article class="weui-article">
+                     <section> 
+                       <p>
+                        <a ui-sref="routes">
+                        <img src="weui/src/example/images/England.png" alt="">
+                         </a>
+                       </p>
+                       <p>
+                        英国
+                       </p>
+                     </section>
+                   </article>
+                  </div>
+               </div>
+            </div>
+            <div class="weui-flex__item">
+               <div class="placeholder"> 
+                  <div class="page__bd">
+                   <article class="weui-article">
+                     <section> 
+                       <p>
+                       <a ui-sref="routes">
+                        <img src="weui/src/example/images/Germany.png" alt="">
+                        </a>
+                       </p>
+                        德国
+                       </p>
+                     </section>
+                   </article>
+                  </div>
+               </div>
+            </div>
+           <div class="weui-flex__item">
+               <div class="placeholder"> 
+                  <div class="page__bd">
+                   <article class="weui-article">
+                     <section> 
+                       <p>
+                       <a ui-sref="routes">
+                        <img src="weui/src/example/images/France.png" alt="">
+                        </a>
+                       </p>
+                       <p>
+                        法国
+                       </p>
+                     </section>
+                   </article>
+                  </div>
+               </div>
+            </div>
+        </div>
+    </div>
+<div class="weui-cells">
+ <div class="page">
+    <div class="page__hd" style="margin-left:2px">
+        <p class="page__desc"><img src="weui/src/example/images/xiaolian.png" alt="">您可能感兴趣的路线</p>
+    </div>
+    <div class="page__bd">
+        <article class="weui-article">
+                <section> 
+                    <p>
+                        <img src="weui/src/example/images/trip2.png" alt="" style="width:100%;display:block">
+                    </p>
+                   <font size="2">
+                        全程无自费，点评过百，私人沙滩，两晚椰子岛，VILLA别墅，海豚岛，送大堡礁帝王岛。
+                     </font>
+                </section>
+        </article>
+    </div>
+    <div class="page__bd">
+        <article class="weui-article">
+                <section> 
+                    <p>
+                        <img src="weui/src/example/images/trip3.png" alt="" style="width:100%;display:block">
+                    </p>
+                    <font size="2">
+                         包机直飞，升级2晚国五，赠京津交通，PP岛环岛游，帝王岛，攀牙湾泛舟，情人沙滩，人妖歌舞表演，骑大象观大象 
+                    </font>
+                </section>
+        </article>
+    </div>
+ </div>
+</div>

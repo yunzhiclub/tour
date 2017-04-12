@@ -1,0 +1,112 @@
+<!-- 
+description 经典小团详情界面
+router:#!/clsdetail
+ -->
+<div class="page">
+    <div class="page__hd">
+    </div>
+    <div class="page__bd">
+        <article class="weui-article">
+            <section>
+                <section>
+                    <p>
+                        <img src="weui/src/example/images/trip6.png" alt="" style="width:100%;display:block;margin-right:0px;margin-left:0px;margin-top: 1px">
+                    </p>
+                </section>
+            </section>
+        </article>
+    </div>
+</div>
+<div class="page">
+    <div class="page__bd">
+        <div class="weui-form-preview">
+            <div class="weui-form-preview__hd">
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">订单详情：</label>
+                </div>
+            </div>
+            <div class="weui-form-preview__bd">
+                <div class="weui-form-preview__item">
+                    <span class="weui-form-preview__value">
+                    {{content}}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page">
+    <div class="page__bd">
+        <div class="weui-form-preview">
+            <div class="weui-form-preview__hd">
+            </div>
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">出发城市</label>
+                <span class="weui-form-preview__value">{{startCityName}}</span>
+            </div>
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">默认价格</label>
+                <span class="weui-form-preview__value">{{actualPrice | currency: '¥'}}</span>
+            </div>
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">默认出发时间</label>
+                <span class="weui-form-preview__value">{{beginTime | date:'yyyy-MM-dd'}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="page">
+    <div class="page__hd">
+    </div>
+    <div class="page__bd">
+        <div class="weui-cells__title">出发日期 以下价格均为起价</div>
+        <div class="weui-cells">
+            <div class="weui-flex" ng-repeat="data in startTimes">
+                <div class="weui-flex__item" ng-repeat="startTime in data">
+                    <div class="placeholder"><a ui-sref="hourse({timeId:startTime.id})" class="weui-btn weui-btn_mini weui-btn_default">{{startTime.date | date:'yyyy-MM-dd'}} {{startTime.money | currency: '¥'}}</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page">
+    <div class="page__bd" style="height: 100%;">
+        <div class="weui-tab">
+            <div class="weui-navbar">
+                <button class="weui-navbar__item" ng-click="ishidden1()">
+                    详情
+                </button>
+                <button class="weui-navbar__item" ng-click="ishidden2()">
+                    评价
+                </button>
+            </div>
+            <div class="weui-tab__panel">
+                <div ng-hide="status1">
+                    <p>【北部经典景点玩乐 ：首都路易港、红顶教堂、蔻丹广场、中央市场、SUPER U超市、炮台山】 推荐产品编号：210301330、210240388（可直接复制在搜索框内搜索）</p>
+                </div>
+                <div ng-hide="status2">
+                    <p>对此次行程安排非常满意，无论是领队还是当地导游服务非常好，尽心尽力为游客安排好一切。总之，此次行程非常满意，也感谢途牛无论是之前还是回来后，一直都有跟踪服务，服务很好，以后出游还会很途牛合作的！</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page">
+    <div class="weui-flex">
+        <div class="weui-flex__item">
+            <div class="placeholder">
+                <a style="height:100%;width:100%;background-color:#f8f8f8;" class="weui-btn weui-btn_mini weui-btn_default"><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>电话客服</a>
+            </div>
+        </div>
+        <div class="weui-flex__item">
+            <div class="placeholder">
+                <a style="height:100%;width:100%;background-color:#f8f8f8;" class="weui-btn weui-btn_mini weui-btn_default"><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>收藏</a>
+            </div>
+        </div>
+        <div class="weui-flex__item">
+            <div class="placeholder">
+                <a style="height:100%;width:100%;background-color:#ffa726" class="weui-btn weui-btn_mini weui-btn_default" ui-sref="hourse">立即预定</a>
+            </div>
+        </div>
+    </div>
