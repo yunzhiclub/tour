@@ -9,6 +9,37 @@ use app\model\EvaluateModel;	//评价
 use app\model\CollectionModel;	//收藏
 use app\model\FlightModel;
 
+/*
+ * 单条路线的json数据格式
+ * { 
+ *		"route":{
+ *				"id": 1,
+ *				"start_city_name": "天津",
+ *				"destination_city_name": "伦敦",
+ *     		 	"route_standard_price": 6777,
+ *      		"route_starting_price": 8999,
+ * 				"actualPrice": 5000,
+ *				"begin_time": "2343243243", // 时间戳
+ *				"hotel_title": "金门之星",
+ *				"hotel_picture" "", // 目前数据库还没有该字段,
+ *				"content":  "这是一个详细的路线描述",
+ *				"description": "这是一个简述的路线描述",
+ *				"service_phone":13389770089,
+ *				"deadline": 23435435, // 时间戳
+ *			  },
+ *      "BeginFlight":{
+ *							"up_time": "08:30",
+ *							"down_time": "5:30",
+ *							"company": "中国国际航空公司",
+ *                    }
+ *      "BackFlight":{
+ *							"up_time": "08:30",
+ *							"down_time": "5:30",
+ *							"company": "中国国际航空公司",
+ *                    }
+ *  
+ * }
+ **/
 class RouteController extends ApiController {
 	/**
 	 * 获取推荐路线
@@ -53,14 +84,14 @@ class RouteController extends ApiController {
 	}
 
 	/**
-	 * @param $CountryId
-	 * @param $StartCityId
-	 * @return json
+	 * method:get,
+	 * params: countryid 目的城市id , cityid 出发城市id,
+	 * return json [{上面的实例json}],
 	 * @author: mengyunzhi www.mengyunzhi.com
 	 * @Date&Time:2017-04-08 21:45
 	 * 根据国家ID和出发城市ID获取全部路线
 	 */
-	public function getRoutesByCountryId($CountryId,$StartCityId) {
+	public function getRoutesByCountryId() {
 		$CountryId = Request::instance()->param('countryid');
 		$StartCityId = Request::instance()->param('cityid');
 		
