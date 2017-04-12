@@ -2,7 +2,14 @@
 description 这是国家列表页面 
 router:#!/placelist
  -->
-<div class="page">
+ <div class="page"  ng-show="loading">
+    <div class="page__bd">
+        <div class="weui-loadmore weui-loadmore_line">
+            <span class="weui-loadmore__tips">暂无数据</span>
+        </div>
+    </div>
+</div>
+<div class="page" ng-hide="loading">
     <div class="page__hd" style="margin-left:2px">
         <p class="page__desc"><img src="weui/src/example/images/xin.png" alt="">请您选择国家</p>
     </div>
@@ -26,6 +33,12 @@ router:#!/placelist
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="weui-msg" ng-show="isEmpty">
+        <div class="weui-msg__icon-area"><i class="weui-icon-info weui-icon_msg"></i></div>
+        <div class="weui-msg__text-area">
+            <p class="weui-msg__desc">系统暂未查询到相关数据</p>
         </div>
     </div>
 </div>

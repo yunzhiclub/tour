@@ -2,7 +2,14 @@
 description 具体国家中的路线列表 
 router:#!/routes
  -->
-<div class="page" ng-repeat="route in routes">
+<div class="page"  ng-show="loading">
+    <div class="page__bd">
+        <div class="weui-loadmore weui-loadmore_line">
+            <span class="weui-loadmore__tips">暂无数据</span>
+        </div>
+    </div>
+</div>
+<div class="page" ng-repeat="route in routes" ng-hide="loading">
     <div class="page__bd">
         <div class="weui-form-preview">
             <div class="weui-form-preview__hd">
@@ -59,6 +66,12 @@ router:#!/routes
             </div>
         </div>
     </div>
+</div>
+<div class="weui-msg" ng-show="isEmpty">
+        <div class="weui-msg__icon-area"><i class="weui-icon-info weui-icon_msg"></i></div>
+        <div class="weui-msg__text-area">
+            <p class="weui-msg__desc">系统暂未查询到相关数据</p>
+        </div>
 </div>
 <br/>
 
