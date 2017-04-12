@@ -6,7 +6,7 @@ use app\model\BedModel;
 /*
 前台邀约的视图
 */
-class InvRuteStarciyDesciyCusStatimViewModel extends ModelModel
+class InviteRouteStartcityDestcityCustomerStarttimeViewModel extends ModelModel
 {
 	/**
 	 * 通过查route_id对应的询条件$map获取邀约
@@ -19,8 +19,8 @@ class InvRuteStarciyDesciyCusStatimViewModel extends ModelModel
         $pathconfig = 'http://127.0.0.1/tour'. DS .'public' . DS . 'upload' . DS;
 
 		// 查询视图获取符合条件的邀约
-		$InvRuteStarciyDesciyCusStatimViewModel = new InvRuteStarciyDesciyCusStatimViewModel;
-		$invitations = $InvRuteStarciyDesciyCusStatimViewModel->where($type, 'in', $map)->select();
+		$InviteRouteStartcityDestcityCustomerStarttimeViewModel = new InviteRouteStartcityDestcityCustomerStarttimeViewModel;
+		$invitations = $InviteRouteStartcityDestcityCustomerStarttimeViewModel->where($type, 'in', $map)->select();
 
 		// 判断获取到邀约
 		if (empty($invitations)) {
