@@ -205,6 +205,11 @@ class InviteModel extends ModelModel
 			if (1 === $Invitation->roomDatas[$i]->isPay) {
 				//TODO调用微信支付接口
 				//完成支付之后，将该用户保存进bed表
+				$OrderModel = new OrderModel;
+				$OrderModel->customer_id = $Invitation->customerId;
+				$OrderModel->invite_id = $inviteId;
+				$OrderModel->number = self::getOrderNumber($Invitation->customerId);
+				$OrderModel->save();
 				
 				//保存customer_id进相应的床位表
 				$BedModel->customer_id = $Invitation->customerId;
@@ -214,5 +219,22 @@ class InviteModel extends ModelModel
 		}
 
 		return true;
+	}
+
+	/**
+	 * 获取订单编号，订单编号格式如下:
+	 * 日期+时间戳后五位+（100000 - 客户id）
+	 * eg:201609303243499094
+	 * @param  int $customerId 客户id
+	 * @return string             订单编号
+	 * @author chuhang 
+	 */
+	static public function getOrderNumber($customerId)
+	{
+		$date = date("Ymd");
+        $timestamp = substr(time(), -5, 5);
+        $customerId = sprintf("%05d", 100000 - $customerId);
+
+        return $date . $timestamp . $customerId;
 	}
 }
