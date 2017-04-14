@@ -56,7 +56,7 @@ class BedModel extends ModelModel
 	 * 判断该床位是否有用户，无则直接返回false
 	 * 有用户返回用户的头像和性别年龄信息
 	 */
-    public function setCustomerInfo($customerId) {
+    public function setCustomerInfor($customerId) {
         // 如果这个床位上没有用户直接返回false
         if (empty($customerId)) {
             return false;
