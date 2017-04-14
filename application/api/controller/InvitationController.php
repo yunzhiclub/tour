@@ -126,7 +126,7 @@ class InvitationController extends ApiController {
 		if (false === InviteModel::saveInvitation($stringInvitation)) {
 			return '保存失败';
 		}
-		
+		die();
 		return $this->response(['1']);
 	}
 
