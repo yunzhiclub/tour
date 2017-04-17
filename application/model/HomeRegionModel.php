@@ -21,6 +21,7 @@ class HomeRegionModel extends ModelModel
 		foreach ($threeSelfs as $threeSelf) {
 			$id = $threeSelf->getData('region_id');
 			$results[] = RegionModel::get($id)->getData('name');
+
 		}
 		return $results;
 	}
