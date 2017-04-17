@@ -13,11 +13,11 @@ angular.module('wechatApp')
         var self = this;
         self.citys = [];
         var url = 'City/';
-        var getStartCitys = function() {
+        var getStartCity = function() {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
-            var paramUrl = url + 'getStartCitys';
+            var paramUrl = url + 'getStartCity';
             var data = null;
 
             server.http(paramUrl, data, function successCallback(response) {
@@ -40,8 +40,8 @@ angular.module('wechatApp')
         // Public API here
         return {
             // 获取全部出发城市
-            getStartCitys: function() {
-                return getStartCitys();
+            getStartCity: function() {
+                return getStartCity();
             }
         };
     }]);
