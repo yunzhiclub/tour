@@ -79,7 +79,7 @@ class DestinationController extends ApiController {
 	 * @return array
 	 */
 	public function getHomeRegions() {
-		$HomeRegionNames = HomeRegionModel::getThreeHomeRegionNames();die();
+		$HomeRegionNames = HomeRegionModel::getThreeHomeRegionNames();
 
 		return $this->response($HomeRegionNames);
 	}
