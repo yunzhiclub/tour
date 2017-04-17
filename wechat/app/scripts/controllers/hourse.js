@@ -205,7 +205,7 @@ angular.module('wechatApp')
 
             // 必须是六人组必须每个房间都设置人的信息,目前生成邀约的所有的信息已经全有了
             $scope.submit = function() {
-
+                roomDatas = [];
                 // 把六个房间信息push进数组
                 roomDatas.push($scope.firstRoom);
                 roomDatas.push($scope.scendRoom);
