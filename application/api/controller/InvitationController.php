@@ -121,13 +121,12 @@ class InvitationController extends ApiController {
 	 * @return             int(新生成的趣约的id);
 	 */
 	public function saveInvitation() {
-		
 		$stringInvitation = Request::instance()->param('data');
 
 		if (false === InviteModel::saveInvitation($stringInvitation)) {
 			return '保存失败';
 		}
-		
+		die();
 		return $this->response(['1']);
 	}
 

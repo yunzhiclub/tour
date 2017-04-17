@@ -37,7 +37,7 @@
                     <td>{$OrderModel->Bed->Customer->nick_name}</td>
                     <td><a href="{:url('Invite/index')}">{$OrderModel->getData('invite_id')}</a></td>
                     <td>{$OrderModel->Bed->sex}</td>
-                	<td>{$OrderModel->Bed->money}</td>
+                	<td>{$OrderModel->money_format($OrderModel->Bed->money)}</td>
                 	<td>
                     <a class="btn btn-sm btn-danger" href="{:url('delete?id=' . $OrderModel->getData('id'))}"><i class="glyphicon glyphicon-trash"></i> 删除</a>
 

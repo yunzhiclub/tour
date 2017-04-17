@@ -4,6 +4,8 @@ use think\Request;
 use app\model\RegionModel;	//地区
 use app\model\CountryModel;	//国家
 use app\model\DestinationCityModel;	//目的城市管理
+use app\model\HomeCityModel;	//首页城市
+use app\model\HomeRegionModel;	//首页地区
 
 class DestinationController extends ApiController {
 	
@@ -67,11 +69,9 @@ class DestinationController extends ApiController {
 	 * @return array
 	 */
 	public function getHomeCitys() {
-		// example data
-		$data = ['日本', '韩国', '意大利', '美国'];
-			
-	 
-		return $this->response($data);
+		$HomeCityNames = HomeCityModel::getFourHomeCityNames();
+
+		return $this->response($HomeCityNames);
 	}
 
 	/**
@@ -79,11 +79,9 @@ class DestinationController extends ApiController {
 	 * @return array
 	 */
 	public function getHomeRegions() {
-		// example data
-		$data = ['欧洲', '美洲', '澳洲'];
-			
-	 
-		return $this->response($data);
+		$HomeRegionNames = HomeRegionModel::getThreeHomeRegionNames();
+
+		return $this->response($HomeRegionNames);
 	}
 
 	// 获取用户感兴趣的目的地
