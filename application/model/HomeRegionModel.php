@@ -18,9 +18,10 @@ class HomeRegionModel extends ModelModel
 		$Selves = $Self->where($map)->select();
 		//获取前三个首页地区
 		$threeSelves = array_splice($Selves, 0, 3);
-		foreach ($threeSelves as $threeSelf) {
-			$id = $threeSelf->getData('region_id');
-			$results[] = RegionModel::get($id)->getData('name');
+		//获取三个地区的id和名称
+		foreach ($threeSelves as $key => $threeSelf) {
+			$results[$key]['id'] = $threeSelf->getData('region_id');
+			$results[$key]['name'] = RegionModel::get($results[$key]['id'])->getData('name');
 		}
 		return $results;
 	}
