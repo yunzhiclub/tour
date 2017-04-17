@@ -15,12 +15,13 @@ class HomeCityModel extends ModelModel
 	{
 		$map['is_delete'] = '0';
 		$Self = new self;
-		$Selfs = $Self->where($map)->select();
+		$Selves = $Self->where($map)->select();
 		//获取前四个首页城市
-		$fourSelfs = array_splice($Selfs, 0, 4);
-		foreach ($fourSelfs as $fourSelf) {
-			$id = $fourSelf->getData('country_id');
-			$results[] = CountryModel::get($id)->getData('name');
+		$fourSelves = array_splice($Selves, 0, 4);
+		//获取四个城市的id和名称
+		foreach ($fourSelves as $key => $fourSelf) {
+			$results[$key]['id'] = $fourSelf->getData('country_id');
+			$results[$key]['name'] = CountryModel::get($results[$key]['id'])->getData('name');
 		}
 		return $results;
 	}
