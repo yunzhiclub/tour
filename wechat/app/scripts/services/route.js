@@ -137,7 +137,7 @@ angular.module('wechatApp')
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
-            var paramUrl = url + 'collecteTheRoute';
+            var paramUrl = url + 'collectRoute';
             var data = { customerId: customerId, routeId: routeId };
 
             // $http去后台获取数据
@@ -147,7 +147,7 @@ angular.module('wechatApp')
                     console.log('系统发生错误：' + response.data.error);
                 } else {
                     // 逻辑处理 
-                    self.routes = response.data.data;
+                    //self.routes = response.data.data;
                 }
                 deferred.resolve(self.routes); //执行成功
             }, function errorCallback(response) {
