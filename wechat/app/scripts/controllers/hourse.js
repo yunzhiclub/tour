@@ -56,7 +56,7 @@ angular.module('wechatApp')
             var $ctrl = $scope;
             $ctrl.animationsEnabled = true;
             // 打开弹出框
-            var open = function(size, parentSelector, room, money, callBack = undefined) {
+            var open = function(size, parentSelector, room, money, callBack) {
                 var parentElem = parentSelector ?
                     angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
                 var modalInstance = $uibModal.open({
