@@ -237,18 +237,19 @@ controller('ModalInstanceCtrl', function($uibModalInstance, items, $scope) {
         $ctrl.maxMoney = items.room.getRoom().maxMoney;
 
         $ctrl.ok = function() {
+            console.log(money);
             // 如果是第一次触发就去总金额中减去
             if (money === 0 && money === undefined) {
                 if (0 < $ctrl.selected.money && $ctrl.selected.money <= $ctrl.maxMoney) {
                     items.room.changeMaxMoney($ctrl.selected.money);
                 }
-                alert("输入的数字不正确");
+               // alert("输入的数字不正确");
             } else {
                 if (0 < $ctrl.selected.money && $ctrl.selected.money <= $ctrl.maxMoney) {
                     items.room.changeMaxMoney($ctrl.selected.money);
                     items.room.setMaxMoneyValue(items.room.getRoom().maxMoney + money);
                 }
-                alert("输入的数字不正确");
+                //alert("输入的数字不正确");
             }
 
             $uibModalInstance.close($ctrl.selected);

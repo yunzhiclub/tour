@@ -56,7 +56,7 @@ angular.module('wechatApp')
             var $ctrl = $scope;
             $ctrl.animationsEnabled = true;
             // 打开弹出框
-            var open = function(size, parentSelector, room, money, callBack = undefined) {
+            var open = function(size, parentSelector, room, money, callBack) {
                 var parentElem = parentSelector ?
                     angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
                 var modalInstance = $uibModal.open({
@@ -205,7 +205,7 @@ angular.module('wechatApp')
 
             // 必须是六人组必须每个房间都设置人的信息,目前生成邀约的所有的信息已经全有了
             $scope.submit = function() {
-
+                roomDatas = [];
                 // 把六个房间信息push进数组
                 roomDatas.push($scope.firstRoom);
                 roomDatas.push($scope.scendRoom);

@@ -11,7 +11,8 @@ angular.module('wechatApp')
     .factory('commonTools', function() {
         // Service logic
         // 变成二维数组
-        var formatArray = function(items, length = 3) {
+        var formatArray = function(items, length) {
+            length = (typeof length !== 'undefined')? length:3;
             if (items === undefined) {
                 return items;
             }
@@ -33,7 +34,7 @@ angular.module('wechatApp')
 
         // Public API here
         return {
-            formatArray: function(items, length = 3) {
+            formatArray: function(items, length) {
                 return formatArray(items, length);
             }
         };
