@@ -66,6 +66,10 @@ class DestinationController extends ApiController {
 
 	/**
 	 * 获取首页显示的目的城市(4个)
+     * json{
+     *  "name": "美国",
+     *  "id": 2,
+     * }
 	 * @return array
 	 */
 	public function getHomeCity() {
@@ -76,6 +80,10 @@ class DestinationController extends ApiController {
 
 	/**
 	 * 获取首页显示的目的地区(3个)
+     * json{
+     *  "name": "亚洲",
+     *  "id":1,
+     * }
 	 * @return array
 	 */
 	public function getHomeRegions() {
