@@ -135,10 +135,11 @@ class InvitationController extends ApiController {
 	 * @param
 	 * @return             array[]
 	 */
-	public function topay() {
+	public function toPay() {
 		$customerId = Request::instance()->param('customerId');
 		$invitationId = Request::instance()->param('invitationId');
         $bedId = Request::instance()->param('bedId');
+
 		return $this->response([]);
 	}
 
