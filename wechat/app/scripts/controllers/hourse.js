@@ -205,28 +205,20 @@ angular.module('wechatApp')
 
             // 必须是六人组必须每个房间都设置人的信息,目前生成邀约的所有的信息已经全有了
             $scope.submit = function() {
-                roomDatas = [];
-                // 把六个房间信息push进数组
-                roomDatas.push($scope.firstRoom);
-                roomDatas.push($scope.scendRoom);
-                roomDatas.push($scope.thirdRoom);
-                roomDatas.push($scope.fourthRoom);
-                roomDatas.push($scope.fifthRoom);
-                roomDatas.push($scope.sixthRoom);
+                if ($scope.isAgree === false) {
+                    alert("请选择接受条约");
+                } else {   // 把六个房间信息push进数组
+                    roomDatas.push($scope.firstRoom);
+                    roomDatas.push($scope.scendRoom);
+                    roomDatas.push($scope.thirdRoom);
+                    roomDatas.push($scope.fourthRoom);
+                    roomDatas.push($scope.fifthRoom);
+                    roomDatas.push($scope.sixthRoom);
 
-                // 定义变量
-                var totalMoney = 0;
+                    // 定义变量
+                    var totalMoney = 0;
 
-                // 求出选择房间设置的总金额
-                angular.forEach(roomDatas, function(value, key) {
-                    totalMoney += value.money;
-                });
-                if (totalMoney !== maxMoney) {
-                    // 还需要的钱数
-                    var moreMoney = maxMoney - totalMoney;
-                    alert('还差' + moreMoney + "元");
-                } else {
-                    // 遍历数组设置支付房间
+                    // 求出选择房间设置的总金额
                     angular.forEach(roomDatas, function(value, key) {
                         totalMoney += value.money;
                     });
