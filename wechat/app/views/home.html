@@ -72,14 +72,14 @@ router:#!/home
     </div>
     <div class="weui-flex__item " ng-repeat="region in homeRegions">
         <div class="placeholder ">
-            <button ng-click="getInvitationsByRegionId(region.id)" class="weui-btn weui-btn_mini weui-btn_default " style="width:70px;height:30px">{{region}}</button>
+            <button ng-click="getInvitationsByRegionId(region.id)" class="weui-btn weui-btn_mini weui-btn_default " style="width:70px;height:30px">{{region.name}}</button>
         </div>
     </div>
 </div>
 <div class="weui-flex " style="margin-left:15px ">
-    <div class="weui-flex__item " ng-repeat="country in homeCountrys">
+    <div class="weui-flex__item " ng-repeat="country in homeCountry">
         <div class="placeholder ">
-            <button ng-click="getInvitationsByCountryId(country.id)" class="weui-btn weui-btn_mini weui-btn_default " style="width:70px;height:30px">{{country}}</button>
+            <button ng-click="getInvitationsByCountryId(country.id)" class="weui-btn weui-btn_mini weui-btn_default " style="width:70px;height:30px">{{country.name}}</button>
         </div>
     </div>
 </div>

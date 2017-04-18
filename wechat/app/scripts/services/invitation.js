@@ -112,17 +112,17 @@ angular.module('wechatApp')
             return promise;
         };
 
-        var topay = function(postdata) {
+        var toPay = function(postData) {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
 
             var data = {
-                customerId: postdata.customerId,
-                bedId: postdata.bedId,
-                invitationId: postdata.invitationId,
+                customerId: postData.customerId,
+                bedId: postData.bedId,
+                invitationId: postData.invitationId,
             };
-            var paramUrl = url + 'topay';
+            var paramUrl = url + 'toPay';
             // $http去后台获取数据
             server.http(paramUrl, data, function successCallback(response) {
                 console.log(response);
@@ -285,8 +285,8 @@ angular.module('wechatApp')
             },
 
             // 支付
-            topay: function(postdata) {
-                return topay(postdata);
+            toPay: function(postData) {
+                return toPay(postData);
             },
 
             // 通过出发时间获取趣约
