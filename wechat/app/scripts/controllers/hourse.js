@@ -205,54 +205,55 @@ angular.module('wechatApp')
 
             // 必须是六人组必须每个房间都设置人的信息,目前生成邀约的所有的信息已经全有了
             $scope.submit = function() {
-                roomDatas = [];
-                // 把六个房间信息push进数组
-                roomDatas.push($scope.firstRoom);
-                roomDatas.push($scope.scendRoom);
-                roomDatas.push($scope.thirdRoom);
-                roomDatas.push($scope.fourthRoom);
-                roomDatas.push($scope.fifthRoom);
-                roomDatas.push($scope.sixthRoom);
+                if ($scope.isAgree === false) {
+                    alert("请选择接受条约");
+                } else {   // 把六个房间信息push进数组
+                    roomDatas.push($scope.firstRoom);
+                    roomDatas.push($scope.scendRoom);
+                    roomDatas.push($scope.thirdRoom);
+                    roomDatas.push($scope.fourthRoom);
+                    roomDatas.push($scope.fifthRoom);
+                    roomDatas.push($scope.sixthRoom);
 
-                // 定义变量
-                var totalMoney = 0;
+                    // 定义变量
+                    var totalMoney = 0;
 
-                // 求出选择房间设置的总金额
-                angular.forEach(roomDatas, function(value, key) {
-                    totalMoney += value.money;
-                });
-                if (totalMoney !== maxMoney) {
-                    // 还需要的钱数
-                    var moreMoney = maxMoney - totalMoney;
-                    alert('还差' + moreMoney + "元");
-                } else {
-                    // 遍历数组设置支付房间
+                    // 求出选择房间设置的总金额
                     angular.forEach(roomDatas, function(value, key) {
-                        if (value.tag === $scope.payRoomNumber) {
-                            value.isPay = 1;
-                        }
+                        totalMoney += value.money;
                     });
+                    if (totalMoney !== maxMoney) {
+                        // 还需要的钱数
+                        var moreMoney = maxMoney - totalMoney;
+                        alert('还差' + moreMoney + "元");
+                    } else {
+                        // 遍历数组设置支付房间
+                        angular.forEach(roomDatas, function(value, key) {
+                            if (value.tag === $scope.payRoomNumber) {
+                                value.isPay = 1;
+                            }
+                        });
 
-                    // 给order实例赋值
-                    order.isPublic = $scope.isPublic;
-                    order.deadLine = $scope.deadLine.getTime();
-                    order.roomDatas = roomDatas;
+                        // 给order实例赋值
+                        order.isPublic = $scope.isPublic;
+                        order.deadLine = $scope.deadLine.getTime();
+                        order.roomDatas = roomDatas;
 
-                    // 最后设置发起邀约的人
-                    order.customerId = $scope.customer.id;
+                        // 最后设置发起邀约的人
+                        order.customerId = $scope.customer.id;
 
-                    console.log(order);
+                        console.log(order);
 
-                    // 调用生成邀约的借口并支付
-                    invitation.saveTheInvitation(order).then(function successCallBack(response) {
-                        console.log(response);
-                    }, function errorCallBack() {
+                        // 调用生成邀约的借口并支付
+                        invitation.saveTheInvitation(order).then(function successCallBack(response) {
+                            console.log(response);
+                        }, function errorCallBack() {
 
-                    });
-                    // 调到支付成功页面
-                    $state.go('paysuccess');
+                        });
+                        // 调到支付成功页面
+                        $state.go('paysuccess');
+                    }
                 }
-
             };
         }
     ]);

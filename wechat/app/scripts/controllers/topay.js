@@ -35,14 +35,14 @@ angular.module('wechatApp')
 
         // 去支付并跳转到支付成功页面
         $scope.paysubmit = function() {
-        	// var postData = {
-        	// 	customerId: $scope.customer.id,
-        	// 	bedId: bedId,
-        	// 	invitationId: invitation.id,
-        	// };
+        	var postData = {
+        		customerId: $scope.customer.id,
+        		bedId: bedId,
+        		invitationId: invitation.id,
+        	};
 
-        	// // 去支付
-        	// invitation.topay(postData);
+        	// 去支付
+        	invitation.topay(postData);
             // 调到支付成功页面
             $state.go('paysuccess');
         };
