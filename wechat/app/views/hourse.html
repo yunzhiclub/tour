@@ -38,7 +38,7 @@ router:#!/hourse
                 <label for="exampleInput" class="weui-label">订单截止时间</label>
             </div>
             <div class="weui-cell__bd">
-                <input id="exampleInput" class="weui-input" type="datetime-local" placeholder="yyyy-MM-ddTHH:mm:ss" ng-model="deadLine" />
+                <input id="exampleInput" class="weui-input" type="datetime-local" placeholder="yyyy-MM-ddTHH" ng-model="deadLine" />
             </div>
         </div>
         <hr>
@@ -182,7 +182,7 @@ router:#!/hourse
             </span>
     </label>
     <div class="weui-btn-area">
-        <button  class="weui-btn weui-btn_primary" id="showTooltips"  ng-click="submit()"  ng-disabled="isAgree == false">去支付</button>
+        <button  class="weui-btn weui-btn_primary" id="showTooltips"  ng-click="submit()">去支付</button>
     </div>
 </form>
 <script type="text/ng-template" id="myModalContent.html">
