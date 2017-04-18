@@ -15,13 +15,27 @@ class HomeRegionModel extends ModelModel
 	{
 		$map['is_delete'] = '0';
 		$Self = new self;
-		$Selfs = $Self->where($map)->select();
-		//获取前三个首页地区
-		$threeSelfs = array_splice($Selfs, 0, 3);
-		foreach ($threeSelfs as $threeSelf) {
-			$id = $threeSelf->getData('region_id');
-			$results[] = RegionModel::get($id)->getData('name');
+		$Selves = $Self->where($map)->select();
+
+		//当$i=3时跳出循环
+		$i = 0;
+		foreach ($Selves as $key => $Self) {
+			//获取地区模型
+			$regionId = $Self->getData('region_id');
+			$map['id'] = $regionId;
+			$RegionModel = RegionModel::get($map);
+			//判断地区是否存在
+			if (!empty($RegionModel->getData())) {
+				$results[$i]['id'] = $regionId;
+				$results[$i]['name'] = $RegionModel->getData('name');
+				//$i为3时跳出循环
+				$i++;
+				if ($i === 3) {
+					break;
+				}
+			}
 		}
+		 
 		return $results;
 	}
 }

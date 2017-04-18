@@ -26,7 +26,7 @@ class CountryModel extends ModelModel
 	 * @author huangshuaibin
 	 * @return array           全部国家信息
 	 */
-	public static function getCountrysByRegionId($regionId)
+	public static function getCountryByRegionId($regionId)
 	{
 		//查询条件
 	   	$map = array('region_id' => $regionId);

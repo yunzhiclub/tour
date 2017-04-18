@@ -20,7 +20,7 @@ angular.module('wechatApp')
 
             if ($stateParams.regionId !== undefined) {
                 $scope.loading = true;
-                destination.getCountrysByRegionId($stateParams.regionId).then(function successCallBack(response) {
+                destination.getCountryByRegionId($stateParams.regionId).then(function successCallBack(response) {
                     // console.log(response);
                     // 把获取到的国家数组变成二维数组
                     $scope.countrys = commonTools.formatArray(response);

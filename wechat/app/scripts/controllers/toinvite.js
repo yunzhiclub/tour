@@ -11,14 +11,14 @@ angular.module('wechatApp')
     .controller('ToinviteCtrl', ['startcity', '$scope', 'order',
         function(startcity, $scope, order) {
 
-            $scope.startCitys = [];
+            $scope.startCity = [];
             $scope.selectedStartCityId = null;
             // 获取全部出发城市
-            startcity.getStartCitys().then(function successCallBack(startCitys) {
+            startcity.getStartCity().then(function successCallBack(startCity) {
 
-                $scope.startCitys = startCitys;
+                $scope.startCity = startCity;
                 // 设默认城市
-                $scope.selectedStartCityId = startCitys[0].id;
+                $scope.selectedStartCityId = startCity[0].id;
             }, function error() {});
 
             // 监听selectedStartCityId 并给邀约的单例的邀约startCityId赋值

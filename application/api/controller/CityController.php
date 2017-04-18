@@ -15,7 +15,7 @@ class CityController extends ApiController {
 	 * 获取全部的出发城市
 	 * @return             array;
 	 */
-	public function getStartCitys() {
+	public function getStartCity() {
 		$StartCitys = StartCityModel::all();
 		
 		return $this->response($StartCitys);

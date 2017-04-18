@@ -40,14 +40,14 @@ class DestinationController extends ApiController {
 	 * @author huangshuaibin
 	 * @return             array;
 	 */
-	public function getCountrysByRegionId() {
+	public function getCountryByRegionId() {
 
 	   	$regionId = Request::instance()->param('id');
 
-	   	$countrys = CountryModel::getCountrysByRegionId($regionId);
+	   	$countries = CountryModel::getCountryByRegionId($regionId);
 	   	
 
-		return $this->response($countrys);
+		return $this->response($countries);
 	}
 
 	/**
@@ -55,20 +55,24 @@ class DestinationController extends ApiController {
 	 * @author huangshuaibin
 	 * @return             array;
 	 */
-	public function getCitysByCountryId() {
+	public function getCityByCountryId() {
 	   	$countryid = Request::instance()->param('id');
 
 	   	// 通过国家id获取全部的城市的数据
-		$DestinationCitys = DestinationCityModel::getDestinationCitysByCountryId($countryid);
+		$DestinationCity = DestinationCityModel::getDestinationCityByCountryId($countryid);
 		
-		return $this->response($DestinationCitys);
+		return $this->response($DestinationCity);
 	}
 
 	/**
 	 * 获取首页显示的目的城市(4个)
+     * json{
+     *  "name": "美国",
+     *  "id": 2,
+     * }
 	 * @return array
 	 */
-	public function getHomeCitys() {
+	public function getHomeCity() {
 		$HomeCityNames = HomeCityModel::getFourHomeCityNames();
 
 		return $this->response($HomeCityNames);
@@ -76,6 +80,10 @@ class DestinationController extends ApiController {
 
 	/**
 	 * 获取首页显示的目的地区(3个)
+     * json{
+     *  "name": "亚洲",
+     *  "id":1,
+     * }
 	 * @return array
 	 */
 	public function getHomeRegions() {
@@ -85,16 +93,16 @@ class DestinationController extends ApiController {
 	}
 
 	// 获取用户感兴趣的目的地
-	public function getInterstedDestinations() {
+	public function getInterestedDestinations() {
 
-		$countryid = Request::instance()->param('customerId');
+		$countryId = Request::instance()->param('customerId');
 		
 		return $this->response([]);	
 	}
 
 	// 获取全部目的地城市
-	public function getDestinationCountrys(){
-		 $DestinationCountrys = DestinationCityModel::all();
-		 return $this->response($DestinationCountrys);
+	public function getDestinationCountry(){
+		 $getDestinationCountry = DestinationCityModel::all();
+		 return $this->response($getDestinationCountry);
 	}
 }
