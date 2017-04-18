@@ -44,10 +44,10 @@ class DestinationController extends ApiController {
 
 	   	$regionId = Request::instance()->param('id');
 
-	   	$countrys = CountryModel::getCountryByRegionId($regionId);
+	   	$countries = CountryModel::getCountryByRegionId($regionId);
 	   	
 
-		return $this->response($countrys);
+		return $this->response($countries);
 	}
 
 	/**
