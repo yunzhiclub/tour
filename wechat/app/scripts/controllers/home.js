@@ -33,8 +33,8 @@ angular.module('wechatApp')
 
 
         // 获取首页的citys
-        destination.getHomeCitys().then(function successCallBack(homeCountrys) {
-            $scope.homeCountrys = homeCountrys;
+        destination.getHomeCity().then(function successCallBack(homeCountry) {
+            $scope.homeCountry = homeCountry;
         }, function errorCallBack() {
 
         });

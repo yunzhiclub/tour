@@ -52,7 +52,7 @@ router:#!/ivdetail
          <button ui-sref="topay({bedIdIndex:{index:index, bedId: bed.id, money: bed.money}})" class="weui-btn weui-btn_plain-default" style="width:160px" ng-disabled="bed.isQualified !== 1"> 
              <div class="weui-cell">
                 <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-                    <img src="{{urlPrefix + bed.customer_head_img_url}}" style="width: 50px;display: block" class="img-circle"  height="65" width="55" ng-if="bed.customer_id !== 0 "/>
+                    <img src="{{bed.customer_head_img_url}}" style="width: 50px;display: block" class="img-circle"  height="65" width="55" ng-if="bed.customer_id !== 0 "/>
                     <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block" class="img-circle"  height="65" width="55" ng-if="bed.customer_id === 0 "/>
                     <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;" ng-if="bed.isQualified === 1">可选</span>
                 </div>
