@@ -29,9 +29,6 @@ angular.module('wechatApp')
         // 预定时间
         $scope.orderTime = new Date();
 
-        // 为获取来的图片URL加上前缀
-        $scope.urlPrefix = config.siteUrl + 'public/upload/';
-        console.log(invitation);
 
         // 去支付并跳转到支付成功页面
         $scope.paysubmit = function() {

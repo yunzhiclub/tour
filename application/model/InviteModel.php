@@ -240,4 +240,10 @@ class InviteModel extends ModelModel
 
         return $date . $timestamp . $customerId;
 	}
+
+	// 应邀
+    static public function toCatchTheInvite($customerId, $invitationId, $bedId)
+    {
+        // 获取要支付床位的金额和并给床位上的customer_id赋值
+    }
 }
