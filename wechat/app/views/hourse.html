@@ -38,11 +38,11 @@ router:#!/hourse
                 <label for="exampleInput" class="weui-label">订单截止时间</label>
             </div>
             <div class="weui-cell__bd">
-                <input id="exampleInput" class="weui-input" type="datetime-local" placeholder="yyyy-MM-ddTHH" ng-model="deadLine" />
+                <input id="exampleInput" class="weui-input" type="date" ng-model="deadLine" required/>
             </div>
         </div>
         <hr>
-      
+
             <div class="weui-flex">
                 <div class="weui-flex__item" style="margin-right:20px;margin-left:10px">
                     <div class="placeholder">
@@ -59,7 +59,7 @@ router:#!/hourse
                         </button>
                         <div class="weui-cell">
                             <div class="weui-cell__bd">
-                                <input type="radio" ng-model="payRoomNumber" ng-value="1" class="weui-agree__checkbox"> 支付
+                                <input id="1" type="radio" ng-model="payRoomNumber" ng-value="1" class="weui-agree__checkbox"><label for="1"> 支付</label>
                             </div>
                         </div>
                     </div>
@@ -79,7 +79,7 @@ router:#!/hourse
                         </button>
                         <div class="weui-cell">
                             <div class="weui-cell__bd">
-                                <input type="radio" ng-model="payRoomNumber" ng-value="2" class="weui-agree__checkbox"> 支付
+                                <input id="2" type="radio" ng-model="payRoomNumber" ng-value="2" class="weui-agree__checkbox"><label for="2"> 支付</label>
                             </div>
                         </div>
                     </div>
@@ -102,7 +102,7 @@ router:#!/hourse
                         </button>
                         <div class="weui-cell">
                             <div class="weui-cell__bd">
-                                <input type="radio" ng-model="payRoomNumber" ng-value="3" class="weui-agree__checkbox"> 支付
+                                <input id="3" type="radio" ng-model="payRoomNumber" ng-value="3" class="weui-agree__checkbox"><label for="3"> 支付</label>
                             </div>
                         </div>
                     </div>
@@ -122,7 +122,7 @@ router:#!/hourse
                         </button>
                         <div class="weui-cell">
                             <div class="weui-cell__bd">
-                                <input type="radio" ng-model="payRoomNumber" ng-value="4" class="weui-agree__checkbox"> 支付
+                                <input id="4" type="radio" ng-model="payRoomNumber" ng-value="4" class="weui-agree__checkbox"><label for="4"> 支付</label>
                             </div>
                         </div>
                     </div>
@@ -145,7 +145,7 @@ router:#!/hourse
                         </button>
                         <div class="weui-cell">
                             <div class="weui-cell__bd">
-                                <input type="radio" ng-model="payRoomNumber" ng-value="5" class="weui-agree__checkbox"> 支付
+                                <input id="5" type="radio" ng-model="payRoomNumber" ng-value="5" class="weui-agree__checkbox"><label for="5"> 支付</label>
                             </div>
                         </div>
                     </div>
@@ -165,7 +165,7 @@ router:#!/hourse
                         </button>
                         <div class="weui-cell">
                             <div class="weui-cell__bd">
-                                <input type="radio" ng-model="payRoomNumber" ng-value="6" class="weui-agree__checkbox"> 支付
+                                <input id="6" type="radio" ng-model="payRoomNumber" ng-value="6" class="weui-agree__checkbox"><label for="6"> 支付</label>
                             </div>
                         </div>
                     </div>
@@ -182,7 +182,7 @@ router:#!/hourse
             </span>
     </label>
     <div class="weui-btn-area">
-        <button  class="weui-btn weui-btn_primary" id="showTooltips"  ng-click="submit()">去支付</button>
+        <button  class="weui-btn weui-btn_primary" id="showTooltips"  ng-click="submit()"  ng-disabled="isAgree == false">去支付</button>
     </div>
 </form>
 <script type="text/ng-template" id="myModalContent.html">
