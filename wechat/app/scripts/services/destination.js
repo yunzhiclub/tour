@@ -36,11 +36,11 @@ angular.module('wechatApp')
             return promise;
         };
 
-        var getCountrysByRegionId = function(regionId) {
+        var getCountryByRegionId = function(regionId) {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
-            var paramUrl = url + 'getCountrysByRegionId';
+            var paramUrl = url + 'getCountryByRegionId';
             var data = { id: regionId };
             // $http去后台获取数据
             server.http(paramUrl, data, function successCallback(response) {
@@ -59,11 +59,11 @@ angular.module('wechatApp')
             return promise;
         };
 
-        var getCitysByCountryId = function(countryId) {
+        var getCityByCountryId = function(countryId) {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
-            var paramUrl = url + 'getCitysByCountryId';
+            var paramUrl = url + 'getCityByCountryId';
             var data = { countryId: countryId };
             // $http去后台获取数据
             server.http(paramUrl, data, function successCallback(response) {
@@ -82,11 +82,11 @@ angular.module('wechatApp')
         };
 
         // 获取首页显示的目的城市
-        var getHomeCitys = function() {
+        var getHomeCity = function() {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
-            var paramUrl = url + 'getHomeCitys';
+            var paramUrl = url + 'getHomeCity';
             var data = null;
 
             // $http去后台获取数据
@@ -132,13 +132,13 @@ angular.module('wechatApp')
         };
 
         // 获取感兴趣的目的地
-        var getInterstedDestinations = function(customerId) {
+        var getInterestedDestinations = function(customerId) {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
 
             // $http去后台获取数据
-            var paramUrl = url + 'getInterstedDestinations';
+            var paramUrl = url + 'getInterestedDestinations';
             var data = {customerId: customerId};
 
             // $http去后台获取数据
@@ -158,13 +158,13 @@ angular.module('wechatApp')
         };
 
         // 获取全部目的地城市
-        var getDestinationCountrys = function() {
+        var getDestinationCountry = function() {
               // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
 
             // $http去后台获取数据
-            var paramUrl = url + 'getDestinationCountrys';
+            var paramUrl = url + 'getDestinationCountry';
             var data = null;
 
             // $http去后台获取数据
@@ -192,18 +192,18 @@ angular.module('wechatApp')
             },
 
             // 获取地区所有的国家
-            getCountrysByRegionId: function(regionId) {
-                return getCountrysByRegionId(regionId);
+            getCountryByRegionId: function(regionId) {
+                return getCountryByRegionId(regionId);
             },
 
             // 获取国家所在的城市
-            getCitysByCountryId: function(countryId) {
-                return getCitysByCountryId(countryId);
+            getCityByCountryId: function(countryId) {
+                return getCityByCountryId(countryId);
             },
 
             // 获取首页显示的目的城市（4）
-            getHomeCitys: function() {
-                return getHomeCitys();
+            getHomeCity: function() {
+                return getHomeCity();
             },
 
 
@@ -213,13 +213,13 @@ angular.module('wechatApp')
             },
 
             // 获取感兴趣的目的地
-            getInterstedDestinations: function(customerId) {
+            getInterestedDestinations: function(customerId) {
                 return getInterstedDestinations(customerId);
             },
 
             // 获取全部目的地城市
-            getDestinationCountrys: function() {
-                return getDestinationCountrys();
+            getDestinationCountry: function() {
+                return getDestinationCountry();
             }
         };
     }]);
