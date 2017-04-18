@@ -182,7 +182,10 @@ class InviteModel extends ModelModel
 		$InviteModel->route_id = $Invitation->routeId;
 		$InviteModel->is_public = $Invitation->isPublic;
 		$InviteModel->deadline = $Invitation->deadLine;
-
+		//
+        $InviteModel->person_num = 6;
+        $InviteModel->pay_num = 1;
+        $InviteModel->unpay_num = 5;
 		//保存邀约
 		$InviteModel->save();
 
