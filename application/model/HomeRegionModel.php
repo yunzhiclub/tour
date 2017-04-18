@@ -35,7 +35,7 @@ class HomeRegionModel extends ModelModel
 				}
 			}
 		}
-		
+		 
 		return $results;
 	}
 }
