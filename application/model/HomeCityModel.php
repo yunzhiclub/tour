@@ -16,12 +16,24 @@ class HomeCityModel extends ModelModel
 		$map['is_delete'] = '0';
 		$Self = new self;
 		$Selves = $Self->where($map)->select();
-		//获取前四个首页城市
-		$fourSelves = array_splice($Selves, 0, 4);
-		//获取四个城市的id和名称
-		foreach ($fourSelves as $key => $fourSelf) {
-			$results[$key]['id'] = $fourSelf->getData('country_id');
-			$results[$key]['name'] = CountryModel::get($results[$key]['id'])->getData('name');
+
+		//当$i=3时跳出循环
+		$i = 0;
+		foreach ($Selves as $key => $Self) {
+			//获取地区模型
+			$countryId = $Self->getData('country_id');
+			$map['id'] = $countryId;
+			$CountryModel = CountryModel::get($map);
+			//判断地区是否存在
+			if (!empty($CountryModel->getData())) {
+				$results[$i]['id'] = $countryId;
+				$results[$i]['name'] = $CountryModel->getData('name');
+				//$i为3时跳出循环
+				$i++;
+				if ($i === 4) {
+					break;
+				}
+			}
 		}
 		return $results;
 	}
