@@ -139,7 +139,9 @@ class InvitationController extends ApiController {
 		$customerId = Request::instance()->param('customerId');
 		$invitationId = Request::instance()->param('invitationId');
         $bedId = Request::instance()->param('bedId');
-
+        // 去保存数据生成订单
+        InviteModel::toCatchTheInvite($customerId, $invitationId, $bedId);
+        die();
 		return $this->response([]);
 	}
 
