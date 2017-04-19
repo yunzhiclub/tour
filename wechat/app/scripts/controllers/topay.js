@@ -19,8 +19,7 @@ angular.module('wechatApp')
         var money = bedIdIndex.money;
 
         // 用factory传过来当前的邀约
-        var invitations = invitation.getInvitations();
-        var Invite = invitations[index];
+        var Invite = invitation.getCacheInvitation();
         $scope.invitation = Invite;
 
         // 绑定钱和床位id
