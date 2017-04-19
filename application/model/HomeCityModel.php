@@ -17,7 +17,6 @@ class HomeCityModel extends ModelModel
 		$map['is_delete'] = '0';
 		$Self = new self;
 		$Selves = $Self->where($map)->select();
-		var_dump($Selves);
 
 		//  截取四个首页城市
 		$i = 0;
