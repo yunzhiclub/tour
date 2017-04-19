@@ -3,7 +3,7 @@
 /**
  * @ngdoc function
  * @name wechatApp.controller:CollectionlsCtrl
- * @description
+ * @description`
  * # CollectionlsCtrl
  * Controller of the wechatApp
  */
