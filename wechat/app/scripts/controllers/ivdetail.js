@@ -63,7 +63,7 @@ angular.module('wechatApp')
             if (bed.sex === $scope.customer.sex && bed.old === oldType) {
                 bed.isQualified = 1; 
             } else {
-                bed.isQualified = 0; // 为了测试先都允许选择房间
+                bed.isQualified = 1; // 为了测试先都允许选择房间
             }
         });
         // 为获取来的图片URL加上前缀

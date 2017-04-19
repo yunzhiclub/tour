@@ -182,7 +182,10 @@ class InviteModel extends ModelModel
 		$InviteModel->route_id = $Invitation->routeId;
 		$InviteModel->is_public = $Invitation->isPublic;
 		$InviteModel->deadline = $Invitation->deadLine;
-
+		//
+        $InviteModel->person_num = 6;
+        $InviteModel->pay_num = 1;
+        $InviteModel->unpay_num = 5;
 		//保存邀约
 		$InviteModel->save();
 
@@ -237,4 +240,53 @@ class InviteModel extends ModelModel
 
         return $date . $timestamp . $customerId;
 	}
+
+	/*
+	 * 应邀
+	 * @param $customerId, $invitationId, $bedId
+	 * @return false true
+	 * */
+    static public function toCatchTheInvite($customerId, $invitationId, $bedId)
+    {
+        // 获取要支付床位的金额和并给床位上的customer_id赋值
+        if (empty($bedId)) {
+            return false;
+        }
+        // 获得床位m层
+        $BedModel = BedModel::get($bedId);
+
+        // 获取要支付的金额
+        $money = $BedModel->getData('money');
+        if(empty($money)) {
+            return false;
+        }
+        // 调用微信接口并支付
+
+        // 向床位model中添加customer_id
+        $BedModel->customer_id = $customerId;
+
+        // 保存数据
+        $BedModel->save();
+
+        if (empty($invitationId)) {
+            return false;
+        }
+        // 获取邀约的model并保存支付人数和未支付人数
+        $Invite = InviteModel::get($invitationId);
+        $payNum = $Invite->pay_num;
+        $Invite->pay_num = $payNum + 1;
+        $Invite->unpay_num = $Invite->person_num - $payNum - 1 ;
+
+        // 保存邀约
+        $Invite->save();
+
+        // 生成一条order数据
+        $OrderModel = new OrderModel;
+        $OrderModel->customer_id = $customerId;
+        $OrderModel->invite_id = $invitationId;
+        // 生成订单号
+        $OrderModel->number = self::getOrderNumber($customerId);
+        $OrderModel->save();
+        return true;
+    }
 }
