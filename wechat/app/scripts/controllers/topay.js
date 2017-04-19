@@ -20,8 +20,8 @@ angular.module('wechatApp')
 
         // 用factory传过来当前的邀约
         var invitations = invitation.getInvitations();
-        var invitation = invitations[index];
-        $scope.invitation = invitation;
+        var Invite = invitations[index];
+        $scope.invitation = Invite;
 
         // 绑定钱和床位id
         $scope.money = money;
@@ -38,11 +38,14 @@ angular.module('wechatApp')
         	var postData = {
         		customerId: $scope.customer.id,
         		bedId: bedId,
-        		invitationId: invitation.id,
+        		invitationId: Invite.id,
         	};
-
         	// 去支付
-        	invitation.topay(postData);
+        	invitation.toPay(postData).then(function successCallBack(response) {
+                console.log(response);
+            }, function errorCallBack() {
+
+            });
             // 调到支付成功页面
             $state.go('paysuccess');
         };
