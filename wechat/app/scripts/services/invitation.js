@@ -12,6 +12,8 @@ angular.module('wechatApp')
         // Service logic
         var self = this;
         self.invitations = [];
+        // 定义临时保存处理后的邀约
+        self.cache = {};
         
         var url = 'Invitation/';
         var getChoosedInvitations = function() {
@@ -238,7 +240,12 @@ angular.module('wechatApp')
         var getInvitations = function() {
             return self.invitations;
         };
-
+        var setCacheInvitation = function (Invitation) {
+            self.cache = Invitation;
+        };
+        var getCacheInvitation = function () {
+            return self.cache;
+        };
         var getAllInvitations = function () {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
@@ -318,5 +325,15 @@ angular.module('wechatApp')
             getAllInvitations:function () {
                 return getAllInvitations();
             },
+
+            // 设置临时的邀约
+            setCacheInvitation:function (invitation) {
+                setCacheInvitation(invitation);
+            },
+
+            // 获得临时邀约
+            getCacheInvitation:function () {
+                return getCacheInvitation();
+            }
         };
     }]);
