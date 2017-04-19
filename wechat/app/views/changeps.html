@@ -1,0 +1,100 @@
+<!-- 
+description 个人信息修改页面
+router:#!/changeps
+ -->
+<div class="weui-cells weui-cells_form">
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <div class="weui-uploader">
+                <div class="weui-uploader__hd">
+                    <p class="weui-uploader__title">上传头像</p>
+                </div>
+                <div class="weui-uploader__bd">
+                    <button type="" ng-click="chooseImg(1)"><img src="{{customer.headImg.headImgUrl}}" alt="" height="80" width="80" class="img-circle"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">昵称:</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="" pattern="" placeholder="请输入昵称" value="{{customer.nickName}}" />
+        </div>
+    </div>
+    <div class="weui-cell weui-cell_vcode">
+        <div class="weui-cell__hd">
+            <label class="weui-label">绑定手机</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="tel" placeholder="单行输入" value="{{customer.phone}}">
+        </div>
+        <div class="weui-cell__ft">
+            <button class="weui-vcode-btn">获取验证码</button>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">邮箱</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="" pattern="" placeholder="单行输入" value="{{customer.email}}" />
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">性别</label>
+        </div>
+        <div class="weui-cell__bd">
+            <div class="weui-cell weui-cell_select weui-cell_select-before">
+                <select class="weui-select" name="sex" ng-model="customer.sex">
+                    <option ng-repeat="option in options" ng-value="option.value">{{option.sex}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label for="" class="weui-label">出生日期</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="date" value="{{customer.birthday | date:'yyyy-MM-dd'}}" />
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">所在城市</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="" pattern="" placeholder="" value="{{customer.city}}" />
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">绑定身份证</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="" pattern="" placeholder="请输入身份证号" value="{{customer.idcard}}" />
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <div class="weui-uploader">
+                <div class="weui-uploader__hd">
+                    <p class="weui-uploader__title">上传身份证正反面用于审核</p>
+                </div>
+                <div class="weui-uploader__bd">
+                    <button type="" ng-click="chooseImg(2)"><img src="{{customer.frontIdCardImg.frontIdCardImgUrl}}" alt="正面" height="80" width="80" class="img-circle"></button>
+                    <button type="" ng-click="chooseImg(3)"><img src="{{customer.backIdCardImg.backIdCardImgUrl}}" alt="反面" height="80" width="80" class="img-circle"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page__bd page__bd_spacing">
+    <a ui-sref="personal" class="weui-btn weui-btn_primary" style="margin-right:20px;margin-left:20px;margin-top: 70px;margin-bottom:20px" ng-click="submit()">
+        保存修改
+        </a>
+</div>
+

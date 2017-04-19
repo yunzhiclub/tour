@@ -1,0 +1,76 @@
+{extend name="index" /}
+{block name="content"}
+<div class="row">
+    <div class="col-md-12">
+        <div class="span12">
+            <hr />
+            <div class="row">
+                <div class="col-md-10">
+                    <form action="{:url('index')}" method="get" class="form-inline">
+                        <div class="col-md-3">
+                            <label>出发地</label>&nbsp;
+                            <select class="form-control" name="start_city_id" >
+                                <option value="0">无</option>
+                               {volist name="basicInfo['StartCityModels']" id="StartCityModel"}
+                               <option value="{$StartCityModel->getData('id')}">{$StartCityModel->getData('name')}</option>
+                               {/volist}
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label>目的地</label>&nbsp;
+                                <select class="form-control" name="destination_city_id">
+                                    <option value="0">无</option>
+                                    {volist name="basicInfo['DestinationCityModels']" id="DestinationCityModel"}
+                                   <option value="{$DestinationCityModel->getData('id')}">{$DestinationCityModel->getData('name')}</option>
+                                   {/volist}
+                                </select>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <input name="name" type="text" class="form-control" placeholder="名称..." id="name" value="{:input('get.name')}">
+                            </div>
+                            <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-2 text-right">
+                    <tr>
+                        <a class="btn btn-success" href="{:url('add')}"><i class="glyphicon glyphicon-plus">新增</i></a>
+                    </tr>
+                </div>
+            </div>
+            <hr />
+            <table class="table table-hover table-bordered">
+                <tr class="info">
+                    <th>序号</th>
+                    <th>名称</th>
+                    <th>出发地</th>
+                    <th>目的地</th>
+                    <th style="text-align:right">标价</th>
+                    <th style="text-align:right">实际价格</th>
+                    <th>酒店</th>
+                    <th>首页推荐</th>
+                    <th>操作</th>
+                </tr>
+                
+                {volist name="RouteModels" id="RouteModel" key="key"}
+                <tr>
+                    <td>{$key}</td>
+                    <td><a href="{:url('detail?id=' . $RouteModel->getData('id'))}">{$RouteModel->getData('name')}</a></td>
+                    <td>{eq name="$RouteModel->StartCityModel()" value=""}无{else /}{$RouteModel->StartCityModel()->getData('name')}{/eq}</td>
+                    <td>{eq name="$RouteModel->DestinationCityModel()" value=""}无{else /}{$RouteModel->DestinationCityModel()->getData('name')}{/eq}</td>
+                    <td style="text-align:right">{$RouteModel->money_format($RouteModel->getData('standard_price'))}</td>
+                    <td style="text-align:right">{$RouteModel->money_format($RouteModel->getData('actual_price'))}</td>
+                    <td>{$RouteModel->HotelModel()->getData('name')}</td>
+                    <td>{eq name="$RouteModel->isShowHomeRecommendWeight()" value=""} 是 {else /} 否 {/eq}</td>
+                        <td>
+                         <a class="btn btn-sm btn-primary" href="{:url('edit?id=' . $RouteModel->getData('id'))}"><i class="glyphicon glyphicon-pencil"></i> 编辑</a>
+                        <a class="btn btn-sm btn-danger" href="{:url('delete?id=' . $RouteModel->getData('id'))}"><i class="glyphicon glyphicon-trash"></i> 删除</a>  
+                        </td>
+                </tr>
+                {/volist}
+            </table>
+        </div>
+    </div>
+</div>
+{/block}

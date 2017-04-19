@@ -1,0 +1,56 @@
+<!-- 
+description 经典小团填写订单界面 
+router:#!/clsorder
+ -->
+<div class="weui-cells__title">预订人信息</div>
+    <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">姓名</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" placeholder="请输入姓名"/>
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">手机</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" placeholder="请输入正确的手机号">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label for="" class="weui-label">邮箱</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" placeholder="请输入正确的邮箱">
+                </div>
+            </div>
+        </div>
+         <div class="weui-cells">
+        <label for="weuiAgree" class="weui-agree">
+            <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
+            <span class="weui-agree__text">
+                我确认全部出游人都满足出游条件
+            </span>
+        </label>
+        <div class="weui-cells__title">签证材料确认</div>
+        <div class="weui-cells">
+            <a class="weui-cell weui-cell_access" href="javascript:;">
+                <div class="weui-cell__bd">
+                    <p>意大利ADS团队签证</p>
+                </div>
+                <div class="weui-cell__ft">
+                </div>
+            </a>
+        </div>
+        <label for="weuiAgree" class="weui-agree">
+            <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
+            <span class="weui-agree__text">
+                我已阅读并接受<a href="javascript:void(0);">预定须知、合同、保险等条款</a>
+            </span>
+        </label>
+       <div class="weui-form-preview" style="margin-top:126px;position:relative;bottom:0px;background-color:#F0E68C;clear:both;text-align:center;">
+            <div class="weui-form-preview__ft">
+                <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">总价￥34900</a>
+                <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" ui-sref="hourse">提交订单</button>
+            </div>
+        </div>

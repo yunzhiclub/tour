@@ -1,0 +1,107 @@
+{extend name="index" /} {block name="content"}
+<div class="panel-body"></div>
+<div class="row" ng-app="app"  ng-controller="routeController">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row" style="font-size:20px;">
+                    <div class="col-md-12">
+                        <input id="model" type="hidden" name="id" value="<?php echo get_class($RouteModel); ?>">
+                        <input id="id" type="hidden" name="id" value="{$RouteModel->id}">
+                        <h1>{$RouteModel->getData('name')}</h1>
+                        <hr>
+                        <div>
+                        	<label>出发地：</label>{eq name="$RouteModel->StartCityModel()" value=""}无{else /}{$RouteModel->StartCityModel()->getData('name')}{/eq}
+                        </div>
+                        <div>
+                        	<label>目的地：</label>{eq name="$RouteModel->DestinationCityModel()" value=""}无{else /}{$RouteModel->DestinationCityModel()->getData('name')}{/eq}
+                        </div>
+                        <div>
+                            <label>酒店：</label>{eq name="$RouteModel->HotelModel()" value=""}无{else /}{$RouteModel->HotelModel()->getData('name')}{/eq}
+                        </div>
+                        <div>
+                            <label>出发航班：</label>{eq name="$RouteModel->BeginFlightModel()" value=""}无{else /}{$RouteModel->BeginFlightModel()->getData('number')}{/eq}
+                        <div>
+                            <label>返回航班：</label>{eq name="$RouteModel->BackFlightModel()" value=""}无{else /}{$RouteModel->BackFlightModel()->getData('number')}{/eq}
+                        </div>
+                        <div>
+                            <label>开始日期：</label>{$RouteModel->getData('start_time')}
+                        </div>
+                        <div>
+                            <label>行程天数：</label>{$RouteModel->getData('days')}
+                        </div>
+                        <div>
+                            <label>出发日期——起：</label>2{$RouteModel->getData('begin_time')}
+                        </div>
+                        <div>
+                            <label>出发日期——止：</label>{$RouteModel->getData('deadline')}
+                        </div>
+                        <table class="table table-hover table-bordered" style="width: 400px;">
+                            <tr>
+                                <th width="30%">日期</th>
+                                <th width="70%">价格</th>
+                            </tr>
+                            <tr ng-repeat="(key, date) in dates">
+                                <td>{{date.date}}</td>
+                                <td>{{date.price}}</td>
+                            </tr>
+                        </table>
+                        <div>
+                            <label>描述信息：</label>{$RouteModel->getData('description')}
+                        </div>
+                        <div>
+                            <label>选择间数：</label>{$RouteModel->getData('check_in_rooms')}
+                        </div>
+                        <div>
+                            <label>入住天数：</label>{$RouteModel->getData('check_in_days')}
+                        </div>
+                        <div>
+                            <label>起价：</label>{$RouteModel->getData('starting_price')}
+                        </div>
+                        <div>
+                            <label>标价：</label>{$RouteModel->getData('standard_price')}
+                        </div>
+                        <div>
+                            <label>选择客服：</label>{$RouteModel->getData('service_phone')}
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div>
+                                    <label>首页推荐：</label>{eq name="$RouteModel->isShowHomeRecommendWeight()" value=""} 是 {else /} 否 {/eq}
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                {eq name="$RouteModel->isShowHomeRecommendWeight()" value="0"}
+                                <div>
+                                    <label>权重：</label>
+                                    {$RouteModel->HomeRecommendModel()->getData('weight')}
+                                </div>
+                                {/eq}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div>
+                                    <label>精选：</label>{eq name="$RouteModel->isShowChosenWeight()" value=""} 是 {else /} 否 {/eq}
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                {eq name="$RouteModel->isShowChosenWeight()" value="0"}
+                                <div>
+                                    <label>权重：</label>
+                                    {$RouteModel->ChosenModel()->getData('weight')}
+                                </div>
+                                {/eq}
+                            </div>
+                        </div>
+                        {include file="picture/detail1"}
+                        <div style="float:left">
+                        	<label>路线简介:</label>{$RouteModel->getData('content')}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="Route/detailJs"}
+{/block}
