@@ -8,10 +8,6 @@
  * Controller of the wechatApp
  */
 angular.module('wechatApp')
-  .controller('CollectionlsCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('CollectionlsCtrl', ['$scope', 'customer', function ($scope, customer) {
+
+  }]);
