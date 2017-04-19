@@ -38,7 +38,11 @@ angular.module('wechatApp')
         }, function errorCallBack() {
 
         });
+        console.log(destination.getHomeRegions().then(function successCallBack(homeRegions) {
+            $scope.homeRegions = homeRegions;
+        }, function errorCallBack() {
 
+        }));
         // 获取首页的地区
         destination.getHomeRegions().then(function successCallBack(homeRegions) {
             $scope.homeRegions = homeRegions;
