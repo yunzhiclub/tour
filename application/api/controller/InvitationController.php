@@ -126,7 +126,6 @@ class InvitationController extends ApiController {
 		if (false === InviteModel::saveInvitation($stringInvitation)) {
 			return '保存失败';
 		}
-		die();
 		return $this->response(['1']);
 	}
 
@@ -141,7 +140,6 @@ class InvitationController extends ApiController {
         $bedId = Request::instance()->param('bedId');
         // 去保存数据生成订单
         InviteModel::toCatchTheInvite($customerId, $invitationId, $bedId);
-        die();
 		return $this->response([]);
 	}
 

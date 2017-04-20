@@ -217,6 +217,8 @@ class InviteModel extends ModelModel
 				$OrderModel->number = self::setOrderNumber($Invitation->customerId);
 				$OrderModel->save();
 				
+				$OrderId = $OrderModel->getData('id');
+				$BedModel->order_id = $OrderId;
 				//保存customer_id进相应的床位表
 				$BedModel->customer_id = $Invitation->customerId;
 			}
@@ -283,8 +285,7 @@ class InviteModel extends ModelModel
         // 向床位model中添加customer_id
         $BedModel->customer_id = $customerId;
 
-        // 保存数据
-        $BedModel->save();
+       
 
         if (empty($invitationId)) {
             return false;
@@ -305,6 +306,10 @@ class InviteModel extends ModelModel
         // 生成订单号
         $OrderModel->number = self::getOrderNumber($customerId);
         $OrderModel->save();
+        $OrderId = $OrderModel->getData('id');
+        $BedModel->order_id = $OrderId;
+         // 保存数据
+        $BedModel->save();
         return true;
     }
 }
