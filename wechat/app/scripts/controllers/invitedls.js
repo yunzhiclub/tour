@@ -33,7 +33,7 @@ angular.module('wechatApp')
 
   		// 获取全部出发城市
     	$scope.getStartCitys = function() {
-    		startcity.getStartCitys().then(function successCallBack(response) {
+    		startcity.getStartCity().then(function successCallBack(response) {
     			$scope.startCitys = response;
     		}, function errorCallBack(){
 
@@ -73,7 +73,7 @@ angular.module('wechatApp')
 
     	// 获取全部目的地国家
     	$scope.getDestinationCountrys = function() {
-    		destination.getDestinationCountrys().then(function successCallBack(response) {
+    		destination.getDestinationCountry().then(function successCallBack(response) {
     			$scope.destinationCountrys = response;
     			console.log(response);
     		}, function errorCallBack(){
