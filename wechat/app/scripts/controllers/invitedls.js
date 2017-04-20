@@ -8,8 +8,23 @@
  * Controller of the wechatApp
  */
 angular.module('wechatApp')
-  .controller('InvitedlsCtrl', ['$scope', 'startcity', 'destination', 'invitation', 'config', function ($scope, startcity, destination, invitation, config) {
+  .controller('InvitedlsCtrl', ['$scope', 'startcity', 'destination', 'invitation', 'config', '$timeout', function ($scope, startcity, destination, invitation, config, $timeout) {
 
+         $scope.invitations = [];
+
+        // 时间一秒减一
+         var change = function() {
+            angular.forEach($scope.invitations, function(value) {
+                    // 离截止时间的秒数减一
+                    if (value.deadline === 0) {
+                        value.type = 1;
+                    }
+                    value.deadline = value.deadline - 1;
+                });
+            $timeout(change, 1000);
+        };
+
+        change();
         // 数据加载过程中隐藏邀约页面
         $scope.loading = true;
 
@@ -18,7 +33,7 @@ angular.module('wechatApp')
 
   		// 获取全部出发城市
     	$scope.getStartCitys = function() {
-    		startcity.getStartCitys().then(function successCallBack(response) {
+    		startcity.getStartCity().then(function successCallBack(response) {
     			$scope.startCitys = response;
     		}, function errorCallBack(){
 
@@ -32,7 +47,7 @@ angular.module('wechatApp')
     		invitation.getInvitationsByStartCityId(cityId).then(function successCallBack(response) {
     			 angular.forEach(response, function(value) {
                     // 计算离截止时间的秒数
-                    value.invite_deadline = Math.floor((value.invite_deadline - new Date().getTime()) / 1000);
+                    value.deadline = Math.floor((value.deadline - new Date().getTime()) / 1000);
                      // 如果有路线对应的出发时间id证明选用出发时间表中的日期并给路线默认出发时间赋值
                      if (value.start_time_id === 0) {
                          value.route_start_time = value.start_time_date;
@@ -58,7 +73,7 @@ angular.module('wechatApp')
 
     	// 获取全部目的地国家
     	$scope.getDestinationCountrys = function() {
-    		destination.getDestinationCountrys().then(function successCallBack(response) {
+    		destination.getDestinationCountry().then(function successCallBack(response) {
     			$scope.destinationCountrys = response;
     			console.log(response);
     		}, function errorCallBack(){
@@ -73,7 +88,7 @@ angular.module('wechatApp')
     		invitation.getInvitationsByCountryId(countryId).then(function successCallBack(response) {
     			 angular.forEach(response, function(value) {
                     // 计算离截止时间的秒数
-                    value.invite_deadline = Math.floor((value.invite_deadline - new Date().getTime()) / 1000);
+                    value.deadline = Math.floor((value.deadline - new Date().getTime()) / 1000);
                      // 如果有路线对应的出发时间id证明选用出发时间表中的日期并给路线默认出发时间赋值
                      if (value.start_time_id === 0) {
                          value.route_start_time = value.start_time_date;
@@ -128,7 +143,7 @@ angular.module('wechatApp')
           invitation.getAllInvitations().then(function successCallBack(response) {
               angular.forEach(response, function(value) {
                   // 计算离截止时间的秒数
-                  value.invite_deadline = Math.floor((value.invite_deadline - new Date().getTime()) / 1000);
+                  value.deadline = Math.floor((value.deadline - new Date().getTime()) / 1000);
                   // 如果有路线对应的出发时间id证明选用出发时间表中的日期并给路线默认出发时间赋值
                   if (value.start_time_id === 0) {
                       value.route_start_time = value.start_time_date;
