@@ -18,10 +18,15 @@ class InviteRouteStartcityDestcityCustomerStarttimeViewModel extends ModelModel
         // 拼接上传图片的前缀
         $pathconfig = 'http://127.0.0.1/tour'. DS .'public' . DS . 'upload' . DS;
 
-		// 查询视图获取符合条件的邀约
+       	// 查询视图获取符合条件的邀约
 		$InviteRouteStartcityDestcityCustomerStarttimeViewModel = new InviteRouteStartcityDestcityCustomerStarttimeViewModel;
-		$invitations = $InviteRouteStartcityDestcityCustomerStarttimeViewModel->where($type, 'in', $map)->select();
-
+        if ($type === null && $map === null) {
+        	$invitations = InviteRouteStartcityDestcityCustomerStarttimeViewModel::all();
+        } else {
+        	$invitations = $InviteRouteStartcityDestcityCustomerStarttimeViewModel->where($type, 'in', $map)->select();
+        }
+	
+		
 		// 判断获取到邀约
 		if (empty($invitations)) {
 			return $invitations;

@@ -184,7 +184,7 @@ class InvitationController extends ApiController {
      * 获取全部的趣约
 	 * */
 	public function getAllInvitations() {
-		$Invitations = InviteRouteStartcityDestcityCustomerStarttimeViewModel::all();
+		$Invitations = InviteRouteStartcityDestcityCustomerStarttimeViewModel::getInviteByMap(null, null);
 		return $this->response($Invitations);
     }
 
