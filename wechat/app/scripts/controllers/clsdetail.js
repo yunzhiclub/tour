@@ -16,6 +16,7 @@ angular.module('wechatApp')
             // 根据路由传过来的数组索引获取路线详细信息
             var index = $stateParams.routeId;
             var routeDetail = routes[index];
+           
           
             // 提取路线的出发城市名字和路线id和详细内容描述和默认出发时间和默认价格
             $scope.startCityName = routeDetail.route.start_city_name;
