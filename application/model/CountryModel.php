@@ -75,7 +75,7 @@ class CountryModel extends ModelModel
 			return $result;
 		}
 
-		return null;
+		return [];
 
 	}
 }
