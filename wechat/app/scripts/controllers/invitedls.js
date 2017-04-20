@@ -71,10 +71,10 @@ angular.module('wechatApp')
     		});
     	};
 
-    	// 获取全部目的地国家
-    	$scope.getDestinationCountrys = function() {
-    		destination.getDestinationCountry().then(function successCallBack(response) {
-    			$scope.destinationCountrys = response;
+    	// 获取全部目的地城市
+    	$scope.getDestinationCities = function() {
+    		destination.getDestinationCities().then(function successCallBack(response) {
+    			$scope.destinationCities = response;
     			console.log(response);
     		}, function errorCallBack(){
 
@@ -82,10 +82,10 @@ angular.module('wechatApp')
     	};
 
     	// 获取按目的地国家为筛选条件的邀约
-    	$scope.getInvitationsByCountryId = function(countryId) {
+    	$scope.getInvitationsByDestinationCityId = function(cityId) {
             // 开始加载数据
             $scope.loading = true;
-    		invitation.getInvitationsByCountryId(countryId).then(function successCallBack(response) {
+    		invitation.getInvitationsByDestinationCityId(cityId).then(function successCallBack(response) {
     			 angular.forEach(response, function(value) {
                     // 计算离截止时间的秒数
                     value.deadline = Math.floor((value.deadline - new Date().getTime()) / 1000);
