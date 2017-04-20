@@ -20,10 +20,10 @@
                     <th style="text-align:right">金额</th>
                 </tr>
                 <tr>
-                    <td>{$Bed->getData('number')}</td>
+                    <td>{$Bed->getData('id')}</td>
                     <td>{$Bed->Invite->getData('number')}</td>
                     <td>{$Bed->Customer->getData('nick_name')}</td>
-                    <td>{$Bed->Customer->getData('sex')}</td>
+                    <td>{$Bed->Customer->sex}</td>
                     <td style="text-align:right">{$Bed->money_format($Bed->getData('money'))}</td>
                 </tr>
             </table>
