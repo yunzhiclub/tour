@@ -75,6 +75,7 @@ class CustomerController extends ApiController
     /*
     json[
     {
+    	'id': '1',
         'name': '欧洲七日游',
         'description': '这是第二个测试',
     }
@@ -83,6 +84,7 @@ class CustomerController extends ApiController
     public function getCollectionsByCustomerId()
     {
         $CustomerId = Request::instance()->param('customer_id');
+
        // 获取该客户的收藏
        $Collections =  CollectionModel::getCollectionsByCustomerId($CustomerId);
        
