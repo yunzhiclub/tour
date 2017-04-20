@@ -168,7 +168,7 @@ angular.module('wechatApp')
                     // 处理数据
 
                 }
-                deferred.resolve(); // 执行成功
+                deferred.resolve(response.data.data); // 执行成功
             }, function errorCallback(response) {
                 console.log(response);
                 deferred.reject(); //执行失败

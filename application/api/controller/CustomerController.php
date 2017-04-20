@@ -87,7 +87,6 @@ class CustomerController extends ApiController
 
        // 获取该客户的收藏
        $Collections =  CollectionModel::getCollectionsByCustomerId($CustomerId);
-       
        return $this->response($Collections);  
     }
 

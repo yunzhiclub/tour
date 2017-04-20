@@ -12,6 +12,7 @@ angular.module('wechatApp')
   		var customerId = $scope.customer.id;
   		var openid = $scope.customer.openid;
   		customer.getCollectionsByCustomer_id(customerId, openid).then(function successCallBack(response) {
+  			console.log(response);
   			$scope.collections = response;
   		}, function errorCallBack() {
 
