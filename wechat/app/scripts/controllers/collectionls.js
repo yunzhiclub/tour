@@ -3,15 +3,16 @@
 /**
  * @ngdoc function
  * @name wechatApp.controller:CollectionlsCtrl
- * @description
+ * @description`
  * # CollectionlsCtrl
  * Controller of the wechatApp
  */
 angular.module('wechatApp')
-  .controller('CollectionlsCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('CollectionlsCtrl', ['$scope', 'customer', function ($scope, customer) {
+  		var customerId = $scope.customer.id;
+  		customer.getCollectionsByCustomer_id(customerId).then(function successCallBack(response) {
+  			$scope.collections = response;
+  		}, function errorCallBack() {
+
+  		});
+  }]);
