@@ -9,22 +9,13 @@ router:#!/collectionls
                 </div>
             </div>
             <div class="weui-panel__bd">
-                <a ui-sref="clsdetail" class="weui-media-box weui-media-box_appmsg">
+                <a ui-sref="clsdetail" class="weui-media-box weui-media-box_appmsg" ng-repeat="collection in collections">
                     <div class="weui-media-box__hd">
                         <img class="weui-media-box__thumb" src="weui/src/example/images/trip1.png" alt="" style="width:70px;margin-right:5px;display:block">
                     </div>
                     <div class="weui-media-box__bd">
-                        <h4 class="weui-media-box__title">泰国-布吉岛5晚6或7日游</h4>
-                        <p class="weui-media-box__desc">全程无自费，点评过百，私人沙滩，两晚椰子岛，VILLA别墅，海豚岛，送大堡礁帝王岛。</p>
-                    </div>
-                </a>
-                <a ui-sref="clsdetail" class="weui-media-box weui-media-box_appmsg">
-                    <div class="weui-media-box__hd">
-                        <img class="weui-media-box__thumb" src="weui/src/example/images/trip1.png" alt="" style="width:70px;margin-right:5px;display:block">
-                    </div>
-                    <div class="weui-media-box__bd">
-                        <h4 class="weui-media-box__title">泰国-布吉岛5晚6或7日游</h4>
-                        <p class="weui-media-box__desc">全程无自费，点评过百，私人沙滩，两晚椰子岛，VILLA别墅，海豚岛，送大堡礁帝王岛。</p>
+                        <h4 class="weui-media-box__title">{{collection.name}}</h4>
+                        <p class="weui-media-box__desc">{{collection.description}}</p>
                     </div>
                 </a>
             </div>
