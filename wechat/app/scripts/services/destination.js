@@ -158,13 +158,13 @@ angular.module('wechatApp')
         };
 
         // 获取全部目的地城市
-        var getDestinationCountry = function() {
+        var getDestinationCities = function() {
               // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
 
             // $http去后台获取数据
-            var paramUrl = url + 'getDestinationCountry';
+            var paramUrl = url + 'getDestinationCities';
             var data = null;
 
             // $http去后台获取数据
@@ -218,8 +218,8 @@ angular.module('wechatApp')
             },
 
             // 获取全部目的地城市
-            getDestinationCountry: function() {
-                return getDestinationCountry();
+            getDestinationCities: function() {
+                return getDestinationCities();
             }
         };
     }]);
