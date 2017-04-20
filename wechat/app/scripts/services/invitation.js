@@ -169,7 +169,7 @@ angular.module('wechatApp')
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
-            var data = { cityId: cityId };
+            var data = { id: cityId };
             var paramUrl = url + 'getInvitationsByStartCityId';
 
             // $http去后台获取数据
