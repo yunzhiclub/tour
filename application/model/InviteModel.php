@@ -174,6 +174,7 @@ class InviteModel extends ModelModel
 	public static function saveInvitation($stringInvitation)
 	{
 		$Invitation = json_decode($stringInvitation);
+		$customerId = $Invitation->customerId;
 		$InviteModel = new InviteModel;
 
 		//邀约的相关信息放入InviteModel的对象中
@@ -182,6 +183,8 @@ class InviteModel extends ModelModel
 		$InviteModel->route_id = $Invitation->routeId;
 		$InviteModel->is_public = $Invitation->isPublic;
 		$InviteModel->deadline = $Invitation->deadLine;
+		//	保存邀约号
+		$InviteModel->number = self::setInviteNumber($customerId);
 		//
         $InviteModel->person_num = 6;
         $InviteModel->pay_num = 1;
@@ -211,7 +214,7 @@ class InviteModel extends ModelModel
 				$OrderModel = new OrderModel;
 				$OrderModel->customer_id = $Invitation->customerId;
 				$OrderModel->invite_id = $inviteId;
-				$OrderModel->number = self::getOrderNumber($Invitation->customerId);
+				$OrderModel->number = self::setOrderNumber($Invitation->customerId);
 				$OrderModel->save();
 				
 				//保存customer_id进相应的床位表
@@ -225,20 +228,35 @@ class InviteModel extends ModelModel
 	}
 
 	/**
-	 * 获取订单编号，订单编号格式如下:
+	 * 生成订单编号，订单编号格式如下:
 	 * 日期+时间戳后五位+（100000 - 客户id）
 	 * eg:201609303243499094
 	 * @param  int $customerId 客户id
 	 * @return string             订单编号
 	 * @author chuhang 
 	 */
-	static public function getOrderNumber($customerId)
+	static public function setOrderNumber($customerId)
 	{
 		$date = date("Ymd");
         $timestamp = substr(time(), -5, 5);
         $customerId = sprintf("%05d", 100000 - $customerId);
 
         return $date . $timestamp . $customerId;
+	}
+
+	/**
+	 * 生成邀约编号
+	 * @param $customerId
+	 * @return string
+	 * @author: mengyunzhi www.mengyunzhi.com
+	 * @Date&Time:2017-04-20 15:43
+	 */
+	static public function setInviteNumber($customerId)
+	{
+		$date = date("Ymd");
+		$timestamp = substr(time(), -5, 5);
+
+		return "y" . $date . $timestamp . $customerId;
 	}
 
 	/*
