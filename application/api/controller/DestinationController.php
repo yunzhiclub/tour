@@ -101,8 +101,8 @@ class DestinationController extends ApiController {
 	}
 
 	// 获取全部目的地城市
-	public function getDestinationCountry(){
-		 $getDestinationCountry = DestinationCityModel::all();
-		 return $this->response($getDestinationCountry);
+	public function getDestinationCities(){
+		 $DestinationCityModel = DestinationCityModel::all();
+		 return $this->response($DestinationCityModel);
 	}
 }
