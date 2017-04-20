@@ -151,7 +151,7 @@ angular.module('wechatApp')
         };
 
         // 获取用户收藏
-        var getCollectionsByCustomer_id = function(customer_id) {
+        var getCollectionsByCustomer_id = function(customer_id, openid) {
             // 定义promise解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
@@ -159,7 +159,7 @@ angular.module('wechatApp')
 
             // 调用$http
             var paramUrl = url + 'getCollectionsByCustomerId';
-            var data = { customer_id: customer_id };
+            var data = { customer_id: customer_id, openid: openid };
             server.http(paramUrl, data, function successCallback(response) {
                 console.log(response);
                 if (typeof response.data.errorCode !== 'undefined') {
@@ -307,8 +307,8 @@ angular.module('wechatApp')
             },
 
             // 获取收藏
-            getCollectionsByCustomer_id: function(customer_id) {
-                return getCollectionsByCustomer_id(customer_id);
+            getCollectionsByCustomer_id: function(customer_id, openid) {
+                return getCollectionsByCustomer_id(customer_id, openid);
             },
 
             // 获取自己的全部订单
