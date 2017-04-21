@@ -63,9 +63,10 @@ class RouteController extends ApiController {
 	 */
 	public function getRouteById() {
 		$id = Request::instance()->param('id');
+		$map = [$id];
 		//通过id取出路线
-		$route = RouteModel::getRouteById($id);
-		
+		$route = RouteModel::getRoutesDetails($map);
+	
 		return $this->response($route);
 	}
 
