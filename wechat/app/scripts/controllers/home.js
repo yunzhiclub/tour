@@ -57,7 +57,7 @@ angular.module('wechatApp')
             invitation.getChoosedInvitations().then(function successCallBack(response) {
                 angular.forEach(response, function(value) {
                     // 计算离截止时间的秒数
-                    value.deadline = Math.floor((value.deadline - new Date().getTime()) / 1000);
+                    value.deadline = Math.floor(value.deadline - new Date().getTime() / 1000);
                     // 如果有路线对应的出发时间id证明选用出发时间表中的日期并给路线默认出发时间赋值
                     if (value.start_time_id === 0) {
                         value.route_start_time = value.start_time_date;
@@ -88,7 +88,7 @@ angular.module('wechatApp')
             invitation.getInvitationsByCountryId(countryId).then(function successCallBack(response) {
                angular.forEach(response, function(value) {
                     // 计算离截止时间的秒数
-                    value.deadline = Math.floor((value.deadline - new Date().getTime()) / 1000);
+                    value.deadline = Math.floor(value.deadline - new Date().getTime() / 1000);
                    // 如果有路线对应的出发时间id证明选用出发时间表中的日期并给路线默认出发时间赋值
                    if (value.start_time_id === 0) {
                        value.route_start_time = value.start_time_date;
@@ -117,7 +117,7 @@ angular.module('wechatApp')
             invitation.getInvitationsByRegionId(regionId).then(function successCallBack(response) {
                 angular.forEach(response, function(value) {
                     // 计算离截止时间的秒数并向下取整
-                    value.deadline = Math.floor((value.deadline - new Date().getTime()) / 1000);
+                    value.deadline = Math.floor(value.deadline - new Date().getTime() / 1000);
                     // 如果有路线对应的出发时间id证明选用出发时间表中的日期并给路线默认出发时间赋值
                     if (value.start_time_id === 0) {
                         value.route_start_time = value.start_time_date;
