@@ -55,17 +55,15 @@ class CollectionModel extends ModelModel
 		//  返回数组
 		$result = [];
 
-		foreach ($collections as $collection){
-			$cache = [];
+
+		foreach ($collections as $key =>  $collection){
 			//  根据routeId获取routeModel
 			$routeId = $collection->route_id;
 			$Route = RouteModel::get($routeId);
-            $cache['id'] = $Route->getData('id');
-            $cache['name'] = $Route->getData('name');
-            $cache['description'] = $Route->getData('description');
-            array_push($result, $cache);
-            $cache = [];
-
+			//  获取路线名称和描述信息
+			$result[$key]['id'] = $collection->id;
+			$result[$key]['name'] = $Route->getData('name');
+			$result[$key]['description'] = $Route->description;
 		}
 		return $result;
 	}
