@@ -10,8 +10,6 @@
 angular.module('wechatApp')
     .controller('ClsdetailCtrl', ['$scope', '$stateParams', 'route', 'order', 'commonTools',
         function($scope, $stateParams, route, order, commonTools) {
-            // route m层传值   
-            var routes = route.getRoutes();
 
             // 根据路由传过来的routeId获取具体路线
             var routeId = $stateParams.routeId;
