@@ -51,27 +51,22 @@ class CollectionModel extends ModelModel
 		//  根据客户id获取收藏
 		$map['customer_id'] = $CustomerId;
 		$collections = $Collection->where($map)->select();
+
 		//  返回数组
 		$result = [];
 
 		foreach ($collections as $collection){
-			//  重置$map
-			$map = [];
+			$cache = [];
 			//  根据routeId获取routeModel
 			$routeId = $collection->route_id;
-			$map['id'] = $routeId;
-			$RouteModel = new RouteModel;
-			$Route = $RouteModel->where($map)->select();
-
-			foreach ($Route as $key => $route) {
-				//  获取路线名称和描述信息
-				$result[$key]['id'] = $collection->id;
-				$result[$key]['name'] = $route->getData('name');
-				$result[$key]['description'] = $route->description;
-			}
+			$Route = RouteModel::get($routeId);
+            $cache['id'] = $Route->getData('id');
+            $cache['name'] = $Route->getData('name');
+            $cache['description'] = $Route->getData('description');
+            array_push($result, $cache);
+            $cache = [];
 
 		}
-
 		return $result;
 	}
 	/**
