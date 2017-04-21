@@ -240,9 +240,8 @@ angular.module('wechatApp')
         var getInvitations = function() {
             return self.invitations;
         };
-        var setCacheInvitation = function (Invitation, index) {
+        var setCacheInvitation = function (Invitation) {
             self.cache = Invitation;
-            self.cache.index = index;
         };
         var getCacheInvitation = function () {
             return self.cache;
@@ -351,8 +350,8 @@ angular.module('wechatApp')
             },
 
             // 设置临时的邀约
-            setCacheInvitation:function (invitation, index) {
-                setCacheInvitation(invitation, index);
+            setCacheInvitation:function (invitation) {
+                setCacheInvitation(invitation);
             },
 
             // 获得临时邀约
