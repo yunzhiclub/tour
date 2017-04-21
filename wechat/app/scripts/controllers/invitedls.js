@@ -123,8 +123,10 @@ angular.module('wechatApp')
           $scope.sortField = 'totalMoney';
           if ($scope.isAscended1 === false) {
               $scope.isAscended1 = true;
+              $scope.isAscended = true;
 		  } else {
               $scope.isAscended1 = false;
+              $scope.isAscended = false;
 		  }
       };
       // 定义改变排列字段是出发时间,并反转排序
@@ -132,8 +134,10 @@ angular.module('wechatApp')
           $scope.sortField = 'route_begin_time';
           if ($scope.isAscended2 === false) {
               $scope.isAscended2 = true;
+              $scope.isAscended = true;
           } else {
               $scope.isAscended2 = false;
+              $scope.isAscended = false;
           }
       };
       // 获取全部邀约
