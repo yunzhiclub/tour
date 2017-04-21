@@ -29,25 +29,6 @@ class BedModel extends ModelModel
     }
 
 	/**
-	 * @param $value
-	 * @return mixed
-	 * @author: mengyunzhi www.mengyunzhi.com
-	 * @Date&Time:2017-04-10 21:59
-	 * 输出性别
-	 */
-    public function getSexAttr($value)
-	{
-		$status = array('0'=>'男','1'=>'女');
-		$sex = $status[$value];
-		if (isset($sex))
-		{
-			return $sex;
-		} else {
-			return $status[0];
-		}
-	}
-
-	/**
 	 * @param $customerId
 	 * @return bool
 	 * @author: mengyunzhi www.mengyunzhi.com
