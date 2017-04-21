@@ -9,7 +9,8 @@ router:#!/collectionls
                 </div>
             </div>
             <div class="weui-panel__bd">
-                <a ui-sref="clsdetail" class="weui-media-box weui-media-box_appmsg" ng-repeat="collection in collections">
+                <div ng-repeat="collection in collections">
+                <a ui-sref="clsdetail({routeId:collection.id})" class="weui-media-box weui-media-box_appmsg">
                     <div class="weui-media-box__hd">
                         <img class="weui-media-box__thumb" src="weui/src/example/images/trip1.png" alt="" style="width:70px;margin-right:5px;display:block">
                     </div>
@@ -18,6 +19,7 @@ router:#!/collectionls
                         <p class="weui-media-box__desc">{{collection.description}}</p>
                     </div>
                 </a>
+                </div>
             </div>
         </div>
   </div>
