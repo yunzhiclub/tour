@@ -14,6 +14,11 @@ angular.module('wechatApp')
         var index = $stateParams.invitationIndex;
         $scope.index = index;
         var invite = invitation.getCacheInvitation();
+        invitation.getInvitationById(index).then(function successCallBack(response) {
+            console.log(response);
+        }, function errorCallBack() {
+
+        });
         if (invite.index !== index) {
             var invitations = invitation.getInvitations();
             invite = invitations[index];
