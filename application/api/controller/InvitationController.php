@@ -126,7 +126,6 @@ class InvitationController extends ApiController {
 		if (false === InviteModel::saveInvitation($stringInvitation)) {
 			return '保存失败';
 		}
-		die();
 		return $this->response(['1']);
 	}
 
@@ -139,7 +138,8 @@ class InvitationController extends ApiController {
 		$customerId = Request::instance()->param('customerId');
 		$invitationId = Request::instance()->param('invitationId');
         $bedId = Request::instance()->param('bedId');
-
+        // 去保存数据生成订单
+        InviteModel::toCatchTheInvite($customerId, $invitationId, $bedId);
 		return $this->response([]);
 	}
 
@@ -164,8 +164,10 @@ class InvitationController extends ApiController {
 	 */
 	public function getInvitationById() {
 		$id = Request::instance()->param('id');
-
-		return $this->response([]);
+        $type = 'id';
+        $map = [$id];
+        $Invitation = InviteRouteStartcityDestcityCustomerStarttimeViewModel::getInviteByMap($type, $map);
+		return $this->response($Invitation);
 	}
 
 	/*
@@ -182,7 +184,7 @@ class InvitationController extends ApiController {
      * 获取全部的趣约
 	 * */
 	public function getAllInvitations() {
-		$Invitations = InviteRouteStartcityDestcityCustomerStarttimeViewModel::all();
+		$Invitations = InviteRouteStartcityDestcityCustomerStarttimeViewModel::getInviteByMap(null, null);
 		return $this->response($Invitations);
     }
 
