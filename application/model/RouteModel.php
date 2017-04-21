@@ -167,8 +167,8 @@ class RouteModel extends ModelModel
 	 */
 	public static function getRouteById($id)
 	{
-		$RouteModel = new RouteModel;
-		$route = $RouteModel->get($id);
+		$DestinationCityRouteHotelFlightViewModel = new DestinationCityRouteHotelFlightViewModel;
+		$route = $DestinationCityRouteHotelFlightViewModel->get($id);
 		return $route;
 	}
 	/**

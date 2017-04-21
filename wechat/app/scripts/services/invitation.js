@@ -169,7 +169,7 @@ angular.module('wechatApp')
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
-            var data = { cityId: cityId };
+            var data = { id: cityId };
             var paramUrl = url + 'getInvitationsByStartCityId';
 
             // $http去后台获取数据
@@ -240,8 +240,9 @@ angular.module('wechatApp')
         var getInvitations = function() {
             return self.invitations;
         };
-        var setCacheInvitation = function (Invitation) {
+        var setCacheInvitation = function (Invitation, index) {
             self.cache = Invitation;
+            self.cache.index = index;
         };
         var getCacheInvitation = function () {
             return self.cache;
@@ -268,7 +269,30 @@ angular.module('wechatApp')
 
             return promise;
         };
+        var getInvitationsByDestinationCityId = function(id) {
+               // 定义promise 解决异步问题
+            var deferred = $q.defer();
+            var promise = deferred.promise;
+            var paramUrl = url + 'getInvitationsByDestinationCityId';
+            var data = { id: id };
 
+
+            // $http去后台获取数据
+            server.http(paramUrl, data, function successCallback(response) {
+                console.log(response);
+                if (typeof response.data.errorCode !== 'undefined') {
+                    console.log('系统发生错误：' + response.data.error);
+                } else {
+                    // 逻辑处理 
+                    self.invitations = response.data.data;
+                }
+                deferred.resolve(self.invitations); //执行成功
+            }, function errorCallback(response) {
+                deferred.reject(response); //执行失败
+            });
+
+            return promise;
+        };
 
         // Public API here
         return {
@@ -327,13 +351,17 @@ angular.module('wechatApp')
             },
 
             // 设置临时的邀约
-            setCacheInvitation:function (invitation) {
-                setCacheInvitation(invitation);
+            setCacheInvitation:function (invitation, index) {
+                setCacheInvitation(invitation, index);
             },
 
             // 获得临时邀约
             getCacheInvitation:function () {
                 return getCacheInvitation();
-            }
+            },
+            // 获取以目的城市为筛选条件的邀约
+            getInvitationsByDestinationCityId: function(id) {
+                return getInvitationsByDestinationCityId(id);
+            },
         };
     }]);

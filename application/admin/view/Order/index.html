@@ -33,7 +33,7 @@
                 <tr>
                     <td>{$key}</td>
                     <td>{$OrderModel->getData('number')}</td>
-                    <td><a href="{:url('Bed/detail?id=' . $OrderModel->Bed->id)}">{$OrderModel->Bed->number}</a></td>
+                    <td><a href="{:url('Bed/detail?id=' . $OrderModel->Bed->id)}">{$OrderModel->Bed->id}</a></td>
                     <td>{$OrderModel->Bed->Customer->nick_name}</td>
                     <td><a href="{:url('Invite/index')}">{$OrderModel->getData('invite_id')}</a></td>
                     <td>{$OrderModel->Bed->sex}</td>

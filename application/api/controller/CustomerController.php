@@ -72,13 +72,23 @@ class CustomerController extends ApiController
      * 成功 return $this->response($Collections);| 错误 $this->   
      * response(20004, $Customer->getError());
      */
+    /*
+    json[
+    {
+    	'id': '1',
+        'name': '欧洲七日游',
+        'description': '这是第二个测试',
+    }
+    ]
+    */
     public function getCollectionsByCustomerId()
     {
         $CustomerId = Request::instance()->param('customer_id');
+
        // 获取该客户的收藏
        $Collections =  CollectionModel::getCollectionsByCustomerId($CustomerId);
-       
-       return $this->response($Collections);  
+       $data = array(1,4);
+       return $this->response($data);  
     }
 
     /**
