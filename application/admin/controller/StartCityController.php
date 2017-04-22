@@ -43,6 +43,7 @@ class StartCityController extends IndexController
         if (false === $StartCityModel->isUpdate()->save($data)) {
             return $this->error($StartCityModel->getError());
         }
+
         return $this->success('操作成功', url('index'));
     }
 
