@@ -39,11 +39,11 @@ router:#!/topay
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">出发时间</label>
-                    <span class="weui-form-preview__value"><p ng-if="invitation.start_time_date === null">{{invitation.route_begin_time | date: 'yyyy-MM-dd'}}</p><p ng-if="invitation.start_time_date !== null">{{invitation.start_time_date | date: 'yyyy-MM-dd'}}</p></span>
+                    <span class="weui-form-preview__value"><p>{{invitation.set_out_time | date: 'yyyy-MM-dd'}}</p></span>
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">归来时间</label>
-                    <span class="weui-form-preview__value">2016-11-10</span>
+                    <span class="weui-form-preview__value">{{invitation.back_time}}</span>
                 </div>
             </div>
         </div>
