@@ -58,10 +58,8 @@ angular.module('wechatApp')
                 angular.forEach(response, function(value) {
                     // 计算离截止时间的秒数
                     value.deadline = Math.floor(value.deadline - new Date().getTime() / 1000);
-                    // 如果有路线对应的出发时间id证明选用出发时间表中的日期并给路线默认出发时间赋值
-                    if (value.start_time_id === 0) {
-                        value.route_start_time = value.start_time_date;
-                    }
+                    // 修改php与js时间戳的不一致
+                    value.set_out_time = value.set_out_time * 1000;
                     // 加上是否下架的标识 1 是下架默认是 0
                     value.type = 0;
                 });
@@ -89,10 +87,8 @@ angular.module('wechatApp')
                angular.forEach(response, function(value) {
                     // 计算离截止时间的秒数
                     value.deadline = Math.floor(value.deadline - new Date().getTime() / 1000);
-                   // 如果有路线对应的出发时间id证明选用出发时间表中的日期并给路线默认出发时间赋值
-                   if (value.start_time_id === 0) {
-                       value.route_start_time = value.start_time_date;
-                   }
+                    // 修改php与js时间戳的不一致
+                    value.set_out_time = value.set_out_time * 1000;
                     // 加上是否下架的标识 1 是下架默认是 0
                     value.type = 0;
                 });
@@ -118,10 +114,8 @@ angular.module('wechatApp')
                 angular.forEach(response, function(value) {
                     // 计算离截止时间的秒数并向下取整
                     value.deadline = Math.floor(value.deadline - new Date().getTime() / 1000);
-                    // 如果有路线对应的出发时间id证明选用出发时间表中的日期并给路线默认出发时间赋值
-                    if (value.start_time_id === 0) {
-                        value.route_start_time = value.start_time_date;
-                    }
+                    // 修改php与js时间戳的不一致
+                    value.set_out_time = value.set_out_time * 1000;
                     // 加上是否下架的标识 1 是下架默认是 0
                     value.type = 0;
                 });
