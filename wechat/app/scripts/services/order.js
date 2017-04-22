@@ -15,7 +15,6 @@ angular.module('wechatApp')
         days:0,
         backTime: 0,
         routeId: '',
-        startTimeId: '',
         isPublic: '',
         deadLine: '',
         defaultPrice:0,
