@@ -2,11 +2,11 @@
 description 这是首页页面 
 router:#!/home
  -->
+<!--bar-->
 <div class="page">
-    <div class="page__hd">
-    </div>
     <div class="page__bd page__bd_spacing">
         <div class="weui-flex">
+            <!--出发城市-->
             <div>
                 <a class="weui-cell weui-cell_access" href="javascript:;">
                     <div class="weui-cell__bd">
@@ -16,6 +16,7 @@ router:#!/home
                     </div>
                 </a>
             </div>
+            <!--搜索-->
             <div class="weui-flex__item">
                 <div class="placeholder">
                     <div class="page">
@@ -38,6 +39,7 @@ router:#!/home
                     </div>
                 </div>
             </div>
+            <!--个人中心-->
             <div>
                 <div class="placeholder" style="margin-right:5px;margin-left:5px;margin-top:7px">
                     <a ui-sref="personal"><img src="{{customer.headImg.headImgUrl}}" alt="个人中心" height="40" width="40" class="img-circle"></a>
@@ -45,14 +47,14 @@ router:#!/home
             </div>
         </div>
     </div>
-    <div class="page__ft">
-    </div>
 </div>
 <br>
+<!--显示昵称-->
 <div style="margin-left:20px">
     <font color="orange" style="font-weight:bold">{{customer.nickName}}</font>
 </div>
 <br>
+<!--发布邀约寻找邀约-->
 <div class="weui-flex">
     <div class="weui-flex__item" style="margin-right:20px;margin-left:20px">
         <div class="placeholder"> <a ui-sref="toinvite" class="weui-btn weui-btn_warn" style="background:orange">发布邀约</a></div>
@@ -61,9 +63,11 @@ router:#!/home
         <div class="placeholder"><a ui-sref="invitedls" class="weui-btn weui-btn_warn " style="background:orange">寻找邀约</a></div>
     </div>
 </div>
+<!--最新邀约-->
 <div class="weui-cell " style="margin-left:5px ">
     <h4 class="title ">最新邀约</h4>
 </div>
+<!--推荐按钮-->
 <div class="weui-flex " style="margin-left:15px ">
     <div class="weui-flex__item ">
         <div class="placeholder ">
@@ -83,6 +87,7 @@ router:#!/home
         </div>
     </div>
 </div>
+<!--提示信息-->
 <div class="page"  ng-show="loading">
     <div class="page__bd">
         <div class="weui-loadmore weui-loadmore_line">
@@ -91,10 +96,10 @@ router:#!/home
     </div>
 </div>
 <div class="page" ng-hide="loading">
-    <div class="page__hd ">
-    </div>
+    <!--显示邀约-->
     <div class="page__bd ">
         <div class="weui-form-preview " ng-repeat="invitation in invitations">
+            <!--显示头像和昵称-->
             <div class="weui-form-preview__hd ">
                 <div class="weui-form-preview__item ">
                     <div class="weui-cells ">
@@ -103,28 +108,27 @@ router:#!/home
                             <div class="weui-cell__bd ">
                                 <p>{{invitation.customer_nick_name}} ♂ {{invitation.customer_birthday | ageFilter}}岁</p>
                             </div>
-                            <div class="weui-cell__ft "></div>
                         </div>
                     </div>
                 </div>
-                <div class="weui-form-preview__item ">
-                    <div class="weui-flex">
-                        <div class="weui-flex__item">
-                            <div class="placeholder"></div>
-                        </div>
-                        <div class="weui-flex__item" ng-repeat="bed in  invitation.beds">
-                            <div class="placeholder" ng-if="bed.customer_id !== invitation.customer_id">
-                                <!-- 用customer_id是否为0判断是否该床位是否有人 -->
-                                <img src="{{bed.customer_head_img_url}} " alt=" " style="margin-right:5px;margin-top:8px;display:block " height="30" width="30" class="img-circle" ng-if="bed.customer_id !== 0 ">
-                                <div ng-if="bed.customer_id === 0">
-                                    <img src="weui/src/example/images/whitehead.png" alt=" " style="margin-right:5px;margin-top:8px;display:block " height="30" width="30" class="img-circle">
-                                    <font size="1" color="red">{{bed.money | currency: '¥'}}</font>
-                                </div>
+
+            </div>
+            <!--显示选择床位的头像-->
+            <div class="weui-form-preview__item ">
+                <div class="weui-flex">
+                    <div class="weui-flex__item" ng-repeat="bed in  invitation.beds">
+                        <div class="placeholder" ng-if="bed.customer_id !== invitation.customer_id">
+                            <!-- 用customer_id是否为0判断是否该床位是否有人 -->
+                            <img src="{{bed.customer_head_img_url}} " alt=" " style="margin-right:5px;margin-top:8px;display:block " height="30" width="30" class="img-circle" ng-if="bed.customer_id !== 0 ">
+                            <div ng-if="bed.customer_id === 0">
+                                <img src="weui/src/example/images/whitehead.png" alt=" " style="margin-right:5px;margin-top:8px;display:block " height="30" width="30" class="img-circle">
+                                <font size="1" color="red">{{bed.money | currency: '¥'}}</font>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!--显示邀约的详细信息-->
             <div class="weui-form-preview__bd ">
                 <div class="weui-form-preview__item ">
                     <label class="weui-form-preview__label ">距结束</label>
@@ -155,11 +159,12 @@ router:#!/home
                     <font class="weui-form-preview__value " color="red ">{{invitation | savemaxmoney | currency: '¥'}}</font>
                 </div>
             </div>
-            <div class="page__bd page__bd_spacing">
-                <button ui-sref="ivdetail({invitationIndex: invitation.id})" class="weui-btn weui-btn_primary" style="margin-right:40px;margin-left:20px;margin-top: 20px;margin-bottom: 10px" ng-disabled="invitation.type === 1">
+            <!--显示按钮-->
+            <div class="weui-form-preview__bd ">
+                <a ui-sref="ivdetail({invitationIndex: invitation.id})" class="weui-btn weui-btn_primary" style="margin-right:40px;margin-left:20px;margin-top: 20px;margin-bottom: 10px" ng-disabled="invitation.type === 1">
                     <p ng-if="invitation.type === 1">已经下架</p>
                     <p ng-if="invitation.type !== 1">{{invitation | minvalue | currency: '¥'}}</p>
-                </button>
+                </a>
             </div>
             <br>
         </div>
