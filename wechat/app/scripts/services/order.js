@@ -13,7 +13,6 @@ angular.module('wechatApp')
         customerId: '',
         startCityId: '',
         routeId: '',
-        startTimeId: '',
         isPublic: '',
         deadLine: '',
         defaultPrice:0,
