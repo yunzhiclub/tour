@@ -164,8 +164,10 @@ class InvitationController extends ApiController {
 	 */
 	public function getInvitationById() {
 		$id = Request::instance()->param('id');
-
-		return $this->response([]);
+        $type = 'id';
+        $map = [$id];
+        $Invitation = InviteRouteStartcityDestcityCustomerStarttimeViewModel::getInviteByMap($type, $map);
+		return $this->response($Invitation);
 	}
 
 	/*

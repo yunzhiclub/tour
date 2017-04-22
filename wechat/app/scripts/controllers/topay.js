@@ -11,8 +11,6 @@ angular.module('wechatApp')
     .controller('TopayCtrl', ['$scope', 'config', 'invitation', '$stateParams', '$state', function($scope, config, invitation, $stateParams, $state) {
         var bedIdIndex = $stateParams.bedIdIndex;
 
-        // 邀约数组的索引
-        var index = bedIdIndex.index;
         // 选中床位的id
         var bedId = bedIdIndex.bedId;
         // 选中床位的钱数
