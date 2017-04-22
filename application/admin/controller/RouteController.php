@@ -1,6 +1,5 @@
 <?php
 namespace app\admin\controller;
-use think\Controller;
 use app\model\RouteModel;
 use think\Request;
 use app\model\PictureModel;         //图片
@@ -37,16 +36,17 @@ class RouteController extends IndexController
     {
         //获取所需要编辑的标题
         $id = Request::instance()->param('id');
-        $RouteModel = RouteModel::get($id);
+        //获取路线信息并将时间戳转化为2016-09-30格式
+        $RouteModel = RouteModel::get($id)->ConvertStrtotimeToDate();
+        $this->assign('RouteModel',$RouteModel);
+
         //获取基本信息
         $basicInfo = RouteModel::getBasicInfo();
         $this->assign('basicInfo', $basicInfo);
         //获取其他信息，首页推荐权重、精选权重、路程天数及价格
         $otherInfo = RouteModel::getOtherInfo($id);
         $this->assign('otherInfo', $otherInfo);
-        
 
-        $this->assign('RouteModel',$RouteModel);
     	return $this->fetch();
     }
 
@@ -67,6 +67,8 @@ class RouteController extends IndexController
     public function save()
     {
         $data = Request::instance()->param();
+        //将日期转化为时间戳格式
+        $data = RouteModel::ConvertDateToStrtotime($data);
         //去除pictureIds字段
         $pictureIds = current(array_splice($data, -2, 1));
         //保存数据
@@ -74,7 +76,7 @@ class RouteController extends IndexController
 
         //将图片、路线关联并存入到Picture_route表中
         if ($pictureIds !== null) {
-            $saveRelationPictures = PictureModel::saveRelationPictures($RouteModel, $pictureIds);
+            PictureModel::saveRelationPictures($RouteModel, $pictureIds);
         }
 
         return $this->success('保存成功', url('index'));
@@ -84,6 +86,8 @@ class RouteController extends IndexController
     public function update()
     {
         $data = Request::instance()->param();
+        //将日期转化为时间戳
+        $data = RouteModel::ConvertDateToStrtotime($data);
         //去除pictureIds字段
         $pictureIds = current(array_splice($data, -2, 1));
         //删除数据
@@ -97,7 +101,7 @@ class RouteController extends IndexController
         $RouteModel = RouteModel::updateRouteInfo($data, $id);
         //将图片、酒店关联并存入到Picture_hotel表中
         if ($pictureIds !== null) {
-            $saveRelationPictures = PictureModel::saveRelationPictures($RouteModel, $pictureIds);
+            PictureModel::saveRelationPictures($RouteModel, $pictureIds);
         }
        
         return $this->success('保存成功', url('index'));

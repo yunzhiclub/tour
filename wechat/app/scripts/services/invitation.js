@@ -12,6 +12,8 @@ angular.module('wechatApp')
         // Service logic
         var self = this;
         self.invitations = [];
+        // 定义临时保存处理后的邀约
+        self.cache = {};
         
         var url = 'Invitation/';
         var getChoosedInvitations = function() {
@@ -112,17 +114,17 @@ angular.module('wechatApp')
             return promise;
         };
 
-        var topay = function(postdata) {
+        var toPay = function(postData) {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
 
             var data = {
-                customerId: postdata.customerId,
-                bedId: postdata.bedId,
-                invitationId: postdata.invitationId,
+                customerId: postData.customerId,
+                bedId: postData.bedId,
+                invitationId: postData.invitationId,
             };
-            var paramUrl = url + 'topay';
+            var paramUrl = url + 'toPay';
             // $http去后台获取数据
             server.http(paramUrl, data, function successCallback(response) {
                 console.log(response);
@@ -167,7 +169,7 @@ angular.module('wechatApp')
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
-            var data = { cityId: cityId };
+            var data = { id: cityId };
             var paramUrl = url + 'getInvitationsByStartCityId';
 
             // $http去后台获取数据
@@ -200,9 +202,9 @@ angular.module('wechatApp')
                     console.log('系统发生错误：' + response.data.error);
                 } else {
                     // 逻辑处理 
-                    self.invitations = response.data.data;
+                    //self.invitations = response.data.data;
                 }
-                deferred.resolve(self.invitations); //执行成功
+                deferred.resolve(response.data.data); //执行成功
             }, function errorCallback(response) {
                 deferred.reject(response); //执行失败
             });
@@ -238,7 +240,12 @@ angular.module('wechatApp')
         var getInvitations = function() {
             return self.invitations;
         };
-
+        var setCacheInvitation = function (Invitation) {
+            self.cache = Invitation;
+        };
+        var getCacheInvitation = function () {
+            return self.cache;
+        };
         var getAllInvitations = function () {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
@@ -261,7 +268,30 @@ angular.module('wechatApp')
 
             return promise;
         };
+        var getInvitationsByDestinationCityId = function(id) {
+               // 定义promise 解决异步问题
+            var deferred = $q.defer();
+            var promise = deferred.promise;
+            var paramUrl = url + 'getInvitationsByDestinationCityId';
+            var data = { id: id };
 
+
+            // $http去后台获取数据
+            server.http(paramUrl, data, function successCallback(response) {
+                console.log(response);
+                if (typeof response.data.errorCode !== 'undefined') {
+                    console.log('系统发生错误：' + response.data.error);
+                } else {
+                    // 逻辑处理 
+                    self.invitations = response.data.data;
+                }
+                deferred.resolve(self.invitations); //执行成功
+            }, function errorCallback(response) {
+                deferred.reject(response); //执行失败
+            });
+
+            return promise;
+        };
 
         // Public API here
         return {
@@ -285,8 +315,8 @@ angular.module('wechatApp')
             },
 
             // 支付
-            topay: function(postdata) {
-                return topay(postdata);
+            toPay: function(postData) {
+                return toPay(postData);
             },
 
             // 通过出发时间获取趣约
@@ -317,6 +347,20 @@ angular.module('wechatApp')
             // 获取全部邀约
             getAllInvitations:function () {
                 return getAllInvitations();
+            },
+
+            // 设置临时的邀约
+            setCacheInvitation:function (invitation) {
+                setCacheInvitation(invitation);
+            },
+
+            // 获得临时邀约
+            getCacheInvitation:function () {
+                return getCacheInvitation();
+            },
+            // 获取以目的城市为筛选条件的邀约
+            getInvitationsByDestinationCityId: function(id) {
+                return getInvitationsByDestinationCityId(id);
             },
         };
     }]);

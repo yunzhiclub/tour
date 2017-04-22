@@ -72,29 +72,22 @@ class CustomerController extends ApiController
      * 成功 return $this->response($Collections);| 错误 $this->   
      * response(20004, $Customer->getError());
      */
+    /*
+    json[
+    {
+    	'id': '1',
+        'name': '欧洲七日游',
+        'description': '这是第二个测试',
+    }
+    ]
+    */
     public function getCollectionsByCustomerId()
     {
         $CustomerId = Request::instance()->param('customer_id');
+
        // 获取该客户的收藏
        $Collections =  CollectionModel::getCollectionsByCustomerId($CustomerId);
-       
-       return $this->response($Collections);  
-    }
-
-    /**
-     * 获取用户的全部订单
-     * @param    int                  $Customer_id [description]
-     * @return   
-     * 成功 return $this->response($orders);| 错误 $this->   
-     * response(20004, $Customer->getError());
-     */
-    public function getOrdersByCustomerId() 
-    {
-        $CustomerId = Request::instance()->param('customer_id');
-       // 获取用户的全部订单
-       $orders = OrderModel::getOrdersByCustomerId($CustomerId);
-
-       return $this->response($orders);   
+       return $this->response($Collections);
     }
 
     /**
@@ -144,4 +137,65 @@ class CustomerController extends ApiController
         
         return $this->response([]);
     }
+
+	/**
+	 * 获取用户的全部订单
+	 * @param    int                  $Customer_id [description]
+	 * @return
+	 * 成功 return $this->response($orders);| 错误 $this->
+	 * response(20004, $Customer->getError());
+	 */
+	public function getAllOrderByCustomerId()
+	{
+		$CustomerId = Request::instance()->param('customer_id');
+		// 获取用户的全部订单
+		$orders = OrderModel::getAllOrderByCustomerId($CustomerId);
+
+		return $this->response($orders);
+	}
+
+	/**
+	 * @return json
+	 * @author: mengyunzhi www.mengyunzhi.com
+	 * @Date&Time:2017-04-22 15:02
+	 * 获取未支付订单
+	 */
+	public function getUnPayOrderByCustomerId()
+	{
+		$CustomerId = Request::instance()->param('customer_id');
+		// 获取用户的全部订单
+		$orders = OrderModel::getUnPayOrderByCustomerId($CustomerId);
+
+		return $this->response($orders);
+	}
+
+	/**
+	 * @return json
+	 * @author: mengyunzhi www.mengyunzhi.com
+	 * @Date&Time:2017-04-22 15:04
+	 *        获取未成团订单
+	 */
+	public function getUnSetOutOrderByCustomerId()
+	{
+		$CustomerId = Request::instance()->param('customer_id');
+		// 获取用户的全部订单
+		$orders = OrderModel::getUnSetOutOrderByCustomerId($CustomerId);
+
+		return $this->response($orders);
+	}
+
+	/**
+	 * @return json
+	 * @author: mengyunzhi www.mengyunzhi.com
+	 * @Date&Time:2017-04-22 15:04
+	 *        获取未评价订单
+	 */
+	public function getUnEvaluateOrderByCustomerId()
+	{
+		$CustomerId = Request::instance()->param('customer_id');
+		// 获取用户的全部订单
+		$orders = OrderModel::getUnEvaluateOrderByCustomerId($CustomerId);
+
+		return $this->response($orders);
+	}
 }

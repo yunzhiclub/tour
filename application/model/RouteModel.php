@@ -167,8 +167,8 @@ class RouteModel extends ModelModel
 	 */
 	public static function getRouteById($id)
 	{
-		$RouteModel = new RouteModel;
-		$route = $RouteModel->get($id);
+		$DestinationCityRouteHotelFlightViewModel = new DestinationCityRouteHotelFlightViewModel;
+		$route = $DestinationCityRouteHotelFlightViewModel->get($id);
 		return $route;
 	}
 	/**
@@ -555,5 +555,39 @@ class RouteModel extends ModelModel
 
         return $result;
 	}
+
+    /**
+     * 将日期2017-04-21格式转化为1492704000
+     * @param $data
+     * @return  array
+     * @author chuhang 1093609364@qq.com
+     */
+	static public function ConvertDateToStrtotime($data)
+    {
+        $data['start_time'] = strtotime($data['start_time']);
+        $data['begin_time'] = strtotime($data['begin_time']);
+        $data['deadline'] = strtotime($data['deadline']);
+
+        //将路线出发时间转化为时间戳格式
+        foreach ($data['date'] as $key => $value) {
+            $data['date'][$key] = strtotime($value);
+        }
+
+        return $data;
+    }
+
+    /**
+     * 将时间戳转化为2017-04-21格式
+     * @return $this
+     * @author chuhang 1093609364@qq.com
+     */
+    public function ConvertStrtotimeToDate()
+    {
+        $this->deadline = date('Y-m-d', $this->deadline);
+        $this->start_time = date('Y-m-d', $this->start_time);
+        $this->begin_time = date('Y-m-d', $this->begin_time);
+
+        return $this;
+    }
 
 }

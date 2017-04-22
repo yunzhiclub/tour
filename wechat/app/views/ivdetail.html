@@ -32,11 +32,11 @@ router:#!/ivdetail
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">出发时间</label>
-                    <span class="weui-form-preview__value">{{invitation.route_start_time | date: 'yyyy-MM-dd'}}</span>
+                    <span class="weui-form-preview__value">{{invitation.set_out_time | date: 'yyyy-MM-dd'}}</span>
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">归来时间</label>
-                    <span class="weui-form-preview__value">2016-11-10</span>
+                    <span class="weui-form-preview__value">{{invitation.back_time}}</span>
                 </div>
             </div>
         </div>
@@ -49,10 +49,10 @@ router:#!/ivdetail
 <div class="weui-flex" ng-repeat="beds in invitation.beds">
     <div class="weui-flex__item" style="margin-right:20px;margin-left:10px" ng-repeat="bed in beds">
         <div class="placeholder"> 
-         <button ui-sref="topay({bedIdIndex:{index:index, bedId: bed.id, money: bed.money}})" class="weui-btn weui-btn_plain-default" style="width:160px" ng-disabled="bed.isQualified !== 1"> 
+         <button ui-sref="topay({bedIdIndex:{bedId: bed.id, money: bed.money}})" class="weui-btn weui-btn_plain-default" style="width:160px" ng-disabled="bed.isQualified !== 1">
              <div class="weui-cell">
                 <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-                    <img src="{{urlPrefix + bed.customer_head_img_url}}" style="width: 50px;display: block" class="img-circle"  height="65" width="55" ng-if="bed.customer_id !== 0 "/>
+                    <img src="{{bed.customer_head_img_url}}" style="width: 50px;display: block" class="img-circle"  height="65" width="55" ng-if="bed.customer_id !== 0 "/>
                     <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block" class="img-circle"  height="65" width="55" ng-if="bed.customer_id === 0 "/>
                     <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;" ng-if="bed.isQualified === 1">可选</span>
                 </div>

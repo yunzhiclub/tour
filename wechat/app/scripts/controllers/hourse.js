@@ -16,12 +16,15 @@ angular.module('wechatApp')
             // 先默认设置默认的单价
             var defaultPrice = order.defaultPrice;
             if ($stateParams.timeId !== undefined) {
-                // 选用选择的出发时间id给本次邀约实体赋值
-                order.startTimeId = $stateParams.timeId;
 
                 // 获取本次出发时间的价格替换默认价格
                 invitation.getPriceByStartTimeId($stateParams.timeId).then(function successCallBack(response) {
                     console.log(response);
+                    // 选用选择的出发时间id给本次邀约实体赋值
+                    order.setOutTime = response.date;
+
+                    // 设置返回时间
+                    order.backTime = response.date + order.days * 86400;
                     // 设置总金额
                     defaultPrice = response.price;
                     maxMoney = defaultPrice * 6;
@@ -33,10 +36,9 @@ angular.module('wechatApp')
             } else {
                 // 设置总金额
                 maxMoney = defaultPrice * 6;
+                // 设置返回时间
+                order.backTime = order.setOutTime + order.days * 86400;
                 room.setMaxMoneyValue(maxMoney);
-
-                // 选用默认出发时间所以出发时间id赋空值
-                order.startTimeId = null;
             }
 
             // 设置默认是公开
@@ -44,7 +46,7 @@ angular.module('wechatApp')
 
             // 双向绑定路线上的默认截止时间
             var deadLine = order.deadLine;
-            $scope.deadLine = new Date(deadLine);
+            $scope.deadLine = new Date(deadLine * 1000);
 
             // 设置默认选择支付房间
             $scope.payRoomNumber = 1;

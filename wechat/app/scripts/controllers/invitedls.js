@@ -8,8 +8,23 @@
  * Controller of the wechatApp
  */
 angular.module('wechatApp')
-  .controller('InvitedlsCtrl', ['$scope', 'startcity', 'destination', 'invitation', 'config', function ($scope, startcity, destination, invitation, config) {
+  .controller('InvitedlsCtrl', ['$scope', 'startcity', 'destination', 'invitation', 'config', '$timeout', function ($scope, startcity, destination, invitation, config, $timeout) {
 
+         $scope.invitations = [];
+
+        // 时间一秒减一
+         var change = function() {
+            angular.forEach($scope.invitations, function(value) {
+                    // 离截止时间的秒数减一
+                    if (value.deadline === 0) {
+                        value.type = 1;
+                    }
+                    value.deadline = value.deadline - 1;
+                });
+            $timeout(change, 1000);
+        };
+
+        change();
         // 数据加载过程中隐藏邀约页面
         $scope.loading = true;
 
@@ -18,7 +33,7 @@ angular.module('wechatApp')
 
   		// 获取全部出发城市
     	$scope.getStartCitys = function() {
-    		startcity.getStartCitys().then(function successCallBack(response) {
+    		startcity.getStartCity().then(function successCallBack(response) {
     			$scope.startCitys = response;
     		}, function errorCallBack(){
 
@@ -32,11 +47,9 @@ angular.module('wechatApp')
     		invitation.getInvitationsByStartCityId(cityId).then(function successCallBack(response) {
     			 angular.forEach(response, function(value) {
                     // 计算离截止时间的秒数
-                    value.invite_deadline = Math.floor((value.invite_deadline - new Date().getTime()) / 1000);
-                     // 如果有路线对应的出发时间id证明选用出发时间表中的日期并给路线默认出发时间赋值
-                     if (value.start_time_id === 0) {
-                         value.route_start_time = value.start_time_date;
-                     }
+                    value.deadline = Math.floor(value.deadline - new Date().getTime() / 1000);
+                     // 修改php与js时间戳的不一致
+                    value.set_out_time = value.set_out_time * 1000;
                     // 加上是否下架的标识 1 是下架默认是 0
                     value.type = 0;
                 });
@@ -56,10 +69,10 @@ angular.module('wechatApp')
     		});
     	};
 
-    	// 获取全部目的地国家
-    	$scope.getDestinationCountrys = function() {
-    		destination.getDestinationCountrys().then(function successCallBack(response) {
-    			$scope.destinationCountrys = response;
+    	// 获取全部目的地城市
+    	$scope.getDestinationCities = function() {
+    		destination.getDestinationCities().then(function successCallBack(response) {
+    			$scope.destinationCities = response;
     			console.log(response);
     		}, function errorCallBack(){
 
@@ -67,17 +80,15 @@ angular.module('wechatApp')
     	};
 
     	// 获取按目的地国家为筛选条件的邀约
-    	$scope.getInvitationsByCountryId = function(countryId) {
+    	$scope.getInvitationsByDestinationCityId = function(cityId) {
             // 开始加载数据
             $scope.loading = true;
-    		invitation.getInvitationsByCountryId(countryId).then(function successCallBack(response) {
+    		invitation.getInvitationsByDestinationCityId(cityId).then(function successCallBack(response) {
     			 angular.forEach(response, function(value) {
                     // 计算离截止时间的秒数
-                    value.invite_deadline = Math.floor((value.invite_deadline - new Date().getTime()) / 1000);
-                     // 如果有路线对应的出发时间id证明选用出发时间表中的日期并给路线默认出发时间赋值
-                     if (value.start_time_id === 0) {
-                         value.route_start_time = value.start_time_date;
-                     }
+                    value.deadline = Math.floor(value.deadline - new Date().getTime() / 1000);
+                     // 修改php与js时间戳的不一致
+                    value.set_out_time = value.set_out_time * 1000;
                     // 加上是否下架的标识 1 是下架默认是 0
                     value.type = 0;
                 });
@@ -108,17 +119,21 @@ angular.module('wechatApp')
           $scope.sortField = 'totalMoney';
           if ($scope.isAscended1 === false) {
               $scope.isAscended1 = true;
+              $scope.isAscended = true;
 		  } else {
               $scope.isAscended1 = false;
+              $scope.isAscended = false;
 		  }
       };
       // 定义改变排列字段是出发时间,并反转排序
       $scope.changeSortTypeToRouteBeginTime = function () {
-          $scope.sortField = 'route_begin_time';
+          $scope.sortField = 'set_out_time';
           if ($scope.isAscended2 === false) {
               $scope.isAscended2 = true;
+              $scope.isAscended = true;
           } else {
               $scope.isAscended2 = false;
+              $scope.isAscended = false;
           }
       };
       // 获取全部邀约
@@ -128,11 +143,9 @@ angular.module('wechatApp')
           invitation.getAllInvitations().then(function successCallBack(response) {
               angular.forEach(response, function(value) {
                   // 计算离截止时间的秒数
-                  value.invite_deadline = Math.floor((value.invite_deadline - new Date().getTime()) / 1000);
-                  // 如果有路线对应的出发时间id证明选用出发时间表中的日期并给路线默认出发时间赋值
-                  if (value.start_time_id === 0) {
-                      value.route_start_time = value.start_time_date;
-                  }
+                  value.deadline = Math.floor(value.deadline - new Date().getTime() / 1000);
+                    // 修改php与js时间戳的不一致
+                    value.set_out_time = value.set_out_time * 1000;
                   // 加上是否下架的标识 1 是下架默认是 0
                   value.type = 0;
               });

@@ -10,27 +10,36 @@
 angular.module('wechatApp')
     .controller('ClsdetailCtrl', ['$scope', '$stateParams', 'route', 'order', 'commonTools',
         function($scope, $stateParams, route, order, commonTools) {
-            // route m层传值   
-            var routes = route.getRoutes();
 
-            // 根据路由传过来的数组索引获取路线详细信息
-            var index = $stateParams.routeId;
-            var routeDetail = routes[index];
-          
-            // 提取路线的出发城市名字和路线id和详细内容描述和默认出发时间和默认价格
-            $scope.startCityName = routeDetail.route.start_city_name;
-            $scope.content = routeDetail.route.route_description;
-            $scope.beginTime = routeDetail.route.begin_time;
-            $scope.actualPrice = routeDetail.route.actual_price;
-            $scope.routeId = routeDetail.route.id;
-            var routeId = routeDetail.route.id;
+            // 根据路由传过来的routeId获取具体路线
+            var routeId = $stateParams.routeId;
+            $scope.routeId = routeId;
+           
+            route.getRouteById(routeId).then(function successCallBack(response) {
+                
+                // 提取路线的出发城市名字和路线id和详细内容描述和默认出发时间和默认价格
+                $scope.startCityName = response[0].route.start_city_name;
+                $scope.content = response[0].route.route_description;
+                $scope.startTime = response[0].route.start_time * 1000;
+                $scope.actualPrice = response[0].route.actual_price;
+                
+
+                // 借用order把默认价格和默认价格传入选择房间的c层
+                order.defaultPrice = response[0].route.actual_price;
+                order.deadLine = response[0].route.route_deadline;
+                // 先默认按默认出发时间
+                order.setOutTime = response[0].route.start_time;
+                // 存入天数
+                order.days = response[0].route.route_days;
+            }, function errorCallBack() {
+
+            });
 
             // 向这次的邀约中添加路线的id和默认截止日期
             order.routeId = routeId;
-            order.deadLine = routeDetail.route.route_deadline;
+            
 
-            // 借用order把默认价格传入选择房间的c层
-            order.defaultPrice = routeDetail.route.actual_price;
+            
 
             // 获取路线对应的出发时间和价格
             route.getStarTimeByid(routeId).then(function successCallBack(response) {
@@ -50,8 +59,8 @@ angular.module('wechatApp')
             // 收藏这条路线
             $scope.collecteTheRoute = function () {
                 var customerId = $scope.customer.id;
-                var routeId = $scope.routeId;
-                route.collecteTheRoute(customerId, routeId);
+                var route_Id = routeId;
+                route.collecteTheRoute(customerId, route_Id);
             };
 
             // 客服电话去掉拨号功能

@@ -12,9 +12,9 @@ router:#!/invitedls
         </div>
     </div>
     <div class="weui-flex__item" style="margin-left:8px"> <div class="placeholder btn-group">
-            <button ng-click="getDestinationCountrys()" class="weui-btn weui-btn_mini weui-btn_default btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">目的地&nbsp&nbsp<span class="caret"></button>
+            <button ng-click="getDestinationCities()" class="weui-btn weui-btn_mini weui-btn_default btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">目的地&nbsp&nbsp<span class="caret"></button>
               <ul class="dropdown-menu">
-                <li ng-repeat="destinationCountry in destinationCountrys"><a ng-click="getInvitationsByCountryId(destinationCountry.id)">{{destinationCountry.name}}</a></li>
+                <li ng-repeat="destinationCity in destinationCities"><a ng-click="getInvitationsByDestinationCityId(destinationCity.id)">{{destinationCity.name}}</a></li>
               </ul>
         </div></div>
     <div class="weui-flex__item" style="margin-left:8px"><div class="placeholder"><button ng-click="changeSortTypeToRouteBeginTime()" class="weui-btn weui-btn_mini weui-btn_default">出发时&nbsp<span class="glyphicon glyphicon-menu-down" aria-hidden="true" ng-hide="!isAscended2"></span><span class="glyphicon glyphicon-menu-up" aria-hidden="true" ng-hide="isAscended2"></span>
@@ -67,7 +67,7 @@ router:#!/invitedls
             <div class="weui-form-preview__bd ">
                 <div class="weui-form-preview__item ">
                     <label class="weui-form-preview__label ">距结束</label>
-                    <span class="weui-form-preview__value ">{{invitation.invite_deadline | hhmmss}}</span>
+                    <span class="weui-form-preview__value ">{{invitation.deadline | hhmmss}}</span>
                 </div>
                <div class="weui-form-preview__item ">
             <label class="weui-form-preview__label ">出发地</label>
@@ -79,7 +79,7 @@ router:#!/invitedls
               </div>
              <div class="weui-form-preview__item ">
             <label class="weui-form-preview__label ">详情</label>
-            <span class="weui-form-preview__value ">{{invitation.route_content}}</span>
+            <span class="weui-form-preview__value ">{{invitation.route_description}}</span>
               </div>
             <div class="weui-form-preview__item ">
             <label class="weui-form-preview__label ">总价</label>
@@ -95,7 +95,7 @@ router:#!/invitedls
               </div>
           </div>
     <div class="page__bd page__bd_spacing">
-        <button ui-sref="ivdetail({invitationIndex: $index})" class="weui-btn weui-btn_primary" style="margin-right:40px;margin-left:20px;margin-top: 20px;margin-bottom: 10px" ng-disabled="invitation.type === 1">
+        <button ui-sref="ivdetail({invitationIndex: invitation.id})" class="weui-btn weui-btn_primary" style="margin-right:40px;margin-left:20px;margin-top: 20px;margin-bottom: 10px" ng-disabled="invitation.type === 1">
             <p ng-if="invitation.type === 1">已经下架</p>
             <p ng-if="invitation.type !== 1">{{invitation | minvalue | currency: '¥'}}</p>
         </button>

@@ -39,11 +39,11 @@ router:#!/topay
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">出发时间</label>
-                    <span class="weui-form-preview__value"><p ng-if="invitation.start_time_date === null">{{invitation.route_begin_time | date: 'yyyy-MM-dd'}}</p><p ng-if="invitation.start_time_date !== null">{{invitation.start_time_date | date: 'yyyy-MM-dd'}}</p></span>
+                    <span class="weui-form-preview__value"><p>{{invitation.set_out_time | date: 'yyyy-MM-dd'}}</p></span>
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">归来时间</label>
-                    <span class="weui-form-preview__value">2016-11-10</span>
+                    <span class="weui-form-preview__value">{{invitation.back_time}}</span>
                 </div>
             </div>
         </div>
@@ -97,7 +97,7 @@ router:#!/topay
          <div  class="weui-btn weui-btn_plain-default" style="width:160px" > 
              <div class="weui-cell">
                 <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-                    <img src="{{urlPrefix + bed.customer_head_img_url}}" style="width: 50px;display: block" class="img-circle"  height="65" width="55" ng-if="bed.customer_id !== 0 "/>
+                    <img src="{{bed.customer_head_img_url}}" style="width: 50px;display: block" class="img-circle"  height="65" width="55" ng-if="bed.customer_id !== 0 "/>
                     <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block" class="img-circle"  height="65" width="55" ng-if="bed.customer_id === 0 "/>
                     <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;" ng-if="bed.isQualified === 1"><p ng-if="bed.id === bedId">已选中</p><p ng-if="bed.id !== bedId">可选</p></span>
                 </div>
