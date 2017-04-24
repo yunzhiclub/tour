@@ -66,6 +66,10 @@ angular.module('wechatApp')
             });
             // 规格化数组
             invite.beds = commonTools.formatArray(invite.beds, 2);
+
+            // 修改php与js时间戳的不一致
+            invite.set_out_time = invite.set_out_time * 1000;
+            invite.back_time = invite.back_time * 1000;
             // 求人均的价格
             $scope.perMoney = Math.ceil(invite.totalMoney / 6);
             $scope.invitation = invite;

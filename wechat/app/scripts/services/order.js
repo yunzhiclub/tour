@@ -11,9 +11,10 @@
 angular.module('wechatApp')
     .constant('order', {
         customerId: '',
-        startCityId: '',
+        setOutTime: 0,
+        days:0,
+        backTime: 0,
         routeId: '',
-        startTimeId: '',
         isPublic: '',
         deadLine: '',
         defaultPrice:0,

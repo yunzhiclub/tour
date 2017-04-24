@@ -63,10 +63,10 @@
                     <td style="text-align:right">{$RouteModel->money_format($RouteModel->getData('actual_price'))}</td>
                     <td>{$RouteModel->HotelModel()->getData('name')}</td>
                     <td>{eq name="$RouteModel->isShowHomeRecommendWeight()" value=""} 是 {else /} 否 {/eq}</td>
-                        <td>
-                         <a class="btn btn-sm btn-primary" href="{:url('edit?id=' . $RouteModel->getData('id'))}"><i class="glyphicon glyphicon-pencil"></i> 编辑</a>
-                        <a class="btn btn-sm btn-danger" href="{:url('delete?id=' . $RouteModel->getData('id'))}"><i class="glyphicon glyphicon-trash"></i> 删除</a>  
-                        </td>
+                    <td>
+                        <a class="btn btn-sm btn-primary" href="{:url('edit?id=' . $RouteModel->getData('id'))}"><i class="glyphicon glyphicon-pencil"></i> 编辑</a>
+                        <a class="btn btn-sm btn-danger" href="{:url('delete?id=' . $RouteModel->getData('id'))}"><i class="glyphicon glyphicon-trash"></i> 删除</a>
+                    </td>
                 </tr>
                 {/volist}
             </table>

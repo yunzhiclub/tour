@@ -38,4 +38,26 @@ class HomeRegionModel extends ModelModel
 		 
 		return $results;
 	}
+	/**
+	 * 根据用户的筛选条件查询信息
+	 * @param  array $data [用户的查询条件]
+	 * @return [object]       [首页地区信息]
+	 * @author zhangmengxiang
+	 */
+	public function getSearchInfo($data) {
+        $map['is_delete'] = 0;
+
+		if (isset($data['expiration_time']) && $data['expiration_time'] !== '0') {
+			$map['expiration_time'] = $data['expiration_time'];
+		}
+		if (isset($data['weight']) && $data['weight'] !== '0') {
+			$map['weight'] = $data['weight'];
+		}
+		
+		
+		$this->where($map);
+		
+		unset($map);
+		return $this;
+	}
 }

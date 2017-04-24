@@ -9,7 +9,7 @@ use app\mode\StartTimeModel;	//出发时间
 use app\model\StartCityModel;	//出发城市
 use app\model\RegionModel;		//地区
 use app\model\CountryModel;		//国家
-use app\model\InviteRouteStartcityDestcityCustomerStarttimeViewModel; // 邀约视图
+use app\model\InviteRouteStartcityDestcityCustomerViewModel; // 邀约视图
 /**
  * 返回所有邀约的json单条实例数据
  * {
@@ -72,14 +72,14 @@ class InvitationController extends ApiController {
 		
 		//从邀约表中查询
 		$type = 'route_id';
-		$Invitations = InviteRouteStartcityDestcityCustomerStarttimeViewModel::getInviteByMap($type, $map);
+		$Invitations = InviteRouteStartcityDestcityCustomerViewModel::getInviteByMap($type, $map);
 		return $this->response($Invitations);
 	}
 
 	/**
 	 * 1.首先根据地区获取地区所包含的国家
 	 * 2.根据国家获取所包含的目的地城市
-	 * 3.根据目的地城市查询InviteRouteStartcityDestcityCustomerStarttimeViewModel视图，获取该地区所包含的邀约	
+	 * 3.根据目的地城市查询InviteRouteStartcityDestcityCustomerViewModel视图，获取该地区所包含的邀约	
 	 * @return array
 	 * @author chuhang
 	 */
@@ -91,7 +91,7 @@ class InvitationController extends ApiController {
 
 		//从邀约视图中查询
 		$type = 'destination_city_id';
-		$Invitations = InviteRouteStartcityDestcityCustomerStarttimeViewModel::getInviteByMap($type, $map);
+		$Invitations = InviteRouteStartcityDestcityCustomerViewModel::getInviteByMap($type, $map);
 
 		return $this->response($Invitations);
 
@@ -111,7 +111,7 @@ class InvitationController extends ApiController {
 
 		//从邀约视图中查询
 		$type = 'destination_city_id';
-		$Invitations = InviteRouteStartcityDestcityCustomerStarttimeViewModel::getInviteByMap($type, $map);
+		$Invitations = InviteRouteStartcityDestcityCustomerViewModel::getInviteByMap($type, $map);
 
 		return $this->response($Invitations);
 	}
@@ -166,7 +166,7 @@ class InvitationController extends ApiController {
 		$id = Request::instance()->param('id');
         $type = 'id';
         $map = [$id];
-        $Invitation = InviteRouteStartcityDestcityCustomerStarttimeViewModel::getInviteByMap($type, $map);
+        $Invitation = InviteRouteStartcityDestcityCustomerViewModel::getInviteByMap($type, $map);
 		return $this->response($Invitation);
 	}
 
@@ -184,7 +184,7 @@ class InvitationController extends ApiController {
      * 获取全部的趣约
 	 * */
 	public function getAllInvitations() {
-		$Invitations = InviteRouteStartcityDestcityCustomerStarttimeViewModel::getInviteByMap(null, null);
+		$Invitations = InviteRouteStartcityDestcityCustomerViewModel::getInviteByMap(null, null);
 		return $this->response($Invitations);
     }
 
@@ -201,7 +201,7 @@ class InvitationController extends ApiController {
 
     	//从邀约视图中查询
     	$type = 'destination_city_id';
-    	$Invitations = InviteRouteStartcityDestcityCustomerStarttimeViewModel::getInviteByMap($type, $map);
+    	$Invitations = InviteRouteStartcityDestcityCustomerViewModel::getInviteByMap($type, $map);
 
     	return $this->response($Invitations);
     }
@@ -218,7 +218,7 @@ class InvitationController extends ApiController {
 
     	//从邀约视图中查询
     	$type = 'start_city_id';
-    	$Invitations = InviteRouteStartcityDestcityCustomerStarttimeViewModel::getInviteByMap($type, $map);
+    	$Invitations = InviteRouteStartcityDestcityCustomerViewModel::getInviteByMap($type, $map);
 
     	return $this->response($Invitations);
     }

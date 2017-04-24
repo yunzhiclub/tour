@@ -10,6 +10,8 @@ class InviteModel extends ModelModel
 	private $CustomerModel = null;
 	private $StartTimeModel = null;
 	private $BedModel = null;
+	private static $GenerateOrderTimestamp = null;  //生成订单时的时间戳
+	private static $GenerateOrderIndex = 1;  //同一秒内生成订单的序列号
 
 	/**
 	 * 输出是否公开的状态状态
@@ -179,7 +181,8 @@ class InviteModel extends ModelModel
 
 		//邀约的相关信息放入InviteModel的对象中
 		$InviteModel->customer_id = $Invitation->customerId;
-		$InviteModel->start_time_id = $Invitation->startTimeId;
+		$InviteModel->set_out_time = $Invitation->setOutTime;
+		$InviteModel->back_time = $Invitation->backTime;
 		$InviteModel->route_id = $Invitation->routeId;
 		$InviteModel->is_public = $Invitation->isPublic;
 		$InviteModel->deadline = $Invitation->deadLine;
@@ -214,7 +217,7 @@ class InviteModel extends ModelModel
 				$OrderModel = new OrderModel;
 				$OrderModel->customer_id = $Invitation->customerId;
 				$OrderModel->invite_id = $inviteId;
-				$OrderModel->number = self::setOrderNumber($Invitation->customerId);
+				$OrderModel->number = self::setOrderNumber();
 				$OrderModel->save();
 				
 				$OrderId = $OrderModel->getData('id');
@@ -231,19 +234,31 @@ class InviteModel extends ModelModel
 
 	/**
 	 * 生成订单编号，订单编号格式如下:
-	 * 日期+时间戳后五位+（100000 - 客户id）
-	 * eg:201609303243499094
-	 * @param  int $customerId 客户id
+	 * 日期+时间戳后五位+同一秒内生成的第几条订单
+	 * eg:2016093032434001
 	 * @return string             订单编号
 	 * @author chuhang 
 	 */
-	static public function setOrderNumber($customerId)
+	static public function setOrderNumber()
 	{
+	    //获取当前时间
 		$date = date("Ymd");
         $timestamp = substr(time(), -5, 5);
-        $customerId = sprintf("%05d", 100000 - $customerId);
 
-        return $date . $timestamp . $customerId;
+        //判断在同一秒内是否有订单生成，如果有则进行累加
+        if (time() !== self::$GenerateOrderTimestamp) {
+            //如果同一秒内没有其他订单生成，则更新生成订单的时间戳，并对订单序列号更新
+            self::$GenerateOrderTimestamp = time();
+            self::$GenerateOrderIndex = 1;
+        } else {
+            //同一秒内有 其他订单生成，序列号加一
+            self::$GenerateOrderIndex += 1;
+        }
+
+        //生成订单编号
+        $result = $date . $timestamp . sprintf("%'.03d", self::$GenerateOrderIndex);
+
+        return $result;
 	}
 
 	/**

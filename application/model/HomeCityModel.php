@@ -1,11 +1,13 @@
 <?php
 namespace app\model;
+use app\model\DestinationCityModel; 
 
 /**
  * 首页城市
  */
 class HomeCityModel extends ModelModel
 {
+	private $DestinationCityModel = null;
 	/**
 	 * 获取显示的首页城市
 	 * @return array 
@@ -37,5 +39,41 @@ class HomeCityModel extends ModelModel
 			}
 		}
 		return $results;
+	}
+		/**
+	 * 获取DestinationCityModel通过本对象中的destination_city_id
+	 * @author zhangmengxiang
+	 * @return Object Route对象
+	 */
+	public function getDestinationCityModel()
+	{
+		if (null === $this->DestinationCityModel) {
+			$DestinationCityModelId = $this->getData('destination_city_id');
+			$this->DestinationCityModel = DestinationCityModel::get($DestinationCityModelId);
+		}
+
+		return $this->DestinationCityModel;
+	}
+	/**
+	 * 根据用户的筛选条件查询信息
+	 * @param  array $data [用户的查询条件]
+	 * @return [object]       [首页城市信息]
+	 * @author zhangmengxiang
+	 */
+	public function getSearchInfo($data) {
+        $map['is_delete'] = 0;
+
+		if (isset($data['expiration_time']) && $data['expiration_time'] !== '0') {
+			$map['expiration_time'] = $data['expiration_time'];
+		}
+		if (isset($data['weight']) && $data['weight'] !== '0') {
+			$map['weight'] = $data['weight'];
+		}
+		
+		
+		$this->where($map);
+		
+		unset($map);
+		return $this;
 	}
 }

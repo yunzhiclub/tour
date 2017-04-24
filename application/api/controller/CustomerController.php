@@ -91,22 +91,6 @@ class CustomerController extends ApiController
     }
 
     /**
-     * 获取用户的全部订单
-     * @param    int                  $Customer_id [description]
-     * @return   
-     * 成功 return $this->response($orders);| 错误 $this->   
-     * response(20004, $Customer->getError());
-     */
-    public function getOrdersByCustomerId() 
-    {
-        $CustomerId = Request::instance()->param('customer_id');
-       // 获取用户的全部订单
-       $orders = OrderModel::getOrdersByCustomerId($CustomerId);
-
-       return $this->response($orders);   
-    }
-
-    /**
      * 按趣约id和用户id设置是否公开....趣约公开应该是不需要用户的id
      * @param              int
      * @return     保存成功会返回1 保存不成功返回错误信息或者错误码
@@ -153,4 +137,65 @@ class CustomerController extends ApiController
         
         return $this->response([]);
     }
+
+	/**
+	 * 获取用户的全部订单
+	 * @param    int                  $Customer_id [description]
+	 * @return
+	 * 成功 return $this->response($orders);| 错误 $this->
+	 * response(20004, $Customer->getError());
+	 */
+	public function getAllOrderByCustomerId()
+	{
+		$CustomerId = Request::instance()->param('customer_id');
+		// 获取用户的全部订单
+		$orders = OrderModel::getAllOrderByCustomerId($CustomerId);
+
+		return $this->response($orders);
+	}
+
+	/**
+	 * @return json
+	 * @author: mengyunzhi www.mengyunzhi.com
+	 * @Date&Time:2017-04-22 15:02
+	 * 获取未支付订单
+	 */
+	public function getUnPayOrderByCustomerId()
+	{
+		$CustomerId = Request::instance()->param('customer_id');
+		// 获取用户的全部订单
+		$orders = OrderModel::getUnPayOrderByCustomerId($CustomerId);
+
+		return $this->response($orders);
+	}
+
+	/**
+	 * @return json
+	 * @author: mengyunzhi www.mengyunzhi.com
+	 * @Date&Time:2017-04-22 15:04
+	 *        获取未成团订单
+	 */
+	public function getUnSetOutOrderByCustomerId()
+	{
+		$CustomerId = Request::instance()->param('customer_id');
+		// 获取用户的全部订单
+		$orders = OrderModel::getUnSetOutOrderByCustomerId($CustomerId);
+
+		return $this->response($orders);
+	}
+
+	/**
+	 * @return json
+	 * @author: mengyunzhi www.mengyunzhi.com
+	 * @Date&Time:2017-04-22 15:04
+	 *        获取未评价订单
+	 */
+	public function getUnEvaluateOrderByCustomerId()
+	{
+		$CustomerId = Request::instance()->param('customer_id');
+		// 获取用户的全部订单
+		$orders = OrderModel::getUnEvaluateOrderByCustomerId($CustomerId);
+
+		return $this->response($orders);
+	}
 }

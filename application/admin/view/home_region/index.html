@@ -11,26 +11,22 @@
                             <label>权重</label>&nbsp;
                             <select class="form-control" name="weight" >
                             <option value="0">无</option>
-                            {volist name = "HomeCityModelAll" id = "HomeCityModel"}
-                            <option value="{$HomeCityModel->getData('weight')}">{$HomeCityModel->getData('weight')}</option>
+                            {volist name ="HomeRegionModelAll" id ="HomeRegionModel"}
+                            <option value="{$HomeRegionModel->getData('weight')}">
+                                {$HomeRegionModel->getData('weight')}
+                            </option>
                             {/volist}
-
-                                
                             </select>
-                            
-                           
-                            
                             
                         </div>
                         <div class="col-md-4">
                             <label>过期时间</label>&nbsp;
                                 <select class="form-control" name="expiration_time">
-                                <option value="0" >不过期</option>
-                                {volist name ="HomeCityModelAll" id ="HomeCityModel"}
-                                <option value="{$HomeCityModel->getData('expiration_time')}">
-                                	{$HomeCityModel->getData('expiration_time')}
-                                </option>
+                                <option value="0">不过期</option>
+                                {volist name ="HomeRegionModelAll" id ="HomeRegionModel"}
+                                <option value="{$HomeRegionModel->getData('expiration_time')}">{$HomeRegionModel->getData('expiration_time')}</option>>
                                 {/volist}
+                               
                                 </select>
                                  <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>
                             
@@ -51,24 +47,24 @@
             <table class="table table-hover table-bordered">
                 <tr class="info">
                     <th>序号</th>
-                    <th>城市名称</th>
+                    <th>区域名称</th>
                     <th>权重</th>
                     <th>过期日期</th>
                     <th>操作</th>
                 </tr>
-                {volist name ="HomeCityModels" id = "HomeCityModel" key="key"}
+                {volist name ="HomeRegionModels" id ="HomeRegionModel" key="key"}
                 <tr>
-                
-                	<td>{$key}</td>
-                	<td>{$HomeCityModel->getDestinationCityModel()->getData('name')}</td>
-                	<td>{$HomeCityModel->getData('weight')}</td>
-                	<td>{$HomeCityModel->getData('expiration_time')}</td>
-                	<td><a class="btn btn-sm btn-primary" href="{:url('edit?id=' . $HomeCityModel->getData('id'))}"><i class="glyphicon glyphicon-pencil"></i> 编辑</a>
-                                <a class="btn btn-sm btn-danger" href="{:url('delete?id=' . $HomeCityModel->getData('id'))}"><i class="glyphicon glyphicon-trash"></i> 删除</a></td>
+                    <td>{$key}</td>
+                    <td>{$HomeRegionModel->getData('region_id')}</td>
+                    <td>{$HomeRegionModel->getData('weight')}</td>
+                    <td>{$HomeRegionModel->getData('expiration_time')}</td>
+                    <td><a class="btn btn-sm btn-primary" href="{:url('edit?id=' . $HomeRegionModel->getData('id'))}"><i class="glyphicon glyphicon-pencil"></i> 编辑</a>
+                                <a class="btn btn-sm btn-danger" href="{:url('delete?id=' . $HomeRegionModel->getData('id'))}"><i class="glyphicon glyphicon-trash"></i> 删除</a></td>
                 </tr>
-               {/volist}
+                {/volist}
+                
             </table>
-           {$HomeCityModels->render()}
+            
         </div>
     </div>
 </div>

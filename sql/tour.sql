@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-04-21 15:52:43
+Date: 2017-04-22 20:28:41
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -405,7 +405,8 @@ CREATE TABLE `yunzhi_invite` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `route_id` int(10) unsigned NOT NULL COMMENT '路线id',
   `customer_id` int(10) unsigned NOT NULL COMMENT '用户id',
-  `start_time_id` int(10) unsigned NOT NULL COMMENT '出发时间id',
+  `set_out_time` int(10) NOT NULL COMMENT '出发时间',
+  `back_time` int(11) DEFAULT NULL COMMENT '返程时间',
   `number` varchar(30) DEFAULT NULL COMMENT '订单号',
   `person_num` int(10) unsigned DEFAULT '0' COMMENT '邀约人数',
   `pay_num` int(10) unsigned DEFAULT '0' COMMENT '支付人数',
@@ -421,15 +422,15 @@ CREATE TABLE `yunzhi_invite` (
 -- ----------------------------
 -- Records of yunzhi_invite
 -- ----------------------------
-INSERT INTO `yunzhi_invite` VALUES ('1', '1', '1', '1', 'Y123121', '4', '5', '0', '1', '1', '1222', '2147483647', '1492695281');
-INSERT INTO `yunzhi_invite` VALUES ('2', '1', '1', '0', 'Y123122', '0', '0', '0', '1', '0', '0', '2147483647', '0');
-INSERT INTO `yunzhi_invite` VALUES ('3', '2', '1', '0', 'Y123123', '0', '0', '0', '0', '0', '0', '2147483647', '0');
-INSERT INTO `yunzhi_invite` VALUES ('4', '3', '1', '1', 'Y123124', '0', '0', '0', '0', '1', '1489831509', '234343234', '1489831509');
-INSERT INTO `yunzhi_invite` VALUES ('5', '1', '1', '0', '', '0', '0', '0', '0', '1', '1492501376', '2147483647', '1492501376');
-INSERT INTO `yunzhi_invite` VALUES ('6', '3', '1', '0', null, '6', '1', '5', '0', '0', '1492673104', '2147483647', '1492673104');
-INSERT INTO `yunzhi_invite` VALUES ('7', '3', '1', '0', 'y20170420743721', '6', '1', '5', '0', '1', '1492674372', '2147483647', '1492674372');
-INSERT INTO `yunzhi_invite` VALUES ('8', '3', '1', '0', 'y20170420781861', '6', '1', '5', '0', '1', '1492678186', '2147483647', '1492678186');
-INSERT INTO `yunzhi_invite` VALUES ('9', '3', '1', '0', 'y20170420931381', '6', '1', '5', '0', '1', '1492693138', '2147483647', '1492693138');
+INSERT INTO `yunzhi_invite` VALUES ('1', '1', '1', '1', null, 'Y123121', '4', '5', '0', '1', '1', '1222', '2147483647', '1492695281');
+INSERT INTO `yunzhi_invite` VALUES ('2', '1', '1', '0', null, 'Y123122', '0', '0', '0', '1', '0', '0', '2147483647', '0');
+INSERT INTO `yunzhi_invite` VALUES ('3', '2', '1', '0', null, 'Y123123', '0', '0', '0', '0', '0', '0', '2147483647', '0');
+INSERT INTO `yunzhi_invite` VALUES ('4', '3', '1', '1', null, 'Y123124', '0', '0', '0', '0', '1', '1489831509', '234343234', '1489831509');
+INSERT INTO `yunzhi_invite` VALUES ('5', '1', '1', '0', null, '', '0', '0', '0', '0', '1', '1492501376', '2147483647', '1492501376');
+INSERT INTO `yunzhi_invite` VALUES ('6', '3', '1', '0', null, null, '6', '1', '5', '0', '0', '1492673104', '2147483647', '1492673104');
+INSERT INTO `yunzhi_invite` VALUES ('7', '3', '1', '0', null, 'y20170420743721', '6', '1', '5', '0', '1', '1492674372', '2147483647', '1492674372');
+INSERT INTO `yunzhi_invite` VALUES ('8', '3', '1', '0', null, 'y20170420781861', '6', '1', '5', '0', '1', '1492678186', '2147483647', '1492678186');
+INSERT INTO `yunzhi_invite` VALUES ('9', '3', '1', '0', null, 'y20170420931381', '6', '1', '5', '0', '1', '1492693138', '2147483647', '1492693138');
 
 -- ----------------------------
 -- Table structure for `yunzhi_order`
@@ -453,11 +454,11 @@ CREATE TABLE `yunzhi_order` (
 -- ----------------------------
 -- Records of yunzhi_order
 -- ----------------------------
-INSERT INTO `yunzhi_order` VALUES ('1', '1', '1', 'D1233211234567', null, null, '0', null, null);
-INSERT INTO `yunzhi_order` VALUES ('2', '2', '2', 'D1233211234568', null, null, '0', null, null);
-INSERT INTO `yunzhi_order` VALUES ('3', '3', '2', 'D1233211234569', null, null, '0', null, null);
-INSERT INTO `yunzhi_order` VALUES ('5', '6', '1', '33', null, null, '0', null, null);
-INSERT INTO `yunzhi_order` VALUES ('6', '5', '1', '22', null, null, '0', null, null);
+INSERT INTO `yunzhi_order` VALUES ('1', '1', '1', 'D1233211234567', null, '0', '0', null, null);
+INSERT INTO `yunzhi_order` VALUES ('2', '2', '2', 'D1233211234568', null, '0', '0', null, null);
+INSERT INTO `yunzhi_order` VALUES ('3', '3', '2', 'D1233211234569', null, '0', '0', null, null);
+INSERT INTO `yunzhi_order` VALUES ('5', '6', '1', '33', null, '0', '0', null, null);
+INSERT INTO `yunzhi_order` VALUES ('6', '5', '1', '22', null, '0', '0', null, null);
 INSERT INTO `yunzhi_order` VALUES ('7', '1', '6', '201704207310499999', '0', '0', '0', '1492673104', '1492673104');
 INSERT INTO `yunzhi_order` VALUES ('8', '1', '7', '201704207437299999', '0', '0', '0', '1492674372', '1492674372');
 INSERT INTO `yunzhi_order` VALUES ('9', '1', '8', '201704207818699999', '0', '0', '0', '1492678186', '1492678186');
@@ -671,96 +672,30 @@ CREATE TABLE `yunzhi_start_time` (
   `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '出发时间id',
   `route_id` int(10) unsigned NOT NULL COMMENT '路线id',
   `price` int(10) unsigned NOT NULL COMMENT '应付金额',
-  `date` date NOT NULL COMMENT '时间',
+  `date` int(11) NOT NULL COMMENT '时间',
   `update_time` int(11) NOT NULL,
   `create_time` int(11) NOT NULL,
   `is_delete` tinyint(1) unsigned zerofill NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=260 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=276 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yunzhi_start_time
 -- ----------------------------
-INSERT INTO `yunzhi_start_time` VALUES ('180', '1', '45345', '2017-04-01', '1491467419', '1491059550', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('181', '1', '4234', '2017-04-02', '1491467419', '1491059550', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('182', '1', '432432', '2017-04-03', '1491467419', '1491059550', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('183', '1', '45345', '2017-04-02', '1491828051', '1491467419', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('184', '1', '4234', '2017-04-03', '1491828051', '1491467419', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('185', '1', '432432', '2017-04-04', '1491828051', '1491467419', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('186', '1', '12345', '2017-04-05', '1491828051', '1491467419', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('187', '1', '112233', '2017-04-06', '1491828051', '1491467419', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('188', '82', '11', '2017-04-08', '1491827868', '1491826232', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('189', '82', '12699', '2017-04-08', '1491827868', '1491827868', '0');
-INSERT INTO `yunzhi_start_time` VALUES ('190', '82', '12699', '2017-04-09', '1491827868', '1491827868', '0');
-INSERT INTO `yunzhi_start_time` VALUES ('191', '82', '12699', '2017-04-10', '1491827868', '1491827868', '0');
-INSERT INTO `yunzhi_start_time` VALUES ('192', '82', '12699', '2017-04-11', '1491827868', '1491827868', '0');
-INSERT INTO `yunzhi_start_time` VALUES ('193', '82', '12699', '2017-04-12', '1491827868', '1491827868', '0');
-INSERT INTO `yunzhi_start_time` VALUES ('194', '82', '12699', '2017-04-13', '1491827868', '1491827868', '0');
-INSERT INTO `yunzhi_start_time` VALUES ('195', '82', '12699', '2017-04-14', '1491827868', '1491827868', '0');
-INSERT INTO `yunzhi_start_time` VALUES ('196', '82', '12699', '2017-04-15', '1491827868', '1491827868', '0');
-INSERT INTO `yunzhi_start_time` VALUES ('197', '1', '7799', '2017-04-02', '1491828092', '1491828051', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('198', '1', '7799', '2017-04-03', '1491828092', '1491828051', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('199', '1', '7799', '2017-04-04', '1491828092', '1491828051', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('200', '1', '7799', '2017-04-05', '1491828092', '1491828051', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('201', '1', '7799', '2017-04-06', '1491828092', '1491828051', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('202', '1', '7799', '2017-04-02', '1491828093', '1491828092', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('203', '1', '7799', '2017-04-03', '1491828093', '1491828092', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('204', '1', '7799', '2017-04-04', '1491828093', '1491828092', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('205', '1', '7799', '2017-04-05', '1491828093', '1491828092', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('206', '1', '7799', '2017-04-06', '1491828093', '1491828092', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('207', '1', '7799', '2017-04-02', '1491828192', '1491828093', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('208', '1', '7799', '2017-04-03', '1491828192', '1491828093', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('209', '1', '7799', '2017-04-04', '1491828192', '1491828093', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('210', '1', '7799', '2017-04-05', '1491828192', '1491828093', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('211', '1', '7799', '2017-04-06', '1491828192', '1491828093', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('212', '1', '7799', '2017-04-02', '1491828214', '1491828192', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('213', '1', '7799', '2017-04-03', '1491828214', '1491828192', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('214', '1', '7799', '2017-04-04', '1491828214', '1491828192', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('215', '1', '7799', '2017-04-05', '1491828214', '1491828192', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('216', '1', '7799', '2017-04-06', '1491828214', '1491828192', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('217', '1', '7799', '2017-04-02', '1491828336', '1491828214', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('218', '1', '7799', '2017-04-03', '1491828336', '1491828214', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('219', '1', '7799', '2017-04-04', '1491828336', '1491828214', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('220', '1', '7799', '2017-04-05', '1491828336', '1491828214', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('221', '1', '7799', '2017-04-06', '1491828336', '1491828214', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('222', '1', '7799', '2017-04-02', '1491828356', '1491828336', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('223', '1', '7799', '2017-04-03', '1491828356', '1491828336', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('224', '1', '7799', '2017-04-04', '1491828356', '1491828336', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('225', '1', '7799', '2017-04-05', '1491828356', '1491828336', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('226', '1', '7799', '2017-04-06', '1491828356', '1491828336', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('227', '1', '7799', '2017-04-02', '1491828376', '1491828356', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('228', '1', '7799', '2017-04-03', '1491828376', '1491828356', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('229', '1', '7799', '2017-04-04', '1491828376', '1491828356', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('230', '1', '7799', '2017-04-05', '1491828376', '1491828356', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('231', '1', '7799', '2017-04-06', '1491828376', '1491828356', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('232', '1', '7799', '2017-04-02', '1491828404', '1491828376', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('233', '1', '7799', '2017-04-03', '1491828404', '1491828376', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('234', '1', '7799', '2017-04-04', '1491828404', '1491828376', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('235', '1', '7799', '2017-04-05', '1491828404', '1491828376', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('236', '1', '7799', '2017-04-06', '1491828404', '1491828376', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('237', '1', '7799', '2017-04-02', '1491828421', '1491828404', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('238', '1', '7799', '2017-04-03', '1491828421', '1491828404', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('239', '1', '7799', '2017-04-04', '1491828421', '1491828404', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('240', '1', '7799', '2017-04-05', '1491828421', '1491828404', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('241', '1', '7799', '2017-04-06', '1491828421', '1491828404', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('242', '1', '7799', '2017-04-02', '1491828451', '1491828421', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('243', '1', '7799', '2017-04-03', '1491828451', '1491828421', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('244', '1', '7799', '2017-04-04', '1491828451', '1491828421', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('245', '1', '7799', '2017-04-05', '1491828451', '1491828421', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('246', '1', '7799', '2017-04-06', '1491828451', '1491828421', '1');
-INSERT INTO `yunzhi_start_time` VALUES ('247', '1', '7799', '2017-04-02', '1491828451', '1491828451', '0');
-INSERT INTO `yunzhi_start_time` VALUES ('248', '1', '7799', '2017-04-03', '1491828451', '1491828451', '0');
-INSERT INTO `yunzhi_start_time` VALUES ('249', '1', '7799', '2017-04-04', '1491828451', '1491828451', '0');
-INSERT INTO `yunzhi_start_time` VALUES ('250', '1', '7799', '2017-04-05', '1491828451', '1491828451', '0');
-INSERT INTO `yunzhi_start_time` VALUES ('251', '1', '7799', '2017-04-06', '1491828451', '1491828451', '0');
-INSERT INTO `yunzhi_start_time` VALUES ('252', '96', '1', '2017-04-18', '1492435847', '1492435847', '0');
-INSERT INTO `yunzhi_start_time` VALUES ('253', '96', '2', '2017-04-19', '1492435847', '1492435847', '0');
-INSERT INTO `yunzhi_start_time` VALUES ('254', '96', '3', '2017-04-20', '1492435847', '1492435847', '0');
-INSERT INTO `yunzhi_start_time` VALUES ('255', '96', '4', '2017-04-21', '1492435847', '1492435847', '0');
-INSERT INTO `yunzhi_start_time` VALUES ('256', '96', '2', '2017-04-22', '1492435847', '1492435847', '0');
-INSERT INTO `yunzhi_start_time` VALUES ('257', '96', '5', '2017-04-23', '1492435847', '1492435847', '0');
-INSERT INTO `yunzhi_start_time` VALUES ('258', '96', '3', '2017-04-24', '1492435847', '1492435847', '0');
-INSERT INTO `yunzhi_start_time` VALUES ('259', '96', '2', '2017-04-25', '1492435847', '1492435847', '0');
+INSERT INTO `yunzhi_start_time` VALUES ('262', '83', '2', '1492704000', '1492779615', '1492777913', '1');
+INSERT INTO `yunzhi_start_time` VALUES ('263', '83', '23', '1492790400', '1492779615', '1492777913', '1');
+INSERT INTO `yunzhi_start_time` VALUES ('264', '83', '2', '1492704000', '1492779832', '1492779615', '1');
+INSERT INTO `yunzhi_start_time` VALUES ('265', '83', '23', '1492790400', '1492779832', '1492779615', '1');
+INSERT INTO `yunzhi_start_time` VALUES ('266', '83', '11', '1492876800', '1492779832', '1492779615', '1');
+INSERT INTO `yunzhi_start_time` VALUES ('267', '83', '1', '1492963200', '1492779832', '1492779615', '1');
+INSERT INTO `yunzhi_start_time` VALUES ('268', '82', '23', '1492704000', '1492779728', '1492779728', '0');
+INSERT INTO `yunzhi_start_time` VALUES ('269', '82', '23', '1492790400', '1492779728', '1492779728', '0');
+INSERT INTO `yunzhi_start_time` VALUES ('270', '82', '23', '1492876800', '1492779728', '1492779728', '0');
+INSERT INTO `yunzhi_start_time` VALUES ('271', '82', '2323', '1492963200', '1492779728', '1492779728', '0');
+INSERT INTO `yunzhi_start_time` VALUES ('272', '1', '10000', '1492704000', '1492779823', '1492779823', '0');
+INSERT INTO `yunzhi_start_time` VALUES ('273', '1', '10000', '1492790400', '1492779823', '1492779823', '0');
+INSERT INTO `yunzhi_start_time` VALUES ('274', '1', '11000', '1492876800', '1492779823', '1492779823', '0');
+INSERT INTO `yunzhi_start_time` VALUES ('275', '1', '11000', '1492963200', '1492779823', '1492779823', '0');
 
 -- ----------------------------
 -- Table structure for `yunzhi_test`
@@ -810,7 +745,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- View structure for `yunzhi_invite_route_startcity_destcity_customer_starttime_view`
 -- ----------------------------
 DROP VIEW IF EXISTS `yunzhi_invite_route_startcity_destcity_customer_starttime_view`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `yunzhi_invite_route_startcity_destcity_customer_starttime_view` AS select `yunzhi_invite`.`id` AS `id`,`yunzhi_invite`.`route_id` AS `route_id`,`yunzhi_invite`.`customer_id` AS `customer_id`,`yunzhi_invite`.`start_time_id` AS `start_time_id`,`yunzhi_invite`.`number` AS `number`,`yunzhi_invite`.`person_num` AS `person_num`,`yunzhi_invite`.`pay_num` AS `pay_num`,`yunzhi_invite`.`unpay_num` AS `unpay_num`,`yunzhi_invite`.`status` AS `status`,`yunzhi_invite`.`is_public` AS `is_public`,`yunzhi_invite`.`deadline` AS `deadline`,`yunzhi_customer`.`openid` AS `customer_openid`,`yunzhi_customer`.`nick_name` AS `customer_nick_name`,`yunzhi_customer`.`sex` AS `customer_sex`,`yunzhi_customer`.`city` AS `customer_city`,`yunzhi_customer`.`province` AS `customer_province`,`yunzhi_customer`.`country` AS `customer_country`,`yunzhi_customer`.`head_img_url` AS `customer_head_img_url`,`yunzhi_customer`.`birthday` AS `customer_birthday`,`yunzhi_customer`.`phone` AS `customer_phone`,`yunzhi_customer`.`email` AS `customer_email`,`yunzhi_start_time`.`date` AS `start_time_date`,`yunzhi_route`.`name` AS `route_name`,`yunzhi_route`.`start_city_id` AS `start_city_id`,`yunzhi_route`.`destination_city_id` AS `destination_city_id`,`yunzhi_route`.`days` AS `route_days`,`yunzhi_route`.`description` AS `route_description`,`yunzhi_route`.`check_in_days` AS `route_check_in_days`,`yunzhi_route`.`check_in_rooms` AS `route_check_in_rooms`,`yunzhi_route`.`deadline` AS `route_deadline`,`yunzhi_route`.`content` AS `route_content`,`yunzhi_route`.`click` AS `route_click`,`yunzhi_route`.`service_phone` AS `route_service_phone`,`yunzhi_route`.`start_time` AS `route_start_time`,`yunzhi_destination_city`.`name` AS `destination_city_name`,`yunzhi_start_city`.`name` AS `start_city_name`,`yunzhi_customer`.`head_img_url_wechat` AS `customer_head_img_url_wechat` from (((((`yunzhi_invite` left join `yunzhi_customer` on((`yunzhi_invite`.`customer_id` = `yunzhi_customer`.`id`))) left join `yunzhi_start_time` on((`yunzhi_invite`.`start_time_id` = `yunzhi_start_time`.`id`))) left join `yunzhi_route` on((`yunzhi_invite`.`route_id` = `yunzhi_route`.`id`))) left join `yunzhi_destination_city` on((`yunzhi_route`.`destination_city_id` = `yunzhi_destination_city`.`id`))) left join `yunzhi_start_city` on((`yunzhi_route`.`start_city_id` = `yunzhi_start_city`.`id`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `yunzhi_invite_route_startcity_destcity_customer_starttime_view` AS select `yunzhi_invite`.`id` AS `id`,`yunzhi_invite`.`route_id` AS `route_id`,`yunzhi_invite`.`customer_id` AS `customer_id`,`tour`.`yunzhi_invite`.`start_time_id` AS `start_time_id`,`tour`.`yunzhi_invite`.`number` AS `number`,`tour`.`yunzhi_invite`.`person_num` AS `person_num`,`tour`.`yunzhi_invite`.`pay_num` AS `pay_num`,`tour`.`yunzhi_invite`.`unpay_num` AS `unpay_num`,`tour`.`yunzhi_invite`.`status` AS `status`,`tour`.`yunzhi_invite`.`is_public` AS `is_public`,`tour`.`yunzhi_invite`.`deadline` AS `deadline`,`tour`.`yunzhi_customer`.`openid` AS `customer_openid`,`tour`.`yunzhi_customer`.`nick_name` AS `customer_nick_name`,`tour`.`yunzhi_customer`.`sex` AS `customer_sex`,`tour`.`yunzhi_customer`.`city` AS `customer_city`,`tour`.`yunzhi_customer`.`province` AS `customer_province`,`tour`.`yunzhi_customer`.`country` AS `customer_country`,`tour`.`yunzhi_customer`.`head_img_url` AS `customer_head_img_url`,`tour`.`yunzhi_customer`.`birthday` AS `customer_birthday`,`tour`.`yunzhi_customer`.`phone` AS `customer_phone`,`tour`.`yunzhi_customer`.`email` AS `customer_email`,`tour`.`yunzhi_start_time`.`date` AS `start_time_date`,`tour`.`yunzhi_route`.`name` AS `route_name`,`tour`.`yunzhi_route`.`start_city_id` AS `start_city_id`,`tour`.`yunzhi_route`.`destination_city_id` AS `destination_city_id`,`tour`.`yunzhi_route`.`days` AS `route_days`,`tour`.`yunzhi_route`.`description` AS `route_description`,`tour`.`yunzhi_route`.`check_in_days` AS `route_check_in_days`,`tour`.`yunzhi_route`.`check_in_rooms` AS `route_check_in_rooms`,`tour`.`yunzhi_route`.`deadline` AS `route_deadline`,`tour`.`yunzhi_route`.`content` AS `route_content`,`tour`.`yunzhi_route`.`click` AS `route_click`,`tour`.`yunzhi_route`.`service_phone` AS `route_service_phone`,`tour`.`yunzhi_route`.`start_time` AS `route_start_time`,`tour`.`yunzhi_destination_city`.`name` AS `destination_city_name`,`tour`.`yunzhi_start_city`.`name` AS `start_city_name`,`tour`.`yunzhi_customer`.`head_img_url_wechat` AS `customer_head_img_url_wechat` from (((((`yunzhi_invite` left join `yunzhi_customer` on((`tour`.`yunzhi_invite`.`customer_id` = `tour`.`yunzhi_customer`.`id`))) left join `yunzhi_start_time` on((`tour`.`yunzhi_invite`.`start_time_id` = `tour`.`yunzhi_start_time`.`id`))) left join `yunzhi_route` on((`tour`.`yunzhi_invite`.`route_id` = `tour`.`yunzhi_route`.`id`))) left join `yunzhi_destination_city` on((`tour`.`yunzhi_route`.`destination_city_id` = `tour`.`yunzhi_destination_city`.`id`))) left join `yunzhi_start_city` on((`tour`.`yunzhi_route`.`start_city_id` = `tour`.`yunzhi_start_city`.`id`))) ;
 
 -- ----------------------------
 -- View structure for `yunzhi_test_view`
