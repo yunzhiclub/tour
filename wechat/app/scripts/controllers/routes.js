@@ -33,5 +33,13 @@ angular.module('wechatApp')
         	}, function errorCallBack(response) {
         		console.log(response);
         	});
+        }   
+        var customerId = $scope.customer.id;
+        $scope.collecteTheRoute = function(routeId) {
+            route.collecteTheRoute(customerId, routeId).then(function successCallBack(response) {
+                console.log(response);
+            }, function errorCallBack() {
+
+            });
         }
   }]);

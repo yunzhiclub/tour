@@ -2,7 +2,7 @@
 app.controller('RouteController', function($scope) {
     //出发时间赋值
     var RouteModel = <?php echo $RouteModel; ?>;
-    $scope.deadline = new Date(RouteModel.deadline);
+    $scope.end_time = new Date(RouteModel.end_time);
     $scope.begin_time = new Date(RouteModel.begin_time);
     //给不同出发时间的价格赋值
     $scope.dates = <?php echo json_encode($otherInfo['start_time']); ?>;
@@ -14,14 +14,14 @@ app.controller('RouteController', function($scope) {
     $scope.isChosen = <?php echo $otherInfo['isChosen']; ?>;
     $scope.isHomeRecommend = <?php echo $otherInfo['isHomeRecommend']; ?>;
     //监听开始时间和出发时间两个字段
-    $scope.$watch('[begin_time, deadline]', function() {
+    $scope.$watch('[begin_time, end_time]', function() {
         //获取开始日期和截止日期之间相隔的天数
-        $scope.dates = getDates($scope.begin_time, $scope.deadline);
+        $scope.dates = getDates($scope.begin_time, $scope.end_time);
 
         //判断用户是否在开始日期、截止日期输入值
-        if ($scope.begin_time && $scope.deadline) {
+        if ($scope.begin_time && $scope.end_time) {
             //判断截止日期是否大于开始日期
-            if ($scope.begin_time <= $scope.deadline) {
+            if ($scope.begin_time <= $scope.end_time) {
                 $scope.myValue = true;
             } else {
                 $scope.myValue = false;

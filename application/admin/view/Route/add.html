@@ -86,7 +86,7 @@
                             <div class="form-group">
                                 <label class="col-md-2 control-label">出发日期——止</label>
                                 <div class="col-md-3">
-                                    <input type="date" class="form-control" ng-model="deadline" name="deadline" required />
+                                    <input type="date" class="form-control" ng-model="end_time" name="end_time" required />
                                 </div>
                                 <p class="text-danger" ng-show="promptInfo">
                                     <span>须大于等于“出发日期——起”</span>
@@ -108,8 +108,14 @@
                                 </table>
                             </div>
                             </div>
-                            
+
                             </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">截止日期</label>
+                                    <div class="col-md-3">
+                                        <input type="date" name="deadline" class="form-control" min="0" required/>
+                                    </div>
+                                </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label">描述信息</label>
                                 <div class="col-md-3">

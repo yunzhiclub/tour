@@ -61,7 +61,7 @@ router:#!/routes
                 </div>
             </div>
             <div class="weui-form-preview__ft">
-                <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:">收藏</a>
+                <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:" ng-click="collecteTheRoute(route.route.id)">收藏</a>
                 <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" ui-sref="clsdetail({routeId: route.route.id})">立即预定</button>
             </div>
         </div>
