@@ -45,11 +45,26 @@ class CollectionModel extends ModelModel
 	 * @param  int $UserId 用户的id
 	 * @return array         用户的所有收藏
 	 */
-	public static function getCollectionsByUserId($UserId)
+	public static function getCollectionsByCustomerId($CustomerId)
 	{
 		$Collection = new CollectionModel;
-		$collections = $Collection->where('user_id', 'in', $UserId)->select();
-		return $collections;
+		//  根据客户id获取收藏
+		$map['customer_id'] = $CustomerId;
+		$collections = $Collection->where($map)->select();
+		//  返回数组
+		$result = [];
+
+		foreach ($collections as $key =>  $collection){
+			//  根据routeId获取routeModel
+			$routeId = $collection->route_id;
+			$Route = RouteModel::get($routeId);
+			//  获取路线名称和描述信息
+			$result[$key]['id'] = $collection->id;
+			$result[$key]['name'] = $Route->getData('name');
+			$result[$key]['description'] = $Route->description;
+		}
+
+		return $result;
 	}
 	/**
 	 *   获得对应路线信息

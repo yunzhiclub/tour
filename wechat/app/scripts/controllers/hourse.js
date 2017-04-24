@@ -44,7 +44,7 @@ angular.module('wechatApp')
 
             // 双向绑定路线上的默认截止时间
             var deadLine = order.deadLine;
-            $scope.deadLine = new Date(deadLine);
+            $scope.deadLine = new Date(deadLine * 1000);
 
             // 设置默认选择支付房间
             $scope.payRoomNumber = 1;
