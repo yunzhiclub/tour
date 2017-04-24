@@ -2,8 +2,6 @@
 
 namespace traits\model;
 
-use think\db\Query;
-
 trait SoftDelete
 {
 
@@ -24,25 +22,24 @@ trait SoftDelete
     /**
      * 查询软删除数据
      * @access public
-     * @return Query
+     * @return \think\db\Query
      */
     public static function withTrashed()
     {
         $model = new static();
-        $field = $model->getDeleteTimeField(true);
-        return $model->db(false)->removeWhereField($field);
+        return $model->db();
     }
 
     /**
      * 只查询软删除数据
      * @access public
-     * @return Query
+     * @return \think\db\Query
      */
     public static function onlyTrashed()
     {
         $model = new static();
-        $field = $model->getDeleteTimeField(true);
-        return $model->db(false)->whereNotNull($field);
+        $field = $model->getDeleteTimeField();
+        return $model->db()->where($field, 'exp', 'is not null');
     }
 
     /**
@@ -63,7 +60,7 @@ trait SoftDelete
             $this->data[$name] = $this->autoWriteTimestamp($name);
             $result            = $this->isUpdate()->save();
         } else {
-            $result = $this->db(false)->delete($this->data);
+            $result = $this->db()->delete($this->data);
         }
 
         $this->trigger('after_delete', $this);
@@ -79,8 +76,8 @@ trait SoftDelete
      */
     public static function destroy($data, $force = false)
     {
-        // 包含软删除数据
-        $query = self::withTrashed();
+        $model = new static();
+        $query = $model->db();
         if (is_array($data) && key($data) !== 0) {
             $query->where($data);
             $data = null;
@@ -111,25 +108,21 @@ trait SoftDelete
     public function restore($where = [])
     {
         $name = $this->getDeleteTimeField();
-        if (empty($where)) {
-            $pk           = $this->getPk();
-            $where[$pk]   = $this->getData($pk);
-            $where[$name] = ['not null', ''];
-        }
         // 恢复删除
-        return $this->db(false)->removeWhereField($this->getDeleteTimeField(true))->where($where)->update([$name => null]);
+        return $this->isUpdate()->save([$name => null], $where);
+
     }
 
     /**
      * 查询默认不包含软删除数据
      * @access protected
-     * @param Query $query 查询对象
+     * @param \think\db\Query $query 查询对象
      * @return void
      */
     protected function base($query)
     {
         $field = $this->getDeleteTimeField(true);
-        $query->whereNull($field);
+        $query->where($field, 'null');
     }
 
     /**
@@ -140,13 +133,13 @@ trait SoftDelete
      */
     protected function getDeleteTimeField($read = false)
     {
-        $field = isset($this->deleteTime) ? $this->deleteTime : 'delete_time';
-        if (!strpos($field, '.')) {
-            $field = '__TABLE__.' . $field;
+        if (isset($this->deleteTime)) {
+            $field = $this->deleteTime;
+        } else {
+            $field = 'delete_time';
         }
         if (!$read && strpos($field, '.')) {
-            $array = explode('.', $field);
-            $field = array_pop($array);
+            list($alias, $field) = explode('.', $field);
         }
         return $field;
     }

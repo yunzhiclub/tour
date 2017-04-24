@@ -2,7 +2,7 @@
 // +----------------------------------------------------------------------
 // | ThinkPHP [ WE CAN DO IT JUST THINK ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2006~2017 http://thinkphp.cn All rights reserved.
+// | Copyright (c) 2006~2016 http://thinkphp.cn All rights reserved.
 // +----------------------------------------------------------------------
 // | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
 // +----------------------------------------------------------------------
@@ -11,6 +11,7 @@
 
 namespace think;
 
+use think\App;
 use think\exception\ClassNotFoundException;
 
 class Session
@@ -77,12 +78,7 @@ class Session
             ini_set('session.gc_maxlifetime', $config['expire']);
             ini_set('session.cookie_lifetime', $config['expire']);
         }
-        if (isset($config['secure'])) {
-            ini_set('session.cookie_secure', $config['secure']);
-        }
-        if (isset($config['httponly'])) {
-            ini_set('session.cookie_httponly', $config['httponly']);
-        }
+
         if (isset($config['use_cookies'])) {
             ini_set('session.use_cookies', $config['use_cookies'] ? 1 : 0);
         }
@@ -118,9 +114,7 @@ class Session
         if (is_null(self::$init)) {
             self::init();
         } elseif (false === self::$init) {
-            if (PHP_SESSION_ACTIVE != session_status()) {
-                session_start();
-            }
+            session_start();
             self::$init = true;
         }
     }
@@ -197,49 +191,13 @@ class Session
             self::delete($name, $prefix);
             return $result;
         } else {
-            return;
-        }
-    }
-
-    /**
-     * session设置 下一次请求有效
-     * @param string        $name session名称
-     * @param mixed         $value session值
-     * @param string|null   $prefix 作用域（前缀）
-     * @return void
-     */
-    public static function flash($name, $value)
-    {
-        self::set($name, $value);
-        if (!self::has('__flash__.__time__')) {
-            self::set('__flash__.__time__', $_SERVER['REQUEST_TIME_FLOAT']);
-        }
-        self::push('__flash__', $name);
-    }
-
-    /**
-     * 清空当前请求的session数据
-     * @return void
-     */
-    public static function flush()
-    {
-        if (self::$init) {
-            $item = self::get('__flash__');
-
-            if (!empty($item)) {
-                $time = $item['__time__'];
-                if ($_SERVER['REQUEST_TIME_FLOAT'] > $time) {
-                    unset($item['__time__']);
-                    self::delete($item);
-                    self::set('__flash__', []);
-                }
-            }
+            return null;
         }
     }
 
     /**
      * 删除session数据
-     * @param string|array  $name session名称
+     * @param string        $name session名称
      * @param string|null   $prefix 作用域（前缀）
      * @return void
      */
@@ -247,11 +205,7 @@ class Session
     {
         empty(self::$init) && self::boot();
         $prefix = !is_null($prefix) ? $prefix : self::$prefix;
-        if (is_array($name)) {
-            foreach ($name as $key) {
-                self::delete($key, $prefix);
-            }
-        } elseif (strpos($name, '.')) {
+        if (strpos($name, '.')) {
             list($name1, $name2) = explode('.', $name);
             if ($prefix) {
                 unset($_SESSION[$prefix][$name1][$name2]);
@@ -300,22 +254,6 @@ class Session
         } else {
             return $prefix ? isset($_SESSION[$prefix][$name]) : isset($_SESSION[$name]);
         }
-    }
-
-    /**
-     * 添加数据到一个session数组
-     * @param  string  $key
-     * @param  mixed   $value
-     * @return void
-     */
-    public static function push($key, $value)
-    {
-        $array = self::get($key);
-        if (is_null($array)) {
-            $array = [];
-        }
-        $array[] = $value;
-        self::set($key, $array);
     }
 
     /**
