@@ -15,7 +15,7 @@ angular.module('wechatApp')
             var maxMoney = 0;
             // 先默认设置默认的单价
             var defaultPrice = order.defaultPrice;
-            if ($stateParams.timeId !== undefined) {
+            if ($stateParams.timeId !== '') {
 
                 // 获取本次出发时间的价格替换默认价格
                 invitation.getPriceByStartTimeId($stateParams.timeId).then(function successCallBack(response) {
