@@ -6,6 +6,22 @@ namespace app\model;
  */
 class HomeRegionModel extends ModelModel
 {
+    private $RegionModel = null;
+
+
+    /**
+     * 当前模型与出发城市关系为n:1
+     * @return lists $RegionModels
+     * @author chuhang
+     */
+    public function RegionModel() {
+
+        if (null === $this->RegionModel) {
+            $this->RegionModel = RegionModel::get($this->getData('region_id'));
+        }
+
+        return $this->RegionModel;
+    }
 	/**
 	 * 获取首页显示的地区，3个			
 	 * @return [array] 

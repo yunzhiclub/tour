@@ -19,7 +19,7 @@
                             </select>
                             
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label>过期时间</label>&nbsp;
                                 <select class="form-control" name="expiration_time">
                                 <option value="0">不过期</option>
@@ -55,7 +55,7 @@
                 {volist name ="HomeRegionModels" id ="HomeRegionModel" key="key"}
                 <tr>
                     <td>{$key}</td>
-                    <td>{$HomeRegionModel->getData('region_id')}</td>
+                    <td>{$HomeRegionModel->RegionModel()->getData('name')}</td>
                     <td>{$HomeRegionModel->getData('weight')}</td>
                     <td>{$HomeRegionModel->getData('expiration_time')}</td>
                     <td><a class="btn btn-sm btn-primary" href="{:url('edit?id=' . $HomeRegionModel->getData('id'))}"><i class="glyphicon glyphicon-pencil"></i> 编辑</a>
