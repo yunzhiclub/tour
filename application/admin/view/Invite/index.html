@@ -23,9 +23,6 @@
                     <th>邀约编号</th>
                     <th>路线</th>
                     <th>生成客户</th>
-                    <th>出发时间</th>
-                    <th>床位</th>
-                    <th>邀约人数</th>
                     <th>已支付</th>
                     <th>未支付</th>
                     <th>订单状态</th>
@@ -38,9 +35,6 @@
                     <td>{$InviteModel->getData('number')}</td>
                 	<td><a href="{:url('Route/detail?id='. $InviteModel->getRouteModel()->getData('id'))}">{$InviteModel->getRouteModel()->getData('name')}</a></td>
                     <td>{$InviteModel->getCustomerModel()->getData('nick_name')}</td>
-                    <td>{$InviteModel->getData('start_time_id')}</td>
-                    <td><a href="{:url('Bed/index?id='. $InviteModel->getData('id'))}">详情</a></td>
-                    <td>6</td>
                     <td>{$InviteModel->getData('pay_num')}</td>
                     <td>
                         <?php $temp = $InviteModel->getData('pay_num');
@@ -48,8 +42,8 @@
                               echo $unPayNum;
                          ?>
                     </td>
-                    <td>{$InviteModel->getData('status')}</td>
-                    <td>{$InviteModel->getData('is_public')}</td>
+                    <td>{$InviteModel->getStatusAttr($InviteModel->getData('status'))}</td>
+                    <td>{eq name="$InviteModel->getData('is_public')" value="0"}不公开{else /}公开{/eq}</td>
                 	<td>
                     <a class="btn btn-sm btn-danger" href="{:url('delete?id=' . $InviteModel->getData('id'))}"><i class="glyphicon glyphicon-trash"></i> 删除</a>
                     </td>
