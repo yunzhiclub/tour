@@ -388,6 +388,21 @@ angular.module('wechatApp')
                 return getAllOrderByCustomerId(customer_id, openid);
             },
 
+            // 获取未支付的全部订单
+            getUnPayOrderByCustomerId: function(customer_id, openid) {
+                return getUnPayOrderByCustomerId(customer_id, openid);
+            },
+
+            // 获取未成行的全部订单
+            getUnSetOutOrderByCustomerId: function(customer_id, openid) {
+                return getUnSetOutOrderByCustomerId(customer_id, openid);
+            },
+
+            // 获取未评价的全部订单
+            getUnEvaluateOrderByCustomerId: function(customer_id, openid) {
+                return getUnEvaluateOrderByCustomerId(customer_id, openid);
+            },
+
             // 设置趣约是否公开（必须是自己发布的）
             setInviteIsPublic: function(id, flag) {
                 return setInviteIsPublic(id, flag);

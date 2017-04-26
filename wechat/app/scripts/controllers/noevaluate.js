@@ -8,10 +8,14 @@
  * Controller of the wechatApp
  */
 angular.module('wechatApp')
-  .controller('NoevaluateCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('NoevaluateCtrl',['$scope', 'customer', function ($scope, customer) {
+      var customerId = $scope.customer.id;
+      var openId = $scope.customer.openid;
+      customer.getUnEvaluateOrderByCustomerId(customerId, openId).then(function successCallBack(response) {
+          console.log(response);
+          $scope.orders = response;
+          $scope.isPublic = 1;
+      }, function errorCallBack() {
+
+      });
+  }]);
