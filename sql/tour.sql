@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-04-22 20:28:41
+Date: 2017-04-25 18:15:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -295,21 +295,24 @@ INSERT INTO `yunzhi_flight` VALUES ('30', 'A31111', '中国航空', '05:05:00', 
 DROP TABLE IF EXISTS `yunzhi_home_city`;
 CREATE TABLE `yunzhi_home_city` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `destination_city_id` int(10) unsigned NOT NULL COMMENT '国家ID',
-  `is_delete` tinyint(1) unsigned zerofill NOT NULL,
+  `country_id` int(10) unsigned NOT NULL COMMENT '国家ID',
+  `weight` int(1) NOT NULL,
+  `expiration_time` date NOT NULL COMMENT '过期时间',
   `update_time` int(11) unsigned NOT NULL,
   `create_time` int(11) unsigned NOT NULL,
+  `is_delete` tinyint(1) unsigned zerofill NOT NULL DEFAULT '0',
+  `destination_city_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yunzhi_home_city
 -- ----------------------------
-INSERT INTO `yunzhi_home_city` VALUES ('1', '1', '0', '0', '0');
-INSERT INTO `yunzhi_home_city` VALUES ('2', '2', '1', '0', '0');
-INSERT INTO `yunzhi_home_city` VALUES ('3', '3', '0', '0', '0');
-INSERT INTO `yunzhi_home_city` VALUES ('4', '4', '0', '0', '0');
-INSERT INTO `yunzhi_home_city` VALUES ('5', '5', '0', '0', '0');
+INSERT INTO `yunzhi_home_city` VALUES ('1', '1', '6', '2017-04-15', '1492878698', '15', '0', '2');
+INSERT INTO `yunzhi_home_city` VALUES ('2', '1', '2', '2017-03-15', '1492664408', '0', '1', '2');
+INSERT INTO `yunzhi_home_city` VALUES ('3', '0', '16', '2017-04-01', '1492661131', '1492659531', '0', '1');
+INSERT INTO `yunzhi_home_city` VALUES ('4', '0', '9', '2017-03-23', '1492782133', '1492664421', '1', '7');
+INSERT INTO `yunzhi_home_city` VALUES ('5', '0', '6', '2017-04-06', '1492878889', '1492878889', '0', '1');
 
 -- ----------------------------
 -- Table structure for `yunzhi_home_recommend`
@@ -319,38 +322,37 @@ CREATE TABLE `yunzhi_home_recommend` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `route_id` int(10) unsigned NOT NULL,
   `weight` int(10) NOT NULL,
+  `expiration_time` date DEFAULT NULL COMMENT '过期时间',
   `update_time` int(11) unsigned NOT NULL,
   `create_time` int(11) unsigned NOT NULL,
   `is_delete` tinyint(1) unsigned zerofill NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yunzhi_home_recommend
 -- ----------------------------
-INSERT INTO `yunzhi_home_recommend` VALUES ('14', '1', '343342', '1491057701', '1491057671', '1');
-INSERT INTO `yunzhi_home_recommend` VALUES ('15', '1', '343342', '1491057766', '1491057701', '1');
-INSERT INTO `yunzhi_home_recommend` VALUES ('16', '1', '4', '1491058272', '1491058258', '1');
-INSERT INTO `yunzhi_home_recommend` VALUES ('17', '1', '4', '1491058386', '1491058272', '1');
-INSERT INTO `yunzhi_home_recommend` VALUES ('18', '1', '4', '1491058936', '1491058386', '1');
-INSERT INTO `yunzhi_home_recommend` VALUES ('19', '1', '4', '1491059061', '1491058936', '1');
-INSERT INTO `yunzhi_home_recommend` VALUES ('20', '1', '4', '1491059062', '1491059061', '1');
-INSERT INTO `yunzhi_home_recommend` VALUES ('21', '1', '4', '1491059135', '1491059062', '1');
-INSERT INTO `yunzhi_home_recommend` VALUES ('22', '1', '4', '1491059550', '1491059135', '1');
-INSERT INTO `yunzhi_home_recommend` VALUES ('23', '1', '4', '1491467419', '1491059550', '1');
-INSERT INTO `yunzhi_home_recommend` VALUES ('24', '1', '4', '1491828051', '1491467419', '1');
-INSERT INTO `yunzhi_home_recommend` VALUES ('25', '1', '4', '1491828092', '1491828051', '1');
-INSERT INTO `yunzhi_home_recommend` VALUES ('26', '1', '4', '1491828093', '1491828092', '1');
-INSERT INTO `yunzhi_home_recommend` VALUES ('27', '1', '4', '1491828192', '1491828093', '1');
-INSERT INTO `yunzhi_home_recommend` VALUES ('28', '1', '4', '1491828214', '1491828192', '1');
-INSERT INTO `yunzhi_home_recommend` VALUES ('29', '1', '4', '1491828336', '1491828214', '1');
-INSERT INTO `yunzhi_home_recommend` VALUES ('30', '1', '4', '1491828356', '1491828336', '1');
-INSERT INTO `yunzhi_home_recommend` VALUES ('31', '1', '4', '1491828376', '1491828356', '1');
-INSERT INTO `yunzhi_home_recommend` VALUES ('32', '1', '4', '1491828404', '1491828376', '1');
-INSERT INTO `yunzhi_home_recommend` VALUES ('33', '1', '4', '1491828421', '1491828404', '1');
-INSERT INTO `yunzhi_home_recommend` VALUES ('34', '1', '4', '1491828451', '1491828421', '1');
-INSERT INTO `yunzhi_home_recommend` VALUES ('35', '1', '4', '1491828451', '1491828451', '0');
-INSERT INTO `yunzhi_home_recommend` VALUES ('36', '96', '100', '1492435847', '1492435847', '0');
+INSERT INTO `yunzhi_home_recommend` VALUES ('1', '2', '66', '2017-04-22', '1492876762', '1491057671', '1');
+INSERT INTO `yunzhi_home_recommend` VALUES ('2', '1', '343342', '0000-00-00', '1492605684', '1491057701', '1');
+INSERT INTO `yunzhi_home_recommend` VALUES ('3', '1', '4', '0000-00-00', '1492605663', '1491058258', '1');
+INSERT INTO `yunzhi_home_recommend` VALUES ('17', '1', '4', '0000-00-00', '1491058386', '1491058272', '0');
+INSERT INTO `yunzhi_home_recommend` VALUES ('18', '1', '4', '0000-00-00', '1491058936', '1491058386', '1');
+INSERT INTO `yunzhi_home_recommend` VALUES ('19', '1', '4', '0000-00-00', '1491059061', '1491058936', '1');
+INSERT INTO `yunzhi_home_recommend` VALUES ('20', '1', '4', '0000-00-00', '1491059062', '1491059061', '0');
+INSERT INTO `yunzhi_home_recommend` VALUES ('21', '1', '4', '0000-00-00', '1491059135', '1491059062', '0');
+INSERT INTO `yunzhi_home_recommend` VALUES ('22', '1', '4', '0000-00-00', '1491059550', '1491059135', '0');
+INSERT INTO `yunzhi_home_recommend` VALUES ('23', '1', '4', '0000-00-00', '1491467419', '1491059550', '0');
+INSERT INTO `yunzhi_home_recommend` VALUES ('24', '1', '4', '0000-00-00', '1491831279', '1491467419', '1');
+INSERT INTO `yunzhi_home_recommend` VALUES ('25', '1', '4', '0000-00-00', '1491831279', '1491831279', '0');
+INSERT INTO `yunzhi_home_recommend` VALUES ('26', '87', '2', '0000-00-00', '1491831923', '1491831755', '1');
+INSERT INTO `yunzhi_home_recommend` VALUES ('27', '87', '2', '0000-00-00', '1491831923', '1491831923', '0');
+INSERT INTO `yunzhi_home_recommend` VALUES ('28', '0', '6', '2017-03-31', '1492778503', '1492601020', '1');
+INSERT INTO `yunzhi_home_recommend` VALUES ('29', '1', '1', '2017-04-05', '1492601130', '1492601130', '0');
+INSERT INTO `yunzhi_home_recommend` VALUES ('30', '1', '1', '2017-04-05', '1492601137', '1492601137', '0');
+INSERT INTO `yunzhi_home_recommend` VALUES ('31', '87', '5', '2017-04-18', '1492601155', '1492601155', '0');
+INSERT INTO `yunzhi_home_recommend` VALUES ('32', '87', '9', '2017-04-29', '1492601179', '1492601179', '0');
+INSERT INTO `yunzhi_home_recommend` VALUES ('33', '1', '9', '2017-04-13', '1492601206', '1492601206', '0');
+INSERT INTO `yunzhi_home_recommend` VALUES ('34', '1', '0', '2017-04-07', '1492601231', '1492601231', '0');
 
 -- ----------------------------
 -- Table structure for `yunzhi_home_region`
@@ -359,21 +361,22 @@ DROP TABLE IF EXISTS `yunzhi_home_region`;
 CREATE TABLE `yunzhi_home_region` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
   `region_id` int(10) unsigned NOT NULL COMMENT '地区id',
-  `is_delete` tinyint(1) unsigned zerofill NOT NULL,
+  `weight` int(10) NOT NULL,
+  `expiration_time` date NOT NULL,
   `update_time` int(11) unsigned NOT NULL,
   `create_time` int(11) unsigned NOT NULL,
+  `is_delete` tinyint(1) unsigned zerofill NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yunzhi_home_region
 -- ----------------------------
-INSERT INTO `yunzhi_home_region` VALUES ('1', '1', '0', '0', '0');
-INSERT INTO `yunzhi_home_region` VALUES ('2', '2', '0', '0', '0');
-INSERT INTO `yunzhi_home_region` VALUES ('3', '3', '1', '0', '0');
-INSERT INTO `yunzhi_home_region` VALUES ('4', '4', '0', '0', '0');
-INSERT INTO `yunzhi_home_region` VALUES ('5', '5', '0', '0', '0');
-INSERT INTO `yunzhi_home_region` VALUES ('6', '6', '0', '0', '0');
+INSERT INTO `yunzhi_home_region` VALUES ('1', '2', '5', '2017-04-07', '1492876123', '0', '0');
+INSERT INTO `yunzhi_home_region` VALUES ('2', '6', '8', '0000-00-00', '0', '0', '0');
+INSERT INTO `yunzhi_home_region` VALUES ('3', '2', '1', '2017-04-06', '1492791120', '1492791120', '0');
+INSERT INTO `yunzhi_home_region` VALUES ('4', '1', '6', '2017-04-21', '1492876373', '1492873851', '1');
+INSERT INTO `yunzhi_home_region` VALUES ('5', '1', '666', '2017-04-07', '1492879208', '1492879208', '0');
 
 -- ----------------------------
 -- Table structure for `yunzhi_hotel`
@@ -623,25 +626,26 @@ CREATE TABLE `yunzhi_route` (
   `starting_price` int(10) NOT NULL COMMENT '路线起价',
   `actual_price` int(10) unsigned NOT NULL,
   `standard_price` int(10) NOT NULL COMMENT '标价',
-  `deadline` int(10) unsigned NOT NULL COMMENT '路线到期时间',
+  `end_time` int(11) unsigned NOT NULL COMMENT '出发日期——止',
   `content` text NOT NULL COMMENT '详细内容',
   `click` int(11) DEFAULT '0' COMMENT '点击次数',
   `service_phone` varchar(40) DEFAULT '' COMMENT '客服电话',
   `is_delete` tinyint(1) NOT NULL,
   `create_time` int(11) unsigned NOT NULL,
   `update_time` int(11) unsigned NOT NULL,
-  `start_time` int(11) NOT NULL COMMENT '开始日期',
-  `begin_time` int(11) NOT NULL COMMENT '出发日期——起',
-  `end_time` int(11) DEFAULT NULL COMMENT '出发时间-止',
+  `start_time` int(11) unsigned NOT NULL COMMENT '开始日期',
+  `begin_time` int(11) unsigned NOT NULL COMMENT '出发日期——起',
+  `deadline` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yunzhi_route
 -- ----------------------------
-INSERT INTO `yunzhi_route` VALUES ('1', '法国+瑞士+意大利+德国11日9晚跟团游', '1', '3', '1', '28', '28', '11', '赠送荷兰+库肯霍夫公园+双宫入内+滴滴湖', '10', '4', '7799', '7799', '8000', '20170406', '                                                                                                                                                                                                                                                                                                                                    <p></p><ul><li>★ 【优质保证】：全程往返优质航空，南进北出，不走回头路</li><li>★ 【深度游览】：罗马，威尼斯，佛罗伦萨的宁静悠远，精心设计</li><li>★ 【精心赠送】：令人魂牵梦萦的库肯霍夫公园，赏荷兰风光</li></ul>                                                                                                                                                                                                                                                                                                                                    ', '0', '022-232332', '0', '1491828451', '1491828451', '20160401', '20170402', null);
-INSERT INTO `yunzhi_route` VALUES ('2', '法国+意大利+瑞士10日8晚跟团游', '1', '4', '1', '28', '28', '10', '一价全含+勃朗峰+金色山口车+双宫+双游船', '9', '3', '12699', '12699', '18000', '20170415', '                                                                                                                                                                                    <p></p><ul><li>★ 【春季抢购】全程四人WIFI+可异地按指纹+出签率高</li><li>★ 【行程升级】全程三星-四星酒店+勃朗峰+双宫入内讲解+塞纳河游船</li><li>★ 【法国深度】：威尼斯本岛+威尼斯彩虹岛布尔诺 +黄金大运河</li></ul>                                                                                                                                                <p><br></p>', '0', '022-3242342', '0', '1491827868', '1491827868', '20170408', '20170408', null);
-INSERT INTO `yunzhi_route` VALUES ('3', '经典小团', '2', '5', '1', '28', '28', '5', '测试信息', '4', '2', '8888', '7800', '9999', '20170425', '                                    <p>这是个测试路线</p>', '0', '212', '0', '1492435847', '1492435847', '20170417', '20170418', null);
+INSERT INTO `yunzhi_route` VALUES ('1', '法国+瑞士+意大利+德国11日9晚跟团游', '1', '1', '1', '28', '28', '2', '赠送荷兰+库肯霍夫公园+双宫入内+滴滴湖', '2', '4', '7799', '7799', '8000', '1492963200', '                                                                                                                                                                                                                                                                                                                                                                                                                                                <p></p><ul><li>★ 【优质保证】：全程往返优质航空，南进北出，不走回头路</li><li>★ 【深度游览】：罗马，威尼斯，佛罗伦萨的宁静悠远，精心设计</li><li>★ 【精心赠送】：令人魂牵梦萦的库肯霍夫公园，赏荷兰风光</li></ul>                                    ', '0', '022-232332', '0', '1492779823', '1492779823', '1492704000', '1492704000', '1492779728');
+INSERT INTO `yunzhi_route` VALUES ('2', '法国+意大利+瑞士10日8晚跟团游', '1', '1', '1', '28', '28', '3', '一价全含+勃朗峰+金色山口车+双宫+双游船', '3', '3', '12699', '12699', '18000', '1492963200', '                                                                                                                                                                                                                        <p></p><ul><li>★ 【春季抢购】全程四人WIFI+可异地按指纹+出签率高</li><li>★ 【行程升级】全程三星-四星酒店+勃朗峰+双宫入内讲解+塞纳河游船</li><li>★ 【法国深度】：威尼斯本岛+威尼斯彩虹岛布尔诺 +黄金大运河</li></ul>                                                                                                                                                <p><br></p>                                    ', '0', '022-3242342', '0', '1492779728', '1492779728', '1492704000', '1492704000', '1492779728');
+INSERT INTO `yunzhi_route` VALUES ('3', '测试', '1', '1', '1', '28', '28', '3', '1223', '3', '1', '1', '1', '1', '1493049600', '                                                                        <p>11</p>                                    ', '0', '1', '0', '1493038955', '1493038955', '1493913600', '1492963200', '1492876800');
+INSERT INTO `yunzhi_route` VALUES ('4', '测试1', '1', '1', '1', '28', '28', '2', '测试', '2', '1', '1222', '1111', '2222', '1492963200', '', '0', '022-232332', '0', '0', '1492779823', '1492779823', '1492779823', '1492779823');
 
 -- ----------------------------
 -- Table structure for `yunzhi_start_city`
@@ -739,16 +743,10 @@ INSERT INTO `yunzhi_user` VALUES ('1', 'admin', '69bfbc2e8df54af9fe751b3dfa4d2e9
 -- View structure for `yunzhi_destination_city_route_hotel_flight_view`
 -- ----------------------------
 DROP VIEW IF EXISTS `yunzhi_destination_city_route_hotel_flight_view`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `yunzhi_destination_city_route_hotel_flight_view` AS select `yunzhi_route`.`id` AS `id`,`yunzhi_route`.`name` AS `route_name`,`yunzhi_route`.`destination_city_id` AS `route_destination_city_id`,`yunzhi_route`.`hotel_id` AS `route_hotel_id`,`yunzhi_route`.`begin_flight_id` AS `route_begin_flight_id`,`yunzhi_route`.`back_flight_id` AS `route_back_flight_id`,`yunzhi_route`.`days` AS `route_days`,`yunzhi_route`.`description` AS `route_description`,`yunzhi_route`.`check_in_days` AS `route_check_in_days`,`yunzhi_route`.`check_in_rooms` AS `route_check_in_rooms`,`yunzhi_route`.`standard_price` AS `route_standard_price`,`yunzhi_route`.`deadline` AS `route_deadline`,`yunzhi_route`.`click` AS `route_click`,`yunzhi_route`.`is_delete` AS `route_is_delete`,`yunzhi_route`.`create_time` AS `route_create_time`,`yunzhi_hotel`.`dress` AS `hotel_dress`,`yunzhi_hotel`.`phone` AS `hotel_phone`,`yunzhi_hotel`.`star` AS `hotel_star`,`yunzhi_hotel`.`content` AS `hotel_content`,`yunzhi_hotel`.`is_delete` AS `hotel_is_delete`,`yunzhi_flight`.`number` AS `flight_number`,`yunzhi_flight`.`company` AS `flight_company`,`yunzhi_flight`.`up_time` AS `flight_up_time`,`yunzhi_flight`.`down_time` AS `flight_down_time`,`yunzhi_flight`.`up_city_id` AS `flight_up_city_id`,`yunzhi_flight`.`down_city_id` AS `flight_down_city_id`,`yunzhi_destination_city`.`country_id` AS `destination_city_country_id`,`yunzhi_destination_city`.`name` AS `destination_city_name`,`yunzhi_start_city`.`name` AS `start_city_name`,`yunzhi_route`.`start_city_id` AS `route_start_city_id`,`yunzhi_route`.`starting_price` AS `route_starting_price`,`yunzhi_route`.`service_phone` AS `route_service_phone`,`yunzhi_route`.`actual_price` AS `actual_price`,`yunzhi_route`.`begin_time` AS `begin_time`,`yunzhi_route`.`content` AS `content`,`yunzhi_hotel`.`name` AS `hotel_name` from ((((`yunzhi_route` left join `yunzhi_hotel` on((`yunzhi_hotel`.`id` = `yunzhi_route`.`hotel_id`))) left join `yunzhi_flight` on(((`yunzhi_flight`.`id` = `yunzhi_route`.`begin_flight_id`) and (`yunzhi_route`.`back_flight_id` = `yunzhi_flight`.`id`)))) left join `yunzhi_start_city` on((`yunzhi_start_city`.`id` = `yunzhi_route`.`start_city_id`))) left join `yunzhi_destination_city` on((`yunzhi_destination_city`.`id` = `yunzhi_route`.`destination_city_id`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `yunzhi_destination_city_route_hotel_flight_view` AS select `yunzhi_route`.`id` AS `id`,`yunzhi_route`.`name` AS `route_name`,`yunzhi_route`.`destination_city_id` AS `route_destination_city_id`,`yunzhi_route`.`hotel_id` AS `route_hotel_id`,`yunzhi_route`.`begin_flight_id` AS `route_begin_flight_id`,`yunzhi_route`.`back_flight_id` AS `route_back_flight_id`,`yunzhi_route`.`days` AS `route_days`,`yunzhi_route`.`description` AS `route_description`,`yunzhi_route`.`check_in_days` AS `route_check_in_days`,`yunzhi_route`.`check_in_rooms` AS `route_check_in_rooms`,`yunzhi_route`.`standard_price` AS `route_standard_price`,`yunzhi_route`.`deadline` AS `route_deadline`,`yunzhi_route`.`click` AS `route_click`,`yunzhi_route`.`is_delete` AS `route_is_delete`,`yunzhi_route`.`create_time` AS `route_create_time`,`yunzhi_hotel`.`dress` AS `hotel_dress`,`yunzhi_hotel`.`phone` AS `hotel_phone`,`yunzhi_hotel`.`star` AS `hotel_star`,`yunzhi_hotel`.`content` AS `hotel_content`,`yunzhi_hotel`.`is_delete` AS `hotel_is_delete`,`yunzhi_flight`.`number` AS `flight_number`,`yunzhi_flight`.`company` AS `flight_company`,`yunzhi_flight`.`up_time` AS `flight_up_time`,`yunzhi_flight`.`down_time` AS `flight_down_time`,`yunzhi_flight`.`up_city_id` AS `flight_up_city_id`,`yunzhi_flight`.`down_city_id` AS `flight_down_city_id`,`yunzhi_destination_city`.`country_id` AS `destination_city_country_id`,`yunzhi_destination_city`.`name` AS `destination_city_name`,`yunzhi_start_city`.`name` AS `start_city_name`,`yunzhi_route`.`start_city_id` AS `route_start_city_id`,`yunzhi_route`.`starting_price` AS `route_starting_price`,`yunzhi_route`.`service_phone` AS `route_service_phone`,`yunzhi_route`.`actual_price` AS `actual_price`,`yunzhi_route`.`content` AS `content`,`yunzhi_hotel`.`name` AS `hotel_name`,`yunzhi_route`.`start_time` AS `start_time` from ((((`yunzhi_route` left join `yunzhi_hotel` on((`yunzhi_hotel`.`id` = `yunzhi_route`.`hotel_id`))) left join `yunzhi_flight` on(((`yunzhi_flight`.`id` = `yunzhi_route`.`begin_flight_id`) and (`yunzhi_route`.`back_flight_id` = `yunzhi_flight`.`id`)))) left join `yunzhi_start_city` on((`yunzhi_start_city`.`id` = `yunzhi_route`.`start_city_id`))) left join `yunzhi_destination_city` on((`yunzhi_destination_city`.`id` = `yunzhi_route`.`destination_city_id`))) ;
 
 -- ----------------------------
--- View structure for `yunzhi_invite_route_startcity_destcity_customer_starttime_view`
+-- View structure for `yunzhi_invite_route_startcity_destcity_customer_view`
 -- ----------------------------
-DROP VIEW IF EXISTS `yunzhi_invite_route_startcity_destcity_customer_starttime_view`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `yunzhi_invite_route_startcity_destcity_customer_starttime_view` AS select `yunzhi_invite`.`id` AS `id`,`yunzhi_invite`.`route_id` AS `route_id`,`yunzhi_invite`.`customer_id` AS `customer_id`,`tour`.`yunzhi_invite`.`start_time_id` AS `start_time_id`,`tour`.`yunzhi_invite`.`number` AS `number`,`tour`.`yunzhi_invite`.`person_num` AS `person_num`,`tour`.`yunzhi_invite`.`pay_num` AS `pay_num`,`tour`.`yunzhi_invite`.`unpay_num` AS `unpay_num`,`tour`.`yunzhi_invite`.`status` AS `status`,`tour`.`yunzhi_invite`.`is_public` AS `is_public`,`tour`.`yunzhi_invite`.`deadline` AS `deadline`,`tour`.`yunzhi_customer`.`openid` AS `customer_openid`,`tour`.`yunzhi_customer`.`nick_name` AS `customer_nick_name`,`tour`.`yunzhi_customer`.`sex` AS `customer_sex`,`tour`.`yunzhi_customer`.`city` AS `customer_city`,`tour`.`yunzhi_customer`.`province` AS `customer_province`,`tour`.`yunzhi_customer`.`country` AS `customer_country`,`tour`.`yunzhi_customer`.`head_img_url` AS `customer_head_img_url`,`tour`.`yunzhi_customer`.`birthday` AS `customer_birthday`,`tour`.`yunzhi_customer`.`phone` AS `customer_phone`,`tour`.`yunzhi_customer`.`email` AS `customer_email`,`tour`.`yunzhi_start_time`.`date` AS `start_time_date`,`tour`.`yunzhi_route`.`name` AS `route_name`,`tour`.`yunzhi_route`.`start_city_id` AS `start_city_id`,`tour`.`yunzhi_route`.`destination_city_id` AS `destination_city_id`,`tour`.`yunzhi_route`.`days` AS `route_days`,`tour`.`yunzhi_route`.`description` AS `route_description`,`tour`.`yunzhi_route`.`check_in_days` AS `route_check_in_days`,`tour`.`yunzhi_route`.`check_in_rooms` AS `route_check_in_rooms`,`tour`.`yunzhi_route`.`deadline` AS `route_deadline`,`tour`.`yunzhi_route`.`content` AS `route_content`,`tour`.`yunzhi_route`.`click` AS `route_click`,`tour`.`yunzhi_route`.`service_phone` AS `route_service_phone`,`tour`.`yunzhi_route`.`start_time` AS `route_start_time`,`tour`.`yunzhi_destination_city`.`name` AS `destination_city_name`,`tour`.`yunzhi_start_city`.`name` AS `start_city_name`,`tour`.`yunzhi_customer`.`head_img_url_wechat` AS `customer_head_img_url_wechat` from (((((`yunzhi_invite` left join `yunzhi_customer` on((`tour`.`yunzhi_invite`.`customer_id` = `tour`.`yunzhi_customer`.`id`))) left join `yunzhi_start_time` on((`tour`.`yunzhi_invite`.`start_time_id` = `tour`.`yunzhi_start_time`.`id`))) left join `yunzhi_route` on((`tour`.`yunzhi_invite`.`route_id` = `tour`.`yunzhi_route`.`id`))) left join `yunzhi_destination_city` on((`tour`.`yunzhi_route`.`destination_city_id` = `tour`.`yunzhi_destination_city`.`id`))) left join `yunzhi_start_city` on((`tour`.`yunzhi_route`.`start_city_id` = `tour`.`yunzhi_start_city`.`id`))) ;
-
--- ----------------------------
--- View structure for `yunzhi_test_view`
--- ----------------------------
-DROP VIEW IF EXISTS `yunzhi_test_view`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `yunzhi_test_view` AS select `yunzhi_start_city`.`id` AS `start_city__id`,`yunzhi_destination_city`.`id` AS `destination_city__id`,`yunzhi_route`.`id` AS `id`,`yunzhi_route`.`start_city_id` AS `start_city_id`,`yunzhi_route`.`destination_city_id` AS `destination_city_id` from ((`yunzhi_route` left join `yunzhi_start_city` on((`yunzhi_route`.`start_city_id` = `yunzhi_start_city`.`id`))) left join `yunzhi_destination_city` on((`yunzhi_route`.`destination_city_id` = `yunzhi_destination_city`.`id`))) ;
+DROP VIEW IF EXISTS `yunzhi_invite_route_startcity_destcity_customer_view`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `yunzhi_invite_route_startcity_destcity_customer_view` AS select `yunzhi_invite`.`id` AS `id`,`yunzhi_invite`.`route_id` AS `route_id`,`yunzhi_invite`.`customer_id` AS `customer_id`,`yunzhi_invite`.`number` AS `number`,`yunzhi_invite`.`person_num` AS `person_num`,`yunzhi_invite`.`pay_num` AS `pay_num`,`yunzhi_invite`.`unpay_num` AS `unpay_num`,`yunzhi_invite`.`status` AS `status`,`yunzhi_invite`.`is_public` AS `is_public`,`yunzhi_invite`.`deadline` AS `deadline`,`yunzhi_customer`.`openid` AS `customer_openid`,`yunzhi_customer`.`nick_name` AS `customer_nick_name`,`yunzhi_customer`.`sex` AS `customer_sex`,`yunzhi_customer`.`city` AS `customer_city`,`yunzhi_customer`.`province` AS `customer_province`,`yunzhi_customer`.`country` AS `customer_country`,`yunzhi_customer`.`head_img_url` AS `customer_head_img_url`,`yunzhi_customer`.`birthday` AS `customer_birthday`,`yunzhi_customer`.`phone` AS `customer_phone`,`yunzhi_customer`.`email` AS `customer_email`,`yunzhi_route`.`name` AS `route_name`,`yunzhi_route`.`start_city_id` AS `start_city_id`,`yunzhi_route`.`destination_city_id` AS `destination_city_id`,`yunzhi_route`.`days` AS `route_days`,`yunzhi_route`.`description` AS `route_description`,`yunzhi_route`.`check_in_days` AS `route_check_in_days`,`yunzhi_route`.`check_in_rooms` AS `route_check_in_rooms`,`yunzhi_route`.`deadline` AS `route_deadline`,`yunzhi_route`.`content` AS `route_content`,`yunzhi_route`.`click` AS `route_click`,`yunzhi_route`.`service_phone` AS `route_service_phone`,`yunzhi_route`.`start_time` AS `route_start_time`,`yunzhi_destination_city`.`name` AS `destination_city_name`,`yunzhi_start_city`.`name` AS `start_city_name`,`yunzhi_customer`.`head_img_url_wechat` AS `customer_head_img_url_wechat`,`yunzhi_invite`.`set_out_time` AS `set_out_time`,`yunzhi_invite`.`back_time` AS `back_time` from ((((`yunzhi_invite` left join `yunzhi_customer` on((`yunzhi_invite`.`customer_id` = `yunzhi_customer`.`id`))) left join `yunzhi_route` on((`yunzhi_invite`.`route_id` = `yunzhi_route`.`id`))) left join `yunzhi_destination_city` on((`yunzhi_route`.`destination_city_id` = `yunzhi_destination_city`.`id`))) left join `yunzhi_start_city` on((`yunzhi_route`.`start_city_id` = `yunzhi_start_city`.`id`))) ;
