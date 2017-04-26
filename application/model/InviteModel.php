@@ -84,7 +84,7 @@ class InviteModel extends ModelModel
 	public function getStartTimeModel()
 	{
 		if (null == $this->StartTimeModel) {
-			$StartTimeId = $this->getData('start_time_id');
+			$StartTimeId = $this->getData('id');
 			$this->StartTimeModel = StartTimeModel::get($StartTimeId);
 		}
 
