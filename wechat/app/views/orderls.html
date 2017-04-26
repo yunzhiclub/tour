@@ -11,7 +11,7 @@ router:#!/orderls
                     <div class="weui-cell__bd">是否公开订单</div>
                         <div class="weui-cell__ft">
                             <label for="switchCP" class="weui-switch-cp">
-                                <input id="switchCP" class="weui-switch-cp__input" type="checkbox" checked="checked" />
+                                <input id="switchCP" class="weui-switch-cp__input" type="checkbox" ng-model="isPublic" ng-true-value="1" ng-false-value="0" />
                                 <div class="weui-switch-cp__box"></div>
                             </label>
                        </div>
@@ -32,15 +32,15 @@ router:#!/orderls
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">预定时间</label>
-                    <span class="weui-form-preview__value">{{order.create_time}}</span>
+                    <span class="weui-form-preview__value">{{order.create_time | date: 'yyyy-MM-dd'}}</span>
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">出发时间</label>
-                    <span class="weui-form-preview__value">{{order.set_out_time}}</span>
+                    <span class="weui-form-preview__value">{{order.set_out_time | date: 'yyyy-MM-dd'}}</span>
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">归来时间</label>
-                    <span class="weui-form-preview__value">{{order.back_time}}</span>
+                    <span class="weui-form-preview__value">{{order.back_time | date: 'yyyy-MM-dd'}}</span>
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">出发城市</label>
@@ -64,7 +64,7 @@ router:#!/orderls
                        <!--<div class="weui-cell__bd">是否公开订单</div>-->
                        <!--<div class="weui-cell__ft">-->
                          <!--<label for="switchCP" class="weui-switch-cp">-->
-                           <!--<input id="switchCP" class="weui-switch-cp__input" type="checkbox" checked="checked" />-->
+                           <!--<input id="switchCP" class="weui-switch-cp__input" type="checkbox" checked="ch ecked" />-->
                            <!--<div class="weui-switch-cp__box"></div>-->
                          <!--</label>-->
                        <!--</div>-->
