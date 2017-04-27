@@ -13,6 +13,8 @@ angular.module('wechatApp')
       var openId = $scope.customer.openid;
       customer.getAllOrderByCustomerId(customerId, openId).then(function successCallBack(response) {
           console.log(response);
+          $scope.orders = response;
+          $scope.isPublic = 1;
       }, function errorCallBack() {
 
       });

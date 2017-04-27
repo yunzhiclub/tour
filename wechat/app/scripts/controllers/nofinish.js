@@ -8,10 +8,14 @@
  * Controller of the wechatApp
  */
 angular.module('wechatApp')
-  .controller('NofinishCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('NofinishCtrl', ['$scope','customer',function ($scope, customer) {
+      var customerId = $scope.customer.id;
+      var openId = $scope.customer.openid;
+      customer.getUnSetOutOrderByCustomerId(customerId , openId).then(function successCallBack(response){
+          console.log(response);
+          $scope.orders = response;
+          $scope.isPublic = 1;
+      },function errorCallBack() {
+
+      });
+  }]);

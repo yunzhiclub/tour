@@ -176,11 +176,83 @@ angular.module('wechatApp')
             return promise;
         };
 
+        // 获取用户全部订单
         var getAllOrderByCustomerId = function(customer_id, openid) {
             // 定义promise解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
             var paramUrl = url + 'getAllOrderByCustomerId';
+            var data = { customer_id: customer_id, openid: openid};
+            server.http(paramUrl, data, function successCallback(response) {
+                console.log(response);
+                if (typeof response.data.errorCode !== 'undefined') {
+                    console.log('系统发生错误：' + response.data.error);
+                } else {
+                    // 处理数据
+                }
+                deferred.resolve(response.data.data); // 执行成功
+            }, function errorCallback(response) {
+                console.log(response);
+                deferred.reject(); //执行失败
+            });
+
+            return promise;
+        };
+
+        // 获取未支付订单
+        var getUnPayOrderByCustomerId = function(customer_id, openid) {
+            // 定义promise解决异步问题
+            var deferred = $q.defer();
+            var promise = deferred.promise;
+            var paramUrl = url + 'getUnPayOrderByCustomerId';
+            var data = { customer_id: customer_id, openid: openid};
+            server.http(paramUrl, data, function successCallback(response) {
+                console.log(response);
+                if (typeof response.data.errorCode !== 'undefined') {
+                    console.log('系统发生错误：' + response.data.error);
+                } else {
+                    // 处理数据
+
+                }
+                deferred.resolve(response.data.data); // 执行成功
+            }, function errorCallback(response) {
+                console.log(response);
+                deferred.reject(); //执行失败
+            });
+
+            return promise;
+        };
+
+        // 获取未成团订单
+        var getUnSetOutOrderByCustomerId = function(customer_id, openid) {
+            // 定义promise解决异步问题
+            var deferred = $q.defer();
+            var promise = deferred.promise;
+            var paramUrl = url + 'getUnSetOutOrderByCustomerId';
+            var data = { customer_id: customer_id, openid: openid};
+            server.http(paramUrl, data, function successCallback(response) {
+                console.log(response);
+                if (typeof response.data.errorCode !== 'undefined') {
+                    console.log('系统发生错误：' + response.data.error);
+                } else {
+                    // 处理数据
+
+                }
+                deferred.resolve(response.data.data); // 执行成功
+            }, function errorCallback(response) {
+                console.log(response);
+                deferred.reject(); //执行失败
+            });
+
+            return promise;
+        };
+
+        // 获取未评价订单
+        var getUnEvaluateOrderByCustomerId = function(customer_id, openid) {
+            // 定义promise解决异步问题
+            var deferred = $q.defer();
+            var promise = deferred.promise;
+            var paramUrl = url + 'getUnEvaluateOrderByCustomerId';
             var data = { customer_id: customer_id, openid: openid};
             server.http(paramUrl, data, function successCallback(response) {
                 console.log(response);
@@ -314,6 +386,21 @@ angular.module('wechatApp')
             // 获取自己的全部订单
             getAllOrderByCustomerId: function(customer_id, openid) {
                 return getAllOrderByCustomerId(customer_id, openid);
+            },
+
+            // 获取未支付的全部订单
+            getUnPayOrderByCustomerId: function(customer_id, openid) {
+                return getUnPayOrderByCustomerId(customer_id, openid);
+            },
+
+            // 获取未成行的全部订单
+            getUnSetOutOrderByCustomerId: function(customer_id, openid) {
+                return getUnSetOutOrderByCustomerId(customer_id, openid);
+            },
+
+            // 获取未评价的全部订单
+            getUnEvaluateOrderByCustomerId: function(customer_id, openid) {
+                return getUnEvaluateOrderByCustomerId(customer_id, openid);
             },
 
             // 设置趣约是否公开（必须是自己发布的）
