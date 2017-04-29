@@ -103,7 +103,7 @@ angular.module('wechatApp')
                 return getConfig();
             },
 
-            // 选择上传图片获取media_id
+            // 选择上传图片获取serverid
             chooseImg: function(callBack) {
                 chooseImg(callBack);
             },
