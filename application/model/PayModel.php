@@ -28,7 +28,7 @@ class PayModel {
     }
 
     /*
-     * 获取预支付id
+     * 创建JSAPI支付参数包
      * @param string $openid 用户openid，　JSAPI必填
      * @param string $body 商品标题
      * @param string $out_trade_no 第三方订单号
@@ -36,11 +36,16 @@ class PayModel {
      * @param string $notify_url 支付成功回调地址
      * @param string $trade_type 支付类型JSAPI|NATIVE|APP
      * @param string $goods_tag 商品标记，代金卷或立减优惠功能的参数
-     * @return bool|string */
-    public function getPrepayId($openid, $body, $out_trade_no, $total_fee, $notify_url, $trade_type = "JSAPI", $goods_tag = null) {
-        // 生成wechat对象
+     * @return bool|array */
+    public function createPayParams($openid, $body, $out_trade_no, $total_fee, $notify_url, $trade_type = "JSAPI", $goods_tag = null) {
+        // 生成$prepayId
         $WechatPay = new \Wechat\WechatPay();
         $prepayId = $WechatPay->getPrepayId($openid, $body, $out_trade_no, $total_fee, $notify_url, $trade_type = "JSAPI", $goods_tag = null);
-        return $prepayId;
+        if ($prepayId === false) {
+            return fasle;
+        }
+        // 生成参数数组
+        $option = $WechatPay->createMchPay($prepayId);
+        return $option;
     }
 }
