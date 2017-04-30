@@ -35,7 +35,7 @@ class CustomerModel extends ModelModel
         $CustomerModel = CustomerModel::where('openid', '=', $openid)->find();
         
         //图片的路径拼接
-        $pathconfig = 'http://' . $_SERVER['HTTP_HOST'] . '/tour'. DS .'public' . DS . 'upload' . DS;
+        $pathconfig = 'http://' . $_SERVER['HTTP_HOST'] . DS . 'tour'. DS .'public' . DS . 'upload' . DS;
         
         //对Customer中的部分数据进行简单的加工
         //图片URL的拼接

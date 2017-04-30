@@ -247,12 +247,13 @@ angular.module('wechatApp')
 
                         // 调用生成邀约的借口并支付 1　代表是生成邀约而不是去支付
                         jssdk.getPayParams(order, 1).then(function successCallBack(response) {
-                            console.log(response);
+                            // 调用微信支付接口去支付
+                            jssdk.toPay(response);
                         }, function errorCallBack() {
 
                         });
                         // 调到支付成功页面
-                        $state.go('paysuccess');
+                        //$state.go('paysuccess');
                     }
                 }
             };

@@ -29,42 +29,51 @@ class JssdkController extends ApiController
 	 * 获取支付参数
 	 * */
     public function getPayParams() {
-        $stringInvitation = Request::instance()->param('data');
-	    $isCreateInvite = Request::instance()->param('isCreateInvite');
-        var_dump($_SERVER['HTTP_HOST']);
-        die();
-        // 订单总金额，单位为分 (交易金额默认为人民币交易，接口中参数支付金额单位为【分】，参数值不能带小数。对账单中的交易金额单位为【元】。
-        //外币交易的支付金额精确到币种的最小单位，参数值不能带小数点。)
-        $total_fee = 67899;
-
-        // 商户订单号 实例
-        $out_trade_no = '20150806125346';
-        $openid = 'oUpF8uMuAJO_M2pxb1Q9zNjWeS6o';
-	    // 如果$isCreateInvite为１则表明这是发起邀约的支付
-	    if ($isCreateInvite === '1') {
-            // 保存邀约并获取openid money number
-            $result = InviteModel::saveInvitation($stringInvitation);
-            $openid = $result['openid'];
-            $total_fee = $result['money'];
-            $out_trade_no = $result['number'];
-        } else {
-	        // 应邀
-
-        }
-	    // 商品简单描述 实例
-        $body = '腾讯充值中心-QQ会员充值';
-
-
-        //异步接收微信支付结果通知的回调地址，通知url必须为外网可访问的url，不能携带参数。
-        //example 'http://www.weixin.qq.com/wxpay/pay.php'
-        $notify_url = ROOT_PATH;
-        $PayModel = new PayModel();
-        $params = $PayModel->createPayParams($openid, $body, $out_trade_no, $total_fee, $notify_url);
-        if ($params === fasle) {
-            return $this->response(10001);
-        } else {
-            return $this->response($params);
-        }
+//        $stringInvitation = Request::instance()->param('data');
+//	    $isCreateInvite = Request::instance()->param('isCreateInvite');
+//        // 订单总金额，单位为分 (交易金额默认为人民币交易，接口中参数支付金额单位为【分】，参数值不能带小数。对账单中的交易金额单位为【元】。
+//        //外币交易的支付金额精确到币种的最小单位，参数值不能带小数点。)
+//        $total_fee = 67899;
+//
+//        // 商户订单号 实例
+//        $out_trade_no = '20150806125346';
+//        $openid = 'oUpF8uMuAJO_M2pxb1Q9zNjWeS6o';
+//	    // 如果$isCreateInvite为１则表明这是发起邀约的支付
+//	    if ($isCreateInvite === '1') {
+//            // 保存邀约并获取openid money number
+//            $result = InviteModel::saveInvitation($stringInvitation);
+//            $openid = $result['openid'];
+//            // 变成分为单位
+//            $total_fee = $result['money'] * 100;
+//            $out_trade_no = $result['number'];
+//        } else {
+//	        // 应邀
+//
+//        }
+//	    // 商品简单描述 实例
+//        $body = '腾讯充值中心-QQ会员充值';
+//
+//
+//        //异步接收微信支付结果通知的回调地址，通知url必须为外网可访问的url，不能携带参数。
+//        //example 'http://www.weixin.qq.com/wxpay/pay.php'
+//        $notify_url = 'http://' . $_SERVER['HTTP_HOST'] . DS . 'tour'. DS .'public' . DS . 'api' . DS . 'Jssdk' . DS . 'getNotify?' ;
+//        $PayModel = new PayModel();
+//        $params = $PayModel->createPayParams($openid, $body, $out_trade_no, $total_fee, $notify_url);
+//        if ($params === fasle) {
+//            return $this->response(10001);
+//        } else {
+//            return $this->response($params);
+//        }
+        // 测试代码
+        $option = [];
+        $option["appId"] = 'wxd678efh567hg6787';
+        $option["timeStamp"] = (string)time();
+        $option["nonceStr"] = '5K8264ILTKCH16CQ2502SI8ZNMTM67VS';
+        $option["package"] = "prepay_id=1232";
+        $option["signType"] = "MD5";
+        $option["paySign"] = '5K8264ILTKCH16CQ2502SI8ZNMTM67VS';
+        $option['timestamp'] = $option['timeStamp'];
+        return $this->response($option);
     }
     /*
      * 异步接收微信支付结果通知的回调地址
