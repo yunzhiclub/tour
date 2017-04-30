@@ -13,7 +13,6 @@ angular.module('wechatApp')
 
         // 获取当前的url
         var url = window.location.href.replace(window.location.hash, '');
-
         // 定制配置信息
         var jssdkConfig = {
             jsApiList: ['chooseImage', 'uploadImage'],
@@ -95,7 +94,36 @@ angular.module('wechatApp')
                 },
             });
         };
+        // 获取支付参数
+        var getPayParams = function () {
+            // 获得支付参数
+            // 定义promise 解决异步问题
+            var deferred = $q.defer();
+            var promise = deferred.promise;
+            var paramUrl = 'Jssdk/getConfig';
+            var data = {};
 
+            server.http(paramUrl, data, function successCallback(response) {
+                console.log(response.data.data);
+                if (typeof response.data.errorCode !== 'undefined') {
+                    console.log('系统发生错误：' + response.data.error);
+                } else {
+                    // 逻辑处理
+                    // 返回200说明请求正常，则调用系统初始化函数
+                    if (response.status === 200) {
+                        // 调jssdk初始化函数
+                        init(response.data.data);
+                    } else {
+                        console.log('数据返回错误', +response.status);
+                    }
+                }
+                deferred.resolve(); //执行成功
+            }, function errorCallback(response) {
+                console.log('数据返回错误:' + response.status);
+                deferred.reject(); //执行失败
+            });
+            return promise;
+        };
         // Public API here
         return {
             // 获取jssdk配置
@@ -106,6 +134,10 @@ angular.module('wechatApp')
             // 选择上传图片获取serverid
             chooseImg: function(callBack) {
                 chooseImg(callBack);
+            },
+            // 去支付
+            getPayParams: function () {
+                return getPayParams();
             },
         };
     }]);
