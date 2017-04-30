@@ -72,4 +72,29 @@ class BedModel extends ModelModel
 
         return true;
 }
+
+    /*
+     * 设置床位中的customer_id并生成一条邀约
+     * @param int $bedId  床位id
+     * @param int $customer_id 用户的id
+     * return array 订单号和金额
+     * */
+    public static function setCustomerIdAndCreateOrder($bedId, $customer_id) {
+        $result = [];
+        // 获得要支付的金额并设置床位的customer_id
+        $BedModel = self::get($bedId);
+        $result['money'] = $BedModel->getData('money');
+        $BedModel->customer_id = $customer_id;
+        $inviteId = $BedModel->getData('invite_id');
+        $BedModel->save();
+        // 生成订单并设置订单号
+        $OrderModel = new OrderModel();
+        $OrderModel->customer_id = $customer_id;
+        $OrderModel->invite_id = $inviteId;
+        $number = InviteModel::setOrderNumber();
+        $OrderModel->number = $number;
+        $result['number'] = $number;
+        $OrderModel->save();
+        return $result;
+    }
 }

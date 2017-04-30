@@ -8,6 +8,7 @@ use app\model\PayModel;
 use Wechat\WechatPay;
 use app\model\OrderModel;
 use app\model\InviteModel;
+use app\model\BedModel;
 
 /**
 * jsssdk处理类
@@ -48,7 +49,14 @@ class JssdkController extends ApiController
             $out_trade_no = $result['number'];
         } else {
 	        // 应邀
-
+            $dataObject = json_decode($stringInvitation);
+            $openid = $dataObject->openid;
+            $bedId = $dataObject->bedId;
+            $customerId = $dataObject->customerId;
+            // 床位设置customer_id 并生成订单
+            $data = BedModel::setCustomerIdAndCreateOrder($bedId, $customerId);
+            $total_fee = $data['money'];
+            $out_trade_no = $data['number'];
         }
 	    // 商品简单描述 实例
         $body = '腾讯充值中心-QQ会员充值';

@@ -321,7 +321,7 @@ class InviteModel extends ModelModel
         $OrderModel->customer_id = $customerId;
         $OrderModel->invite_id = $invitationId;
         // 生成订单号
-        $OrderModel->number = self::getOrderNumber($customerId);
+        $OrderModel->number = self::setOrderNumber();
         $OrderModel->save();
         $OrderId = $OrderModel->getData('id');
         $BedModel->order_id = $OrderId;
