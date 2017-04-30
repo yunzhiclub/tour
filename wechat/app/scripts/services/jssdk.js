@@ -95,13 +95,13 @@ angular.module('wechatApp')
             });
         };
         // 获取支付参数
-        var getPayParams = function () {
+        var getPayParams = function (postData, isCreateInvite) {
             // 获得支付参数
             // 定义promise 解决异步问题
             var deferred = $q.defer();
             var promise = deferred.promise;
-            var paramUrl = 'Jssdk/getConfig';
-            var data = {};
+            var paramUrl = 'Jssdk/getPayParams';
+            var data = {data: postData, isCreateInvite:isCreateInvite};
 
             server.http(paramUrl, data, function successCallback(response) {
                 console.log(response.data.data);
@@ -136,8 +136,8 @@ angular.module('wechatApp')
                 chooseImg(callBack);
             },
             // 去支付
-            getPayParams: function () {
-                return getPayParams();
+            getPayParams: function (postData, isCreateInvite) {
+                return getPayParams(postData, isCreateInvite);
             },
         };
     }]);

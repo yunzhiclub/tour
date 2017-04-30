@@ -8,8 +8,8 @@
  * Controller of the wechatApp
  */
 angular.module('wechatApp')
-    .controller('HourseCtrl', ['$uibModal', '$log', '$document', '$scope', '$stateParams', 'order', 'room', '$state', 'invitation',
-        function($uibModal, $log, $document, $scope, $stateParams, order, room, $state, invitation) {
+    .controller('HourseCtrl', ['$uibModal', '$log', '$document', '$scope', '$stateParams', 'order', 'room', '$state', 'invitation', 'jssdk',
+        function($uibModal, $log, $document, $scope, $stateParams, order, room, $state, invitation, jssdk) {
 
             // 定义总价
             var maxMoney = 0;
@@ -243,11 +243,11 @@ angular.module('wechatApp')
 
                         // 最后设置发起邀约的人
                         order.customerId = $scope.customer.id;
-
+                        order.openid = $scope.customer.openid;
                         console.log(order);
 
-                        // 调用生成邀约的借口并支付
-                        invitation.saveTheInvitation(order).then(function successCallBack(response) {
+                        // 调用生成邀约的借口并支付 1　代表是生成邀约而不是去支付
+                        jssdk.getPayParams(order, 1).then(function successCallBack(response) {
                             console.log(response);
                         }, function errorCallBack() {
 
