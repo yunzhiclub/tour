@@ -31,20 +31,29 @@ class JssdkController extends ApiController
     public function getPayParams() {
         $stringInvitation = Request::instance()->param('data');
 	    $isCreateInvite = Request::instance()->param('isCreateInvite');
+
+        // 订单总金额，单位为分 (交易金额默认为人民币交易，接口中参数支付金额单位为【分】，参数值不能带小数。对账单中的交易金额单位为【元】。
+        //外币交易的支付金额精确到币种的最小单位，参数值不能带小数点。)
+        $total_fee = 67899;
+
+        // 商户订单号 实例
+        $out_trade_no = '20150806125346';
+        $openid = 'oUpF8uMuAJO_M2pxb1Q9zNjWeS6o';
 	    // 如果$isCreateInvite为１则表明这是发起邀约的支付
 	    if ($isCreateInvite === '1') {
             // 保存邀约并获取openid money number
             $result = InviteModel::saveInvitation($stringInvitation);
-            var_dump($result);
+            $openid = $result['openid'];
+            $total_fee = $result['money'];
+            $out_trade_no = $result['number'];
+        } else {
+	        // 应邀
+
         }
-	    die();
 	    // 商品简单描述 实例
         $body = '腾讯充值中心-QQ会员充值';
-        // 商户订单号 实例
-        $out_trade_no = '20150806125346';
-        // 订单总金额，单位为分 (交易金额默认为人民币交易，接口中参数支付金额单位为【分】，参数值不能带小数。对账单中的交易金额单位为【元】。
-        //外币交易的支付金额精确到币种的最小单位，参数值不能带小数点。)
-        $total_fee = 67899;
+
+
         //异步接收微信支付结果通知的回调地址，通知url必须为外网可访问的url，不能携带参数。
         $notify_url = 'http://www.weixin.qq.com/wxpay/pay.php';
         $PayModel = new PayModel();

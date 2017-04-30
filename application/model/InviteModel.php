@@ -182,7 +182,7 @@ class InviteModel extends ModelModel
 
 		//邀约的相关信息放入InviteModel的对象中
 		$InviteModel->customer_id = $Invitation->customerId;
-		$InviteModel->set_out_time = $Invitation->setOutTime;
+		//$InviteModel->set_out_time = $Invitation->setOutTime;
 		$InviteModel->back_time = $Invitation->backTime;
 		$InviteModel->route_id = $Invitation->routeId;
 		$InviteModel->is_public = $Invitation->isPublic;

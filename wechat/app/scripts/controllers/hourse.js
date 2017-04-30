@@ -10,7 +10,6 @@
 angular.module('wechatApp')
     .controller('HourseCtrl', ['$uibModal', '$log', '$document', '$scope', '$stateParams', 'order', 'room', '$state', 'invitation', 'jssdk',
         function($uibModal, $log, $document, $scope, $stateParams, order, room, $state, invitation, jssdk) {
-
             // 定义总价
             var maxMoney = 0;
             // 先默认设置默认的单价
