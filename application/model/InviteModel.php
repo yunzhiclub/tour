@@ -327,4 +327,35 @@ class InviteModel extends ModelModel
         $BedModel->save();
         return true;
     }
+    /*
+     * 去判断是否订单所有的人都支付完成，如果是就改变所有ｏｒｄｅｒ的状态为２
+     * @param int $inviteId
+     * @return bool
+     * */
+    public function isAllPayed($inviteId) {
+        $InviteModel = self::get($inviteId);
+        // 首先判断是否全部支付
+        $pay_num = $InviteModel->getData('pay_num');
+        $person_num = $InviteModel->getData('person_num');
+        if ($pay_num + 1 === $person_num) {
+            // 修改邀约中的数据
+            $InviteModel->pay_num = $pay_num + 1;
+            $InviteModel->unpay_num = $InviteModel->getData('unpay_num') - 1;
+            $InviteModel->save();
+
+            // 修改订单中的状态全为２
+            $OrderModel = new OrderModel();
+            $OrderModels = $OrderModel->where('invite_id', '=', $inviteId)->select();
+            foreach ($OrderModels as $key => $value) {
+                $value->status = 1;
+                $value->save();
+            }
+            return true;
+        }
+        // 修改邀约中的数据
+        $InviteModel->pay_num = $pay_num + 1;
+        $InviteModel->unpay_num = $InviteModel->getData('unpay_num') - 1;
+        $InviteModel->save();
+        return true;
+    }
 }

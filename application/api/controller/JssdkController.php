@@ -7,6 +7,7 @@ use think\File;
 use app\model\PayModel;
 use Wechat\WechatPay;
 use app\model\OrderModel;
+use app\model\InviteModel;
 
 /**
 * jsssdk处理类
@@ -49,6 +50,7 @@ class JssdkController extends ApiController
     }
     /*
      * 异步接收微信支付结果通知的回调地址
+     * @return xml
      * */
     public function getNotify() {
         // 定义要回复的xml的值
@@ -71,6 +73,10 @@ class JssdkController extends ApiController
             if ($status === 0) {
                 $OrderDetail->status = 1;
                 $OrderDetail->save();
+                // 去判断是否订单所有的人都支付完成，如果是就改变所有ｏｒｄｅｒ的状态为２
+                $inviteId = $OrderDetail->getData('invite_id');
+                $InviteModel = new InviteModel();
+                $InviteModel->isAllPayed($inviteId);
             }
             $data['return_code'] = 'SUCCESS';
         }
@@ -80,12 +86,14 @@ class JssdkController extends ApiController
 
     /*
      * 调用查询ａｐｉ，查询支付结果
+     * @param number 订单号
+     * @return json
      * */
     public function queryOrder() {
         $out_trade_no = Request::instance()->param('number');
         // 判断是否接到通知
         $Order = new OrderModel();
-        $OrderDetail = $Order->where('number', '=', $number)->find();
+        $OrderDetail = $Order->where('number', '=', $out_trade_no)->find();
         $status = $OrderDetail->getData('status');
         // 状态等于０证明还没有收到正确的回复，　就去查询订单的状态
         if ($status === 0) {
@@ -99,15 +107,19 @@ class JssdkController extends ApiController
                 if ($result['trade_state'] === 'SUCCESS') {
                     $OrderDetail->status = 1;
                     $OrderDetail->save();
+                    // 去判断是否订单所有的人都支付完成，如果是就改变所有ｏｒｄｅｒ的状态为２
+                    $inviteId = $OrderDetail->getData('invite_id');
+                    $InviteModel = new InviteModel();
+                    $InviteModel->isAllPayed($inviteId);
                 }
             }
         }
         // 再查一下数据库看状态值
-        $OrderDetail = $Order->where('number', '=', $number)->find();
+        $OrderDetail = $Order->where('number', '=', $out_trade_no)->find();
         $statusFinal = $OrderDetail->getData('status');
         if ($statusFinal === 0) {
             return $this->response(10001);
         }
-        return　$this->response($OrderDetail);
+        return $this->response($OrderDetail);
     }
 }
