@@ -68,7 +68,7 @@ class JssdkController extends ApiController
             $Order = new OrderModel();
             $OrderDetail = $Order->where('number', '=', $number)->find();
             $status = $OrderDetail->getData('status');
-            if ($status !== 1) {
+            if ($status === 0) {
                 $OrderDetail->status = 1;
                 $OrderDetail->save();
             }
@@ -76,5 +76,38 @@ class JssdkController extends ApiController
         }
         // 回复ｘｍｌ信息
         return $WechatPay->replyXml($data, true);
+    }
+
+    /*
+     * 调用查询ａｐｉ，查询支付结果
+     * */
+    public function queryOrder() {
+        $out_trade_no = Request::instance()->param('number');
+        // 判断是否接到通知
+        $Order = new OrderModel();
+        $OrderDetail = $Order->where('number', '=', $number)->find();
+        $status = $OrderDetail->getData('status');
+        // 状态等于０证明还没有收到正确的回复，　就去查询订单的状态
+        if ($status === 0) {
+            $WechatPay = new WechatPay();
+            $result = $WechatPay->queryOrder($out_trade_no);
+            // 判断是否正确返回查询结果
+            if ($result === false) {
+                return $this->response(10001);
+            } else {
+                // 判断该订单是否完成支付，如果完成就去改变订单的状态
+                if ($result['trade_state'] === 'SUCCESS') {
+                    $OrderDetail->status = 1;
+                    $OrderDetail->save();
+                }
+            }
+        }
+        // 再查一下数据库看状态值
+        $OrderDetail = $Order->where('number', '=', $number)->find();
+        $statusFinal = $OrderDetail->getData('status');
+        if ($statusFinal === 0) {
+            return $this->response(10001);
+        }
+        return　$this->response($OrderDetail);
     }
 }
