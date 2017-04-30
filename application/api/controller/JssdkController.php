@@ -31,7 +31,8 @@ class JssdkController extends ApiController
     public function getPayParams() {
         $stringInvitation = Request::instance()->param('data');
 	    $isCreateInvite = Request::instance()->param('isCreateInvite');
-
+        var_dump($_SERVER['HTTP_HOST']);
+        die();
         // 订单总金额，单位为分 (交易金额默认为人民币交易，接口中参数支付金额单位为【分】，参数值不能带小数。对账单中的交易金额单位为【元】。
         //外币交易的支付金额精确到币种的最小单位，参数值不能带小数点。)
         $total_fee = 67899;
@@ -55,7 +56,8 @@ class JssdkController extends ApiController
 
 
         //异步接收微信支付结果通知的回调地址，通知url必须为外网可访问的url，不能携带参数。
-        $notify_url = 'http://www.weixin.qq.com/wxpay/pay.php';
+        //example 'http://www.weixin.qq.com/wxpay/pay.php'
+        $notify_url = ROOT_PATH;
         $PayModel = new PayModel();
         $params = $PayModel->createPayParams($openid, $body, $out_trade_no, $total_fee, $notify_url);
         if ($params === fasle) {
