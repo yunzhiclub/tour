@@ -190,8 +190,8 @@ class InviteModel extends ModelModel
 		$InviteModel->number = self::setInviteNumber($customerId);
 		//
         $InviteModel->person_num = 6;
-        $InviteModel->pay_num = 1;
-        $InviteModel->unpay_num = 5;
+        $InviteModel->pay_num = 0;
+        $InviteModel->unpay_num = 6;
 		//保存邀约
 		$InviteModel->save();
 
