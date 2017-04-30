@@ -5,6 +5,9 @@ use think\Config;
 use think\Request;
 use think\File;
 use app\model\PayModel;
+use Wechat\WechatPay;
+use app\model\OrderModel;
+
 /**
 * jsssdk处理类
 */
@@ -30,7 +33,7 @@ class JssdkController extends ApiController
 	    // 商品简单描述 实例
         $body = '腾讯充值中心-QQ会员充值';
         // 商户订单号 实例
-        $out_trade_no = '20150806125346';　
+        $out_trade_no = '20150806125346';
         // 订单总金额，单位为分 (交易金额默认为人民币交易，接口中参数支付金额单位为【分】，参数值不能带小数。对账单中的交易金额单位为【元】。
         //外币交易的支付金额精确到币种的最小单位，参数值不能带小数点。)
         $total_fee = 67899;
@@ -44,5 +47,34 @@ class JssdkController extends ApiController
             return $this->response($params);
         }
     }
-
+    /*
+     * 异步接收微信支付结果通知的回调地址
+     * */
+    public function getNotify() {
+        // 定义要回复的xml的值
+        $data = [];
+        // 调用wechat组件去验证请求的数据
+        $WechatPay = new WechatPay();
+        $notifyInfo = $WechatPay->getNotify();
+        if ($notifyInfo === false) {
+            $data['return_code'] = 'Fall';
+            $data['return_msg'] = $WechatPay->errMsg;
+        }
+        // 去处理数据
+        if ($notifyInfo['result_code'] === 'SUCCESS') {
+            // 获取订单号
+            $number = $notifyInfo['out_trade_no'];
+            // 修改订单目前的状态
+            $Order = new OrderModel();
+            $OrderDetail = $Order->where('number', '=', $number)->find();
+            $status = $OrderDetail->getData('status');
+            if ($status !== 1) {
+                $OrderDetail->status = 1;
+                $OrderDetail->save();
+            }
+            $data['return_code'] = 'SUCCESS';
+        }
+        // 回复ｘｍｌ信息
+        return $WechatPay->replyXml($data, true);
+    }
 }
