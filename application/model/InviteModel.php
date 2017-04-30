@@ -171,10 +171,11 @@ class InviteModel extends ModelModel
 	 * 保存邀约，保存对应的床位信息
 	 * @param  string $stringInvitation 前台传来的邀约的字符串，以及六个用户的床位信息
 	 * @author huangshuaibin
-	 * @return true or false                   true表示保存成功
+	 * @return array
 	 */
 	public static function saveInvitation($stringInvitation)
 	{
+	    $result = [];
 		$Invitation = json_decode($stringInvitation);
 		$customerId = $Invitation->customerId;
 		$InviteModel = new InviteModel;
@@ -212,14 +213,14 @@ class InviteModel extends ModelModel
 
 			//如果前台的床位isPay字段是1的情况，表示该床位是当前用户的床位
 			if (1 === $Invitation->roomDatas[$i]->isPay) {
-				//TODO调用微信支付接口
-				//完成支付之后，将该用户保存进bed表
 				$OrderModel = new OrderModel;
 				$OrderModel->customer_id = $Invitation->customerId;
 				$OrderModel->invite_id = $inviteId;
-				$OrderModel->number = self::setOrderNumber();
+				$number = self::setOrderNumber();
+				$OrderModel->number = $number;
 				$OrderModel->save();
-				
+				$result['number'] = $number;
+                $result['money'] = $Invitation->roomDatas[$i]->money;
 				$OrderId = $OrderModel->getData('id');
 				$BedModel->order_id = $OrderId;
 				//保存customer_id进相应的床位表
@@ -229,7 +230,7 @@ class InviteModel extends ModelModel
 			$BedModel->save();
 		}
 
-		return true;
+		return $result;
 	}
 
 	/**
