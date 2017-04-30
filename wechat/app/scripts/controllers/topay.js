@@ -38,6 +38,8 @@ angular.module('wechatApp')
         	// 去支付
         	jssdk.getPayParams(postData, 0).then(function successCallBack(response) {
                 console.log(response);
+                // 调用微信支付接口去支付
+                jssdk.toPay(response);
             }, function errorCallBack() {
 
             });
