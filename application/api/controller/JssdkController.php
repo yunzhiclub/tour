@@ -29,12 +29,13 @@ class JssdkController extends ApiController
 	 * 获取支付参数
 	 * */
     public function getPayParams() {
-        // 微信支付分配的公众账号ID　实例值wxd678efh567hg6787
-	    $data = Request::instance()->param('data');
+        $stringInvitation = Request::instance()->param('data');
 	    $isCreateInvite = Request::instance()->param('isCreateInvite');
 	    // 如果$isCreateInvite为１则表明这是发起邀约的支付
 	    if ($isCreateInvite === '1') {
-            var_dump($isCreateInvite);
+            // 保存邀约并获取openid money number
+            $result = InviteModel::saveInvitation($stringInvitation);
+            var_dump($result);
         }
 	    die();
 	    // 商品简单描述 实例

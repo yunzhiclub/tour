@@ -171,7 +171,7 @@ class InviteModel extends ModelModel
 	 * 保存邀约，保存对应的床位信息
 	 * @param  string $stringInvitation 前台传来的邀约的字符串，以及六个用户的床位信息
 	 * @author huangshuaibin
-	 * @return array
+	 * @return array example ['openid'=>'oUpF8uMuAJO_M2pxb1Q9zNjWeS6o', 'number'=>'20150806125346', money: 676元]
 	 */
 	public static function saveInvitation($stringInvitation)
 	{
@@ -187,6 +187,7 @@ class InviteModel extends ModelModel
 		$InviteModel->route_id = $Invitation->routeId;
 		$InviteModel->is_public = $Invitation->isPublic;
 		$InviteModel->deadline = $Invitation->deadLine;
+        $result['openid'] = $Invitation->openid;
 		//	保存邀约号
 		$InviteModel->number = self::setInviteNumber($customerId);
 		//
