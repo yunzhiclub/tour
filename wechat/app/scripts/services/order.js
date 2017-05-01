@@ -11,6 +11,7 @@
 angular.module('wechatApp')
     .constant('order', {
         customerId: '',
+        openid: '',
         setOutTime: 0,
         days:0,
         backTime: 0,

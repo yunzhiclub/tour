@@ -120,7 +120,6 @@ class ApiController extends Controller
         20002 => ['openid length incorect', 'openid 长度有误'],
         20003 => ['user does not exists', '用户不存在'], 
         20004 => ['IDCard formart is incorect', '身份证号码格式不正确'],
-
     ];
 
     /**
