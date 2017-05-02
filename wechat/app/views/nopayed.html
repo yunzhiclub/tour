@@ -1,9 +1,9 @@
 <div class="page">
     <div class="page__bd">
-     <div class="weui-form-preview" ng-repeat="order in orders">
+        <div class="weui-form-preview" ng-repeat="order in orders">
             <div class="weui-form-preview__hd">
                 <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">跟团游| {{order.status | orderstatus}} </label>
+                    <label class="weui-form-preview__label"> {{order.status | orderstatus}} </label>
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">订单号</label>
@@ -29,7 +29,7 @@
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">归来时间</label>
-                    <span class="weui-form-preview__value">{{order.back_time | date: 'yyyy-MM-dd'}}/span>
+                    <span class="weui-form-preview__value">{{order.back_time | date: 'yyyy-MM-dd'}}</span>
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">出发城市</label>
@@ -41,143 +41,143 @@
                 </div>
             </div>
             <hr>
-<div class="weui-flex">
-    <div class="weui-flex__item" style="margin-right:20px;margin-left:10px">
-        <div class="placeholder"> 
-         <a ui-sref="" class="weui-btn weui-btn_plain-default" style="width:160px"> 
-             <div class="weui-cell">
-                <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-                    <img src="weui/src/example/images/lhead1.png" style="width: 50px;display: block"/>
+            <div class="weui-flex">
+                <div class="weui-flex__item" style="margin-right:20px;margin-left:10px">
+                    <div class="placeholder">
+                        <a ui-sref="" class="weui-btn weui-btn_plain-default" style="width:160px">
+                            <div class="weui-cell">
+                                <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+                                    <img src="weui/src/example/images/lhead1.png" style="width: 50px;display: block"/>
+                                </div>
+                                <div class="weui-cell__bd">
+                                    <p>♀</p>
+                                    <p style="font-size: 13px;color: #888888;">￥5,0000.00</p>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="weui-cell">
+                            <div class="weui-cell__bd">
+                                <p>已支付</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="weui-cell__bd">
-                    <p>♀</p>
-                    <p style="font-size: 13px;color: #888888;">￥5,0000.00</p>
+                <div class="weui-flex__item" >
+                    <div class="placeholder">
+                        <a ui-sref="" class="weui-btn weui-btn_plain-default" style="width:160px" style="margin-right:20px;margin-left:20px">
+                            <div class="weui-cell">
+                                <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+                                    <img src="weui/src/example/images/lhead2.png" style="width: 50px;display: block"/>
+                                </div>
+                                <div class="weui-cell__bd">
+                                    <p>♀</p>
+                                    <p style="font-size: 13px;color: #888888;">￥0.01</p>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="weui-cell">
+                            <div class="weui-cell__bd">
+                                <p>已支付</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-             </div>
-          </a>
-          <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <p>已支付</p>
+            </div>
+            <hr>
+            <div class="weui-flex">
+                <div class="weui-flex__item" style="margin-right:20px;margin-left:10px">
+                    <div class="placeholder">
+                        <a ui-sref="" class="weui-btn weui-btn_plain-default" style="width:160px">
+                            <div class="weui-cell">
+                                <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+                                    <img src="weui/src/example/images/lhead5.png" style="width: 50px;display: block"/>
+                                </div>
+                                <div class="weui-cell__bd">
+                                    <p>♂</p>
+                                    <p style="font-size: 13px;color: #888888;">￥0.01</p>
+                                </div>
+                            </div>
+                        </a>
+                       <div class="weui-cell">
+                            <div class="weui-cell__bd">
+                                <p>未支付</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <div class="weui-flex__item">
+                    <div class="placeholder">
+                        <a ui-sref="" class="weui-btn weui-btn_plain-default" style="width:160px" style="margin-right:20px;margin-left:20px">
+                            <div class="weui-cell">
+                                <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+                                    <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block"/>
+                                    <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;"></span>
+                                </div>
+                                <div class="weui-cell__bd">
+                                    <p>♂</p>
+                                    <p style="font-size: 13px;color: #888888;">￥0.01</p>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="weui-cell">
+                            <div class="weui-cell__bd">
+                                <p>未受邀</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="weui-flex">
+                <div class="weui-flex__item" style="margin-right:20px;margin-left:10px">
+                    <div class="placeholder">
+                        <a ui-sref="topay" class="weui-btn weui-btn_plain-default" style="width:160px">
+                            <div class="weui-cell">
+                                <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+                                    <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block"/>
+                                    <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">可选</span>
+                                </div>
+                                <div class="weui-cell__bd">
+                                    <p>♀</p>
+                                    <p style="font-size: 13px;color: #888888;">￥10,000.00</p>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="weui-cell">
+                            <div class="weui-cell__bd">
+                                <p>未受邀</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-flex__item" >
+                    <div class="placeholder">
+                        <a ui-sref="topay" class="weui-btn weui-btn_plain-default" style="width:160px">
+                            <div class="weui-cell">
+                                <div class="weui-cell__hd" style="position: relative" style="margin-right:20px;margin-left:20px">
+                                    <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block"/>
+                                    <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">可选</span>
+                                </div>
+                                <div class="weui-cell__bd">
+                                    <p>♀</p>
+                                    <p style="font-size: 13px;color: #888888;">￥0.01</p>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="weui-cell">
+                            <div class="weui-cell__bd">
+                                <p>未受邀</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-form-preview__ft">
+            </div>
+            <div class="weui-cells__title">支付方式</div>
+            <div class="weui-btn-area">
+                <a class="weui-btn weui-btn_primary" ui-sref="paysuccess" id="showTooltips">微信支付</a>
             </div>
         </div>
     </div>
-    <div class="weui-flex__item" >
-      <div class="placeholder">
-       <a ui-sref="" class="weui-btn weui-btn_plain-default" style="width:160px" style="margin-right:20px;margin-left:20px">
-          <div class="weui-cell">
-                <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-                    <img src="weui/src/example/images/lhead2.png" style="width: 50px;display: block"/>
-                </div>
-                <div class="weui-cell__bd">
-                    <p>♀</p>
-                    <p style="font-size: 13px;color: #888888;">￥0.01</p>
-                </div>
-          </div>
-       </a>
-        <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <p>已支付</p>
-                </div>
-            </div>
-      </div>
-      </div>
 </div>
-<hr>
-<div class="weui-flex">
-    <div class="weui-flex__item" style="margin-right:20px;margin-left:10px">
-        <div class="placeholder"> 
-         <a ui-sref="" class="weui-btn weui-btn_plain-default" style="width:160px"> 
-             <div class="weui-cell">
-                <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-                    <img src="weui/src/example/images/lhead5.png" style="width: 50px;display: block"/>
-                </div>
-                <div class="weui-cell__bd">
-                    <p>♂</p>
-                    <p style="font-size: 13px;color: #888888;">￥0.01</p>
-                </div>
-             </div>
-          </a>
-           <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <p>未支付</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="weui-flex__item">
-      <div class="placeholder">
-       <a ui-sref="" class="weui-btn weui-btn_plain-default" style="width:160px" style="margin-right:20px;margin-left:20px">
-          <div class="weui-cell">
-                <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-                    <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block"/>
-                    <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;"></span>
-                </div>
-                <div class="weui-cell__bd">
-                    <p>♂</p>
-                    <p style="font-size: 13px;color: #888888;">￥0.01</p>
-                </div>
-          </div>
-       </a>
-       <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <p>未受邀</p>
-                </div>
-            </div>
-      </div>
-      </div>
-</div>
-<hr>
-<div class="weui-flex">
-    <div class="weui-flex__item" style="margin-right:20px;margin-left:10px">
-        <div class="placeholder"> 
-         <a ui-sref="topay" class="weui-btn weui-btn_plain-default" style="width:160px"> 
-             <div class="weui-cell">
-                <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-                    <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block"/>
-                    <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">可选</span>
-                </div>
-                <div class="weui-cell__bd">
-                    <p>♀</p>
-                    <p style="font-size: 13px;color: #888888;">￥10,000.00</p>
-                </div>
-             </div>
-          </a>
-          <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <p>未受邀</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="weui-flex__item" >
-      <div class="placeholder">
-       <a ui-sref="topay" class="weui-btn weui-btn_plain-default" style="width:160px">
-          <div class="weui-cell">
-                <div class="weui-cell__hd" style="position: relative" style="margin-right:20px;margin-left:20px">
-                    <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block"/>
-                    <span class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">可选</span>
-                </div>
-                <div class="weui-cell__bd">
-                    <p>♀</p>
-                    <p style="font-size: 13px;color: #888888;">￥0.01</p>
-                </div>
-          </div>
-       </a>
-       <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <p>未受邀</p>
-                </div>
-            </div>
-      </div>
-      </div>
-</div>
-             <div class="weui-form-preview__ft">
-            </div>
-        </div>
-    </div>
-</div>
-<div class="weui-cells__title">支付方式</div>
-        <div class="weui-btn-area">
-            <a class="weui-btn weui-btn_primary" ui-sref="paysuccess" id="showTooltips">微信支付</a>
-        </div>
