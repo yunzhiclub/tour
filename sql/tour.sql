@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-04-25 18:15:21
+Date: 2017-05-02 15:31:45
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -33,7 +33,7 @@ CREATE TABLE `yunzhi_bed` (
   `order_id` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yunzhi_bed
@@ -70,6 +70,12 @@ INSERT INTO `yunzhi_bed` VALUES ('38', '9', null, null, '1', '1', null, '0', '14
 INSERT INTO `yunzhi_bed` VALUES ('39', '9', null, null, '1', '1', null, '0', '1492693138', '1492693138', null);
 INSERT INTO `yunzhi_bed` VALUES ('40', '9', null, null, '1', '1', null, '0', '1492693138', '1492693138', null);
 INSERT INTO `yunzhi_bed` VALUES ('41', '10', '1', null, null, '1', null, null, null, null, null);
+INSERT INTO `yunzhi_bed` VALUES ('42', '10', '1', null, '1', '1', null, '76194', '1493127712', '1493127712', '11');
+INSERT INTO `yunzhi_bed` VALUES ('43', '10', null, null, '1', '1', null, '0', '1493127712', '1493127712', null);
+INSERT INTO `yunzhi_bed` VALUES ('44', '10', null, null, '1', '1', null, '0', '1493127712', '1493127712', null);
+INSERT INTO `yunzhi_bed` VALUES ('45', '10', null, null, '1', '1', null, '0', '1493127712', '1493127712', null);
+INSERT INTO `yunzhi_bed` VALUES ('46', '10', null, null, '1', '1', null, '0', '1493127712', '1493127712', null);
+INSERT INTO `yunzhi_bed` VALUES ('47', '10', null, null, '1', '1', null, '0', '1493127712', '1493127712', null);
 
 -- ----------------------------
 -- Table structure for `yunzhi_chosen`
@@ -164,7 +170,7 @@ CREATE TABLE `yunzhi_country` (
   `update_time` int(11) NOT NULL,
   `is_delete` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '1为删除',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yunzhi_country
@@ -173,10 +179,12 @@ INSERT INTO `yunzhi_country` VALUES ('1', '1', '中国', '127.0.0.1/public/', '0
 INSERT INTO `yunzhi_country` VALUES ('2', '2', '英国', '127.0.0.1/public/', '0', '0', '0');
 INSERT INTO `yunzhi_country` VALUES ('3', '3', '美国', '127.0.0.1/public/', '0', '1489495307', '0');
 INSERT INTO `yunzhi_country` VALUES ('4', '4', '斐济', '', '1489412789', '1489476824', '0');
-INSERT INTO `yunzhi_country` VALUES ('6', '6', '澳大利亚', '', '0', '0', '0');
+INSERT INTO `yunzhi_country` VALUES ('5', '4', '澳大利亚', '', '0', '0', '0');
 INSERT INTO `yunzhi_country` VALUES ('7', '3', '墨西哥', '', '1489495709', '1489495709', '0');
 INSERT INTO `yunzhi_country` VALUES ('8', '1', '泰国', '', '1489997911', '1489998611', '0');
 INSERT INTO `yunzhi_country` VALUES ('9', '1', '日本', '', '0', '0', '0');
+INSERT INTO `yunzhi_country` VALUES ('10', '2', '法国', '', '0', '0', '0');
+INSERT INTO `yunzhi_country` VALUES ('11', '2', '德国', '', '0', '0', '0');
 
 -- ----------------------------
 -- Table structure for `yunzhi_customer`
@@ -232,15 +240,15 @@ CREATE TABLE `yunzhi_destination_city` (
 -- ----------------------------
 -- Records of yunzhi_destination_city
 -- ----------------------------
-INSERT INTO `yunzhi_destination_city` VALUES ('1', '8', '巴黎', null, null, '00');
+INSERT INTO `yunzhi_destination_city` VALUES ('1', '10', '巴黎', null, null, '00');
 INSERT INTO `yunzhi_destination_city` VALUES ('2', '2', '伦敦', null, null, '00');
-INSERT INTO `yunzhi_destination_city` VALUES ('3', '1', '柏林', null, null, '00');
-INSERT INTO `yunzhi_destination_city` VALUES ('4', '1', '啊啊', null, '1489235698', '00');
+INSERT INTO `yunzhi_destination_city` VALUES ('3', '11', '柏林', null, null, '00');
+INSERT INTO `yunzhi_destination_city` VALUES ('4', '1', '上海', null, '1489235698', '00');
 INSERT INTO `yunzhi_destination_city` VALUES ('5', '2', '阿道夫阿斯蒂芬', null, '1489235711', '00');
-INSERT INTO `yunzhi_destination_city` VALUES ('6', '1', '测试', null, null, '00');
-INSERT INTO `yunzhi_destination_city` VALUES ('7', '3', '大师傅啊', '1489230764', '1489393582', '01');
-INSERT INTO `yunzhi_destination_city` VALUES ('8', '1', '', '1489237122', '1489393570', '01');
-INSERT INTO `yunzhi_destination_city` VALUES ('9', '1', '555', '1489401153', '1489401153', '00');
+INSERT INTO `yunzhi_destination_city` VALUES ('6', '1', '三亚', null, null, '00');
+INSERT INTO `yunzhi_destination_city` VALUES ('7', '3', '加利福尼亚', '1489230764', '1489393582', '01');
+INSERT INTO `yunzhi_destination_city` VALUES ('8', '1', '西藏', '1489237122', '1489393570', '01');
+INSERT INTO `yunzhi_destination_city` VALUES ('9', '1', '丽江', '1489401153', '1489401153', '00');
 
 -- ----------------------------
 -- Table structure for `yunzhi_evaluate`
@@ -420,7 +428,7 @@ CREATE TABLE `yunzhi_invite` (
   `deadline` int(11) DEFAULT '0' COMMENT '到期时间小与路线的结束时间',
   `update_time` int(11) DEFAULT NULL COMMENT '订单更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yunzhi_invite
@@ -434,6 +442,7 @@ INSERT INTO `yunzhi_invite` VALUES ('6', '3', '1', '0', null, null, '6', '1', '5
 INSERT INTO `yunzhi_invite` VALUES ('7', '3', '1', '0', null, 'y20170420743721', '6', '1', '5', '0', '1', '1492674372', '2147483647', '1492674372');
 INSERT INTO `yunzhi_invite` VALUES ('8', '3', '1', '0', null, 'y20170420781861', '6', '1', '5', '0', '1', '1492678186', '2147483647', '1492678186');
 INSERT INTO `yunzhi_invite` VALUES ('9', '3', '1', '0', null, 'y20170420931381', '6', '1', '5', '0', '1', '1492693138', '2147483647', '1492693138');
+INSERT INTO `yunzhi_invite` VALUES ('10', '2', '1', '1492704000', '1492963200', 'y20170425277131', '6', '1', '5', '0', '1', '1493127712', '2147483647', '1493127712');
 
 -- ----------------------------
 -- Table structure for `yunzhi_order`
@@ -452,7 +461,7 @@ CREATE TABLE `yunzhi_order` (
   PRIMARY KEY (`id`),
   KEY `客户id` (`customer_id`),
   CONSTRAINT `客户id` FOREIGN KEY (`customer_id`) REFERENCES `yunzhi_customer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yunzhi_order
@@ -464,8 +473,9 @@ INSERT INTO `yunzhi_order` VALUES ('5', '6', '1', '33', null, '0', '0', null, nu
 INSERT INTO `yunzhi_order` VALUES ('6', '5', '1', '22', null, '0', '0', null, null);
 INSERT INTO `yunzhi_order` VALUES ('7', '1', '6', '201704207310499999', '0', '0', '0', '1492673104', '1492673104');
 INSERT INTO `yunzhi_order` VALUES ('8', '1', '7', '201704207437299999', '0', '0', '0', '1492674372', '1492674372');
-INSERT INTO `yunzhi_order` VALUES ('9', '1', '8', '201704207818699999', '0', '0', '0', '1492678186', '1492678186');
-INSERT INTO `yunzhi_order` VALUES ('10', '1', '9', '201704209313899999', '0', '0', '0', '1492693138', '1492693138');
+INSERT INTO `yunzhi_order` VALUES ('9', '1', '8', '201704207818699999', '0', '1', '0', '1492678186', '1492678186');
+INSERT INTO `yunzhi_order` VALUES ('10', '1', '9', '201704209313899999', '0', '2', '0', '1492693138', '1492693138');
+INSERT INTO `yunzhi_order` VALUES ('11', '1', '10', '2017042527713001', '0', '3', '0', '1493127712', '1493127712');
 
 -- ----------------------------
 -- Table structure for `yunzhi_picture`
@@ -574,7 +584,7 @@ CREATE TABLE `yunzhi_region` (
 INSERT INTO `yunzhi_region` VALUES ('1', '亚洲', '0', '00', '0');
 INSERT INTO `yunzhi_region` VALUES ('2', '欧洲', '0', '00', '0');
 INSERT INTO `yunzhi_region` VALUES ('3', '美洲', '0', '00', '1489217724');
-INSERT INTO `yunzhi_region` VALUES ('4', '南极洲', '0', '00', '0');
+INSERT INTO `yunzhi_region` VALUES ('4', '澳洲', '0', '00', '0');
 INSERT INTO `yunzhi_region` VALUES ('9', '大洋洲', '0', '00', '0');
 
 -- ----------------------------
@@ -643,9 +653,9 @@ CREATE TABLE `yunzhi_route` (
 -- Records of yunzhi_route
 -- ----------------------------
 INSERT INTO `yunzhi_route` VALUES ('1', '法国+瑞士+意大利+德国11日9晚跟团游', '1', '1', '1', '28', '28', '2', '赠送荷兰+库肯霍夫公园+双宫入内+滴滴湖', '2', '4', '7799', '7799', '8000', '1492963200', '                                                                                                                                                                                                                                                                                                                                                                                                                                                <p></p><ul><li>★ 【优质保证】：全程往返优质航空，南进北出，不走回头路</li><li>★ 【深度游览】：罗马，威尼斯，佛罗伦萨的宁静悠远，精心设计</li><li>★ 【精心赠送】：令人魂牵梦萦的库肯霍夫公园，赏荷兰风光</li></ul>                                    ', '0', '022-232332', '0', '1492779823', '1492779823', '1492704000', '1492704000', '1492779728');
-INSERT INTO `yunzhi_route` VALUES ('2', '法国+意大利+瑞士10日8晚跟团游', '1', '1', '1', '28', '28', '3', '一价全含+勃朗峰+金色山口车+双宫+双游船', '3', '3', '12699', '12699', '18000', '1492963200', '                                                                                                                                                                                                                        <p></p><ul><li>★ 【春季抢购】全程四人WIFI+可异地按指纹+出签率高</li><li>★ 【行程升级】全程三星-四星酒店+勃朗峰+双宫入内讲解+塞纳河游船</li><li>★ 【法国深度】：威尼斯本岛+威尼斯彩虹岛布尔诺 +黄金大运河</li></ul>                                                                                                                                                <p><br></p>                                    ', '0', '022-3242342', '0', '1492779728', '1492779728', '1492704000', '1492704000', '1492779728');
-INSERT INTO `yunzhi_route` VALUES ('3', '测试', '1', '1', '1', '28', '28', '3', '1223', '3', '1', '1', '1', '1', '1493049600', '                                                                        <p>11</p>                                    ', '0', '1', '0', '1493038955', '1493038955', '1493913600', '1492963200', '1492876800');
-INSERT INTO `yunzhi_route` VALUES ('4', '测试1', '1', '1', '1', '28', '28', '2', '测试', '2', '1', '1222', '1111', '2222', '1492963200', '', '0', '022-232332', '0', '0', '1492779823', '1492779823', '1492779823', '1492779823');
+INSERT INTO `yunzhi_route` VALUES ('2', '法国+意大利+瑞士10日8晚跟团游', '1', '2', '1', '28', '28', '3', '一价全含+勃朗峰+金色山口车+双宫+双游船', '3', '3', '12699', '12699', '18000', '1492963200', '                                                                                                                                                                                                                        <p></p><ul><li>★ 【春季抢购】全程四人WIFI+可异地按指纹+出签率高</li><li>★ 【行程升级】全程三星-四星酒店+勃朗峰+双宫入内讲解+塞纳河游船</li><li>★ 【法国深度】：威尼斯本岛+威尼斯彩虹岛布尔诺 +黄金大运河</li></ul>                                                                                                                                                <p><br></p>                                    ', '0', '022-3242342', '0', '1492779728', '1492779728', '1492704000', '1492704000', '1492779728');
+INSERT INTO `yunzhi_route` VALUES ('3', '测试', '1', '3', '1', '28', '28', '3', '1223', '3', '1', '1', '1', '1', '1493049600', '                                                                        <p>11</p>                                    ', '0', '1', '0', '1493038955', '1493038955', '1493913600', '1492963200', '1492876800');
+INSERT INTO `yunzhi_route` VALUES ('4', '测试1', '1', '6', '1', '28', '28', '2', '测试', '2', '1', '1222', '1111', '2222', '1492963200', '', '0', '022-232332', '0', '0', '1492779823', '1492779823', '1492779823', '1492779823');
 
 -- ----------------------------
 -- Table structure for `yunzhi_start_city`
