@@ -26,6 +26,10 @@ class PersonalController extends IndexController
         if (false === UserModel::passwordIsTrue($data['password'])) {
             return $this->error('原密码错误');
         }
+        //判断原密码与新密码是否冲突
+        if ($data['newpassword'] == $data['password']){
+            return $this->error('不可与原密码相同');
+        }
         //判断两次输入的密码是否一致
         if ($data['newpassword'] !== $data['repassword']) {
             return $this->error('两次输入的密码不一致');
