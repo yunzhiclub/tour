@@ -8,7 +8,7 @@
  * Controller of the wechatApp
  */
 angular.module('wechatApp')
-    .controller('TopayCtrl', ['$scope', 'config', 'invitation', '$stateParams', '$state', function($scope, config, invitation, $stateParams, $state) {
+    .controller('TopayCtrl', ['$scope', 'config', 'invitation', '$stateParams', '$state','jssdk', function($scope, config, invitation, $stateParams, $state, jssdk) {
         var bedIdIndex = $stateParams.bedIdIndex;
 
         // 选中床位的id
@@ -28,15 +28,18 @@ angular.module('wechatApp')
 
 
         // 去支付并跳转到支付成功页面
-        $scope.paysubmit = function() {
+        $scope.paySubmit = function() {
         	var postData = {
         		customerId: $scope.customer.id,
+        		openid: $scope.customer.openid,
         		bedId: bedId,
         		invitationId: Invite.id,
         	};
         	// 去支付
-        	invitation.toPay(postData).then(function successCallBack(response) {
+        	jssdk.getPayParams(postData, 0).then(function successCallBack(response) {
                 console.log(response);
+                // 调用微信支付接口去支付
+                jssdk.toPay(response);
             }, function errorCallBack() {
 
             });

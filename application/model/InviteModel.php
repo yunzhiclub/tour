@@ -171,10 +171,11 @@ class InviteModel extends ModelModel
 	 * 保存邀约，保存对应的床位信息
 	 * @param  string $stringInvitation 前台传来的邀约的字符串，以及六个用户的床位信息
 	 * @author huangshuaibin
-	 * @return true or false                   true表示保存成功
+	 * @return array example ['openid'=>'oUpF8uMuAJO_M2pxb1Q9zNjWeS6o', 'number'=>'20150806125346', money: 676元]
 	 */
 	public static function saveInvitation($stringInvitation)
 	{
+	    $result = [];
 		$Invitation = json_decode($stringInvitation);
 		$customerId = $Invitation->customerId;
 		$InviteModel = new InviteModel;
@@ -186,12 +187,13 @@ class InviteModel extends ModelModel
 		$InviteModel->route_id = $Invitation->routeId;
 		$InviteModel->is_public = $Invitation->isPublic;
 		$InviteModel->deadline = $Invitation->deadLine;
+        $result['openid'] = $Invitation->openid;
 		//	保存邀约号
 		$InviteModel->number = self::setInviteNumber($customerId);
 		//
         $InviteModel->person_num = 6;
-        $InviteModel->pay_num = 1;
-        $InviteModel->unpay_num = 5;
+        $InviteModel->pay_num = 0;
+        $InviteModel->unpay_num = 6;
 		//保存邀约
 		$InviteModel->save();
 
@@ -212,14 +214,14 @@ class InviteModel extends ModelModel
 
 			//如果前台的床位isPay字段是1的情况，表示该床位是当前用户的床位
 			if (1 === $Invitation->roomDatas[$i]->isPay) {
-				//TODO调用微信支付接口
-				//完成支付之后，将该用户保存进bed表
 				$OrderModel = new OrderModel;
 				$OrderModel->customer_id = $Invitation->customerId;
 				$OrderModel->invite_id = $inviteId;
-				$OrderModel->number = self::setOrderNumber();
+				$number = self::setOrderNumber();
+				$OrderModel->number = $number;
 				$OrderModel->save();
-				
+				$result['number'] = $number;
+                $result['money'] = $Invitation->roomDatas[$i]->money;
 				$OrderId = $OrderModel->getData('id');
 				$BedModel->order_id = $OrderId;
 				//保存customer_id进相应的床位表
@@ -229,7 +231,7 @@ class InviteModel extends ModelModel
 			$BedModel->save();
 		}
 
-		return true;
+		return $result;
 	}
 
 	/**
@@ -319,12 +321,43 @@ class InviteModel extends ModelModel
         $OrderModel->customer_id = $customerId;
         $OrderModel->invite_id = $invitationId;
         // 生成订单号
-        $OrderModel->number = self::getOrderNumber($customerId);
+        $OrderModel->number = self::setOrderNumber();
         $OrderModel->save();
         $OrderId = $OrderModel->getData('id');
         $BedModel->order_id = $OrderId;
          // 保存数据
         $BedModel->save();
+        return true;
+    }
+    /*
+     * 去判断是否订单所有的人都支付完成，如果是就改变所有ｏｒｄｅｒ的状态为２
+     * @param int $inviteId
+     * @return bool
+     * */
+    public function isAllPayed($inviteId) {
+        $InviteModel = self::get($inviteId);
+        // 首先判断是否全部支付
+        $pay_num = $InviteModel->getData('pay_num');
+        $person_num = $InviteModel->getData('person_num');
+        if ($pay_num + 1 === $person_num) {
+            // 修改邀约中的数据
+            $InviteModel->pay_num = $pay_num + 1;
+            $InviteModel->unpay_num = $InviteModel->getData('unpay_num') - 1;
+            $InviteModel->save();
+
+            // 修改订单中的状态全为２
+            $OrderModel = new OrderModel();
+            $OrderModels = $OrderModel->where('invite_id', '=', $inviteId)->select();
+            foreach ($OrderModels as $key => $value) {
+                $value->status = 1;
+                $value->save();
+            }
+            return true;
+        }
+        // 修改邀约中的数据
+        $InviteModel->pay_num = $pay_num + 1;
+        $InviteModel->unpay_num = $InviteModel->getData('unpay_num') - 1;
+        $InviteModel->save();
         return true;
     }
 }
