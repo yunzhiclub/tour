@@ -1,22 +1,22 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : test
-Source Server Version : 50625
-Source Host           : 127.0.0.1:3306
+Source Server         : localhost_3306
+Source Server Version : 50505
+Source Host           : localhost:3306
 Source Database       : tour
 
 Target Server Type    : MYSQL
-Target Server Version : 50625
+Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-03-09 23:43:07
+Date: 2017-05-02 20:08:25
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for yunzhi_start_city
+-- Table structure for `yunzhi_start_city`
 -- ----------------------------
 DROP TABLE IF EXISTS `yunzhi_start_city`;
 CREATE TABLE `yunzhi_start_city` (
@@ -26,7 +26,8 @@ CREATE TABLE `yunzhi_start_city` (
   `is_delete` tinyint(1) unsigned zerofill NOT NULL,
   `create_time` int(11) NOT NULL,
   `update_time` int(11) unsigned zerofill NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------

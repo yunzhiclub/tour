@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-03-11 15:47:13
+Date: 2017-05-02 20:08:48
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,13 +25,14 @@ CREATE TABLE `yunzhi_region` (
   `create_time` int(11) unsigned NOT NULL,
   `is_delete` tinyint(2) unsigned zerofill DEFAULT '00',
   `update_time` int(11) unsigned NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of yunzhi_region
 -- ----------------------------
-INSERT INTO `yunzhi_region` VALUES ('1', '亚洲', '0', '00', '0');
+INSERT INTO `yunzhi_region` VALUES ('1', '大洋洲', '0', '00', '1491922423');
 INSERT INTO `yunzhi_region` VALUES ('2', '欧洲', '0', '00', '0');
-INSERT INTO `yunzhi_region` VALUES ('3', '美洲', '0', '01', '1489217724');
-INSERT INTO `yunzhi_region` VALUES ('9', '大洋洲', '0', '00', '0');
+INSERT INTO `yunzhi_region` VALUES ('3', '美洲', '0', '00', '1489217724');
+INSERT INTO `yunzhi_region` VALUES ('24', '大洋洲6', '1493725004', '01', '1493725009');
