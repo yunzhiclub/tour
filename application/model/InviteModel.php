@@ -217,6 +217,7 @@ class InviteModel extends ModelModel
 				$OrderModel = new OrderModel;
 				$OrderModel->customer_id = $Invitation->customerId;
 				$OrderModel->invite_id = $inviteId;
+				$OrderModel->money = $Invitation->roomDatas[$i]->money;
 				$number = self::setOrderNumber();
 				$OrderModel->number = $number;
 				$OrderModel->save();

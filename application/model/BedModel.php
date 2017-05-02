@@ -93,6 +93,7 @@ class BedModel extends ModelModel
         $OrderModel->invite_id = $inviteId;
         $number = InviteModel::setOrderNumber();
         $OrderModel->number = $number;
+		$OrderModel->money = $result['money'];
         $result['number'] = $number;
         $OrderModel->save();
         return $result;
