@@ -53,7 +53,7 @@ class RouteController extends IndexController
     public function detail() 
     {
         $id = Request::instance()->param('id');
-        $RouteModel = RouteModel::get($id);
+        $RouteModel = RouteModel::get($id)->ConvertStrtotimeToDate();
         $this->assign('RouteModel', $RouteModel);
         //获取其他信息，首页推荐权重、精选权重、路程天数及价格
         $otherInfo = RouteModel::getOtherInfo($id);

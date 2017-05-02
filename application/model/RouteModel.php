@@ -301,7 +301,7 @@ class RouteModel extends ModelModel
 	static public function saveRouteInfo($data)
 	{
 		//将数组进行拆分，一部分存入路线表中，一部分存入出发时间表中，一部分存入首页推荐表和精选表中
-		$weightRelation = array_splice($data, 19, 5);
+		$weightRelation = array_splice($data, 20, 5);
 		$data['content'] = array_pop($weightRelation);
 		$startTime = array_splice($data, 10, 2);
 		//将数据存入路线表中
@@ -492,7 +492,7 @@ class RouteModel extends ModelModel
 	static public function updateRouteInfo($data, $id)
 	{
 		//将数组进行拆分，一部分存入路线表中，一部分存入出发时间表中，一部分存入首页推荐表和精选表中
-		$weightRelation = array_splice($data, 19, 5);
+		$weightRelation = array_splice($data, 20, 5);
 		$data['content'] = array_pop($weightRelation);
 		$startTime = array_splice($data, 10, 2);
 		//将数据存入路线表中
@@ -566,6 +566,7 @@ class RouteModel extends ModelModel
     {
         $data['start_time'] = strtotime($data['start_time']);
         $data['begin_time'] = strtotime($data['begin_time']);
+        $data['end_time'] = strtotime($data['end_time']);
         $data['deadline'] = strtotime($data['deadline']);
 
         //将路线出发时间转化为时间戳格式
@@ -583,11 +584,14 @@ class RouteModel extends ModelModel
      */
     public function ConvertStrtotimeToDate()
     {
-        $this->deadline = date('Y-m-d', $this->deadline);
+        $this->end_time = date('Y-m-d', $this->end_time);
         $this->start_time = date('Y-m-d', $this->start_time);
         $this->begin_time = date('Y-m-d', $this->begin_time);
+        $this->deadline = date('Y-m-d', $this->deadline);
 
         return $this;
     }
+
+
 
 }

@@ -8,14 +8,13 @@
  * Controller of the wechatApp
  */
 angular.module('wechatApp')
-    .controller('HourseCtrl', ['$uibModal', '$log', '$document', '$scope', '$stateParams', 'order', 'room', '$state', 'invitation',
-        function($uibModal, $log, $document, $scope, $stateParams, order, room, $state, invitation) {
-
+    .controller('HourseCtrl', ['$uibModal', '$log', '$document', '$scope', '$stateParams', 'order', 'room', '$state', 'invitation', 'jssdk',
+        function($uibModal, $log, $document, $scope, $stateParams, order, room, $state, invitation, jssdk) {
             // 定义总价
             var maxMoney = 0;
             // 先默认设置默认的单价
             var defaultPrice = order.defaultPrice;
-            if ($stateParams.timeId !== undefined) {
+            if ($stateParams.timeId !== '') {
 
                 // 获取本次出发时间的价格替换默认价格
                 invitation.getPriceByStartTimeId($stateParams.timeId).then(function successCallBack(response) {
@@ -243,17 +242,18 @@ angular.module('wechatApp')
 
                         // 最后设置发起邀约的人
                         order.customerId = $scope.customer.id;
-
+                        order.openid = $scope.customer.openid;
                         console.log(order);
 
-                        // 调用生成邀约的借口并支付
-                        invitation.saveTheInvitation(order).then(function successCallBack(response) {
-                            console.log(response);
+                        // 调用生成邀约的借口并支付 1　代表是生成邀约而不是去支付
+                        jssdk.getPayParams(order, 1).then(function successCallBack(response) {
+                            // 调用微信支付接口去支付
+                            jssdk.toPay(response);
                         }, function errorCallBack() {
 
                         });
                         // 调到支付成功页面
-                        $state.go('paysuccess');
+                        //$state.go('paysuccess');
                     }
                 }
             };

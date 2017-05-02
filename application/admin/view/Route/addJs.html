@@ -1,14 +1,14 @@
 <script>
 app.controller('RouteController', function ($scope)  {
     //监听开始时间和出发时间两个字段
-    $scope.$watch('[begin_time, deadline]', function() {
+    $scope.$watch('[begin_time, end_time]', function() {
         //获取开始日期和截止日期之间相隔的天数
-        $scope.dates = getDates($scope.begin_time, $scope.deadline);
+        $scope.dates = getDates($scope.begin_time, $scope.end_time);
 
         //判断用户是否在开始日期、截止日期输入值
-        if ($scope.begin_time && $scope.deadline) {
+        if ($scope.begin_time && $scope.end_time) {
             //判断截止日期是否大于开始日期
-            if ($scope.begin_time <= $scope.deadline) {
+            if ($scope.begin_time <= $scope.end_time) {
                 $scope.myValue = true;
                 $scope.promptInfo = false;
             } else {
