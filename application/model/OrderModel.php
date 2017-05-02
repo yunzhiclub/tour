@@ -97,10 +97,11 @@ class OrderModel extends ModelModel
 		$orders = $Order->where($map)->select();
 		//  获取订单中的详细信息
 		foreach ($orders as $key => $order){
-			//  订单中的订单编号、状态、是否公开
+			//  订单中的订单编号、状态、是否公开、金额
 			$result[$key]['number'] = $order->getData('number');
 			$result[$key]['status'] = $order->getData('status');
 			$result[$key]['is_public'] = $order->getData('is_public');
+			$result[$key]['money'] = $order->getData('money');
 			//  获取邀约表中的预定时间、出发时间、返程时间、出游人数
 			$inviteId = $order->getData('invite_id');
 			$Invite = InviteModel::get($inviteId);
