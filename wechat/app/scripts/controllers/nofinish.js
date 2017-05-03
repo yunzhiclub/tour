@@ -14,7 +14,6 @@ angular.module('wechatApp')
       customer.getUnSetOutOrderByCustomerId(customerId , openId).then(function successCallBack(response){
           console.log(response);
           $scope.orders = response;
-          $scope.isPublic = 1;
       },function errorCallBack() {
 
       });

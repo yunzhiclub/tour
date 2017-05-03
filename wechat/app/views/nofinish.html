@@ -4,7 +4,7 @@
             <div class="weui-form-preview__hd">
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">{{order.status | orderstatus}} </label>
-                    <span>￥{{order.money}}</span>
+                    <span>{{order.money | currency: '¥'}}</span>
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">订单号</label>
