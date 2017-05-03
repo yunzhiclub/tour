@@ -18,4 +18,10 @@ angular.module('wechatApp')
       }, function errorCallBack() {
 
       });
+      $scope.stateChanged = function (isPublic, orderNumber) {
+          console.log(isPublic);
+          console.log(orderNumber);
+          console.log(openId);
+          customer.setIsPublic(isPublic, orderNumber, openId);
+      }
   }]);

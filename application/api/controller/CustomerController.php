@@ -198,4 +198,16 @@ class CustomerController extends ApiController
 
 		return $this->response($orders);
 	}
+	/*
+	 * 设置订单是否公开
+	 * */
+	public function setIsPublic() {
+        $ispublic = Request::instance()->param('ispublic');
+        $orderNumber = Request::instance()->param('orderNumber');
+        // 设置订单
+        $OrderModel = new OrderModel();
+        $OrderModel->setIsPublic($ispublic, $orderNumber);
+        $this->response([]);
+    }
+
 }

@@ -11,7 +11,7 @@ router:#!/orderls
                     <div class="weui-cell__bd">是否公开订单</div>
                         <div class="weui-cell__ft">
                             <label for="switchCP" class="weui-switch-cp">
-                                <input id="switchCP" class="weui-switch-cp__input" type="checkbox" ng-model="isPublic" ng-true-value="1" ng-false-value="0" />
+                                <input id="switchCP" ng-change="stateChanged(order.is_public,order.number)" class="weui-switch-cp__input" type="checkbox" ng-model="order.is_public" ng-true-value="1" ng-false-value="0" />
                                 <div class="weui-switch-cp__box"></div>
                             </label>
                         </div>
