@@ -128,7 +128,7 @@ angular
                 controller: 'ChangepsCtrl',
             })
             .state('orderls', {
-                url: '/orderls', // 全部订单列表页面
+                url: '/orderls/:number', // 全部订单列表页面
                 templateUrl: 'views/orderls.html',
                 controller: 'OrderlsCtrl',
             })
