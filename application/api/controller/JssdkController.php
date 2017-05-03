@@ -27,7 +27,7 @@ class JssdkController extends ApiController
 		return $this->response($signPackage);
 	}
 	/*
-	 * 获取支付参数
+	 * 获取支付参数 isCreateInvite 1 表示发起邀约　0 表示应邀　2　表示去支付那些取消支付的订单
 	 * */
     public function getPayParams() {
         $stringInvitation = Request::instance()->param('data');
@@ -47,7 +47,7 @@ class JssdkController extends ApiController
             // 变成分为单位
             $total_fee = $result['money'] * 100;
             $out_trade_no = $result['number'];
-        } else {
+        } else if($isCreateInvite === '0'){
 	        // 应邀
             $dataObject = json_decode($stringInvitation);
             $openid = $dataObject->openid;
@@ -55,8 +55,14 @@ class JssdkController extends ApiController
             $customerId = $dataObject->customerId;
             // 床位设置customer_id 并生成订单
             $data = BedModel::setCustomerIdAndCreateOrder($bedId, $customerId);
-            $total_fee = $data['money'];
+            $total_fee = $data['money'] * 100;
             $out_trade_no = $data['number'];
+        } else {
+            // 重新去支付
+            $dataObject = json_decode($stringInvitation);
+            $openid = $dataObject->openid;
+            $total_fee = $dataObject->money * 100;
+            $out_trade_no = $dataObject->number;
         }
 	    // 商品简单描述 实例
         $body = '腾讯充值中心-QQ会员充值';
