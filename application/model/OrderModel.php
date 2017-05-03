@@ -139,6 +139,7 @@ class OrderModel extends ModelModel
 //			返回床位中的价格和性别
 			$result[$key]['money'] = $bed->money;
 			$result[$key]['sex'] = $bed->sex;
+            $result[$key]['old'] = $bed->old;
 //			根据客户id获取客户信息返回客户姓名和头像
 			$customer_id = $bed->customer_id;
 			// 做上用户就有订单
