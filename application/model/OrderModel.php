@@ -150,4 +150,16 @@ class OrderModel extends ModelModel
 
 		return $result;
 	}
+	/*
+	 * 设置订单是否公开
+	 * */
+	public function setIsPublic($ispublic, $orderNumber)
+    {
+        $map = array(
+            'number' => $orderNumber,
+        );
+        $OrderModel = $this->where($map)->find();
+        $OrderModel->is_public = $ispublic;
+        $OrderModel->save();
+    }
 }
