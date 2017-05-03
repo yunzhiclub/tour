@@ -121,4 +121,33 @@ class OrderModel extends ModelModel
 		}
 		return $result;
 	}
+
+	public static function getOrderDetailById($id)
+	{
+//		设置返回数组
+		$result = [];
+//		根据传入的id获取ordermodel
+		$order = OrderModel::get($id);
+		$map['invite_id'] = $order->invite_id;
+//		根据邀约id获取所有床位信息
+		$Bed = new BedModel;
+		$beds = $Bed->where($map)->select();
+
+		foreach ($beds as $key => $bed){
+//			返回床位中的价格和性别
+			$result[$key]['money'] = $bed->money;
+			$result[$key]['sex'] = $bed->sex;
+//			根据客户id获取客户信息返回客户姓名和头像
+			$customer_id = $bed->customer_id;
+			$customer = CustomerModel::get($customer_id);
+			$result[$key]['head_img_url'] = $customer->head_img_url;
+			$result[$key]['name'] = $customer->getData('name');
+//			根据床位订单1:1关系获取订单中状态
+			$order_id = $bed->order_id;
+			$Order = OrderModel::get($order_id);
+			$result[$key]['status'] = $Order->getData('status');
+		}
+
+		return $result;
+	}
 }

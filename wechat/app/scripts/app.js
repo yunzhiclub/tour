@@ -133,7 +133,7 @@ angular
                 controller: 'OrderlsCtrl',
             })
             .state('orderdetail', {
-                url: '/orderdetail', // 订单详情页面
+                url: '/orderdetail/:orderId', // 订单详情页面
                 templateUrl: 'views/orderdetail.html',
                 controller: 'OrderdetailCtrl',
             })

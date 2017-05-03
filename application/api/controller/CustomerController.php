@@ -198,4 +198,19 @@ class CustomerController extends ApiController
 
 		return $this->response($orders);
 	}
+
+	/**
+	 * @return json
+	 * @author: mengyunzhi www.mengyunzhi.com
+	 * @Date&Time:2017-05-03 11:41
+	 * 获取订单详情
+	 */
+	public function getOrderDetailById()
+	{
+		$id = Request::instance()->param('id');
+//		获取订单详情
+		$order = OrderModel::getOrderDetailById($id);
+
+		return $this->response($order);
+	}
 }
