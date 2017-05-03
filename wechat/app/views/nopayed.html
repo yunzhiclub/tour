@@ -4,7 +4,7 @@
             <div class="weui-form-preview__hd">
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label"> {{order.status | orderstatus}} </label>
-                    <span class="weui-form-preview__value">￥{{order.money}}</span>
+                    <span class="weui-form-preview__value">{{order.money | currency: '¥'}}</span>
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">订单号</label>
@@ -44,7 +44,7 @@
 
             <div class="weui-cells__title">支付方式</div>
             <div class="weui-btn-area">
-                <a class="weui-btn weui-btn_primary" ui-sref="paysuccess" id="showTooltips">微信支付</a>
+                <a ng-click="topay({money:order.money, number:order.number})" class="weui-btn weui-btn_primary" id="showTooltips">微信支付</a>
             </div>
         </div>
     </div>
