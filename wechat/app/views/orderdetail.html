@@ -4,138 +4,43 @@ router:#!/orderdetail
  -->
 <div class="weui-form-preview">
     <div class="weui-form-preview__hd">
-        <div class="weui-flex">
+        <div class="weui-flex" ng-repeat="bed in beds">
             <div class="weui-flex__item" style="margin-right:20px;margin-left:10px">
                 <div class="placeholder">
-                    <a ui-sref="" class="weui-btn weui-btn_plain-default" style="width:160px">
+                    <div class="weui-btn weui-btn_plain-default" style="width:160px">
                         <div class="weui-cell">
                             <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-                                <img src="weui/src/example/images/lhead1.png" style="width: 50px;display: block"/>
+                                <img src="{{bed.head_img_url}}" style="width: 50px;display: block"/>
                             </div>
                             <div class="weui-cell__bd">
-                                <p>♀</p>
-                                <p style="font-size: 13px;color: #888888;">￥5,0000.00</p>
+                                <p>
+                                    <div class="animate-switch-container"
+                                         ng-switch on="bed.sex">
+                                        <div class="animate-switch"  ng-switch-when="0">
+                                            <div class="weui-form-preview__ft">
+                                                ♂
+                                            </div>
+                                        </div>
+                                        <div class="animate-switch"  ng-switch-when="1">
+                                            <div class="weui-form-preview__ft">
+                                                ♀
+                                            </div>
+                                        </div>
+                                    </div>
+                                </p>
+                                <p style="font-size: 13px;color: #888888;">￥{{bed.money}}</p>
                             </div>
                         </div>
-                    </a>
+                    </div>
                     <div class="weui-cell">
                         <div class="weui-cell__bd">
-                            <p>已支付</p>
+                            <p>{{bed.status | orderstatus}}</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="weui-flex__item" >
-                <div class="placeholder">
-                    <a ui-sref="" class="weui-btn weui-btn_plain-default" style="width:160px" style="margin-right:20px;margin-left:20px">
-                        <div class="weui-cell">
-                            <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-                                <img src="weui/src/example/images/lhead2.png" style="width: 50px;display: block"/>
-                            </div>
-                            <div class="weui-cell__bd">
-                                <p>♀</p>
-                                <p style="font-size: 13px;color: #888888;">￥0.01</p>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="weui-cell">
-                        <div class="weui-cell__bd">
-                            <p>已支付</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <hr>
         </div>
-        <hr>
-        <div class="weui-flex">
-            <div class="weui-flex__item" style="margin-right:20px;margin-left:10px">
-                <div class="placeholder">
-                    <a ui-sref="" class="weui-btn weui-btn_plain-default" style="width:160px">
-                        <div class="weui-cell">
-                            <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-                                <img src="weui/src/example/images/lhead5.png" style="width: 50px;display: block"/>
-                            </div>
-                            <div class="weui-cell__bd">
-                                <p>♂</p>
-                                <p style="font-size: 13px;color: #888888;">￥0.01</p>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="weui-cell">
-                        <div class="weui-cell__bd">
-                            <p>未支付</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="weui-flex__item">
-                <div class="placeholder">
-                    <a ui-sref="" class="weui-btn weui-btn_plain-default" style="width:160px" style="margin-right:20px;margin-left:20px">
-                        <div class="weui-cell">
-                            <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-                                <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block"/>
-
-                            </div>
-                            <div class="weui-cell__bd">
-                                <p>♂</p>
-                                <p style="font-size: 13px;color: #888888;">￥0.01</p>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="weui-cell">
-                        <div class="weui-cell__bd">
-                            <p>未受邀</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <div class="weui-flex">
-            <div class="weui-flex__item" style="margin-right:20px;margin-left:10px">
-                <div class="placeholder">
-                    <a ui-sref="topay" class="weui-btn weui-btn_plain-default" style="width:160px">
-                        <div class="weui-cell">
-                            <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
-                                <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block"/>
-
-                            </div>
-                            <div class="weui-cell__bd">
-                                <p>♀</p>
-                                <p style="font-size: 13px;color: #888888;">￥10,000.00</p>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="weui-cell">
-                        <div class="weui-cell__bd">
-                            <p>未受邀</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="weui-flex__item" >
-                <div class="placeholder">
-                    <a ui-sref="topay" class="weui-btn weui-btn_plain-default" style="width:160px">
-                        <div class="weui-cell">
-                            <div class="weui-cell__hd" style="position: relative" style="margin-right:20px;margin-left:20px">
-                                <img src="weui/src/example/images/whitehead.png" style="width: 50px;display: block"/>
-
-                            </div>
-                            <div class="weui-cell__bd">
-                                <p>♀</p>
-                                <p style="font-size: 13px;color: #888888;">￥0.01</p>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="weui-cell">
-                        <div class="weui-cell__bd">
-                            <p>未受邀</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr>
         <div class="weui-cells__title">生成分享链接</div>
         <div class="weui-btn-area">
             <a class="weui-btn weui-btn_primary" ui-sref="" id="showTooltips">分享</a>
