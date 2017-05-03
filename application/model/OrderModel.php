@@ -124,6 +124,8 @@ class OrderModel extends ModelModel
 	}
 	public static function getOrderDetailById($id)
 	{
+        //图片的路径拼接
+        $pathconfig = 'http://' . $_SERVER['HTTP_HOST'] . DS . 'tour'. DS .'public' . DS . 'upload' . DS;
 //		设置返回数组
 		$result = [];
 //		根据传入的id获取ordermodel
@@ -139,13 +141,24 @@ class OrderModel extends ModelModel
 			$result[$key]['sex'] = $bed->sex;
 //			根据客户id获取客户信息返回客户姓名和头像
 			$customer_id = $bed->customer_id;
-			$customer = CustomerModel::get($customer_id);
-			$result[$key]['head_img_url'] = $customer->head_img_url;
-			$result[$key]['name'] = $customer->getData('nick_name');
-//			根据床位订单1:1关系获取订单中状态
+			// 做上用户就有订单
+			if($customer_id !== null) {
+                $customer = CustomerModel::get($customer_id);
+                if($customer->head_img_url !== null) {
+                    $result[$key]['head_img_url'] = $pathconfig . $customer->head_img_url;
+                } else {
+                    $result[$key]['head_img_url'] = $customer->head_img_url_wechat;
+                }
+
+                $result[$key]['name'] = $customer->getData('nick_name');
+            }
+
+//			根据床位订单1:1|0关系获取订单中状态
 			$order_id = $bed->order_id;
-			$Order = OrderModel::get($order_id);
-			$result[$key]['status'] = $Order->getData('status');
+			if ($order_id !== null) {
+                $Order = OrderModel::get($order_id);
+                $result[$key]['status'] = $Order->getData('status');
+            }
 		}
 
 		return $result;

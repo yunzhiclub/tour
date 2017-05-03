@@ -4,8 +4,8 @@ router:#!/orderdetail
  -->
 <div class="weui-form-preview">
     <div class="weui-form-preview__hd">
-        <div class="weui-flex" ng-repeat="bed in beds">
-            <div class="weui-flex__item" style="margin-right:20px;margin-left:10px">
+        <div class="weui-flex" ng-repeat="item in beds">
+            <div class="weui-flex__item" style="margin-right:20px;margin-left:10px" ng-repeat="bed in item">
                 <div class="placeholder">
                     <div class="weui-btn weui-btn_plain-default" style="width:160px">
                         <div class="weui-cell">

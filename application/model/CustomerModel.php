@@ -39,15 +39,15 @@ class CustomerModel extends ModelModel
         
         //对Customer中的部分数据进行简单的加工
         //图片URL的拼接
-        if ('' !== $CustomerModel->head_img_url) {
+        if (null !== $CustomerModel->head_img_url) {
             $CustomerModel->head_img_url = $pathconfig . $CustomerModel->head_img_url;
         } else {
             $CustomerModel->head_img_url = $CustomerModel->head_img_url_wechat;
         }
-        if ('' !== $CustomerModel->card_img_front_url) {
+        if (null !== $CustomerModel->card_img_front_url) {
             $CustomerModel->card_img_front_url = $pathconfig . $CustomerModel->card_img_front_url; 
         }
-        if ('' !== $CustomerModel->card_img_back_url) {
+        if (null !== $CustomerModel->card_img_back_url) {
             $CustomerModel->card_img_back_url = $pathconfig . $CustomerModel->card_img_back_url;
         }
 
