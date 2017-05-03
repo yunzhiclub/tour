@@ -18,23 +18,24 @@ router:#!/orderdetail
                                          ng-switch on="bed.sex">
                                         <div class="animate-switch"  ng-switch-when="0">
                                             <div class="weui-form-preview__ft">
-                                                ♂
+                                               女
                                             </div>
                                         </div>
                                         <div class="animate-switch"  ng-switch-when="1">
                                             <div class="weui-form-preview__ft">
-                                                ♀
+                                                男
                                             </div>
                                         </div>
+                                        <p>{{bed.old | oldFilter}}</p>
                                     </div>
                                 </p>
-                                <p style="font-size: 13px;color: #888888;">￥{{bed.money}}</p>
+                                <p style="font-size: 13px;color: #888888;">{{bed.money | currency: '¥'}}</p>
                             </div>
                         </div>
                     </div>
                     <div class="weui-cell">
                         <div class="weui-cell__bd">
-                            <p>{{bed.status | orderstatus}}</p>
+                            <p>{{bed.status | ischoose}}</p>
                         </div>
                     </div>
                 </div>
