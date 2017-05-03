@@ -8,8 +8,8 @@
  * Controller of the wechatApp
  */
 angular.module('wechatApp')
-  .controller('OrderdetailCtrl', ['$scope', 'customer', function ($scope, customer) {
-      var orderId = $scope.order.id;
+  .controller('OrderdetailCtrl', ['$scope', 'customer', '$stateParams', function ($scope, customer, $stateParams) {
+      var orderId = $stateParams.orderId;
       customer.getOrderDetailById(orderId).then(function successCallBack (response) {
           console.log(response);
           $scope.order = response;

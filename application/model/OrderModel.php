@@ -98,6 +98,7 @@ class OrderModel extends ModelModel
 		//  获取订单中的详细信息
 		foreach ($orders as $key => $order){
 			//  订单中的订单编号、状态、是否公开、金额
+			$result[$key]['id'] = $order->getData('id');
 			$result[$key]['number'] = $order->getData('number');
 			$result[$key]['status'] = $order->getData('status');
 			$result[$key]['is_public'] = $order->getData('is_public');
@@ -121,16 +122,32 @@ class OrderModel extends ModelModel
 		}
 		return $result;
 	}
+	public static function getOrderDetailById($id)
+	{
+//		设置返回数组
+		$result = [];
+//		根据传入的id获取ordermodel
+		$order = OrderModel::get($id);
+		$map['invite_id'] = $order->invite_id;
+//		根据邀约id获取所有床位信息
+		$Bed = new BedModel;
+		$beds = $Bed->where($map)->select();
 
-	/*
-	 * 根据订单号设置订单是否公开
-	 * */
-	public function setIsPublic($ispublic, $orderNumber) {
-	    $map = array(
-	        'number' => $orderNumber,
-        );
-	    $OrderModel = $this->where($map)->find();
-        $OrderModel->is_public = $ispublic;
-        $OrderModel->save();
-    }
+		foreach ($beds as $key => $bed){
+//			返回床位中的价格和性别
+			$result[$key]['money'] = $bed->money;
+			$result[$key]['sex'] = $bed->sex;
+//			根据客户id获取客户信息返回客户姓名和头像
+			$customer_id = $bed->customer_id;
+			$customer = CustomerModel::get($customer_id);
+			$result[$key]['head_img_url'] = $customer->head_img_url;
+			$result[$key]['name'] = $customer->getData('name');
+//			根据床位订单1:1关系获取订单中状态
+			$order_id = $bed->order_id;
+			$Order = OrderModel::get($order_id);
+			$result[$key]['status'] = $Order->getData('status');
+		}
+
+		return $result;
+	}
 }
