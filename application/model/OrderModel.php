@@ -141,7 +141,7 @@ class OrderModel extends ModelModel
 			$customer_id = $bed->customer_id;
 			$customer = CustomerModel::get($customer_id);
 			$result[$key]['head_img_url'] = $customer->head_img_url;
-			$result[$key]['name'] = $customer->getData('name');
+			$result[$key]['name'] = $customer->getData('nick_name');
 //			根据床位订单1:1关系获取订单中状态
 			$order_id = $bed->order_id;
 			$Order = OrderModel::get($order_id);
