@@ -58,7 +58,7 @@ angular
                 controller: 'TopayCtrl',
             })
             .state('paysuccess', {
-                url: '/paysuccess', // 支付成功界面
+                url: '/paysuccess/:number', // 支付成功界面
                 templateUrl: 'views/paysuccess.html',
                 controller: 'PaysuccessCtrl',
             })
@@ -128,7 +128,7 @@ angular
                 controller: 'ChangepsCtrl',
             })
             .state('orderls', {
-                url: '/orderls', // 全部订单列表页面
+                url: '/orderls/:number', // 全部订单列表页面
                 templateUrl: 'views/orderls.html',
                 controller: 'OrderlsCtrl',
             })

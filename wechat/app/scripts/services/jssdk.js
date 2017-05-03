@@ -8,7 +8,7 @@
  * Factory in the wechatApp.
  */
 angular.module('wechatApp')
-    .factory('jssdk', ['$q', 'config', 'server', '$location', function($q, config, server, $location) {
+    .factory('jssdk', ['$q', 'config', 'server', '$location', '$state', function($q, config, server, $location, $state) {
         // Service logic
 
         // 获取当前的url
@@ -134,10 +134,36 @@ angular.module('wechatApp')
                 success: function (res) {
                     // 支付成功后的回调函数
                     // 调到支付成功的页面
-                    $location.path('/paysuccess');
+                    //$location.path('/paysuccess');
+                    // 带着订单好跳转
+                    $state.go('paysuccess', {number:params.out_trade_no});
                 }
             });
         };
+        var queryOrder = function (number) {
+            // 定义promise 解决异步问题
+            var deferred = $q.defer();
+            var promise = deferred.promise;
+
+            var data = {
+               number:number,
+            };
+
+            var paramUrl = 'Jssdk/queryOrder';
+            server.http(paramUrl, data, function successCallback(response) {
+                console.log(response);
+                if (typeof response.data.errorCode !== 'undefined') {
+                    console.log('系统发生错误：' + response.data.error);
+                } else {
+                    // 逻辑处理
+
+                }
+                deferred.resolve(response.data.data); //执行成功
+            }, function errorCallback(response) {
+                deferred.reject(response); //执行失败
+            });
+            return promise;
+        }
         // Public API here
         return {
             // 获取jssdk配置
@@ -157,5 +183,9 @@ angular.module('wechatApp')
             toPay: function (params) {
                 toPay(params);
             },
+            // 查询订单看是否支付成功
+            queryOrder: function (number) {
+                return queryOrder(number);
+            }
         };
     }]);

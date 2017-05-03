@@ -67,6 +67,7 @@ class JssdkController extends ApiController
         $notify_url = 'http://' . $_SERVER['HTTP_HOST'] . DS . 'tour'. DS .'public' . DS . 'api' . DS . 'Jssdk' . DS . 'getNotify?' ;
         $PayModel = new PayModel();
         $params = $PayModel->createPayParams($openid, $body, $out_trade_no, $total_fee, $notify_url);
+        $params['out_trade_no'] = $out_trade_no;
         if ($params === fasle) {
             return $this->response(10001);
         } else {
@@ -140,12 +141,12 @@ class JssdkController extends ApiController
                 }
             }
         }
-        // 再查一下数据库看状态值
-        $OrderDetail = $Order->where('number', '=', $out_trade_no)->find();
-        $statusFinal = $OrderDetail->getData('status');
-        if ($statusFinal === 0) {
-            return $this->response(10001);
-        }
+        // 获取该实际支付成功与否的订单并返回
+        $map = array(
+            'number' => $out_trade_no,
+        );
+
+        $OrderDetail = OrderModel::getOrderDetailByMap($map);
         return $this->response($OrderDetail);
     }
 }
