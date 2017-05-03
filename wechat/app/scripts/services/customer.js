@@ -368,7 +368,33 @@ angular.module('wechatApp')
             });
             return promise;
         };
+        var setIsPublic = function (ispublic, orderNumber, openid){
+            // 定义promise 解决异步问题
+            var deferred = $q.defer();
+            var promise = deferred.promise;
 
+            var datas = {
+                ispublic: ispublic,
+                orderNumber: orderNumber,
+                openid:openid,
+            };
+
+            var paramUrl = url + 'setIsPublic';
+            var data = datas;
+            server.http(paramUrl, data, function successCallback(response) {
+                console.log(response);
+                if (typeof response.data.errorCode !== 'undefined') {
+                    console.log('系统发生错误：' + response.data.error);
+                } else {
+                    // 逻辑处理
+
+                }
+                deferred.resolve(); //执行成功
+            }, function errorCallback(response) {
+                deferred.reject(response); //执行失败
+            });
+            return promise;
+        };
 
         // Public API here
         return {
@@ -445,6 +471,10 @@ angular.module('wechatApp')
             // 按趣约id和用户id评价订单
             toEvaluate: function(postData) {
                 return toEvaluate(postData);
+            },
+            // 改变订单状态是否公开
+            setIsPublic: function(ispublic, orderNumber, openid) {
+                setIsPublic(ispublic, orderNumber, openid);
             },
         };
     }]);
