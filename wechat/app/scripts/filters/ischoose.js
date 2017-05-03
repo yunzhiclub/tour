@@ -15,7 +15,6 @@ angular.module('wechatApp')
         if(status === undefined){
             result = "可应邀";
         }
-
         return result;
     };
   });

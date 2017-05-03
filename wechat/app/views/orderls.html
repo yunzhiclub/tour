@@ -61,7 +61,7 @@ router:#!/orderls
                 </div>
                 <div class="animate-switch" ng-switch-when="0">
                     <div class="weui-form-preview__ft">
-                        <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" ui-sref="topay">去支付</button>
+                        <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" ng-click="topay({money:order.money, number:order.number})">去支付</button>
                     </div>
                 </div>
                 <div class="animate-switch" ng-switch-when="2">
