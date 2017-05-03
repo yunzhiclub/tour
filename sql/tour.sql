@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost_3306
+Source Server         : localhost
 Source Server Version : 50505
 Source Host           : localhost:3306
 Source Database       : tour
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-05-02 15:31:45
+Date: 2017-05-03 16:24:09
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -103,8 +103,8 @@ INSERT INTO `yunzhi_chosen` VALUES ('52', '2', '4', '1491059086', '1491058887', 
 INSERT INTO `yunzhi_chosen` VALUES ('53', '2', '4', '1491059113', '1491059086', '1');
 INSERT INTO `yunzhi_chosen` VALUES ('54', '2', '4', '1491059445', '1491059113', '1');
 INSERT INTO `yunzhi_chosen` VALUES ('55', '1', '343', '1491828051', '1491467419', '1');
-INSERT INTO `yunzhi_chosen` VALUES ('56', '82', '1', '1491827868', '1491826232', '1');
-INSERT INTO `yunzhi_chosen` VALUES ('57', '82', '2', '1491827868', '1491827868', '0');
+INSERT INTO `yunzhi_chosen` VALUES ('56', '3', '1', '1491827868', '1491826232', '1');
+INSERT INTO `yunzhi_chosen` VALUES ('57', '3', '2', '1491827868', '1491827868', '0');
 INSERT INTO `yunzhi_chosen` VALUES ('58', '1', '2', '1491828092', '1491828051', '1');
 INSERT INTO `yunzhi_chosen` VALUES ('59', '1', '2', '1491828093', '1491828092', '1');
 INSERT INTO `yunzhi_chosen` VALUES ('60', '1', '2', '1491828192', '1491828093', '1');
@@ -116,7 +116,7 @@ INSERT INTO `yunzhi_chosen` VALUES ('65', '1', '2', '1491828404', '1491828376', 
 INSERT INTO `yunzhi_chosen` VALUES ('66', '1', '2', '1491828421', '1491828404', '1');
 INSERT INTO `yunzhi_chosen` VALUES ('67', '1', '2', '1491828451', '1491828421', '1');
 INSERT INTO `yunzhi_chosen` VALUES ('68', '1', '2', '1491828451', '1491828451', '0');
-INSERT INTO `yunzhi_chosen` VALUES ('69', '96', '100', '1492435847', '1492435847', '0');
+INSERT INTO `yunzhi_chosen` VALUES ('69', '4', '100', '1492435847', '1492435847', '0');
 
 -- ----------------------------
 -- Table structure for `yunzhi_collection`
@@ -352,13 +352,13 @@ INSERT INTO `yunzhi_home_recommend` VALUES ('22', '1', '4', '0000-00-00', '14910
 INSERT INTO `yunzhi_home_recommend` VALUES ('23', '1', '4', '0000-00-00', '1491467419', '1491059550', '0');
 INSERT INTO `yunzhi_home_recommend` VALUES ('24', '1', '4', '0000-00-00', '1491831279', '1491467419', '1');
 INSERT INTO `yunzhi_home_recommend` VALUES ('25', '1', '4', '0000-00-00', '1491831279', '1491831279', '0');
-INSERT INTO `yunzhi_home_recommend` VALUES ('26', '87', '2', '0000-00-00', '1491831923', '1491831755', '1');
-INSERT INTO `yunzhi_home_recommend` VALUES ('27', '87', '2', '0000-00-00', '1491831923', '1491831923', '0');
+INSERT INTO `yunzhi_home_recommend` VALUES ('26', '3', '2', '0000-00-00', '1491831923', '1491831755', '1');
+INSERT INTO `yunzhi_home_recommend` VALUES ('27', '3', '2', '0000-00-00', '1491831923', '1491831923', '0');
 INSERT INTO `yunzhi_home_recommend` VALUES ('28', '0', '6', '2017-03-31', '1492778503', '1492601020', '1');
 INSERT INTO `yunzhi_home_recommend` VALUES ('29', '1', '1', '2017-04-05', '1492601130', '1492601130', '0');
 INSERT INTO `yunzhi_home_recommend` VALUES ('30', '1', '1', '2017-04-05', '1492601137', '1492601137', '0');
-INSERT INTO `yunzhi_home_recommend` VALUES ('31', '87', '5', '2017-04-18', '1492601155', '1492601155', '0');
-INSERT INTO `yunzhi_home_recommend` VALUES ('32', '87', '9', '2017-04-29', '1492601179', '1492601179', '0');
+INSERT INTO `yunzhi_home_recommend` VALUES ('31', '4', '5', '2017-04-18', '1492601155', '1492601155', '0');
+INSERT INTO `yunzhi_home_recommend` VALUES ('32', '4', '9', '2017-04-29', '1492601179', '1492601179', '0');
 INSERT INTO `yunzhi_home_recommend` VALUES ('33', '1', '9', '2017-04-13', '1492601206', '1492601206', '0');
 INSERT INTO `yunzhi_home_recommend` VALUES ('34', '1', '0', '2017-04-07', '1492601231', '1492601231', '0');
 
@@ -452,6 +452,7 @@ CREATE TABLE `yunzhi_order` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `customer_id` int(10) unsigned DEFAULT NULL COMMENT '用户id',
   `invite_id` int(10) unsigned DEFAULT NULL COMMENT '邀约id',
+  `money` int(11) unsigned DEFAULT NULL COMMENT '订单金额',
   `number` varchar(18) DEFAULT '' COMMENT '订单编号',
   `is_delete` tinyint(2) unsigned DEFAULT '0' COMMENT '是否删除',
   `status` tinyint(3) unsigned DEFAULT '0' COMMENT '订单状态0未支付1已支付2未评价',
@@ -466,16 +467,16 @@ CREATE TABLE `yunzhi_order` (
 -- ----------------------------
 -- Records of yunzhi_order
 -- ----------------------------
-INSERT INTO `yunzhi_order` VALUES ('1', '1', '1', 'D1233211234567', null, '0', '0', null, null);
-INSERT INTO `yunzhi_order` VALUES ('2', '2', '2', 'D1233211234568', null, '0', '0', null, null);
-INSERT INTO `yunzhi_order` VALUES ('3', '3', '2', 'D1233211234569', null, '0', '0', null, null);
-INSERT INTO `yunzhi_order` VALUES ('5', '6', '1', '33', null, '0', '0', null, null);
-INSERT INTO `yunzhi_order` VALUES ('6', '5', '1', '22', null, '0', '0', null, null);
-INSERT INTO `yunzhi_order` VALUES ('7', '1', '6', '201704207310499999', '0', '0', '0', '1492673104', '1492673104');
-INSERT INTO `yunzhi_order` VALUES ('8', '1', '7', '201704207437299999', '0', '0', '0', '1492674372', '1492674372');
-INSERT INTO `yunzhi_order` VALUES ('9', '1', '8', '201704207818699999', '0', '1', '0', '1492678186', '1492678186');
-INSERT INTO `yunzhi_order` VALUES ('10', '1', '9', '201704209313899999', '0', '2', '0', '1492693138', '1492693138');
-INSERT INTO `yunzhi_order` VALUES ('11', '1', '10', '2017042527713001', '0', '3', '0', '1493127712', '1493127712');
+INSERT INTO `yunzhi_order` VALUES ('1', '1', '1', '1000', 'D1233211234567', null, '0', '0', null, null);
+INSERT INTO `yunzhi_order` VALUES ('2', '2', '2', '1000', 'D1233211234568', null, '0', '0', null, null);
+INSERT INTO `yunzhi_order` VALUES ('3', '3', '2', '1000', 'D1233211234569', null, '0', '0', null, null);
+INSERT INTO `yunzhi_order` VALUES ('5', '6', '1', '1000', '33', null, '0', '0', null, null);
+INSERT INTO `yunzhi_order` VALUES ('6', '5', '1', '1000', '22', null, '0', '0', null, null);
+INSERT INTO `yunzhi_order` VALUES ('7', '1', '6', '1000', '201704207310499999', '0', '0', '0', '1492673104', '1492673104');
+INSERT INTO `yunzhi_order` VALUES ('8', '1', '7', '1000', '201704207437299999', '0', '0', '0', '1492674372', '1492674372');
+INSERT INTO `yunzhi_order` VALUES ('9', '1', '8', '1000', '201704207818699999', '0', '1', '0', '1492678186', '1492678186');
+INSERT INTO `yunzhi_order` VALUES ('10', '1', '9', '1000', '201704209313899999', '0', '2', '0', '1492693138', '1492693138');
+INSERT INTO `yunzhi_order` VALUES ('11', '1', '10', '1000', '2017042527713001', '0', '3', '0', '1493127712', '1493127712');
 
 -- ----------------------------
 -- Table structure for `yunzhi_picture`
@@ -585,6 +586,7 @@ INSERT INTO `yunzhi_region` VALUES ('1', '亚洲', '0', '00', '0');
 INSERT INTO `yunzhi_region` VALUES ('2', '欧洲', '0', '00', '0');
 INSERT INTO `yunzhi_region` VALUES ('3', '美洲', '0', '00', '1489217724');
 INSERT INTO `yunzhi_region` VALUES ('4', '澳洲', '0', '00', '0');
+INSERT INTO `yunzhi_region` VALUES ('6', '非洲', '0', '00', '0');
 INSERT INTO `yunzhi_region` VALUES ('9', '大洋洲', '0', '00', '0');
 
 -- ----------------------------
