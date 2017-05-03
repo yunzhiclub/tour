@@ -428,8 +428,8 @@ angular.module('wechatApp')
             },
 
             // 获取订单详情
-            getOrderDetailById: function(order_id) {
-                return getOrderDetailById(order_id);
+            getOrderDetailById: function(order_id,openId) {
+                return getOrderDetailById(order_id,openId);
             },
 
             // 设置趣约是否公开（必须是自己发布的）
