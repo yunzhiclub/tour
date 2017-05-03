@@ -98,6 +98,7 @@ class OrderModel extends ModelModel
 		//  获取订单中的详细信息
 		foreach ($orders as $key => $order){
 			//  订单中的订单编号、状态、是否公开、金额
+			$result[$key]['id'] = $order->getData('id');
 			$result[$key]['number'] = $order->getData('number');
 			$result[$key]['status'] = $order->getData('status');
 			$result[$key]['is_public'] = $order->getData('is_public');
