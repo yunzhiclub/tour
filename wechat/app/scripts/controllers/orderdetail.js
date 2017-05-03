@@ -8,10 +8,12 @@
  * Controller of the wechatApp
  */
 angular.module('wechatApp')
-  .controller('OrderdetailCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('OrderdetailCtrl', ['$scope', 'customer', function ($scope, customer) {
+      var orderId = $scope.order.id;
+      customer.getOrderDetailById(orderId).then(function successCallBack (response) {
+          console.log(response);
+          $scope.order = response;
+      },function errorCallBack() {
+
+      })
+  }]);

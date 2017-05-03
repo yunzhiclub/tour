@@ -271,6 +271,30 @@ angular.module('wechatApp')
             return promise;
         };
 
+        // 获取订单详情
+        var getOrderDetailById = function(order_id, openid) {
+            // 定义promise解决异步问题
+            var deferred = $q.defer();
+            var promise = deferred.promise;
+            var paramUrl = url + 'getOrderDetailById';
+            var data = { id: order_id, openid: openid};
+            server.http(paramUrl, data, function successCallback(response) {
+                console.log(response);
+                if (typeof response.data.errorCode !== 'undefined') {
+                    console.log('系统发生错误：' + response.data.error);
+                } else {
+                    // 处理数据
+
+                }
+                deferred.resolve(response.data.data); // 执行成功
+            }, function errorCallback(response) {
+                console.log(response);
+                deferred.reject(); //执行失败
+            });
+
+            return promise;
+        };
+
         var setInviteIsPublic = function(id, flag) {
             // 定义promise 解决异步问题
             var deferred = $q.defer();
@@ -401,6 +425,11 @@ angular.module('wechatApp')
             // 获取未评价的全部订单
             getUnEvaluateOrderByCustomerId: function(customer_id, openid) {
                 return getUnEvaluateOrderByCustomerId(customer_id, openid);
+            },
+
+            // 获取订单详情
+            getOrderDetailById: function(order_id) {
+                return getOrderDetailById(order_id);
             },
 
             // 设置趣约是否公开（必须是自己发布的）
