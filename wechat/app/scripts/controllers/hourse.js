@@ -253,7 +253,7 @@ angular.module('wechatApp')
 
                         });
                         // 调到支付成功页面
-                        //$state.go('paysuccess');
+                        $state.go('paysuccess',{number:24324234});
                     }
                 }
             };

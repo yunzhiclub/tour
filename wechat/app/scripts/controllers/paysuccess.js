@@ -8,7 +8,9 @@
  * Controller of the wechatApp
  */
 angular.module('wechatApp')
-  .controller('PaysuccessCtrl', ['$scope', '$timeout', '$state', function ($scope, $timeout, $state) {
+  .controller('PaysuccessCtrl', ['$scope', '$timeout', '$state', '$stateParams', function ($scope, $timeout, $state,$stateParams) {
+     // 路由穿过来的订单号
+      var number = $stateParams.number;
       // 绑定５秒的值
       $scope.clock = 5;
       var reduceOneSecond = function () {

@@ -58,7 +58,7 @@ angular
                 controller: 'TopayCtrl',
             })
             .state('paysuccess', {
-                url: '/paysuccess', // 支付成功界面
+                url: '/paysuccess/:number', // 支付成功界面
                 templateUrl: 'views/paysuccess.html',
                 controller: 'PaysuccessCtrl',
             })

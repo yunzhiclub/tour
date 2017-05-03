@@ -8,7 +8,7 @@
  * Factory in the wechatApp.
  */
 angular.module('wechatApp')
-    .factory('jssdk', ['$q', 'config', 'server', '$location', function($q, config, server, $location) {
+    .factory('jssdk', ['$q', 'config', 'server', '$location', '$state', function($q, config, server, $location, $state) {
         // Service logic
 
         // 获取当前的url
@@ -134,7 +134,9 @@ angular.module('wechatApp')
                 success: function (res) {
                     // 支付成功后的回调函数
                     // 调到支付成功的页面
-                    $location.path('/paysuccess');
+                    //$location.path('/paysuccess');
+                    // 带着订单好跳转
+                    $state.go('paysuccess', {number:params.out_trade_no});
                 }
             });
         };
