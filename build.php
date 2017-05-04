@@ -18,7 +18,7 @@ return [
         '__file__'   => ['common.php'],
         '__dir__'    => ['behavior', 'controller', 'model', 'view'],
         'controller' => ['index', 'Test', 'UserType'],
-        'model'      => ['user1', 'UserType'],
+        'model'      => ['user', 'UserType'],
         'view'       => ['index/index'],
     ],
     // 其他更多的模块定义
