@@ -22,7 +22,7 @@ class LoginController extends Controller
         $User = UserModel::get($map);
         
         if (UserModel::login($username, $password)) {
-            return $this->success('登录成功', url('Index/index'));
+            return $this->success('登录成功', url('index/index'));
         } else {
             return $this->error('用户名或密码错误', url('index'));
         }

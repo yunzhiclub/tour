@@ -693,7 +693,7 @@
 			}
 		}
 	
-		/* User specified column options */
+		/* user specified column options */
 		if ( oOptions !== undefined && oOptions !== null )
 		{
 			// Backwards compatibility
@@ -1503,7 +1503,7 @@
 	 /**
 	 * Take an array of integers (index array) and remove a target integer (value - not
 	 * the key!)
-	 *  @param {array} a Index array to target
+	 *  @param {array} a index array to target
 	 *  @param {int} iTarget value to find
 	 *  @memberof DataTable#oApi
 	 */
@@ -5038,7 +5038,7 @@
 			settings._iDisplayLength   = state.length;
 		}
 	
-		// Order
+		// order
 		if ( state.order !== undefined ) {
 			settings.aaSorting = [];
 			$.each( state.order, function ( i, col ) {
@@ -5371,7 +5371,7 @@
 		 *  @param {object} [oOpts] Optional parameters for modifying the rows to be included
 		 *  @param {string} [oOpts.filter=none] Select TR elements that meet the current filter
 		 *    criterion ("applied") or all TR elements (i.e. no filter).
-		 *  @param {string} [oOpts.order=current] Order of the TR elements in the processed array.
+		 *  @param {string} [oOpts.order=current] order of the TR elements in the processed array.
 		 *    Can be either 'current', whereby the current sorting of the table is used, or
 		 *    'original' whereby the original order the data was read into the table is used.
 		 *  @param {string} [oOpts.page=all] Limit the selection to the currently displayed page
@@ -5419,7 +5419,7 @@
 		 *  @param {object} [oOpts] Optional parameters for modifying the rows to be included
 		 *  @param {string} [oOpts.filter=none] Select elements that meet the current filter
 		 *    criterion ("applied") or all elements (i.e. no filter).
-		 *  @param {string} [oOpts.order=current] Order of the data in the processed array.
+		 *  @param {string} [oOpts.order=current] order of the data in the processed array.
 		 *    Can be either 'current', whereby the current sorting of the table is used, or
 		 *    'original' whereby the original order the data was read into the table is used.
 		 *  @param {string} [oOpts.page=all] Limit the selection to the currently displayed page
@@ -8820,7 +8820,7 @@
 	} );
 	
 	
-	// Order by the selected column(s)
+	// order by the selected column(s)
 	_api_register( [
 		'columns().order()',
 		'column().order()'
@@ -9460,7 +9460,7 @@
 		"src": null,
 	
 		/**
-		 * Index in the aoData array. This saves an indexOf lookup when we have the
+		 * index in the aoData array. This saves an indexOf lookup when we have the
 		 * object, but want to know the index
 		 *  @type integer
 		 *  @default -1
@@ -10557,11 +10557,11 @@
 		 *  @type function
 		 *  @param {node} foot "TR" element for the footer
 		 *  @param {array} data Full table data (as derived from the original HTML)
-		 *  @param {int} start Index for the current display starting point in the
+		 *  @param {int} start index for the current display starting point in the
 		 *    display array
-		 *  @param {int} end Index for the current display ending point in the
+		 *  @param {int} end index for the current display ending point in the
 		 *    display array
-		 *  @param {array int} display Index array to translate the visual position
+		 *  @param {array int} display index array to translate the visual position
 		 *    to the full data array
 		 *
 		 *  @dtopt Callbacks
@@ -10621,11 +10621,11 @@
 		 *  @type function
 		 *  @param {node} head "TR" element for the header
 		 *  @param {array} data Full table data (as derived from the original HTML)
-		 *  @param {int} start Index for the current display starting point in the
+		 *  @param {int} start index for the current display starting point in the
 		 *    display array
-		 *  @param {int} end Index for the current display ending point in the
+		 *  @param {int} end index for the current display ending point in the
 		 *    display array
-		 *  @param {array int} display Index array to translate the visual position
+		 *  @param {array int} display index array to translate the visual position
 		 *    to the full data array
 		 *
 		 *  @dtopt Callbacks
@@ -13127,8 +13127,8 @@
 		 * Sorting that is applied to the table. Note that the inner arrays are
 		 * used in the following manner:
 		 * <ul>
-		 *   <li>Index 0 - column number</li>
-		 *   <li>Index 1 - current sorting direction</li>
+		 *   <li>index 0 - column number</li>
+		 *   <li>index 1 - current sorting direction</li>
 		 * </ul>
 		 * Note that this parameter will be set by the initialisation routine. To
 		 * set a default use {@link DataTable.defaults}.
@@ -14219,7 +14219,7 @@
 	
 	
 		/**
-		 * Index for what 'this' index API functions should use
+		 * index for what 'this' index API functions should use
 		 *  @type int
 		 *  @deprecated Since v1.10
 		 */
@@ -15075,7 +15075,7 @@
 	 */
 
 	/**
-	 * Order event, fired when the ordering applied to the table is altered.
+	 * order event, fired when the ordering applied to the table is altered.
 	 *  @name DataTable#order.dt
 	 *  @event
 	 *  @param {event} e jQuery event object

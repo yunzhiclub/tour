@@ -209,10 +209,10 @@ myApp.config(function($stateProvider) {
       }
     })
     .state('route1', {
-      url: "/route1",
+      url: route,
       views: {
-        "viewA": { template: "route1.viewA" },
-        "viewB": { template: "route1.viewB" }
+        "viewA": { template: route },
+        "viewB": { template: route }
       }
     })
     .state('route2', {

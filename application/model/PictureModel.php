@@ -33,7 +33,7 @@ class PictureModel extends ModelModel
 
 	/**
 	 * 保存图片
-	 * @param  [object] $Picture [用户上传的图片]
+	 * @param  [object] $picture [用户上传的图片]
 	 * @return [json]          1为成功，反之
 	 * @author chuhang 
 	 */
@@ -189,7 +189,7 @@ class PictureModel extends ModelModel
 	 */
 	static public function getRelationModel($model)
 	{
-		return substr($model, 0, 10) . 'Picture' . substr($model, 10);
+		return substr($model, 0, 10) . 'picture' . substr($model, 10);
 	}
 
 	/**
