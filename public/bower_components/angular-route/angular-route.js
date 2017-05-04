@@ -97,7 +97,7 @@ function $RouteProvider() {
    * @ngdoc method
    * @name $routeProvider#when
    *
-   * @param {string} path Route path (matched against `$location.path`). If `$location.path`
+   * @param {string} path route1 path (matched against `$location.path`). If `$location.path`
    *    contains redundant trailing slash or is missing one, the route will still match and the
    *    `$location.path` will be updated to add or drop the trailing slash to exactly match the
    *    route definition.
@@ -918,7 +918,7 @@ ngRouteModule.provider('$routeParams', $RouteParamsProvider);
  * ```js
  *  // Given:
  *  // URL: http://server.com/index.html#/Chapter/1/Section/2?search=moby
- *  // Route: /Chapter/:chapterId/Section/:sectionId
+ *  // route1: /Chapter/:chapterId/Section/:sectionId
  *  //
  *  // Then
  *  $routeParams ==> {chapterId:'1', sectionId:'2', search:'moby'}

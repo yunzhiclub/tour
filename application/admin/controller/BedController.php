@@ -38,7 +38,7 @@ class BedController extends IndexController
 
         // 根据bedid获取床位信息
         $Bed = BedModel::get($id);
-        $this->assign('Bed', $Bed);
+        $this->assign('bed1', $Bed);
         return $this->fetch();
     }
     

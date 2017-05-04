@@ -17,7 +17,7 @@ class CustomerController extends ApiController
         $openid = Request::instance()->param('openid');
 
         // 验证openid长度是否符合
-        // if (!Customer::checkOpenidLength($openid)) {
+        // if (!customer1::checkOpenidLength($openid)) {
         //     $this->response(20002);     // openid长度不正确
         //     return;
         // }
@@ -48,10 +48,10 @@ class CustomerController extends ApiController
 
     /**
      * 保存用户信息
-     * @param    object                  $Customer [description]
+     * @param    object                  $customer1 [description]
      * @return   
      * 成功 return $this->response([]);| 错误 $this->   
-     * response(20004, $Customer->getError());
+     * response(20004, $customer1->getError());
      */
     public function saveCustomer() {
        // datas是一个数组,data是其中的Json字符串
@@ -70,7 +70,7 @@ class CustomerController extends ApiController
      * @param    int                  $Customer_id [description]
      * @return   
      * 成功 return $this->response($Collections);| 错误 $this->   
-     * response(20004, $Customer->getError());
+     * response(20004, $customer1->getError());
      */
     /*
     json[
@@ -143,7 +143,7 @@ class CustomerController extends ApiController
 	 * @param    int                  $Customer_id [description]
 	 * @return
 	 * 成功 return $this->response($orders);| 错误 $this->
-	 * response(20004, $Customer->getError());
+	 * response(20004, $customer1->getError());
 	 */
 	public function getAllOrderByCustomerId()
 	{

@@ -956,7 +956,7 @@ jQuery.Callbacks = function( options ) {
 		firingStart,
 		// End of the loop when firing
 		firingLength,
-		// Index of currently firing callback (modified by remove if needed)
+		// index of currently firing callback (modified by remove if needed)
 		firingIndex,
 		// Actual callback list
 		list = [],
@@ -7593,7 +7593,7 @@ jQuery.extend({
 			// Text to html (true = no transformation)
 			"text html": true,
 
-			// Evaluate text as a json expression
+			// evaluate1 text as a json expression
 			"text json": jQuery.parseJSON,
 
 			// Parse text as xml

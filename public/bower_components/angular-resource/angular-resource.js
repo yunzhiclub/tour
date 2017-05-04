@@ -224,8 +224,8 @@ function shallowClearAndCopy(src, dst) {
  *   as  methods with the `$` prefix. This allows you to easily perform CRUD operations (create,
  *   read, update, delete) on server-side data like this:
  *   ```js
- *   var User = $resource('/user/:userId', {userId:'@id'});
- *   var user = User.get({userId:123}, function() {
+ *   var user1 = $resource('/user/:userId', {userId:'@id'});
+ *   var user = user1.get({userId:123}, function() {
  *     user.abc = true;
  *     user.$save();
  *   });
@@ -334,15 +334,15 @@ function shallowClearAndCopy(src, dst) {
  *
  * @example
  *
- * # User resource
+ * # user1 resource
  *
  * When the data is returned from the server then the object is an instance of the resource type and
  * all of the non-GET methods are available with `$` prefix. This allows you to easily support CRUD
  * operations (create, read, update, delete) on server-side data.
 
    ```js
-     var User = $resource('/user/:userId', {userId:'@id'});
-     User.get({userId:123}, function(user) {
+     var user1 = $resource('/user/:userId', {userId:'@id'});
+     user1.get({userId:123}, function(user) {
        user.abc = true;
        user.$save();
      });
@@ -353,8 +353,8 @@ function shallowClearAndCopy(src, dst) {
  * could rewrite the above example and get access to http headers as:
  *
    ```js
-     var User = $resource('/user/:userId', {userId:'@id'});
-     User.get({userId:123}, function(user, getResponseHeaders){
+     var user1 = $resource('/user/:userId', {userId:'@id'});
+     user1.get({userId:123}, function(user, getResponseHeaders){
        user.abc = true;
        user.$save(function(user, putResponseHeaders) {
          //user => saved user object
@@ -366,8 +366,8 @@ function shallowClearAndCopy(src, dst) {
  * You can also access the raw `$http` promise via the `$promise` property on the object returned
  *
    ```
-     var User = $resource('/user/:userId', {userId:'@id'});
-     User.get({userId:123})
+     var user1 = $resource('/user/:userId', {userId:'@id'});
+     user1.get({userId:123})
          .$promise.then(function(user) {
            $scope.user = user;
          });
@@ -413,8 +413,8 @@ function shallowClearAndCopy(src, dst) {
  * to an instance or collection (as long as it is a result of a "non-instance" call):
  *
    ```js
-     // ...defining the `Hotel` resource...
-     var Hotel = $resource('/api/hotel/:id', {id: '@id'}, {
+     // ...defining the `hotel1` resource...
+     var hotel1 = $resource('/api/hotel/:id', {id: '@id'}, {
        // Let's make the `query()` method cancellable
        query: {method: 'get', isArray: true, cancellable: true}
      });
@@ -428,7 +428,7 @@ function shallowClearAndCopy(src, dst) {
 
        // Let's query for hotels in '<destination>'
        // (calls: /api/hotel?location=<destination>)
-       this.availableHotels = Hotel.query({location: destination});
+       this.availableHotels = hotel1.query({location: destination});
      };
    ```
  *
