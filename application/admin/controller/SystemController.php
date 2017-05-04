@@ -53,7 +53,7 @@ class SystemController extends IndexController
             return $this->error($ConfigModel->getError());
         }
 
-        return $this->success('删除成功', url('index1'));
+        return $this->success('删除成功', url('index'));
 
     }
     public function content()
@@ -72,7 +72,7 @@ class SystemController extends IndexController
             return $this->error($ConfigModel->getError());
         }
 
-        return $this->success('保存成功', url('index1'));
+        return $this->success('保存成功', url('index'));
     }
     public function update()
     {
@@ -83,6 +83,6 @@ class SystemController extends IndexController
             return $this->error($ConfigModel->getError());
         }
 
-        return $this->success('操作成功', url('index1'));
+        return $this->success('操作成功', url('index'));
     }
 }

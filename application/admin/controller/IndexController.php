@@ -19,7 +19,7 @@ class IndexController extends Controller
     	
         if (false === UserModel::isLogin())
         {
-            return $this->error('请登录', url('login/index1'));
+            return $this->error('请登录', url('login/index'));
         } 
     }
 

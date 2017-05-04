@@ -22,9 +22,9 @@ class LoginController extends Controller
         $User = UserModel::get($map);
         
         if (UserModel::login($username, $password)) {
-            return $this->success('登录成功', url('index1/index1'));
+            return $this->success('登录成功', url('index/index'));
         } else {
-            return $this->error('用户名或密码错误', url('index1'));
+            return $this->error('用户名或密码错误', url('index'));
         }
     }
 
@@ -32,9 +32,9 @@ class LoginController extends Controller
     public function logOut()
     {
         if (UserModel::logOut()) {
-            return $this->success('注销成功', url('index1'));
+            return $this->success('注销成功', url('index'));
         } else {
-            return $this->error('注销失败', url('index1'));
+            return $this->error('注销失败', url('index'));
         }
     }
 }

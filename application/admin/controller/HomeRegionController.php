@@ -64,7 +64,7 @@ class  HomeRegionController extends IndexController
 		if(false === $HomeRegionModel->save($data)){
 			return $this->error($HomeRegionModel->getData());
 		}
-		return $this->success('添加成功', url('index1'));
+		return $this->success('添加成功', url('index'));
 	}
 	public function update()
 	{
@@ -74,7 +74,7 @@ class  HomeRegionController extends IndexController
 			return $this->error($HomeRegionModel->getError());
 		}
 
-		return $this->success('操作成功', url('index1'));
+		return $this->success('操作成功', url('index'));
 	}
 
 }

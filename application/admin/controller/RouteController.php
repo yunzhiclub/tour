@@ -79,7 +79,7 @@ class RouteController extends IndexController
             PictureModel::saveRelationPictures($RouteModel, $pictureIds);
         }
 
-        return $this->success('保存成功', url('index1'));
+        return $this->success('保存成功', url('index'));
     }
 
     //先删除，再更新数据
@@ -104,7 +104,7 @@ class RouteController extends IndexController
             PictureModel::saveRelationPictures($RouteModel, $pictureIds);
         }
        
-        return $this->success('保存成功', url('index1'));
+        return $this->success('保存成功', url('index'));
     }
 
     public function delete()

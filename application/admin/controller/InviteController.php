@@ -35,7 +35,7 @@ class InviteController extends IndexController
 			return $this->error('删除失败:' . $InviteModel->getError());
 		}
 
-		return $this->success('删除成功', url('index1'));
+		return $this->success('删除成功', url('index'));
 	}
 
 }

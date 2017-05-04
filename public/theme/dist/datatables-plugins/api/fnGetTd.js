@@ -32,13 +32,13 @@
 
 jQuery.fn.dataTableExt.oApi.fnGetTd  = function ( oSettings, mTr, iTd, bVisOnly )
 {
-	/* Take either a TR node or aoData index1 as the mTr property */
+	/* Take either a TR node or aoData index as the mTr property */
 	var iRow = (typeof mTr == 'object') ?
 		oSettings.oApi._fnNodeToDataIndex(oSettings, mTr) : mTr;
 
 	if ( typeof bVisOnly == 'undefined' && !bVisOnly )
 	{
-		/* Looking at both visible and hidden TD elements - convert to visible index1, if not present
+		/* Looking at both visible and hidden TD elements - convert to visible index, if not present
 		 * then it must be hidden. Return as appropriate
 		 */
 		var iCalcVis = oSettings.oApi._fnColumnIndexToVisible( oSettings, iTd );

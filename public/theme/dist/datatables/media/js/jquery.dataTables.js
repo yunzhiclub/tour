@@ -670,7 +670,7 @@
 	/**
 	 * Apply options for a column
 	 *  @param {object} oSettings dataTables settings object
-	 *  @param {int} iCol column index1 to consider
+	 *  @param {int} iCol column index to consider
 	 *  @param {object} oOptions object with sType, bVisible and bSearchable etc
 	 *  @memberof DataTable#oApi
 	 */
@@ -826,11 +826,11 @@
 	
 	
 	/**
-	 * Covert the index1 of a visible column to the index1 in the data array (take account
+	 * Covert the index of a visible column to the index in the data array (take account
 	 * of hidden columns)
 	 *  @param {object} oSettings dataTables settings object
-	 *  @param {int} iMatch Visible column index1 to lookup
-	 *  @returns {int} i the data index1
+	 *  @param {int} iMatch Visible column index to lookup
+	 *  @returns {int} i the data index
 	 *  @memberof DataTable#oApi
 	 */
 	function _fnVisibleToColumnIndex( oSettings, iMatch )
@@ -844,11 +844,11 @@
 	
 	
 	/**
-	 * Covert the index1 of an index1 in the data array and convert it to the visible
-	 *   column index1 (take account of hidden columns)
-	 *  @param {int} iMatch Column index1 to lookup
+	 * Covert the index of an index in the data array and convert it to the visible
+	 *   column index (take account of hidden columns)
+	 *  @param {int} iMatch Column index to lookup
 	 *  @param {object} oSettings dataTables settings object
-	 *  @returns {int} i the data index1
+	 *  @returns {int} i the data index
 	 *  @memberof DataTable#oApi
 	 */
 	function _fnColumnIndexToVisible( oSettings, iMatch )
@@ -967,7 +967,7 @@
 	 *  @param {array} aoColDefs The aoColumnDefs array that is to be applied
 	 *  @param {array} aoCols The aoColumns array that defines columns individually
 	 *  @param {function} fn Callback function - takes two parameters, the calculated
-	 *    column index1 and the definition for that column.
+	 *    column index and the definition for that column.
 	 *  @memberof DataTable#oApi
 	 */
 	function _fnApplyColumnDefs( oSettings, aoColDefs, aoCols, fn )
@@ -1003,7 +1003,7 @@
 							_fnAddColumn( oSettings );
 						}
 	
-						/* Integer, basic index1 */
+						/* Integer, basic index */
 						fn( aTargets[j], def );
 					}
 					else if ( typeof aTargets[j] === 'number' && aTargets[j] < 0 )
@@ -1047,7 +1047,7 @@
 	 *    DataTables will create a row automatically
 	 *  @param {array} [anTds] Array of TD|TH elements for the row - must be given
 	 *    if nTr is.
-	 *  @returns {int} >=0 if successful (index1 of new aoData entry), -1 if failed
+	 *  @returns {int} >=0 if successful (index of new aoData entry), -1 if failed
 	 *  @memberof DataTable#oApi
 	 */
 	function _fnAddData ( oSettings, aDataIn, nTr, anTds )
@@ -1117,10 +1117,10 @@
 	
 	
 	/**
-	 * Take a TR element and convert it to an index1 in aoData
+	 * Take a TR element and convert it to an index in aoData
 	 *  @param {object} oSettings dataTables settings object
 	 *  @param {node} n the TR element to find
-	 *  @returns {int} index1 if the node is found, null if not
+	 *  @returns {int} index if the node is found, null if not
 	 *  @memberof DataTable#oApi
 	 */
 	function _fnNodeToDataIndex( oSettings, n )
@@ -1130,11 +1130,11 @@
 	
 	
 	/**
-	 * Take a TD element and convert it into a column data index1 (not the visible index1)
+	 * Take a TD element and convert it into a column data index (not the visible index)
 	 *  @param {object} oSettings dataTables settings object
 	 *  @param {int} iRow The row number the TD/TH can be found in
 	 *  @param {node} n The TD/TH element to find
-	 *  @returns {int} index1 if the node is found, -1 if not
+	 *  @returns {int} index if the node is found, -1 if not
 	 *  @memberof DataTable#oApi
 	 */
 	function _fnNodeToColumnIndex( oSettings, iRow, n )
@@ -1147,7 +1147,7 @@
 	 * Get the data for a given cell from the internal cache, taking into account data mapping
 	 *  @param {object} settings dataTables settings object
 	 *  @param {int} rowIdx aoData row id
-	 *  @param {int} colIdx Column index1
+	 *  @param {int} colIdx Column index
 	 *  @param {string} type data get type ('display', 'type' 'filter' 'sort')
 	 *  @returns {*} Cell data
 	 *  @memberof DataTable#oApi
@@ -1195,7 +1195,7 @@
 	 * Set the value for a specific cell, into the internal data cache
 	 *  @param {object} settings dataTables settings object
 	 *  @param {int} rowIdx aoData row id
-	 *  @param {int} colIdx Column index1
+	 *  @param {int} colIdx Column index
 	 *  @param {*} val Value to set
 	 *  @memberof DataTable#oApi
 	 */
@@ -1501,9 +1501,9 @@
 	
 	
 	 /**
-	 * Take an array of integers (index1 array) and remove a target integer (value - not
+	 * Take an array of integers (index array) and remove a target integer (value - not
 	 * the key!)
-	 *  @param {array} a index1 array to target
+	 *  @param {array} a index array to target
 	 *  @param {int} iTarget value to find
 	 *  @memberof DataTable#oApi
 	 */
@@ -1535,10 +1535,10 @@
 	 * the cached data is next requested. Also update from the data source object.
 	 *
 	 * @param {object} settings DataTables settings object
-	 * @param {int}    rowIdx   Row index1 to invalidate
+	 * @param {int}    rowIdx   Row index to invalidate
 	 * @param {string} [src]    Source to invalidate from: undefined, 'auto', 'dom'
 	 *     or 'data'
-	 * @param {int}    [colIdx] Column index1 to invalidate. If undefined the whole
+	 * @param {int}    [colIdx] Column index to invalidate. If undefined the whole
 	 *     row will be invalidated
 	 * @memberof DataTable#oApi
 	 *
@@ -1614,7 +1614,7 @@
 	 * @param {object} settings DataTables settings object
 	 * @param {node|object} TR element from which to read data or existing row
 	 *   object from which to re-read the data from the cells
-	 * @param {int} [colIdx] Optional column index1
+	 * @param {int} [colIdx] Optional column index
 	 * @param {array|object} [d] Data source object. If `colIdx` is given then this
 	 *   parameter should also be given and will be used to write the data into.
 	 *   Only the column in question will be written
@@ -4753,7 +4753,7 @@
 	 * Function to run on user sort request
 	 *  @param {object} settings dataTables settings object
 	 *  @param {node} attachTo node to attach the handler to
-	 *  @param {int} colIdx column sorting index1
+	 *  @param {int} colIdx column sorting index
 	 *  @param {boolean} [append=false] Append the requested sort to the existing
 	 *    sort if true (i.e. multi-column sort)
 	 *  @param {function} [callback] callback function
@@ -4839,7 +4839,7 @@
 	 * Attach a sort handler (click) to a node
 	 *  @param {object} settings dataTables settings object
 	 *  @param {node} attachTo node to attach the handler to
-	 *  @param {int} colIdx column sorting index1
+	 *  @param {int} colIdx column sorting index
 	 *  @param {function} [callback] callback function
 	 *  @memberof DataTable#oApi
 	 */
@@ -5627,7 +5627,7 @@
 		
 		/**
 		 * Remove a row for the table
-		 *  @param {mixed} target The index1 of the row from aoData to be deleted, or
+		 *  @param {mixed} target The index of the row from aoData to be deleted, or
 		 *    the TR element you want to delete
 		 *  @param {function|null} [callBack] Callback function
 		 *  @param {bool} [redraw=true] Redraw the table or not
@@ -5747,8 +5747,8 @@
 		 *    a TR node then the data source for the whole row will be returned. If given as a
 		 *    TD/TH cell node then iCol will be automatically calculated and the data for the
 		 *    cell returned. If given as an integer, then this is treated as the aoData internal
-		 *    data index1 for the row (see fnGetPosition) and the data for that row used.
-		 *  @param {int} [col] Optional column index1 that you want the data of.
+		 *    data index for the row (see fnGetPosition) and the data for that row used.
+		 *  @param {int} [col] Optional column index that you want the data of.
 		 *  @returns {array|object|string} If mRow is undefined, then the data for all rows is
 		 *    returned. If mRow is defined, just data for that row, and is iCol is
 		 *    defined, only data for the designated cell is returned.
@@ -5797,7 +5797,7 @@
 		 * Get an array of the TR nodes that are used in the table's body. Note that you will
 		 * typically want to use the '$' API method in preference to this as it is more
 		 * flexible.
-		 *  @param {int} [iRow] Optional row index1 for the TR element you want
+		 *  @param {int} [iRow] Optional row index for the TR element you want
 		 *  @returns {array|node} If iRow is undefined, returns an array of all TR elements
 		 *    in the table's body, or iRow is defined, just the TR element requested.
 		 *  @dtopt API
@@ -5823,11 +5823,11 @@
 		
 		/**
 		 * Get the array indexes of a particular cell from it's DOM element
-		 * and column index1 including hidden columns
+		 * and column index including hidden columns
 		 *  @param {node} node this can either be a TR, TD or TH in the table's body
-		 *  @returns {int} If nNode is given as a TR, then a single index1 is returned, or
-		 *    if given as a cell, an array of [row index1, column index1 (visible),
-		 *    column index1 (all)] is given.
+		 *  @returns {int} If nNode is given as a TR, then a single index is returned, or
+		 *    if given as a cell, an array of [row index, column index (visible),
+		 *    column index (all)] is given.
 		 *  @dtopt API
 		 *  @deprecated Since v1.10
 		 *
@@ -6015,8 +6015,8 @@
 		
 		/**
 		 * Sort the table by a particular column
-		 *  @param {int} iCol the data index1 to sort on. Note that this will not match the
-		 *    'display index1' if you have hidden data entries
+		 *  @param {int} iCol the data index to sort on. Note that this will not match the
+		 *    'display index' if you have hidden data entries
 		 *  @dtopt API
 		 *  @deprecated Since v1.10
 		 *
@@ -6062,7 +6062,7 @@
 		 * an object in the same format as the original data source. The function is
 		 * self-referencing in order to make the multi column updates easier.
 		 *  @param {object|array|string} mData Data to update the cell/row with
-		 *  @param {node|int} mRow TR element you want to update or the aoData index1
+		 *  @param {node|int} mRow TR element you want to update or the aoData index
 		 *  @param {int} [iColumn] The column to update, give as null or undefined to
 		 *    update a whole row.
 		 *  @param {bool} [bRedraw=true] Redraw the table or not
@@ -6596,7 +6596,7 @@
 				_fnAddTr( oSettings, $(oSettings.nTBody).children('tr') );
 			}
 			
-			/* Copy the data index1 array */
+			/* Copy the data index array */
 			oSettings.aiDisplay = oSettings.aiDisplayMaster.slice();
 			
 			/* Initialisation complete - table can be drawn */
@@ -7235,7 +7235,7 @@
 	 */
 	var __table_selector = function ( selector, a )
 	{
-		// Integer is used to pick out a table by index1
+		// Integer is used to pick out a table by index
 		if ( typeof selector === 'number' ) {
 			return [ a[ selector ] ];
 		}
@@ -7346,9 +7346,9 @@
 	
 	
 	/**
-	 * Get the current page index1.
+	 * Get the current page index.
 	 *
-	 * @return {integer} Current page index1 (zero based)
+	 * @return {integer} Current page index (zero based)
 	 *//**
 	 * Set the current page.
 	 *
@@ -7356,7 +7356,7 @@
 	 * not throw an error, but rather reset the paging.
 	 *
 	 * @param {integer|string} action The paging action to take. This can be one of:
-	 *  * `integer` - The page index1 to jump to
+	 *  * `integer` - The page index to jump to
 	 *  * `string` - An action to take:
 	 *    * `first` - Jump to first page.
 	 *    * `next` - Jump to the next page
@@ -7383,10 +7383,10 @@
 	 * with a suitable selector.
 	 *
 	 * @return {object} Object with the following properties set:
-	 *  * `page` - Current page index1 (zero based - i.e. the first page is `0`)
+	 *  * `page` - Current page index (zero based - i.e. the first page is `0`)
 	 *  * `pages` - Total number of pages
-	 *  * `start` - Display index1 for the first record shown on the current page
-	 *  * `end` - Display index1 for the last record shown on the current page
+	 *  * `start` - Display index for the first record shown on the current page
+	 *  * `end` - Display index for the last record shown on the current page
 	 *  * `length` - Display length (number of records). Note that generally `start
 	 *    + length = end`, but this is not always true, for example if there are
 	 *    only 2 records to show on the final page, with a length of 10.
@@ -7688,12 +7688,12 @@
 	
 		var
 			search = opts.search,  // none, applied, removed
-			order  = opts.order,   // applied, current, index1 (original - compatibility with 1.9)
+			order  = opts.order,   // applied, current, index (original - compatibility with 1.9)
 			page   = opts.page;    // all, current
 	
 		if ( _fnDataSource( settings ) == 'ssp' ) {
 			// In server-side processing mode, most options are irrelevant since
-			// rows not shown don't exist and the index1 order is the applied order
+			// rows not shown don't exist and the index order is the applied order
 			// Removed is a special case - for consistency just return an empty
 			// array
 			return search === 'removed' ?
@@ -7742,7 +7742,7 @@
 	 * Rows
 	 *
 	 * {}          - no selector - use all available rows
-	 * {integer}   - row aoData index1
+	 * {integer}   - row aoData index
 	 * {node}      - TR node
 	 * {string}    - jQuery selector to apply to the TR elements
 	 * {array}     - jQuery array of nodes, or simply an array of TR nodes
@@ -7757,8 +7757,8 @@
 			var i, ien;
 	
 			// Short cut - selector is a number and no options provided (default is
-			// all records, so no need to check if the index1 is in there, since it
-			// must be - dev error if the index1 doesn't exist).
+			// all records, so no need to check if the index is in there, since it
+			// must be - dev error if the index doesn't exist).
 			if ( selInt !== null && ! opts ) {
 				return [ selInt ];
 			}
@@ -7805,7 +7805,7 @@
 			// only a row. A # indicates an id any anything that follows is the id -
 			// unescaped.
 			if ( typeof sel === 'string' && sel.charAt(0) === '#' ) {
-				// get row index1 from id
+				// get row index from id
 				var rowObj = settings.aIds[ sel.replace( /^#/, '' ) ];
 				if ( rowObj !== undefined ) {
 					return [ rowObj.idx ];
@@ -7878,7 +7878,7 @@
 		} );
 	} );
 	
-	_api_registerPlural( 'rows().indexes()', 'row().index1()', function () {
+	_api_registerPlural( 'rows().indexes()', 'row().index()', function () {
 		return this.iterator( 'row', function ( settings, row ) {
 			return row;
 		}, 1 );
@@ -8264,8 +8264,8 @@
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	 * Columns
 	 *
-	 * {integer}           - column index1 (>=0 count from left, <0 count from right)
-	 * "{integer}:visIdx"  - visible column index1 (i.e. translate to column index1)  (>=0 count from left, <0 count from right)
+	 * {integer}           - column index (>=0 count from left, <0 count from right)
+	 * "{integer}:visIdx"  - visible column index (i.e. translate to column index)  (>=0 count from left, <0 count from right)
 	 * "{integer}:visible" - alias for {integer}:visIdx  (>=0 count from left, <0 count from right)
 	 * "{string}:name"     - column name
 	 * "{string}"          - jQuery selector on column header nodes
@@ -8304,7 +8304,7 @@
 				return _range( columns.length );
 			}
 			
-			// Selector - index1
+			// Selector - index
 			if ( selInt !== null ) {
 				return [ selInt >= 0 ?
 					selInt : // Count from left
@@ -8335,7 +8335,7 @@
 					case 'visIdx':
 					case 'visible':
 						var idx = parseInt( match[1], 10 );
-						// Visible index1 given, convert to column index1
+						// Visible index given, convert to column index
 						if ( idx < 0 ) {
 							// Counting from the right
 							var visColumns = $.map( columns, function (col,i) {
@@ -8347,7 +8347,7 @@
 						return [ _fnVisibleToColumnIndex( settings, idx ) ];
 	
 					case 'name':
-						// match by name. `names` is column index1 complete and in order
+						// match by name. `names` is column index complete and in order
 						return $.map( names, function (name, i) {
 							return name === match[1] ? i : null;
 						} );
@@ -8358,7 +8358,7 @@
 				return $( nodes )
 					.filter( s )
 					.map( function () {
-						return $.inArray( this, nodes ); // `nodes` is column index1 complete and in order
+						return $.inArray( this, nodes ); // `nodes` is column index complete and in order
 					} )
 					.toArray();
 			}
@@ -8495,7 +8495,7 @@
 		} );
 	} );
 	
-	_api_registerPlural( 'columns().indexes()', 'column().index1()', function ( type ) {
+	_api_registerPlural( 'columns().indexes()', 'column().index()', function ( type ) {
 		return this.iterator( 'column', function ( settings, column ) {
 			return type === 'visible' ?
 				_fnColumnIndexToVisible( settings, column ) :
@@ -8509,7 +8509,7 @@
 		}, 1 );
 	} );
 	
-	_api_register( 'column.index1()', function ( type, idx ) {
+	_api_register( 'column.index()', function ( type, idx ) {
 		if ( this.context.length !== 0 ) {
 			var ctx = this.context[0];
 	
@@ -8573,7 +8573,7 @@
 				return a;
 			}
 			
-			// Selector - index1
+			// Selector - index
 			if ( $.isPlainObject( s ) ) {
 				return [s];
 			}
@@ -8606,7 +8606,7 @@
 				rowSelector = null;
 			}
 			else {
-				// Cell index1 objects in first parameter
+				// Cell index objects in first parameter
 				opts = columnSelector;
 				columnSelector = null;
 			}
@@ -8686,7 +8686,7 @@
 	} );
 	
 	
-	_api_registerPlural( 'cells().indexes()', 'cell().index1()', function () {
+	_api_registerPlural( 'cells().indexes()', 'cell().index()', function () {
 		return this.iterator( 'cell', function ( settings, row, column ) {
 			return {
 				row: row,
@@ -8737,13 +8737,13 @@
 	 *   table in the current context. Each element in the parent array represents
 	 *   a column being sorted upon (i.e. multi-sorting with two columns would have
 	 *   2 inner arrays). The inner arrays may have 2 or 3 elements. The first is
-	 *   the column index1 that the sorting condition applies to, the second is the
+	 *   the column index that the sorting condition applies to, the second is the
 	 *   direction of the sort (`desc` or `asc`) and, optionally, the third is the
-	 *   index1 of the sorting order from the `column.sorting` initialisation array.
+	 *   index of the sorting order from the `column.sorting` initialisation array.
 	 *//**
 	 * Set the ordering for the table.
 	 *
-	 * @param {integer} order Column index1 to sort upon.
+	 * @param {integer} order Column index to sort upon.
 	 * @param {string} direction Direction of the sort to be applied (`asc` or `desc`)
 	 * @returns {DataTables.Api} this
 	 *//**
@@ -9256,13 +9256,13 @@
 	
 			return this.iterator( type, function ( settings, arg1, arg2, arg3, arg4 ) {
 				// Rows and columns:
-				//  arg1 - index1
+				//  arg1 - index
 				//  arg2 - table counter
 				//  arg3 - loop counter
 				//  arg4 - undefined
 				// Cells:
-				//  arg1 - row index1
-				//  arg2 - column index1
+				//  arg1 - row index
+				//  arg2 - column index
 				//  arg3 - table counter
 				//  arg4 - loop counter
 				fn.call(
@@ -9406,7 +9406,7 @@
 	
 		/**
 		 * Sorting data cache - this array is ostensibly the same length as the
-		 * number of columns (although each index1 is generated only as it is
+		 * number of columns (although each index is generated only as it is
 		 * needed), and holds the data that is used for sorting each column in the
 		 * row. We do this cache generation at the start of the sort in order that
 		 * the formatting of the sort data need be done only once for each cell
@@ -9460,8 +9460,8 @@
 		"src": null,
 	
 		/**
-		 * index1 in the aoData array. This saves an indexOf lookup when we have the
-		 * object, but want to know the index1
+		 * index in the aoData array. This saves an indexOf lookup when we have the
+		 * object, but want to know the index
 		 *  @type integer
 		 *  @default -1
 		 *  @private
@@ -9483,7 +9483,7 @@
 	 */
 	DataTable.models.oColumn = {
 		/**
-		 * Column index1. This could be worked out on-the-fly with $.inArray, but it
+		 * Column index. This could be worked out on-the-fly with $.inArray, but it
 		 * is faster to just hold it as a variable
 		 *  @type integer
 		 *  @default null
@@ -9505,7 +9505,7 @@
 		 * Define the sorting directions that are applied to the column, in sequence
 		 * as the column is repeatedly sorted upon - i.e. the first value is used
 		 * as the sorting direction when the column if first sorted (clicked on).
-		 * Sort it again (click again) and it will move on to the next index1.
+		 * Sort it again (click again) and it will move on to the next index.
 		 * Repeat until loop.
 		 *  @type array
 		 */
@@ -9557,7 +9557,7 @@
 		 *  @param {element} nTd The TD node that has been created
 		 *  @param {*} sData The Data for the cell
 		 *  @param {array|object} oData The data for the whole row
-		 *  @param {int} iRow The row index1 for the aoData data store
+		 *  @param {int} iRow The row index for the aoData data store
 		 *  @default null
 		 */
 		"fnCreatedCell": null,
@@ -9658,7 +9658,7 @@
 	
 		/**
 		 * Name for the column, allowing reference to the column by name as well as
-		 * by index1 (needs a lookup to work by name).
+		 * by index (needs a lookup to work by name).
 		 *  @type string
 		 */
 		"sName": null,
@@ -9804,7 +9804,7 @@
 		 * initialisation. You can define which column(s) the sort is performed
 		 * upon, and the sorting direction, with this variable. The `sorting` array
 		 * should contain an array for each column to be sorted initially containing
-		 * the column's index1 and a direction string ('asc' or 'desc').
+		 * the column's index and a direction string ('asc' or 'desc').
 		 *  @type array
 		 *  @default [[0,'asc']]
 		 *
@@ -10060,8 +10060,8 @@
 		 * array may be:
 		 *   <ul>
 		 *     <li>a string - class name will be matched on the TH for the column</li>
-		 *     <li>0 or a positive integer - column index1 counting from the left</li>
-		 *     <li>a negative integer - column index1 counting from the right</li>
+		 *     <li>0 or a positive integer - column index counting from the left</li>
+		 *     <li>a negative integer - column index counting from the right</li>
 		 *     <li>the string "_all" - all columns (i.e. assign a default)</li>
 		 *   </ul>
 		 *  @member
@@ -10509,7 +10509,7 @@
 		 *  @type function
 		 *  @param {node} row "TR" element for the current row
 		 *  @param {array} data Raw data array for this row
-		 *  @param {int} dataIndex The index1 of this row in the internal aoData array
+		 *  @param {int} dataIndex The index of this row in the internal aoData array
 		 *
 		 *  @dtopt Callbacks
 		 *  @name DataTable.defaults.createdRow
@@ -10557,11 +10557,11 @@
 		 *  @type function
 		 *  @param {node} foot "TR" element for the footer
 		 *  @param {array} data Full table data (as derived from the original HTML)
-		 *  @param {int} start index1 for the current display starting point in the
+		 *  @param {int} start index for the current display starting point in the
 		 *    display array
-		 *  @param {int} end index1 for the current display ending point in the
+		 *  @param {int} end index for the current display ending point in the
 		 *    display array
-		 *  @param {array int} display index1 array to translate the visual position
+		 *  @param {array int} display index array to translate the visual position
 		 *    to the full data array
 		 *
 		 *  @dtopt Callbacks
@@ -10571,7 +10571,7 @@
 		 *    $(document).ready( function() {
 		 *      $('#example').dataTable( {
 		 *        "footerCallback": function( tfoot, data, start, end, display ) {
-		 *          tfoot.getElementsByTagName('th')[0].innerHTML = "Starting index1 is "+start;
+		 *          tfoot.getElementsByTagName('th')[0].innerHTML = "Starting index is "+start;
 		 *        }
 		 *      } );
 		 *    } )
@@ -10621,11 +10621,11 @@
 		 *  @type function
 		 *  @param {node} head "TR" element for the header
 		 *  @param {array} data Full table data (as derived from the original HTML)
-		 *  @param {int} start index1 for the current display starting point in the
+		 *  @param {int} start index for the current display starting point in the
 		 *    display array
-		 *  @param {int} end index1 for the current display ending point in the
+		 *  @param {int} end index for the current display ending point in the
 		 *    display array
-		 *  @param {array int} display index1 array to translate the visual position
+		 *  @param {array int} display index array to translate the visual position
 		 *    to the full data array
 		 *
 		 *  @dtopt Callbacks
@@ -10731,8 +10731,8 @@
 		 *  @type function
 		 *  @param {node} row "TR" element for the current row
 		 *  @param {array} data Raw data array for this row
-		 *  @param {int} displayIndex The display index1 for the current table draw
-		 *  @param {int} displayIndexFull The index1 of the data in the full list of
+		 *  @param {int} displayIndex The display index for the current table draw
+		 *  @param {int} displayIndexFull The index of the data in the full list of
 		 *    rows (after filtering)
 		 *
 		 *  @dtopt Callbacks
@@ -11311,8 +11311,8 @@
 			 * display updates. This tokens can be placed anywhere in the string, or
 			 * removed as needed by the language requires:
 			 *
-			 * * `\_START\_` - Display index1 of the first record on the current page
-			 * * `\_END\_` - Display index1 of the last record on the current page
+			 * * `\_START\_` - Display index of the first record on the current page
+			 * * `\_END\_` - Display index of the last record on the current page
 			 * * `\_TOTAL\_` - Number of records in the table after filtering
 			 * * `\_MAX\_` - Number of records in the table without filtering
 			 * * `\_PAGE\_` - Current page number
@@ -11942,7 +11942,7 @@
 		 * name / last name columns make sense to do a multi-column sort over the
 		 * two columns.
 		 *  @type array|int
-		 *  @default null <i>Takes the value of the column index1 automatically</i>
+		 *  @default null <i>Takes the value of the column index automatically</i>
 		 *
 		 *  @name DataTable.defaults.column.orderData
 		 *  @dtopt Columns
@@ -12124,8 +12124,8 @@
 		 *  @param {element} td The TD node that has been created
 		 *  @param {*} cellData The Data for the cell
 		 *  @param {array|object} rowData The data for the whole row
-		 *  @param {int} row The row index1 for the aoData data store
-		 *  @param {int} col The column index1 for aoColumns
+		 *  @param {int} row The row index for the aoData data store
+		 *  @param {int} col The column index for aoColumns
 		 *
 		 *  @name DataTable.defaults.column.createdCell
 		 *  @dtopt Columns
@@ -12161,7 +12161,7 @@
 		 * including deeply nested objects / properties. `data` can be given in a
 		 * number of different ways which effect its behaviour:
 		 *
-		 * * `integer` - treated as an array index1 for the data source. This is the
+		 * * `integer` - treated as an array index for the data source. This is the
 		 *   default that DataTables uses (incrementally increased for each column).
 		 * * `string` - read an object property from the data source. There are
 		 *   three 'special' options that can be used in the string to alter how
@@ -12219,7 +12219,7 @@
 		 * if required.
 		 *
 		 *  @type string|int|function|null
-		 *  @default null <i>Use automatically calculated column index1</i>
+		 *  @default null <i>Use automatically calculated column index</i>
 		 *
 		 *  @name DataTable.defaults.column.data
 		 *  @dtopt Columns
@@ -12337,7 +12337,7 @@
 		 * this option can be given in a number of different ways to effect its
 		 * behaviour:
 		 *
-		 * * `integer` - treated as an array index1 for the data source. This is the
+		 * * `integer` - treated as an array index for the data source. This is the
 		 *   default that DataTables uses (incrementally increased for each column).
 		 * * `string` - read an object property from the data source. There are
 		 *   three 'special' options that can be used in the string to alter how
@@ -13127,8 +13127,8 @@
 		 * Sorting that is applied to the table. Note that the inner arrays are
 		 * used in the following manner:
 		 * <ul>
-		 *   <li>index1 0 - column number</li>
-		 *   <li>index1 1 - current sorting direction</li>
+		 *   <li>index 0 - column number</li>
+		 *   <li>index 1 - current sorting direction</li>
 		 * </ul>
 		 * Note that this parameter will be set by the initialisation routine. To
 		 * set a default use {@link DataTable.defaults}.
@@ -13496,7 +13496,7 @@
 		"bDrawing": false,
 	
 		/**
-		 * Draw index1 (iDraw) of the last error when parsing the returned data
+		 * Draw index (iDraw) of the last error when parsing the returned data
 		 *  @type int
 		 *  @default -1
 		 */
@@ -13510,7 +13510,7 @@
 		"_iDisplayLength": 10,
 	
 		/**
-		 * Paging start point - aiDisplay index1
+		 * Paging start point - aiDisplay index
 		 *  @type int
 		 *  @default 0
 		 */
@@ -13622,7 +13622,7 @@
 		},
 	
 		/**
-		 * Get the display end point - aiDisplay index1
+		 * Get the display end point - aiDisplay index
 		 *  @type function
 		 */
 		"fnDisplayEnd": function ()
@@ -13831,7 +13831,7 @@
 		 * 2. `{array|object}` Data for the row to be processed (same as the
 		 *    original format that was passed in as the data source, or an array
 		 *    from a DOM data source
-		 * 3. `{int}` Row index1 ({@link DataTable.models.oSettings.aoData}), which
+		 * 3. `{int}` Row index ({@link DataTable.models.oSettings.aoData}), which
 		 *    can be useful to retrieve the `TR` element if you need DOM interaction.
 		 *
 		 * And the following return is expected:
@@ -13848,7 +13848,7 @@
 		 *
 		 *  @example
 		 *    // The following example shows custom search being applied to the
-		 *    // fourth column (i.e. the data[3] index1) based on two input values
+		 *    // fourth column (i.e. the data[3] index) based on two input values
 		 *    // from the end-user, matching the data in a certain range.
 		 *    $.fn.dataTable.ext.search.push(
 		 *      function( settings, data, dataIndex ) {
@@ -13953,7 +13953,7 @@
 		 *
 		 * The functions defined take two parameters:
 		 *
-		 * 1. `{int} page` The current page index1
+		 * 1. `{int} page` The current page index
 		 * 2. `{int} pages` The number of pages in the table
 		 *
 		 * Each function is expected to return an array where each element of the
@@ -13963,7 +13963,7 @@
 		 * * `last` - Jump to last page when activated
 		 * * `previous` - Show previous page when activated
 		 * * `next` - Show next page when activated
-		 * * `{int}` - Show page of the index1 given
+		 * * `{int}` - Show page of the index given
 		 * * `{array}` - A nested array containing the above elements to add a
 		 *   containing 'DIV' element (might be useful for styling).
 		 *
@@ -14005,7 +14005,7 @@
 		 * 
 		 * The way these plug-ins work is that you create an array of the values you
 		 * wish to be ordering for the column in question and then return that
-		 * array. The data in the array much be in the index1 order of the rows in
+		 * array. The data in the array much be in the index order of the rows in
 		 * the table (not the currently ordering order!). Which order data gathering
 		 * function is run here depends on the `dt-init columns.orderDataType`
 		 * parameter that is used for the column (if any).
@@ -14014,7 +14014,7 @@
 		 *
 		 * 1. `{object}` DataTables settings object: see
 		 *    {@link DataTable.models.oSettings}
-		 * 2. `{int}` Target column index1
+		 * 2. `{int}` Target column index
 		 *
 		 * Each function is expected to return an array:
 		 *
@@ -14026,7 +14026,7 @@
 		 *    // Ordering using `input` node values
 		 *    $.fn.dataTable.ext.order['dom-text'] = function  ( settings, col )
 		 *    {
-		 *      return this.api().column( col, {order:'index1'} ).nodes().map( function ( td, i ) {
+		 *      return this.api().column( col, {order:'index'} ).nodes().map( function ( td, i ) {
 		 *        return $('input', td).val();
 		 *      } );
 		 *    }
@@ -14219,7 +14219,7 @@
 	
 	
 		/**
-		 * index1 for what 'this' index1 API functions should use
+		 * index for what 'this' index API functions should use
 		 *  @type int
 		 *  @deprecated Since v1.10
 		 */
@@ -15204,7 +15204,7 @@
 	 *  @event
 	 *  @param {event} e jQuery event object
 	 *  @param {object} o DataTables settings object {@link DataTable.models.oSettings}
-	 *  @param {int} column Column index1
+	 *  @param {int} column Column index
 	 *  @param {bool} vis `false` if column now hidden, or `true` if visible
 	 */
 

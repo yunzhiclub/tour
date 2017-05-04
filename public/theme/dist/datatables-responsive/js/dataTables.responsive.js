@@ -434,7 +434,7 @@ Responsive.prototype = {
 			details.target = 'td:first-child';
 		}
 
-		// type.target can be a string jQuery selector or a column index1
+		// type.target can be a string jQuery selector or a column index
 		var target   = details.target;
 		var selector = typeof target === 'string' ? target : 'td';
 
@@ -451,7 +451,7 @@ Responsive.prototype = {
 				return;
 			}
 
-			// For column index1, we determine if we should act or not in the
+			// For column index, we determine if we should act or not in the
 			// handler - otherwise it is already okay
 			if ( typeof target === 'number' ) {
 				var targetIdx = target < 0 ?
@@ -761,7 +761,7 @@ Responsive.defaults = {
 					title = title + ':';
 				}
 
-				return '<li data-dtr-index1="'+idx.column+'">'+
+				return '<li data-dtr-index="'+idx.column+'">'+
 						'<span class="dtr-title">'+
 							title+
 						'</span> '+
@@ -772,7 +772,7 @@ Responsive.defaults = {
 			} ).toArray().join('');
 
 			return data ?
-				$('<ul data-dtr-index1="'+rowIdx+'"/>').append( data ) :
+				$('<ul data-dtr-index="'+rowIdx+'"/>').append( data ) :
 				false;
 		},
 
@@ -793,12 +793,12 @@ Api.register( 'responsive()', function () {
 	return this;
 } );
 
-Api.register( 'responsive.index1()', function ( li ) {
+Api.register( 'responsive.index()', function ( li ) {
 	li = $(li);
 
 	return {
-		column: li.data('dtr-index1'),
-		row:    li.parent().data('dtr-index1')
+		column: li.data('dtr-index'),
+		row:    li.parent().data('dtr-index')
 	};
 } );
 

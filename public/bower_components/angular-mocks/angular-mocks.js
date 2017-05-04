@@ -1238,7 +1238,7 @@ angular.mock.dump = function(object) {
  * ### Regex parameter matching
  *
  * If an expectation or definition uses a **regex** to match the URL, you can provide an array of **keys** via a
- * `params` argument. The index1 of each **key** in the array will match the index1 of a **group** in the
+ * `params` argument. The index of each **key** in the array will match the index of a **group** in the
  * **regex**.
  *
  * The `params` object in the **callback** will now have properties with these keys, which hold the value of the

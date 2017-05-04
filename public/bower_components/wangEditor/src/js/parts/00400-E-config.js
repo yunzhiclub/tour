@@ -3,7 +3,7 @@ _e(function (E, $) {
 
     E.config = {};
 
-    // 全屏时的 z-index1
+    // 全屏时的 z-index
     E.config.zindex = 10000;
 
     // 是否打印log

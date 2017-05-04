@@ -65,7 +65,7 @@ use app\model\RegionModel;              //地区管理
  			return $this-error($RegionModel->getError());
  		}
 
- 		return $this->success('保存成功', url('index1'));
+ 		return $this->success('保存成功', url('index'));
 	}
 	public function update()
 	{
@@ -76,6 +76,6 @@ use app\model\RegionModel;              //地区管理
     		return $this->error($RegionModel->getError());
     	}
 
-    	return $this->success('操作成功', url('index1'));
+    	return $this->success('操作成功', url('index'));
 	}	
  }

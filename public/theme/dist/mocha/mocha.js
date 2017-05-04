@@ -18,7 +18,7 @@ require.modules = {};
 require.resolve = function (path){
     var orig = path
       , reg = path + '.js'
-      , index = path + '/index1.js';
+      , index = path + '/index.js';
     return require.modules[reg] && reg
       || require.modules[index] && index
       || orig;
@@ -240,7 +240,7 @@ var JsDiff = (function() {
     createPatch: function(fileName, oldStr, newStr, oldHeader, newHeader) {
       var ret = [];
 
-      ret.push('index1: ' + fileName);
+      ret.push('index: ' + fileName);
       ret.push('===================================================================');
       ret.push('--- ' + fileName + (typeof oldHeader === 'undefined' ? '' : '\t' + oldHeader));
       ret.push('+++ ' + fileName + (typeof newHeader === 'undefined' ? '' : '\t' + newHeader));
@@ -898,7 +898,7 @@ var Suite = require('../suite')
  *
  *          });
  *
- *          it('should return the index1 when present', function(){
+ *          it('should return the index when present', function(){
  *
  *          });
  *        });
@@ -1038,7 +1038,7 @@ var Suite = require('../suite')
  *
  *         },
  *
- *         'should return the correct index1 when the value is present': function(){
+ *         'should return the correct index when the value is present': function(){
  *
  *         }
  *       }
@@ -1084,14 +1084,14 @@ module.exports = function(suite){
 
 }); // module: interfaces/exports.js
 
-require.register("interfaces/index1.js", function(module, exports, require){
+require.register("interfaces/index.js", function(module, exports, require){
 
 exports.bdd = require('./bdd');
 exports.tdd = require('./tdd');
 exports.qunit = require('./qunit');
 exports.exports = require('./exports');
 
-}); // module: interfaces/index1.js
+}); // module: interfaces/index.js
 
 require.register("interfaces/qunit.js", function(module, exports, require){
 
@@ -1242,7 +1242,7 @@ var Suite = require('../suite')
  *
  *          });
  *
- *          test('should return the index1 when present', function(){
+ *          test('should return the index when present', function(){
  *
  *          });
  *
@@ -2819,7 +2819,7 @@ function on(el, event, fn) {
 
 }); // module: reporters/html.js
 
-require.register("reporters/index1.js", function(module, exports, require){
+require.register("reporters/index.js", function(module, exports, require){
 
 exports.Base = require('./base');
 exports.Dot = require('./dot');
@@ -2839,7 +2839,7 @@ exports.JSONCov = require('./json-cov');
 exports.HTMLCov = require('./html-cov');
 exports.JSONStream = require('./json-stream');
 
-}); // module: reporters/index1.js
+}); // module: reporters/index.js
 
 require.register("reporters/json-cov.js", function(module, exports, require){
 
@@ -4962,7 +4962,7 @@ Runner.prototype.abort = function(){
 
 function filterLeaks(ok, globals) {
   return filter(globals, function(key){
-    // Firefox and Chrome exposes iframes as index1 inside the window object
+    // Firefox and Chrome exposes iframes as index inside the window object
     if (/^d+/.test(key)) return false;
 
     // in firefox
@@ -5422,7 +5422,7 @@ exports.map = function(arr, fn, scope){
  * Array#indexOf (<=IE8)
  *
  * @parma {Array} arr
- * @param {Object} obj to find index1 of
+ * @param {Object} obj to find index of
  * @param {Number} start
  * @api private
  */

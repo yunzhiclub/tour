@@ -3,10 +3,10 @@
 /**
  * 用法：
  * load_trait('controller/Jump');
- * class index1
+ * class index
  * {
  *     use \traits\controller\Jump;
- *     public function index1(){
+ *     public function index(){
  *         $this->error();
  *         $this->redirect();
  *     }

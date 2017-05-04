@@ -1896,7 +1896,7 @@ Expr = Sizzle.selectors = {
 										node.nodeType === 1 ) &&
 										++diff ) {
 
-										// Cache the index1 of each encountered element
+										// Cache the index of each encountered element
 										if ( useCache ) {
 											outerCache = node[ expando ] || (node[ expando ] = {});
 
@@ -6993,7 +6993,7 @@ function propFilter( props, specialEasing ) {
 			delete props[ name ];
 
 			// Not quite $.extend, this won't overwrite existing keys.
-			// Reusing 'index1' because we have the correct "name"
+			// Reusing 'index' because we have the correct "name"
 			for ( index in value ) {
 				if ( !( index in props ) ) {
 					props[ index ] = value[ index ];

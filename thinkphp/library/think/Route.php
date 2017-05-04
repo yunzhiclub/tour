@@ -33,7 +33,7 @@ class Route
 
     // REST路由操作方法定义
     private static $rest = [
-        'index1'  => ['get', '', 'index1'],
+        'index'  => ['get', '', 'index'],
         'create' => ['get', '/create', 'create'],
         'edit'   => ['get', '/:id/edit', 'edit'],
         'read'   => ['get', '/:id', 'read'],
@@ -797,13 +797,13 @@ class Route
                     }
 
                     if (0 === strpos($result, '\\')) {
-                        // 绑定到命名空间 例如 \app\index1\behavior
+                        // 绑定到命名空间 例如 \app\index\behavior
                         self::$bind = ['type' => 'namespace', 'namespace' => $result];
                     } elseif (0 === strpos($result, '@')) {
-                        // 绑定到类 例如 @app\index1\controller\User
+                        // 绑定到类 例如 @app\index\controller\User
                         self::$bind = ['type' => 'class', 'class' => substr($result, 1)];
                     } else {
-                        // 绑定到模块/控制器 例如 index1/user
+                        // 绑定到模块/控制器 例如 index/user
                         self::$bind = ['type' => 'module', 'module' => $result];
                     }
                     self::$domainBind = true;
@@ -1080,7 +1080,7 @@ class Route
      * 绑定到控制器类
      * @access public
      * @param string    $url URL地址
-     * @param string    $controller 控制器名 （支持带模块名 index1/user ）
+     * @param string    $controller 控制器名 （支持带模块名 index/user ）
      * @param string    $depr URL分隔符
      * @return array
      */

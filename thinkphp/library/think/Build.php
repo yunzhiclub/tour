@@ -173,7 +173,7 @@ class Build
      */
     protected static function buildHello($module, $namespace, $suffix = false)
     {
-        $filename = APP_PATH . ($module ? $module . DS : '') . 'controller' . DS . 'index1' . ($suffix ? 'Controller' : '') . EXT;
+        $filename = APP_PATH . ($module ? $module . DS : '') . 'controller' . DS . 'index' . ($suffix ? 'Controller' : '') . EXT;
         if (!is_file($filename)) {
             $content = file_get_contents(THINK_PATH . 'tpl' . DS . 'default_index.tpl');
             $content = str_replace(['{$app}', '{$module}', '{layer}', '{$suffix}'], [$namespace, $module ? $module . '\\' : '', 'controller', $suffix ? 'Controller' : ''], $content);
