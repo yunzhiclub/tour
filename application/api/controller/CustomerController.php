@@ -208,10 +208,15 @@ class CustomerController extends ApiController
 	public function getOrderDetailById()
 	{
 		$id = Request::instance()->param('id');
+		$OrderModel = OrderModel::get($id);
+		$inviteId = $OrderModel->invite_id;
+
 //		获取订单详情
 		$order = OrderModel::getOrderDetailById($id);
-
-		return $this->response($order);
+        $result = [];
+        $result['beds'] = $order;
+        $result['inviteId'] = $inviteId;
+		return $this->response($result);
 	}
 
 	/*

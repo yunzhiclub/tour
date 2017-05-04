@@ -15,7 +15,7 @@ angular.module('wechatApp')
         var url = window.location.href.replace(window.location.hash, '');
         // 定制配置信息
         var jssdkConfig = {
-            jsApiList: ['chooseImage', 'uploadImage', 'chooseWXPay'],
+            jsApiList: ['chooseImage', 'uploadImage', 'chooseWXPay', 'onMenuShareAppMessage'],
             debug: true,
             appId: '',
         };
@@ -163,7 +163,25 @@ angular.module('wechatApp')
                 deferred.reject(response); //执行失败
             });
             return promise;
-        }
+        };
+        var shareLinkToFriend = function (link) {
+            wx.onMenuShareAppMessage({
+                title: '应邀链接', // 分享标题
+                desc: '选择邀约一起去旅游', // 分享描述
+                link: link, // 分享链接
+                imgUrl: '', // 分享图标
+                type: '', // 分享类型,music、video或link，不填默认为link
+                dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                success: function () {
+                    // 用户确认分享后执行的回调函数
+                    console.log('分享成功');
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                    console.log('您取消了分享');
+                }
+            });
+        };
         // Public API here
         return {
             // 获取jssdk配置
@@ -186,6 +204,10 @@ angular.module('wechatApp')
             // 查询订单看是否支付成功
             queryOrder: function (number) {
                 return queryOrder(number);
+            },
+            // 分享链接给朋友
+            shareLinkToFriend: function (link) {
+                shareLinkToFriend(link);
             }
         };
     }]);
