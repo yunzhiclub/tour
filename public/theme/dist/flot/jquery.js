@@ -7593,7 +7593,7 @@ jQuery.extend({
 			// Text to html (true = no transformation)
 			"text html": true,
 
-			// evaluate1 text as a json expression
+			// evaluate text as a json expression
 			"text json": jQuery.parseJSON,
 
 			// Parse text as xml

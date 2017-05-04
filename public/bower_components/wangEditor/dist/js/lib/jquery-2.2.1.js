@@ -5268,7 +5268,7 @@ function domManip( collection, args, callback, ignored ) {
 				// Reenable scripts
 				jQuery.map( scripts, restoreScript );
 
-				// evaluate1 executable scripts on first document insertion
+				// evaluate executable scripts on first document insertion
 				for ( i = 0; i < hasScripts; i++ ) {
 					node = scripts[ i ];
 					if ( rscriptType.test( node.type || "" ) &&
@@ -8318,7 +8318,7 @@ jQuery.extend( {
 			// Text to html (true = no transformation)
 			"text html": true,
 
-			// evaluate1 text as a json expression
+			// evaluate text as a json expression
 			"text json": jQuery.parseJSON,
 
 			// Parse text as xml

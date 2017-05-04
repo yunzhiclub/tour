@@ -43,7 +43,7 @@ class Console
         "think\\console\\command\\make\\Model",
         "think\\console\\command\\optimize\\Autoload",
         "think\\console\\command\\optimize\\Config",
-        "think\\console\\command\\optimize\\route1",
+        "think\\console\\command\\optimize\\route",
         "think\\console\\command\\optimize\\Schema",
     ];
 
