@@ -44,7 +44,7 @@ class StartCityController extends IndexController
             return $this->error($StartCityModel->getError());
         }
 
-        return $this->success('操作成功', url('index'));
+        return $this->success('操作成功', url('index1'));
     }
 
     public function save() 
@@ -56,7 +56,7 @@ class StartCityController extends IndexController
             return $this->error($StartCityModel->getError());
         }
         
-        return $this->success('操作成功', url('index'));
+        return $this->success('操作成功', url('index1'));
     }
 
     public function delete()

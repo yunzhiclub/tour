@@ -790,18 +790,18 @@ function $UrlMatcherFactory() {
    *
    * @example
    * This is a simple example of a custom type that encodes and decodes items from an
-   * array, using the array index as the URL-encoded value:
+   * array, using the array index1 as the URL-encoded value:
    *
    * <pre>
    * var list = ['John', 'Paul', 'George', 'Ringo'];
    *
    * $urlMatcherFactoryProvider.type('listItem', {
    *   encode: function(item) {
-   *     // Represent the list item in the URL using its corresponding index
+   *     // Represent the list item in the URL using its corresponding index1
    *     return list.indexOf(item);
    *   },
    *   decode: function(item) {
-   *     // Look up the list item by index
+   *     // Look up the list item by index1
    *     return list[parseInt(item, 10)];
    *   },
    *   is: function(item) {

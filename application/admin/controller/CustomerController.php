@@ -61,7 +61,7 @@ class CustomerController extends IndexController
         if (false === $CustomerModel->save()) {
             return $this->error($CustomerModel->getError());
         }
-        return $this->success('操作成功', url('index'));
+        return $this->success('操作成功', url('index1'));
         
         
         

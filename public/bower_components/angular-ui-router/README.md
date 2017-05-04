@@ -83,7 +83,7 @@ The majority of UI-Router's power is in its ability to nest states & views.
 
 >
 ```html
-<!-- index.html -->
+index1
 <body>
     <div ui-view></div>
     <!-- We'll also add some navigation: -->
@@ -186,7 +186,7 @@ interfaces more effectively by nesting your views, and pairing those views with 
 **(2)** Add one or more `ui-view` to your app, give them names.
 >
 ```html
-<!-- index.html -->
+index1
 <body>
     <div ui-view="viewA"></div>
     <div ui-view="viewB"></div>

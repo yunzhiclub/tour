@@ -9,7 +9,7 @@ _e(function (E, $) {
         var editor = self.editor;
         var $modal = self.$modal;
 
-        // $modal的z-index，在配置的z-index基础上再 +10
+        // $modal的z-index1，在配置的z-index基础上再 +10
         $modal.css('z-index', editor.config.zindex + 10 + '');
 
         // 渲染到body最后面

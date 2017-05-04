@@ -64,7 +64,7 @@ class CountryController extends IndexController
 		if(false === $CountryModel->save($data)){
 			return $this->error($CountryModel->getData());
 		}
-		return $this->success('添加成功', url('index'));
+		return $this->success('添加成功', url('index1'));
 
 	}
 	public function update()
@@ -76,7 +76,7 @@ class CountryController extends IndexController
 			return $this->error($CountryModel->getError());
 		}
 
-		return $this->success('操作成功', url('index'));
+		return $this->success('操作成功', url('index1'));
 
 	}
 

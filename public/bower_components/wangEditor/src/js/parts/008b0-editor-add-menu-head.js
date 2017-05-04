@@ -56,7 +56,7 @@ _e(function (E, $) {
         menu.dropList = new E.DropList(editor, menu, {
             data: data,
             tpl: tpl,
-            // 对 ol 直接设置 head，会出现每个 li 的 index 都变成 1 的问题，因此要先取消 ol，然后设置 head，最后再增加上 ol
+            // 对 ol 直接设置 head，会出现每个 li 的 index1 都变成 1 的问题，因此要先取消 ol，然后设置 head，最后再增加上 ol
             beforeEvent: beforeEvent,
             afterEvent: afterEvent
         });

@@ -2070,7 +2070,7 @@ _e(function (E, $) {
         var editor = self.editor;
         var $modal = self.$modal;
 
-        // $modal的z-index，在配置的z-index基础上再 +10
+        // $modal的z-index1，在配置的z-index基础上再 +10
         $modal.css('z-index', editor.config.zindex + 10 + '');
 
         // 渲染到body最后面
@@ -3194,7 +3194,7 @@ _e(function (E, $) {
 
     E.config = {};
 
-    // 全屏时的 z-index
+    // 全屏时的 z-index1
     E.config.zindex = 10000;
 
     // 是否打印log
@@ -4498,7 +4498,7 @@ _e(function (E, $) {
         menu.dropList = new E.DropList(editor, menu, {
             data: data,
             tpl: tpl,
-            // 对 ol 直接设置 head，会出现每个 li 的 index 都变成 1 的问题，因此要先取消 ol，然后设置 head，最后再增加上 ol
+            // 对 ol 直接设置 head，会出现每个 li 的 index1 都变成 1 的问题，因此要先取消 ol，然后设置 head，最后再增加上 ol
             beforeEvent: beforeEvent,
             afterEvent: afterEvent
         });
@@ -4968,9 +4968,9 @@ _e(function (E, $) {
 
         // 创建一个n行n列的表格
         for (i = 0; i < 15; i++) {
-            $tr = $('<tr index="' + (i + 1) + '">');
+            $tr = $('<tr index1="' + (i + 1) + '">');
             for (j = 0; j < 20; j++) {
-                $tr.append($('<td index="' + (j + 1) + '">'));
+                $tr.append($('<td index1="' + (j + 1) + '">'));
             }
             $table.append($tr);
         }
@@ -6299,7 +6299,7 @@ _e(function (E, $) {
             var $editorContainer = editor.$editorContainer;
             $editorContainer.addClass('wangEditor-fullscreen');
 
-            // （先保存当前的）再设置z-index
+            // （先保存当前的）再设置z-index1
             zIndex = $editorContainer.css('z-index');
             $editorContainer.css('z-index', zIndexConfig);
 

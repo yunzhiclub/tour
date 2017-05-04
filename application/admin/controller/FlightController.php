@@ -80,7 +80,7 @@ class FlightController extends IndexController
     		return $this->error($FlightModel->getError());
     	}
 
-    	return $this->success('保存成功', url('index'));
+    	return $this->success('保存成功', url('index1'));
     }
 
     public function update()
@@ -92,6 +92,6 @@ class FlightController extends IndexController
     		return $this->error($FlightModel->getError());
     	}
 
-    	return $this->success('操作成功', url('index'));
+    	return $this->success('操作成功', url('index1'));
     }
 }

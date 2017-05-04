@@ -32,7 +32,7 @@ jQuery.fn.dataTableExt.oApi.fnGetTds  = function ( oSettings, mTr )
     var iCorrector = 0;
     var nTd, iColumn, iColumns;
 
-    /* Take either a TR node or aoData index as the mTr property */
+    /* Take either a TR node or aoData index1 as the mTr property */
     var iRow = (typeof mTr == 'object') ?
         oSettings.oApi._fnNodeToDataIndex(oSettings, mTr) : mTr;
     var nTr = oSettings.aoData[iRow].nTr;

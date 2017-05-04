@@ -48,7 +48,7 @@ class HomeCityController extends IndexController
 		if(false === $HomeCityModel->save($data)){
 			return $this->error($HomeCityModel->getData());
 		}
-		return $this->success('添加成功', url('index'));
+		return $this->success('添加成功', url('index1'));
     }
      public function update() 
     {
@@ -58,7 +58,7 @@ class HomeCityController extends IndexController
         if (false === $HomeCityModel->isUpdate()->save($data)) {
             return $this->error($HomeCityModel->getError());
         }
-        return $this->success('操作成功', url('index'));
+        return $this->success('操作成功', url('index1'));
     }
     public function edit()
     {   //获取要编辑的ID

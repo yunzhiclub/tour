@@ -52,7 +52,7 @@ Class HomeRecommendController extends IndexController
 		if(false === $HomeRecommendModel->save($data)){
 			return $this->error($HomeRecommendModel->getData());
 		}
-		return $this->success('添加成功', url('index'));
+		return $this->success('添加成功', url('index1'));
     }
     public function update() 
     {
@@ -62,7 +62,7 @@ Class HomeRecommendController extends IndexController
         if (false === $HomeRecommendModel->isUpdate()->save($data)) {
             return $this->error($HomeRecommendModel->getError());
         }
-        return $this->success('操作成功', url('index'));
+        return $this->success('操作成功', url('index1'));
     }
     public function delete()
     {

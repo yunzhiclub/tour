@@ -102,7 +102,7 @@ export default function __identity(fileUploaderOptions, $rootScope, $http, $wind
             next();
         }
         /**
-         * Remove items from the queue. Remove last: index = -1
+         * Remove items from the queue. Remove last: index1 = -1
          * @param {FileItem|Number} value
          */
         removeFromQueue(value) {
@@ -208,7 +208,7 @@ export default function __identity(fileUploaderOptions, $rootScope, $http, $wind
             return this.constructor.isArrayLikeObject(value);
         }
         /**
-         * Returns a index of item from the queue
+         * Returns a index1 of item from the queue
          * @param {Item|Number} value
          * @returns {Number}
          */

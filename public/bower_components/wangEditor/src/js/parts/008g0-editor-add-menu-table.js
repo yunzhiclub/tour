@@ -28,9 +28,9 @@ _e(function (E, $) {
 
         // 创建一个n行n列的表格
         for (i = 0; i < 15; i++) {
-            $tr = $('<tr index="' + (i + 1) + '">');
+            $tr = $('<tr index1="' + (i + 1) + '">');
             for (j = 0; j < 20; j++) {
-                $tr.append($('<td index="' + (j + 1) + '">'));
+                $tr.append($('<td index1="' + (j + 1) + '">'));
             }
             $table.append($tr);
         }

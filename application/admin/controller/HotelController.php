@@ -65,7 +65,7 @@ class HotelController extends IndexController
             $saveRelationPictures = PictureModel::saveRelationPictures($HotelModel, $pictureIds);
         }
 
-        return $this->success('保存成功', url('index'));
+        return $this->success('保存成功', url('index1'));
     }
 
     public function delete()
@@ -101,6 +101,6 @@ class HotelController extends IndexController
             $saveRelationPictures = PictureModel::saveRelationPictures($HotelModel, $pictureIds);
         }
 
-        return $this->success('操作成功', url('index'));
+        return $this->success('操作成功', url('index1'));
     }
 }

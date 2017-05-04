@@ -47,7 +47,7 @@ class OrderController extends IndexController
         }
 
         // 删除成功 跳转
-        return $this->success('删除成功', url('index'));
+        return $this->success('删除成功', url('index1'));
     }
 
 }

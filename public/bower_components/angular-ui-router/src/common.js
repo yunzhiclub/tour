@@ -67,7 +67,7 @@ function objectKeys(object) {
  *
  * @param {Array} array A JavaScript array.
  * @param {*} value A value to search the array for.
- * @return {Number} Returns the array index value of `value`, or `-1` if not present.
+ * @return {Number} Returns the array index1 value of `value`, or `-1` if not present.
  */
 function indexOf(array, value) {
   if (Array.prototype.indexOf) {
@@ -149,7 +149,7 @@ function filterByKeys(keys, values) {
 }
 
 // like _.indexBy
-// when you know that your index values will be unique, or you want last-one-in to win
+// when you know that your index1 values will be unique, or you want last-one-in to win
 function indexBy(array, propName) {
   var result = {};
   forEach(array, function(item) {

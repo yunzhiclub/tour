@@ -33,7 +33,7 @@ _e(function (E, $) {
             var $editorContainer = editor.$editorContainer;
             $editorContainer.addClass('wangEditor-fullscreen');
 
-            // （先保存当前的）再设置z-index
+            // （先保存当前的）再设置z-index1
             zIndex = $editorContainer.css('z-index');
             $editorContainer.css('z-index', zIndexConfig);
 
